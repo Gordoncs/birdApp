@@ -1,0 +1,140 @@
+.head{
+  width: 100%;
+  height: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
+.head .searchBox{
+  width: 6rem;
+  height: 0.6rem;
+  border-bottom: 1px solid #000 ;
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start;
+  align-items: center;
+}
+.head .searchBox .icon{
+  width: 0.28rem;
+  height: 0.4rem;
+  margin-left: 0.2rem;
+}
+.head .searchBox  .name{
+  color: #3c3c3c;
+  font-size: 0.26rem;
+  line-height: 0.26rem;
+  margin-left: 0.2rem;
+  margin-left: 1rem;
+}
+.headSwiper .swiper-container {
+  width: 7rem;
+  height: 2.6rem;
+  margin-top: 0.3rem;
+  -moz-box-shadow:0rem 0.08rem 0.1rem #AEAEB0, 0.02rem 0rem 0.05rem #AEAEB0, -0.02rem 0rem 0.05rem #AEAEB0;
+  -webkit-box-shadow:0rem 0.08rem 0.1rem #AEAEB0, 0.02rem 0rem 0.05rem #AEAEB0, -0.02rem 0rem 0.05rem #AEAEB0;
+  box-shadow:0rem 0.08rem 0.1rem #AEAEB0, 0.02rem 0rem 0.05rem #AEAEB0, -0.02rem 0rem 0.05rem #AEAEB0;
+
+}
+.headSwiper .swiper-pagination{
+  margin-left: 0.35rem;
+  text-align: inherit;
+}
+.payBox{
+  width: 100%;
+  height: 1.73rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.payBox img{
+  width: 7.2rem;
+  height: 100%;
+}
+.coffeIcon{
+  width: 0.54rem;
+  height: 1.15rem;
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  top: 5.8rem;
+}
+.sideScrollBox{
+  width: 100%;
+  margin-top: 0.4rem;
+}
+.sideScrollBox .heads{
+  width: 100%;
+}
+.sideScrollBox img{
+  width: 1.89rem;
+  height: 0.5rem;
+  margin-left: 0.28rem;
+}
+.sideScrollBox .swiper-container{
+  padding-left: 0.2rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+.sideScrollBox .swiper-slide{
+  width: 2rem;
+  height: 2.98rem;
+  border: 1px solid #e4cb8e;
+  border-radius: 0.1rem;
+  -moz-box-shadow:0px 0.02rem 0.2rem #dbdbdb;
+  -webkit-box-shadow:0px 0.02rem 0.2rem #dbdbdb;
+  box-shadow:0px 0.02rem 0.2rem #dbdbdb;
+}
+.tiyanBox{
+  width: 7.1rem;
+  height: 1.8rem;
+  border: 1px solid #e4cb8e;
+  margin:0 auto;
+  border-radius: 3.5rem;
+  margin-top: 0.4rem;
+  -moz-box-shadow:0px 0.02rem 0.2rem #d3d3d3;
+  -webkit-box-shadow:0px 0.02rem 0.2rem #d3d3d3;
+  box-shadow:0px 0.05rem 0.2rem #d3d3d3;
+  overflow: hidden;
+}
+.serveBox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.4rem;
+}
+.serveBox .heads{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.serveBox .heads img{
+  width: 1.9rem;
+  height: 0.5rem;
+  margin-left: 0.28rem;
+}
+.serveBox .heads  .moreBtn{
+  width: 1.37rem;
+  height: 0.4rem;
+  border: 1px solid #000;
+  border-radius: 0.2rem;
+  line-height: 0.4rem;
+  text-align: center;
+  font-size: 0.24rem;
+  margin-right: 0.43rem;
+}
+.serveBox .serveList{
+  width: 6.8rem;
+  height: 4.55rem;
+  border-radius: 0.2rem;
+  margin-top: 0.3rem;
+  -moz-box-shadow:0px 0.02rem 0.2rem #c6c6c6;
+  -webkit-box-shadow:0px 0.02rem 0.2rem #c6c6c6;
+  box-shadow:0px 0.05rem 0.2rem #c6c6c6;
+  overflow: hidden;
+  background: #e4cb8e;
+}
+
