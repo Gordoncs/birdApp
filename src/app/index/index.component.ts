@@ -20,8 +20,8 @@ export class IndexComponent implements OnInit, AfterViewInit {
       },
     });
     const sideScrollBox = new Swiper('.sideScrollBox .swiper-container', {
-      slidesPerView: 3,
-      spaceBetween: 15,
+      slidesPerView: 'auto',
+      spaceBetween: 30,
     });
   }
 
