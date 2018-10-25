@@ -9,22 +9,20 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
   constructor() { }
   ngAfterViewInit() {
-    setTimeout(function() {
-      const mySwiper = new Swiper ('.headSwiper .swiper-container', {
-        loop: true, // 循环模式选项
-        autoplay: true,
-        // 如果需要分页器
-        pagination: {
-          el: '.swiper-pagination',
-          bulletClass : 'bullets',
-          bulletActiveClass: 'my-bullet-active',
-        },
-      });
-      const sideScrollBox = new Swiper('.sideScrollBox .swiper-container', {
-        slidesPerView: 3,
-        spaceBetween: 15,
-      });
-    }, 2000);
+    const mySwiper = new Swiper ('.headSwiper .swiper-container', {
+      loop: true, // 循环模式选项
+      autoplay: true,
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination',
+        bulletClass : 'bullets',
+        bulletActiveClass: 'my-bullet-active',
+      },
+    });
+    const sideScrollBox = new Swiper('.sideScrollBox .swiper-container', {
+      slidesPerView: 3,
+      spaceBetween: 15,
+    });
   }
 
   ngOnInit() {

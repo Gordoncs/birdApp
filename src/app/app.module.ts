@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { Code404Component } from './code404/code404.component';
+import { DetailComponent } from './detail/detail.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { Code404Component } from './code404/code404.component';
     IndexComponent,
     NavbarComponent,
     Code404Component,
+    DetailComponent,
   ],
   imports: [
     BrowserModule,
