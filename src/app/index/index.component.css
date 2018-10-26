@@ -196,4 +196,48 @@
   box-shadow:0px 0.05rem 0.2rem #c6c6c6;
   overflow: hidden;
   background: #e4cb8e;
+  position: relative;
+}
+.servehead{
+  width: 100%;
+  height: 1.5rem;
+  background: yellow;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+}
+.servehead .line{
+  width: 0.23rem;
+  height: 0.68rem;
+  background: #e7cd94;
+}
+.servehead .person{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 0.3rem;
+
+}
+.servehead .person .name{
+  color: #deb95f;
+  font-size: 0.28rem;
+}
+.servehead .person .tips{
+  color: #7e7e7e;
+  font-size: 0.2rem;
+}
+.serveList .headImg{
+  width: 1.06rem;
+  height: 1.06rem;
+  border-radius: 100%;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+  top: 0.25rem;
+  right: 0.53rem;
+}
+.serveList .headImg img{
+  width: 100%;
+  height: 100%;
 }
