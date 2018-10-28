@@ -46,6 +46,38 @@
       <div class="tips spec">套餐（三次/疗程）</div>
     </div>
   </div>
+  <div class="protect">
+    <div class="lists">
+      <img class="protectIcon1" src="./assets/image/protect1.png" alt="">
+      <span>安全保障非手术类</span>
+    </div>
+    <div class="lists">
+      <img class="protectIcon2" src="./assets/image/protect2.png" alt="">
+      <span>春鸟统一服务</span>
+    </div>
+    <div class="lists">
+      <img class="protectIcon3" src="./assets/image/protect3.png" alt="">
+      <span>无效退款</span>
+    </div>
+  </div>
+  <div class="bigBox">
+    <div class="head">
+      <div [class.selit]="showWhitchStatus==1" class="headlist" (click)="showWitch(1,$event)">详情</div>
+      <div [class.selit]="showWhitchStatus==2" class="headlist" (click)="showWitch(2,$event)">科普</div>
+      <div [class.selit]="showWhitchStatus==3" class="headlist" (click)="showWitch(3,$event)">Q&A</div>
+      <div [class.selit]="showWhitchStatus==4" class="headlist" (click)="showWitch(4,$event)">承诺</div>
+    </div>
+    <div class="boxShow">
+      <div *ngIf="showWhitchStatus==1" class="boxShowlist">详情显示</div>
+      <div *ngIf="showWhitchStatus==2" class="boxShowlist">科普显示</div>
+      <div *ngIf="showWhitchStatus==3" class="boxShowlist">Q&A显示</div>
+      <div *ngIf="showWhitchStatus==4" class="boxShowlist">承诺显示</div>
+    </div>
+  </div>
 </div>
-
+<div class="priceBar">
+  <div class="price">￥ 330</div>
+  <div class="addCarBtn">加入购物车</div>
+  <div class="payBtn">立即购买</div>
+</div>
 

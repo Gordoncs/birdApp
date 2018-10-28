@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import Swiper from 'swiper';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -7,7 +9,7 @@ import Swiper from 'swiper';
 })
 export class IndexComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(private router: Router, private titleService: Title) { }
   ngAfterViewInit() {
     const mySwiper = new Swiper ('.headSwiper .swiper-container', {
       loop: true, // 循环模式选项
@@ -23,6 +25,10 @@ export class IndexComponent implements OnInit, AfterViewInit {
       slidesPerView: 'auto',
       spaceBetween: 30,
     });
+    /***
+     * 设置title
+     */
+    this.titleService.setTitle('春鸟科美');
   }
 
   ngOnInit() {

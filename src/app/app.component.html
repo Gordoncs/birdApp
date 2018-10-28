@@ -1,5 +1,5 @@
-<div style="margin-bottom: 1.4rem">
+<div >
   <router-outlet></router-outlet>
 </div>
 
-<app-navbar></app-navbar>
+<app-navbar *ngIf="url!='/detail'"></app-navbar>

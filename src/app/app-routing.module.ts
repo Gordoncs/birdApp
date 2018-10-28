@@ -6,7 +6,7 @@ import {DetailComponent} from './detail/detail.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/detail', pathMatch: 'full'},
+  { path: '', redirectTo: '/index', pathMatch: 'full'},
   { path: 'index', component: IndexComponent},
   { path: 'detail', component: DetailComponent},
   { path: '**', component: Code404Component},

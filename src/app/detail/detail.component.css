@@ -1,9 +1,10 @@
 .con{
   width: 100%;
-  min-height: 11rem;
   background: #eeeeee;
   display: flex;
   flex-direction: column;
+  position: relative;
+  margin-bottom: 1rem;
 }
 .headSwiper{
   width: 100%;
@@ -15,7 +16,7 @@
   background: #000;
 }
 .headSwiper .swiper-container {
-  width: 7.5rem;
+  width: 100%;
   height: 5rem;
 }
 .headSwiper .swiper-slide img{
@@ -85,4 +86,113 @@
 .styleChoseBox .choseTips .spec{
   width: 2.78rem;
   height: 0.48rem;
+}
+.protect{
+  width: 100%;
+  height: 1.15rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 0.1rem;
+}
+.protect .lists{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.protect  .protectIcon1{
+  width: 0.34rem;
+  height: 0.43rem;
+}
+.protect  .protectIcon2{
+  width: 0.4rem;
+  height: 0.45rem;
+}
+.protect  .protectIcon3{
+  width: 0.43rem;
+  height: 0.4rem;
+}
+.protect .lists span{
+  color: #555555;
+  font-size: 0.24rem;
+  margin-left: 0.15rem;
+}
+.bigBox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.1rem;
+}
+.bigBox .head{
+  width: 100%;
+  height: 1.15rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.bigBox .headlist{
+  width: 0.9rem;
+  height: 1.05rem;
+  border-bottom: 0.1rem solid #FFF;
+  text-align: center;
+  color: #555555;
+  font-size: 0.24rem;
+  line-height: 1.05rem;
+}
+.boxShow{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.boxShowlist{
+  width: 100%;
+  min-height: 6rem;
+  text-align: center;
+}
+.selit{
+  border-bottom: 0.1rem solid #efcd83 !important;
+}
+.priceBar{
+  width: 100%;
+  height: 1rem;
+  background: #FFF;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+.priceBar .price{
+  width: 45%;
+  height: 100%;
+  line-height: 1rem;
+  color: #deb95f;
+  font-size: 0.36rem;
+  text-indent: 0.45rem;
+  border-right: 0.01rem solid #eeeeee;
+}
+.priceBar .addCarBtn{
+  width: 27%;
+  height: 100%;
+  line-height: 1rem;
+  color: #555555;
+  font-size: 0.30rem;
+  text-align: center;
+}
+.priceBar .payBtn{
+  width: 27%;
+  height: 100%;
+  line-height: 1rem;
+  color: #FFF;
+  font-size: 0.30rem;
+  background: #efcd83;
+  text-align: center;
 }
