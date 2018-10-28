@@ -1,0 +1,88 @@
+.con{
+  width: 100%;
+  min-height: 11rem;
+  background: #eeeeee;
+  display: flex;
+  flex-direction: column;
+}
+.headSwiper{
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background: #000;
+}
+.headSwiper .swiper-container {
+  width: 7.5rem;
+  height: 5rem;
+}
+.headSwiper .swiper-slide img{
+  width: 100%;
+  height: 5rem;
+}
+
+.headSwiper .swiper-pagination-fraction{
+  width: auto !important;
+  right: 0.3rem;
+  bottom: 0.25rem;
+  background: #FFF;
+  padding: 0.08rem;
+  left: unset;
+  border-radius: 0.1rem;
+  font-size: 0.18rem;
+}
+.priceTitle{
+  width: 100%;
+  height: 1rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  color: #deb95f;
+  font-size: 0.36rem;
+  text-indent: 0.4rem;
+}
+.styleChoseBox{
+  width: 100%;
+  min-height: 2.15rem;
+  margin-top: 0.1rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.1rem;
+}
+.styleChoseBox .heads{
+  width: 100%;
+  color: #555555;
+  font-size: 0.2rem;
+  line-height: 0.2rem;
+  margin-top: 0.25rem;
+  text-indent: 0.35rem;
+}
+.styleChoseBox .choseTips{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  flex-wrap: wrap;
+  padding-right: 0.1rem;
+}
+.styleChoseBox .choseTips .tips{
+  padding: 0.06rem 0.35rem;
+  border: 1px solid #555555;
+  color: #555555;
+  text-align: center;
+  font-size: 0.24rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-left: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+.styleChoseBox .choseTips .spec{
+  width: 2.78rem;
+  height: 0.48rem;
+}
