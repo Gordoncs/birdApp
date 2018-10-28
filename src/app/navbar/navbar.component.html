@@ -1,14 +1,14 @@
 <div class="navbar">
-  <div class="navbarList" [routerLink]="['/index']" routerLinkActive="active">
-    <img class="icon" src="http://www.iconpng.com/png/media_monster_christmas/mail.png" alt="">
+  <div class="navbarList" [routerLink]="['/index']" routerLinkActive="activeIndex" #rla="routerLinkActive">
+    <img class="index" src="{{rla.isActive?'./assets/image/indexSel.png':'./assets/image/index.png'}}" alt="">
     <div class="text">首页</div>
   </div>
   <div class="navbarList">
-    <img class="icon" src="http://www.iconpng.com/png/media_monster_christmas/mail.png" alt="">
-    <div class="text">科美分类</div>
+    <img class="index" src="./assets/image/car.png" alt="">
+    <div class="text">购物车</div>
   </div>
   <div class="navbarList">
-    <img class="icon" src="http://www.iconpng.com/png/media_monster_christmas/mail.png" alt="">
+    <img class="index" src="./assets/image/person.png" alt="">
     <div class="text">我的</div>
   </div>
 </div>

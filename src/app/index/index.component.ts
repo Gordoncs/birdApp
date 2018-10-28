@@ -56,5 +56,9 @@ export class IndexComponent implements OnInit, AfterViewInit {
     };
   }
 
+  gotopFn(): void {
+    console.log(11);
+    document.documentElement.scrollTop = 0;
+  }
 
 }

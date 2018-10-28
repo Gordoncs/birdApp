@@ -22,13 +22,27 @@
   align-items: center;
   color: #adadad;
 }
-.navbarList .icon{
-  width: 0.5rem;
-  height: 0.5rem;
-}
+
 .navbarList .text{
   font-size: 0.2rem;
+  margin-top:0.1rem;
 }
-.active{
+.activeIndex{
   color: #000 !important;
+
 }
+.index{
+  width: 0.51rem;
+  height: 0.47rem;
+}
+.car{
+  width: 0.49rem;
+  height: 0.50rem;
+  background: url("../../../src/assets/image/car.png") top center;
+}
+.person{
+  width: 0.52rem;
+  height: 0.53rem;
+  background: url("../../../src/assets/image/person.png") top center;
+}
+
