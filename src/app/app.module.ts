@@ -8,7 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { Code404Component } from './code404/code404.component';
 import { DetailComponent } from './detail/detail.component';
 import {UserConfigService} from './shared/user-config.service';
-
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import {UserConfigService} from './shared/user-config.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [UserConfigService],
   bootstrap: [AppComponent]
