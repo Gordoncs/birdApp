@@ -1,0 +1,80 @@
+.con{
+  width: 100%;
+  background: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 1rem;
+}
+.headTitle{
+  width: 100%;
+  height: 0.95rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.headTitle .titleBtn{
+  font-size: 0.28rem;
+  color: #3f3633;
+  width: 50%;
+  height: 0.5rem;
+  text-align: center;
+  line-height: 0.5rem;
+}
+.btnsel{
+  color: #efcd83 !important;
+}
+
+.allCountBox{
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  margin-top: 0.1rem;
+}
+.headsBg{
+  width: 100%;
+  height: 2.5rem;
+}
+.allCountBox .personImgBox{
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  left: 0.75rem;
+  border: 0.06rem solid #fff0cf;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.allCountBox .personImgBox img{
+  width: 100%;
+  height: 100%;
+}
+.allCountBox .infoBox{
+  height: 100%;
+  width: 3.5rem;
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  color: #453c3a;
+  font-size: 0.36rem;
+}
+.allCountBox .infoBox span{
+  color: #efcd83;
+  font-size: 0.72rem;
+  margin-right: 0.3rem;
+}
+.effectBox{
+
+}

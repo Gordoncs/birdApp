@@ -11,6 +11,7 @@ import {UserConfigService} from './shared/user-config.service';
 import {HttpClientModule} from '@angular/common/http';
 import { ShopcarComponent } from './shopcar/shopcar.component';
 import { MyindexComponent } from './myindex/myindex.component';
+import { EffectluckComponent } from './effectluck/effectluck.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MyindexComponent } from './myindex/myindex.component';
     DetailComponent,
     ShopcarComponent,
     MyindexComponent,
+    EffectluckComponent,
   ],
   imports: [
     BrowserModule,

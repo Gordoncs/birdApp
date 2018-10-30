@@ -20,7 +20,136 @@
   height: 2.5rem;
 }
 .heads .personImgBox{
-  width: 1.6rem;
-  height: 1.6rem;
-
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  left: 0.75rem;
+  border: 0.06rem solid #fff0cf;
+  border-radius: 1.5rem;
+  -moz-box-shadow:0rem 0.08rem 0.1rem #d8af60, 0.02rem 0rem 0.05rem #d8af60, -0.02rem 0rem 0.05rem #d8af60;
+  -webkit-box-shadow:0rem 0.08rem 0.1rem #d8af60, 0.02rem 0rem 0.05rem #d8af60, -0.02rem 0rem 0.05rem #d8af60;
+  box-shadow:0rem 0.08rem 0.1rem #d8af60, 0.02rem 0rem 0.05rem #d8af60, -0.02rem 0rem 0.05rem #d8af60;
+  overflow: hidden;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.heads .personImgBox img{
+  width: 100%;
+  height: 100%;
+}
+.heads .infoBox{
+  height: 100%;
+  width: 3.5rem;
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+}
+.heads .infoBox span{
+  color: #FFF;
+  font-size: 0.28rem;
+}
+.orderStatusBox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.1rem;
+  background: #FFF;
+}
+.orderStatusBox .statusHead{
+  width: 100%;
+  height: 0.77rem;
+  border-bottom: 1px solid #eeeeee;
+  text-align: left;
+  line-height: 0.77rem;
+  color: #393939;
+  font-size: 0.24rem;
+  text-indent: 0.55rem;
+}
+.orderStatusBox .statusCon{
+  width: 100%;
+  height: 1.47rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.orderStatusBox .statusList{
+  width: 1.2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.orderStatusBox .statusList span{
+  color: #393939;
+  font-size: 0.2rem;
+  margin-top: 0.15rem;
+}
+.effectLuckBox{
+  width: 100%;
+  height: 2.8rem;
+  margin-top: 0.1rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.effectLuckList{
+  width: 1.57rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.effectLuckList img{
+  width: 100%;
+  height: 2.16rem;
+}
+.effectLuckList span{
+  color: #e7cd94;
+  font-size: 0.3rem;
+  margin-top: 0.15rem;
+}
+.zeroShareBox{
+  width: 100%;
+  height: 1.67rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.zeroShareBox img{
+  width: 7.36rem;
+  height: 1.49rem;
+  margin-top: 0.1rem;
+}
+.birdList{
+  width: 100%;
+  height: 0.9rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.birdList span{
+  color: #393939;
+  font-size: 0.24rem;
+  font-weight: bold;
+}
+.birdList img{
+  width: 0.15rem;
+  height: 0.26rem;
+}
+.ml55{
+  margin-left: 0.55rem;
+}
+.mr40{
+  margin-right: 0.4rem;
 }
