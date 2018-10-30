@@ -9,6 +9,8 @@ import { Code404Component } from './code404/code404.component';
 import { DetailComponent } from './detail/detail.component';
 import {UserConfigService} from './shared/user-config.service';
 import {HttpClientModule} from '@angular/common/http';
+import { ShopcarComponent } from './shopcar/shopcar.component';
+import { MyindexComponent } from './myindex/myindex.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import {HttpClientModule} from '@angular/common/http';
     NavbarComponent,
     Code404Component,
     DetailComponent,
+    ShopcarComponent,
+    MyindexComponent,
   ],
   imports: [
     BrowserModule,

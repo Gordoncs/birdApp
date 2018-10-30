@@ -1,0 +1,26 @@
+.con{
+  width: 100%;
+  background: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 1rem;
+}
+.heads{
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+.headsBg{
+  width: 100%;
+  height: 2.5rem;
+}
+.heads .personImgBox{
+  width: 1.6rem;
+  height: 1.6rem;
+
+}

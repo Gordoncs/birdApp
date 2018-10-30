@@ -23,9 +23,4 @@ export class UserConfigService {
     // return new UserConfig(0, 1 );
   }
 }
-export class UserConfig {
-  constructor(
-    public userid: number,
-    public shopid: number
-  ) {}
-}
+
