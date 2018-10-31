@@ -8,11 +8,14 @@
     <div class="personImgBox">
       <img src="./assets/image/girl.png" alt="">
     </div>
-    <div class="infoBox">
+    <div class="infoBox" *ngIf="showWitch==1">
       <span>85</span>位好友
     </div>
+    <div class="infoBox" *ngIf="showWitch==2">
+      <span>482</span>幸福值
+    </div>
   </div>
-  <div class="effectBox">
+  <div *ngIf="showWitch==1" class="effectBox">
     <div class="effectList">
       <div class="personImgBox">
         <img src="./assets/image/girl.png" alt="">
@@ -97,5 +100,28 @@
         <div class="tips">您获得2次活动机会</div>
       </div>
     </div>
+  </div>
+  <div class="luckBox">
+    <div class="luckHead">
+      <div class="wordShow">幸运时刻</div>
+      <div class="wordShow">幸运值</div>
+    </div>
+    <div class="luckList">
+      <div class="wordShow">2018-10-28</div>
+      <div class="wordShow yellowColor">58</div>
+    </div>
+    <div class="luckList">
+      <div class="wordShow">2018-10-28</div>
+      <div class="wordShow yellowColor">58</div>
+    </div>
+    <div class="luckList">
+      <div class="wordShow">2018-10-28</div>
+      <div class="wordShow yellowColor">58</div>
+    </div>
+    <div class="luckList">
+      <div class="wordShow">2018-10-28</div>
+      <div class="wordShow yellowColor">58</div>
+    </div>
+
   </div>
 </div>

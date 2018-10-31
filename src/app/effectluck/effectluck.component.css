@@ -152,3 +152,46 @@
   justify-content: center;
 
 }
+.luckBox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.luckHead{
+  width: 100%;
+  height: 0.87rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.luckHead .wordShow{
+  display: flex;
+  width: 2rem;
+  color: #231815;
+  font-size: 0.28rem;
+  justify-content: center;
+}
+.luckList{
+  width: 100%;
+  height: 0.97rem;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background: #FFF;
+}
+.luckList .wordShow{
+  display: flex;
+  width: 2rem;
+  font-size: 0.28rem;
+  color: #231815;
+  justify-content: center;
+}
+.yellowColor{
+  color: #efcd83 !important;
+}

@@ -12,7 +12,6 @@ if (environment.production) {
 const xhr = new XMLHttpRequest();
 
 const currUrl = 'http://' + window.location.host + '/g/index.html';
-alert(currUrl);
 const signatureUrl = '/signature?redirectUrl=g/index.html&currUrl=' + currUrl;
 const configWeixin = function () {
   const data = JSON.parse(this.response);
@@ -47,8 +46,6 @@ const configWeixin = function () {
         }
       });
     });
-    platformBrowserDynamic().bootstrapModule(AppModule)
-      .catch(err => console.error(err));
   } else {
     window.location.href = data.result.data;
   }
@@ -57,6 +54,7 @@ xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
 
-
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
 
 
