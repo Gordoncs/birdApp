@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./effectluck.component.css']
 })
 export class EffectluckComponent implements OnInit {
-
+  public showWitch: any = 1;
   constructor() { }
 
   ngOnInit() {
   }
-
+  choseit(index) {
+    this.showWitch = index;
+  }
 }

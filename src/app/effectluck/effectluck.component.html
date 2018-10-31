@@ -1,7 +1,7 @@
 <div class="con">
   <div class="headTitle">
-    <div class="titleBtn btnsel" style="width: 49%;border-right: 1px solid #eeeeee">影响力</div>
-    <div class="titleBtn">幸运指数</div>
+    <div [class.btnsel]="showWitch==1" class="titleBtn " (click)="choseit(1)" style="width: 49%;border-right: 1px solid #eeeeee">影响力</div>
+    <div [class.btnsel]="showWitch==2" class="titleBtn" (click)="choseit(2)">幸运指数</div>
   </div>
   <div class="allCountBox">
     <img class="headsBg" src="./assets/image/myindexHeadnocolor.png" alt="">
@@ -18,13 +18,83 @@
         <img src="./assets/image/girl.png" alt="">
       </div>
       <div class="context">
-        <span>林凡</span>
+        <span class="name">林凡</span>
         <span>2018年10月27日</span>
         <span>因您而更美</span>
       </div>
       <div class="rightInfo">
-        <img src="" alt="">
-        <div>您获得2次 活动机会</div>
+        <img src="./assets/image/effectIcon.png" alt="">
+        <div class="tips">您获得2次活动机会</div>
+      </div>
+    </div>
+    <div class="effectList">
+      <div class="personImgBox">
+        <img src="./assets/image/girl.png" alt="">
+      </div>
+      <div class="context">
+        <span class="name">林凡</span>
+        <span>2018年10月27日</span>
+        <span>因您而更美</span>
+      </div>
+      <div class="rightInfo">
+        <img src="./assets/image/effectIcon.png" alt="">
+        <div class="tips">您获得2次活动机会</div>
+      </div>
+    </div>
+    <div class="effectList">
+      <div class="personImgBox">
+        <img src="./assets/image/girl.png" alt="">
+      </div>
+      <div class="context">
+        <span class="name">林凡</span>
+        <span>2018年10月27日</span>
+        <span>因您而更美</span>
+      </div>
+      <div class="rightInfo">
+        <img src="./assets/image/effectIcon.png" alt="">
+        <div class="tips">您获得2次活动机会</div>
+      </div>
+    </div>
+    <div class="effectList">
+      <div class="personImgBox">
+        <img src="./assets/image/girl.png" alt="">
+      </div>
+      <div class="context">
+        <span class="name">林凡</span>
+        <span>2018年10月27日</span>
+        <span>因您而更美</span>
+      </div>
+      <div class="rightInfo">
+        <img src="./assets/image/effectIcon.png" alt="">
+        <div class="tips">您获得2次活动机会</div>
+      </div>
+    </div>
+    <div class="effectList">
+      <div class="personImgBox">
+        <img src="./assets/image/girl.png" alt="">
+      </div>
+      <div class="context">
+        <span class="name">林凡</span>
+        <span>2018年10月27日</span>
+        <span>因您而更美</span>
+      </div>
+      <div class="rightInfo">
+        <img src="./assets/image/effectIcon.png" alt="">
+        <div class="tips">您获得2次活动机会</div>
+      </div>
+    </div>
+    <div class="effectList">
+      <div class="personImgBox">
+        <img src="./assets/image/girl.png" alt="">
+      </div>
+      <div class="context">
+        <span class="name">林凡</span>
+        <span>2018年10月27日</span>
+        <span>因您而更美</span>
+      </div>
+      <div class="rightInfo">
+        <img src="./assets/image/effectIcon.png" alt="">
+        <div class="tips">您获得2次活动机会</div>
       </div>
     </div>
   </div>

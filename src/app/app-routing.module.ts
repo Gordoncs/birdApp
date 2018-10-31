@@ -9,7 +9,7 @@ import {EffectluckComponent} from './effectluck/effectluck.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/myindex', pathMatch: 'full'},
+  { path: '', redirectTo: '/index', pathMatch: 'full'},
   { path: 'index', component: IndexComponent},
   { path: 'car', component: ShopcarComponent},
   { path: 'myindex', component: MyindexComponent},
