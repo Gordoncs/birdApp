@@ -4,7 +4,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 3;
+  z-index: 5;
   background: #FFF;
   display: flex;
   flex-direction: row;
@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
   margin-top: 0.85rem;
 }
 .shopInfoBox{
@@ -72,4 +72,202 @@
 }
 .fz25{
   font-size: 0.25rem !important;
+}
+.userInfo{
+  width: 100%;
+  height: 2.1rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.userInfo .tips{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 0.15rem;
+}
+.userInfo .tips .s1{
+  color: #f27442;
+  font-size: 0.24rem;
+  margin-left: 0.3rem;
+}
+.userInfo .tips .s2{
+  color: #f27442;
+  font-size: 0.22rem;
+}
+.userInfo .inputBox{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0.15rem;
+}
+.userInfo .inputBox span{
+  color: #333333;
+  font-size: 0.28rem;
+  margin-left: 0.3rem;
+}
+.userInfo .inputBox input{
+  width: 5.56rem;
+  height: 0.58rem;
+  border-radius: 0.1rem;
+  border: 1px solid #e7cd94;
+  font-size: 0.28rem;
+  text-indent: 0.1rem;
+}
+
+.mainBox{
+  width: 100%;
+  margin-top: 0.15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #FFF;
+  margin-bottom: 0.1rem;
+}
+.mainBox .tips{
+  width: 6.9rem;
+  color: #f27442;
+  font-size: 0.24rem;
+  margin-top: 0.15rem;
+  margin-bottom: 0.15rem;
+}
+.mainBox .productList{
+  width: 6.9rem;
+  height: 1.4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  margin-bottom: 0.15rem;
+}
+.mainBox .productList .productImg{
+  width: 1.4rem;
+  height: 1.4rem;
+  background: #eeeeee;
+  border-radius: 0.05rem;
+  overflow: hidden;
+}
+.mainBox .productList .productImg img{
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.mainBox .productIndec{
+  width: 2.9rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 0.2rem;
+}
+.mainBox .productIndec .name{
+  width: 100%;
+  font-size: 0.24rem;
+  color: #737373;
+  word-break:break-all;
+  word-wrap:break-word;
+  line-height: 0.24rem;
+}
+.mainBox .productIndec .price{
+  font-size: 0.28rem;
+  color: #f27442;
+  margin-top: 0.1rem;
+}
+.mainBox .productList .nums{
+  height: 100%;
+  line-height: 0.6rem;
+  color: #737373;
+  font-size: 0.24rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.textBox{
+  width: 6.9rem;
+  height: 0.6rem;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #737373;
+  font-size: 0.22rem;
+}
+.textBox .cheapBox{
+  width: 5.7rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.textBox .cheapBox .name{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #f27442;
+  font-size: 0.24rem;
+  line-height: 0.24rem;
+}
+.textBox .cheapBox .name img{
+  width: 0.24rem;
+  height: 0.24rem;
+  margin-left: 0.2rem;
+}
+.memoBox{
+  width: 6.9rem;
+  height: 1.48rem;
+  border-radius: 0.1rem;
+  border: 1px solid #e5e5e5;
+  color: #737373;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  resize: none;
+  font-size: 0.20rem;
+  padding: 0.1rem;
+}
+.priceBar{
+  width: 100%;
+  height: 1rem;
+  background: #FFF;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+.priceBar .price{
+  width: 73%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.priceBar .price .s1{
+  color: #737373;
+  font-size: 0.28rem;
+  margin-left: 0.35rem;
+  margin-top: 0.1rem;
+}
+.priceBar .price .s2{
+  color: #333333;
+  font-size: 0.46rem;
+  margin-right: 0.2rem;
+}
+
+.priceBar .payBtn{
+  width: 27%;
+  height: 100%;
+  line-height: 1rem;
+  color: #FFF;
+  font-size: 0.30rem;
+  background: #efcd83;
+  text-align: center;
 }
