@@ -6,12 +6,14 @@ import {DetailComponent} from './detail/detail.component';
 import {ShopcarComponent} from './shopcar/shopcar.component';
 import {MyindexComponent} from './myindex/myindex.component';
 import {EffectluckComponent} from './effectluck/effectluck.component';
+import {PaysureComponent} from './paysure/paysure.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/effectluck', pathMatch: 'full'},
+  { path: '', redirectTo: '/paysure', pathMatch: 'full'},
   { path: 'index', component: IndexComponent},
-  { path: 'car', component: ShopcarComponent},
+  { path: 'cart', component: ShopcarComponent},
+  { path: 'paysure', component: PaysureComponent},
   { path: 'myindex', component: MyindexComponent},
   { path: 'effectluck', component: EffectluckComponent},
   { path: 'detail', component: DetailComponent},

@@ -1,7 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentChecked} from '@angular/core';
 import Swiper from 'swiper';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -11,6 +13,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router, private titleService: Title) { }
   ngAfterViewInit() {
+    console.log(1111);
     const mySwiper = new Swiper ('.headSwiper .swiper-container', {
       loop: true, // 循环模式选项
       autoplay: true,
@@ -66,5 +69,4 @@ export class IndexComponent implements OnInit, AfterViewInit {
     console.log(11);
     document.documentElement.scrollTop = 0;
   }
-
 }

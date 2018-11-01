@@ -1,0 +1,75 @@
+.qRcodeTitle{
+  width: 100%;
+  height: 0.85rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.qRcodeTitle img{
+  width: 0.34rem;
+  height: 0.34rem;
+  margin-right: 0.25rem;
+}
+.con{
+  width: 100%;
+  min-height: 6rem;
+  background: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 1rem;
+  margin-top: 0.85rem;
+}
+.shopInfoBox{
+  width: 100%;
+  height: 1.62rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.shopInfoBox .bg{
+  width: 100%;
+  height: 1.62rem;
+}
+.shopInfoCon{
+  width: 100%;
+  height: 1.62rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  justify-content: center;
+}
+.shopInfoCon .text{
+  color: #dab57b;
+  font-size: 0.22rem;
+  margin-left: 0.28rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.shopInfoCon .text img{
+  width: 0.29rem;
+  height: 0.25rem;
+  margin-right: 0.05rem;
+}
+.shopInfoBox .editShop{
+  position: absolute;
+  z-index: 3;
+  font-size: 0.22rem;
+  color: #e7e7e7;
+  top: 50%;
+  margin-top: -0.1rem;
+  right: 0.25rem;
+}
+.fz25{
+  font-size: 0.25rem !important;
+}

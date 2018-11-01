@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { ShopcarComponent } from './shopcar/shopcar.component';
 import { MyindexComponent } from './myindex/myindex.component';
 import { EffectluckComponent } from './effectluck/effectluck.component';
+import { PaysureComponent } from './paysure/paysure.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { EffectluckComponent } from './effectluck/effectluck.component';
     ShopcarComponent,
     MyindexComponent,
     EffectluckComponent,
+    PaysureComponent,
   ],
   imports: [
     BrowserModule,
