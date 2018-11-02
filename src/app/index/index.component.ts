@@ -11,10 +11,10 @@ import {UserConfigService} from '../shared/user-config.service';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit, AfterViewInit {
+  public indexInfo: any;
 
   constructor(private router: Router, private titleService: Title, private userConfigService: UserConfigService) { }
   ngAfterViewInit() {
-    console.log(1111);
     const mySwiper = new Swiper ('.headSwiper .swiper-container', {
       loop: true, // 循环模式选项
       autoplay: true,
@@ -33,11 +33,10 @@ export class IndexComponent implements OnInit, AfterViewInit {
      * 设置title
      */
     this.titleService.setTitle('春鸟科美');
-
-    this.userConfigService.getUserConfig();
   }
 
   ngOnInit() {
+
     /***
      * 懒加载图片
     */
@@ -66,10 +65,20 @@ export class IndexComponent implements OnInit, AfterViewInit {
         });
       }
     };
+    // 获取首页数据
+    this.getInfo();
   }
 
   gotopFn(): void {
     console.log(11);
     document.documentElement.scrollTop = 0;
+  }
+
+  getInfo() {
+    this.userConfigService.getUserConfig()
+      .subscribe((data) => {
+        this.indexInfo = data['data'];
+        console.log(data);
+      });
   }
 }
