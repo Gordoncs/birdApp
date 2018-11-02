@@ -54,6 +54,22 @@ xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
 
+/**
+ * 获取当前用户公共信息
+ * 取值方式为：
+ *localStorage.setItem("key","value");//存储变量名为key，值为value的变量
+
+ localStorage.key = "value"//存储变量名为key，值为value的变量
+
+ localStorage.getItem("key");//获取存储的变量key的值123
+
+ localStorage.key;//获取存储的变量key的值
+
+ localStorage.removeItem("key")//删除变量名为key的存储变量
+ ---------------------
+ */
+localStorage.setItem('userid', '123');
+localStorage.setItem('shopid', '345');
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 

@@ -2,6 +2,7 @@ import {Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentChecked}
 import Swiper from 'swiper';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import {UserConfigService} from '../shared/user-config.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class IndexComponent implements OnInit, AfterViewInit {
 
-  constructor(private router: Router, private titleService: Title) { }
+  constructor(private router: Router, private titleService: Title, private userConfigService: UserConfigService) { }
   ngAfterViewInit() {
     console.log(1111);
     const mySwiper = new Swiper ('.headSwiper .swiper-container', {
@@ -32,6 +33,8 @@ export class IndexComponent implements OnInit, AfterViewInit {
      * 设置title
      */
     this.titleService.setTitle('春鸟科美');
+
+    this.userConfigService.getUserConfig();
   }
 
   ngOnInit() {

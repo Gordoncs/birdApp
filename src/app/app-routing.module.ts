@@ -10,7 +10,7 @@ import {PaysureComponent} from './paysure/paysure.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/paysure', pathMatch: 'full'},
+  { path: '', redirectTo: '/index', pathMatch: 'full'},
   { path: 'index', component: IndexComponent},
   { path: 'cart', component: ShopcarComponent},
   { path: 'paysure', component: PaysureComponent},
@@ -26,3 +26,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 }
+

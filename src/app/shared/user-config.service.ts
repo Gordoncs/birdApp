@@ -15,11 +15,8 @@ export class UserConfigService {
     // subscribe((data) => {
     //   console.log(data);
     // });
-    /**
-     * 设置本地存储变量
-     */
-    localStorage.setItem('userid', '123');
-    localStorage.setItem('shopid', '345');
+    console.log(localStorage.getItem('userid'));
+    console.log(localStorage.getItem('shopid'));
     // return new UserConfig(0, 1 );
   }
 }
