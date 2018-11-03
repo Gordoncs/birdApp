@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentChecked} from '@angular/core';
 import Swiper from 'swiper';
-import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import {Title} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
 
 
@@ -13,15 +13,17 @@ import {UserConfigService} from '../shared/user-config.service';
 export class IndexComponent implements OnInit, AfterViewInit {
   public indexInfo: any;
 
-  constructor(private router: Router, private titleService: Title, private userConfigService: UserConfigService) { }
+  constructor(private router: Router, private titleService: Title, private userConfigService: UserConfigService) {
+  }
+
   ngAfterViewInit() {
-    const mySwiper = new Swiper ('.headSwiper .swiper-container', {
+    const mySwiper = new Swiper('.headSwiper .swiper-container', {
       loop: true, // 循环模式选项
       autoplay: true,
       // 如果需要分页器
       pagination: {
         el: '.swiper-pagination',
-        bulletClass : 'bullets',
+        bulletClass: 'bullets',
         bulletActiveClass: 'my-bullet-active',
       },
     });
@@ -39,10 +41,10 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
     /***
      * 懒加载图片
-    */
+     */
     window.onload = function () {
       let scrollTop = window.scrollY;
-      const imgs = Array.from(document.querySelectorAll( 'img.sds' ));
+      const imgs = Array.from(document.querySelectorAll('img.sds'));
       lazyLoad();
 
       // 函数防抖模式
@@ -78,7 +80,10 @@ export class IndexComponent implements OnInit, AfterViewInit {
     this.userConfigService.getUserConfig()
       .subscribe((data) => {
         this.indexInfo = data['data'];
-        console.log(data);
+        for (let i = 0; i < this.indexInfo['personIntroduce'].length; i++) {
+          this.indexInfo['personIntroduce'][i].casePictureArr = (this.indexInfo['personIntroduce'][i].casePicture).split(',');
+        }
+        console.log(this.indexInfo);
       });
   }
 }

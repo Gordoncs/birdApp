@@ -1,114 +1,70 @@
-<div class="headBox">
-  <div class="head">
-    <div class="searchBox"></div>
-    <div class="searchBoxText">
-      <img class="icon" src="./assets/image/location.png" alt="">
-      <span class="name">春鸟皮肤管理中心顺义天美1店</span>
-      <span class="arrow">></span>
+<div style="margin-bottom: 1.3rem">
+  <div class="headBox">
+    <div class="head">
+      <div class="searchBox"></div>
+      <div class="searchBoxText">
+        <img class="icon" src="./assets/image/location.png" alt="">
+        <span class="name">春鸟皮肤管理中心顺义天美1店</span>
+        <span class="arrow">></span>
+      </div>
+    </div>
+    <img class="headBg" src="./assets/image/headBg.png" alt="">
+    <div class="headSwiper">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div *ngFor="let imgs of indexInfo['carousel']" class="swiper-slide" [routerLink]="['../**']">
+            <img  src="{{imgs}}" alt="">
+          </div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+    <div class="payBox" [routerLink]="['../**']">
+      <img src="./assets/image/payIcon.png" alt="">
     </div>
   </div>
-  <img class="headBg" src="./assets/image/headBg.png" alt="">
-  <div class="headSwiper">
+
+  <div class="sideScrollBox">
+    <div class="heads">
+      <img src="./assets/image/sideScrollBoxHead.png" alt="">
+    </div>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" [routerLink]="['../**']">
-          <img src="./assets/image/example.png" alt="">
-        </div>
-        <div class="swiper-slide" [routerLink]="['../**']">
-          <img src="./assets/image/example.png" alt="">
-        </div>
-        <div class="swiper-slide" [routerLink]="['../**']">
-          <img src="./assets/image/example.png" alt="">
+        <div *ngFor="let imgs of indexInfo['carefully']" class="swiper-slide" [routerLink]="['../detail']">
+          <img src="{{imgs}}" alt="">
         </div>
       </div>
-      <!-- 如果需要分页器 -->
-      <div class="swiper-pagination"></div>
     </div>
   </div>
-  <div class="payBox" [routerLink]="['../**']">
-    <img src="./assets/image/payIcon.png" alt="">
+  <div class="tiyanBox" [routerLink]="['../**']">
+    <img src="./assets/image/newperson.png" alt="">
+  </div>
+
+  <div class="serveBox">
+    <div *ngFor="let person of indexInfo['personIntroduce'] " class="serveList">
+      <div class="servehead">
+        <div class="line"></div>
+        <div class="person">
+          <span class="name">{{person.name}}</span>
+          <span class="tips">{{person.title}}</span>
+        </div>
+      </div>
+      <div class="headImg">
+        <img src="{{person.headIcon}}" alt="">
+      </div>
+      <div class="exImg">
+        <div class="exlist" *ngFor="let imgs of person['casePictureArr']">
+          <img src="{{imgs}}" alt="">
+        </div>
+      </div>
+      <p class="declist">会员年龄：{{person.memberAge}}岁</p>
+      <p class="declist">服务项目：{{person.serviceProject}}</p>
+      <p class="declist">实际效果：{{person.describedResults}}</p>
+    </div>
   </div>
 </div>
 
-<div class="sideScrollBox">
-  <div class="heads">
-    <img src="./assets/image/sideScrollBoxHead.png" alt="">
-  </div>
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" [routerLink]="['../detail']">
-        <img src="./assets/image/jx1.png" alt="">
-      </div>
-      <div class="swiper-slide" [routerLink]="['../detail']">
-        <img src="./assets/image/jx2.png" alt="">
-      </div>
-      <div class="swiper-slide" [routerLink]="['../detail']">
-        <img src="./assets/image/jx3.png" alt="">
-      </div>
-      <div class="swiper-slide" [routerLink]="['../detail']">
-        <img src="./assets/image/jx4.png" alt="">
-      </div>
-    </div>
-  </div>
-</div>
-<div class="tiyanBox" [routerLink]="['../**']">
-  <img src="./assets/image/newperson.png" alt="">
-</div>
-
-<div class="serveBox">
-  <div class="serveList">
-    <div class="servehead">
-      <div class="line"></div>
-      <div class="person">
-        <span class="name">金永涵</span>
-        <span class="tips">美容事业部总监</span>
-      </div>
-    </div>
-    <div class="headImg">
-      <img src="./assets/image/headimg.png" alt="">
-    </div>
-    <div class="exImg">
-      <div class="exlist">
-        <img src="./assets/image/anli.png" alt="">
-      </div>
-      <div class="exlist">
-        <img src="./assets/image/anli2.png" alt="">
-      </div>
-      <div class="exlist">
-        <img src="./assets/image/anli3.png" alt="">
-      </div>
-    </div>
-    <p class="declist">会员年龄：31岁</p>
-    <p class="declist">服务项目：蝴蝶袖体雕</p>
-    <p class="declist">实际效果：服务前后通过皮尺测量，周长缩短</p>
-  </div>
-  <div class="serveList">
-    <div class="servehead">
-      <div class="line"></div>
-      <div class="person">
-        <span class="name">金永涵</span>
-        <span class="tips">美容事业部总监</span>
-      </div>
-    </div>
-    <div class="headImg">
-      <img src="./assets/image/headimg.png" alt="">
-    </div>
-    <div class="exImg">
-      <div class="exlist">
-        <img src="./assets/image/anli.png" alt="">
-      </div>
-      <div class="exlist">
-        <img src="./assets/image/anli2.png" alt="">
-      </div>
-      <div class="exlist">
-        <img src="./assets/image/anli3.png" alt="">
-      </div>
-    </div>
-    <p class="declist">会员年龄：31岁</p>
-    <p class="declist">服务项目：蝴蝶袖体雕</p>
-    <p class="declist">实际效果：服务前后通过皮尺测量，周长缩短</p>
-  </div>
-</div>
 
 <div class="gotop" (click)="gotopFn()">
   <img src="./assets/image/gotop.png" alt="">
