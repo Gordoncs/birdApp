@@ -31,7 +31,7 @@
     </div>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div *ngFor="let imgs of indexInfo['carefully']" class="swiper-slide" [routerLink]="['../detail']">
+        <div *ngFor="let imgs of indexInfo['carefully'] let i = index" class="swiper-slide" (click)="goDetail(1)">
           <img src="{{imgs}}" alt="">
         </div>
       </div>

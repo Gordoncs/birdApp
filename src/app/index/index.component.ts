@@ -77,13 +77,16 @@ export class IndexComponent implements OnInit, AfterViewInit {
   }
 
   getInfo() {
-    this.userConfigService.getUserConfig()
+    this.userConfigService.indexView()
       .subscribe((data) => {
         this.indexInfo = data['data'];
         for (let i = 0; i < this.indexInfo['personIntroduce'].length; i++) {
           this.indexInfo['personIntroduce'][i].casePictureArr = (this.indexInfo['personIntroduce'][i].casePicture).split(',');
         }
-        console.log(this.indexInfo);
       });
+  }
+
+  goDetail(id: any) {
+    this.router.navigate(['/detail', id , 8]);
   }
 }

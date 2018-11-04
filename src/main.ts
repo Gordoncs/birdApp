@@ -4,13 +4,13 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {AppModule} from './app/app.module';
 import {environment} from './environments/environment';
 import wx from 'weixin-js-sdk';
-
+import * as MobileDetect from 'mobile-detect';
 if (environment.production) {
   enableProdMode();
 }
+const md = new MobileDetect(window.navigator.userAgent);
 
 const xhr = new XMLHttpRequest();
-
 const currUrl = 'http://' + window.location.host + '/g/index.html';
 const signatureUrl = '/signature?redirectUrl=g/index.html&currUrl=' + currUrl;
 const configWeixin = function () {
@@ -68,8 +68,21 @@ xhr.send();
  localStorage.removeItem("key")//删除变量名为key的存储变量
  ---------------------
  */
-localStorage.setItem('userid', '123');
-localStorage.setItem('shopid', '345');
+
+localStorage.setItem('appkey', '');
+localStorage.setItem('os', md.os());
+if (md.os() === 'iOS') {
+  localStorage.setItem('osVersion', md.os() + String(md.version('iPhone')));
+} else if (md.os() === 'AndroidOS') {
+  localStorage.setItem('osVersion', md.os() + String(md.version('Android')));
+}
+localStorage.setItem('unique', '');
+localStorage.setItem('userId', '');
+localStorage.setItem('userSession', '');
+localStorage.setItem('channel', '');
+localStorage.setItem('subsiteId', '');
+localStorage.setItem('language', 'zh_cn');
+
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 

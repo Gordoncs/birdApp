@@ -22,6 +22,7 @@
     "@angular/router": "^6.1.0",
     "@types/swiper": "^4.2.3",
     "core-js": "^2.5.4",
+    "mobile-detect": "^1.4.3",
     "rxjs": "~6.2.0",
     "swiper": "^4.4.1",
     "weixin-js-sdk": "^1.4.0-test",
