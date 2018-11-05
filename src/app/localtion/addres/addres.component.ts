@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare var  qq: any;
 import {
   trigger,
   state,
@@ -45,7 +46,7 @@ export class AddresComponent implements OnInit {
       }
     );
     const  markerIcon = new qq.maps.MarkerImage(
-        'src/assets/image/addressIcon.png',
+        './assets/image/addressIcon.png',
       );
     const latlngs = [
       new qq.maps.LatLng(39.91474, 116.37333),
