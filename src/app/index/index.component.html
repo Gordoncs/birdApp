@@ -2,7 +2,7 @@
   <div class="headBox">
     <div class="head">
       <div class="searchBox"></div>
-      <div class="searchBoxText">
+      <div class="searchBoxText" routerLink="/address">
         <img class="icon" src="./assets/image/location.png" alt="">
         <span class="name">春鸟皮肤管理中心顺义天美1店</span>
         <span class="arrow">></span>
@@ -12,7 +12,7 @@
     <div class="headSwiper">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div *ngFor="let imgs of indexInfo['carousel']" class="swiper-slide" [routerLink]="['../**']">
+          <div *ngFor="let imgs of indexInfo['carousel']" class="swiper-slide" [routerLink]="['/**']">
             <img  src="{{imgs}}" alt="">
           </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <div class="payBox" [routerLink]="['../**']">
+    <div class="payBox" [routerLink]="['/**']">
       <img src="./assets/image/payIcon.png" alt="">
     </div>
   </div>
@@ -37,7 +37,7 @@
       </div>
     </div>
   </div>
-  <div class="tiyanBox" [routerLink]="['../**']">
+  <div class="tiyanBox" [routerLink]="['/**']">
     <img src="./assets/image/newperson.png" alt="">
   </div>
 

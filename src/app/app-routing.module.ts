@@ -7,6 +7,7 @@ import {ShopcarComponent} from './shopcar/shopcar.component';
 import {MyindexComponent} from './myindex/myindex.component';
 import {EffectluckComponent} from './effectluck/effectluck.component';
 import {PaysureComponent} from './paysure/paysure.component';
+import {AddresComponent} from './localtion/addres/addres.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'myindex', component: MyindexComponent},
   { path: 'effectluck', component: EffectluckComponent},
   { path: 'detail/:goodsId/:storeId', component: DetailComponent},
+  { path: 'address', component: AddresComponent},
   { path: '**', component: Code404Component},
 ];
 
