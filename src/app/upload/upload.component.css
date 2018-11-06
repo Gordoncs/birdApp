@@ -1,0 +1,25 @@
+.uploadBox{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  background: #000;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.uploadBox .middleBox{
+  width: 6rem;
+  height: 6rem;
+}
+.uploadBox .middleBox img{
+  width: 6rem;
+  height: 6rem;
+}
+
+.show{
+  display: flex !important;
+}

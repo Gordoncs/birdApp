@@ -35,6 +35,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
      * 设置title
      */
     this.titleService.setTitle('春鸟科美');
+
   }
 
   ngOnInit() {
@@ -69,13 +70,19 @@ export class IndexComponent implements OnInit, AfterViewInit {
     };
     // 获取首页数据
     this.getInfo();
+    // 获取用户信息
+    this.getbaseMember();
   }
 
   gotopFn(): void {
-    console.log(11);
     document.documentElement.scrollTop = 0;
   }
-
+  getbaseMember() {
+    this.userConfigService.baseMember()
+      .subscribe((data) => {
+        localStorage.setItem('memberInfo', data['data']);
+      });
+  }
   getInfo() {
     this.userConfigService.indexView()
       .subscribe((data) => {

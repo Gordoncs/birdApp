@@ -24,10 +24,12 @@
             ],
             "styles": [
               "src/styles.css",
-              "./node_modules/swiper/dist/css/swiper.css"
+              "./node_modules/swiper/dist/css/swiper.css",
+              "./node_modules/cropperjs/dist/cropper.css"
             ],
             "scripts": [
-              "./node_modules/swiper/dist/js/swiper.min.js"
+              "./node_modules/swiper/dist/js/swiper.min.js",
+              "./node_modules/cropperjs/dist/cropper.js"
             ]
           },
           "configurations": {

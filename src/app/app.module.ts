@@ -14,6 +14,7 @@ import { MyindexComponent } from './myindex/myindex.component';
 import { EffectluckComponent } from './effectluck/effectluck.component';
 import { PaysureComponent } from './paysure/paysure.component';
 import { AddresComponent } from './localtion/addres/addres.component';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AddresComponent } from './localtion/addres/addres.component';
     EffectluckComponent,
     PaysureComponent,
     AddresComponent,
+    UploadComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,8 +12,8 @@
     <div class="headSwiper">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div *ngFor="let imgs of indexInfo['carousel']" class="swiper-slide" [routerLink]="['/**']">
-            <img  src="{{imgs}}" alt="">
+          <div *ngFor="let item of indexInfo['carousel']" class="swiper-slide" [routerLink]="['/**']">
+            <img  src="{{item.imgs}}" alt="">
           </div>
         </div>
         <!-- 如果需要分页器 -->
@@ -31,8 +31,8 @@
     </div>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div *ngFor="let imgs of indexInfo['carefully'] let i = index" class="swiper-slide" (click)="goDetail(1)">
-          <img src="{{imgs}}" alt="">
+        <div *ngFor="let item of indexInfo['carefully'] let i = index" class="swiper-slide" (click)="goDetail(item.id)">
+          <img src="{{item.imgs}}" alt="">
         </div>
       </div>
     </div>

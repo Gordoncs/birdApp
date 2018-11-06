@@ -69,18 +69,13 @@ xhr.send();
  ---------------------
  */
 
-localStorage.setItem('appkey', '');
 localStorage.setItem('os', md.os());
 if (md.os() === 'iOS') {
   localStorage.setItem('osVersion', md.os() + String(md.version('iPhone')));
 } else if (md.os() === 'AndroidOS') {
   localStorage.setItem('osVersion', md.os() + String(md.version('Android')));
 }
-localStorage.setItem('unique', '');
-localStorage.setItem('userId', '');
-localStorage.setItem('userSession', '');
-localStorage.setItem('channel', '');
-localStorage.setItem('subsiteId', '');
+localStorage.setItem('channel', 'wxH5');
 localStorage.setItem('language', 'zh_cn');
 
 platformBrowserDynamic().bootstrapModule(AppModule)

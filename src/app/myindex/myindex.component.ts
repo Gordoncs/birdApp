@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./myindex.component.css']
 })
 export class MyindexComponent implements OnInit {
-
+  nickname: any = (localStorage.getItem('memberInfo'))['nickname'];
+  headimgurl: any = (localStorage.getItem('memberInfo'))['headimgurl'];
   constructor() { }
 
   ngOnInit() {

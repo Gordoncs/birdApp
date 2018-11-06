@@ -12,17 +12,11 @@ export class UserConfigService {
    */
   headoptions = {
     headers: new HttpHeaders({
-      'appkey': localStorage.getItem('appkey'),
       'os': localStorage.getItem('os'),
       'osVersion': localStorage.getItem('osVersion'),
-      'unique': localStorage.getItem('unique'),
-      'userId': localStorage.getItem('userId'),
-      'userSession': localStorage.getItem('userSession'),
       'channel': localStorage.getItem('channel'),
-      'subsiteId': localStorage.getItem('subsiteId'),
       'language': localStorage.getItem('language'),
       'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token'
     })
   };
   /**
@@ -47,12 +41,21 @@ export class UserConfigService {
   }
   constructor(private http: HttpClient) {
   }
-
+  /**
+   * 获取用户信息
+   */
+  baseMember() {
+    return this.http.get(this.configUrl + '/base/member', this.headoptions)
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      );
+  }
   /**
    * 首页数据
    */
   indexView() {
-    return this.http.get(this.configUrl + '/indexView?longitude=70&latitude=80', this.headoptions)
+    return this.http.get(this.configUrl + '/indexView?longitude=116.37333&latitude=39.91474', this.headoptions)
       .pipe(
         retry(3),
         catchError(this.handleError)
