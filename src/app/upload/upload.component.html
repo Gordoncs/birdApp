@@ -1,6 +1,13 @@
-<input type="file" accept="image/jpeg" (change)="getImgUrl($event)">
+
 <div class="uploadBox" [class.show]="isshow">
   <div class="middleBox" >
     <img  id="image" src="picture.jpg">
   </div>
+  <div class="sureBtn" (click)="sureImg()">确定</div>
 </div>
+
+<div class="photoLookBox">
+  <input type="file" class="uploadInput" accept="image/jpeg" (change)="getImgUrl($event)">
+  <div class="photoList"></div>
+</div>
+

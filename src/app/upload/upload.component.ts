@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import Cropper from 'cropperjs';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -7,29 +8,40 @@ import Cropper from 'cropperjs';
   encapsulation: ViewEncapsulation.None
 })
 export class UploadComponent implements OnInit {
-  private cropper: any;
+  private image: any;
+  cropper1: any;
+  cropper2: any;
+  cropper3: any;
+  cropper4: any;
   isshow = false;
   constructor() { }
   ngOnInit() {
-    const image = <HTMLImageElement>document.getElementById('image');
-    this.cropper = new Cropper(image, {
-      aspectRatio: 1 / 1,
-      movable: true,
-      zoomable: true,
-      crop: function(e) {
-        console.log(e.detail.x);
-        console.log(e.detail.y);
-        console.log(e.detail.width);
-        console.log(e.detail.height);
-        console.log(e.detail.rotate);
-        console.log(e.detail.scaleX);
-        console.log(e.detail.scaleY);
-      }
-    });
+    this.image = <HTMLImageElement>document.getElementById('image');
   }
   getImgUrl($event) {
-    this.cropper.replace(window.URL.createObjectURL($event.path[0].files[0])) ;
+    this.cropper1.replace(window.URL.createObjectURL($event.path[0].files[0])) ;
     this.isshow = true;
-    console.log($event);
+    console.log(window.URL.createObjectURL($event.path[0].files[0]));
+    $('.photoLookBox').find('input').val('');
+  }
+  sureImg() {
+    // @ts-ignore
+    const cas = this.cropper.getCroppedCanvas();
+    const base64 = cas.toDataURL('image/jpeg'); // 转换为base64
+    const data = encodeURIComponent(base64);
+    console.log(data);
+    this.isshow = false;
+  }
+  crearImg(index: any, previewDom) {
+    if (index === 0) {
+      this.cropper1 = new Cropper(this.image, {
+        aspectRatio: 1 / 1,
+        movable: true,
+        zoomable: true,
+        viewMode: 2,
+        preview: previewDom,
+        crop: function(e) {}
+      });
+    }
   }
 }

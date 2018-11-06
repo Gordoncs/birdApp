@@ -6,20 +6,57 @@
   right: 0;
   z-index: 3;
   background: #000;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   display: none;
 }
 .uploadBox .middleBox{
-  width: 6rem;
-  height: 6rem;
+  width: 7.5rem;
+  height: 10rem;
 }
 .uploadBox .middleBox img{
-  width: 6rem;
-  height: 6rem;
+  display: block;
+  width: 7.5rem;
+  height: 100%;
 }
 
 .show{
   display: flex !important;
 }
+.sureBtn{
+  width: 1rem;
+  height: 0.5rem;
+  background: #FFF;
+  border-radius: 0.05rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.2rem;
+}
+
+.photoLookBox{
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 0.05rem;
+  border: 1px solid #d8d8d8;
+  overflow: hidden;
+  position: relative;
+}
+.photoLookBox .uploadInput{
+  width: 100%;
+  height: 100%;
+  opacity:0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.photoList{
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 0.05rem;
+  border: 1px solid #d8d8d8;
+  overflow: hidden;
+}
+
