@@ -1,0 +1,147 @@
+.headBg{
+  width: 100%;
+  height: 5.39rem;
+  display: flex;
+}
+.teacherBox{
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 1.1rem;
+}
+.teacherShow{
+  width: 6.8rem;
+  height: 100%;
+  background: #FFF;
+  border-radius: 0.1rem;
+  -moz-box-shadow:0rem 0.1rem 0.2rem #cdcdcd, 0.01rem 0rem 0.05rem #cdcdcd, -0.1rem 0rem 0.2rem #cdcdcd;
+  -webkit-box-shadow:0rem 0.1rem 0.2rem #cdcdcd, 0.01rem 0rem 0.05rem #cdcdcd, -0.1rem 0rem 0.2rem #cdcdcd;
+  box-shadow:0rem 0.1rem 0.2rem #cdcdcd, 0.01rem 0rem 0.05rem #cdcdcd, -0.1rem 0rem 0.2rem #cdcdcd;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.teacherConBg{
+  width: 6.5rem;
+  height: 3.72rem;
+}
+.teacherCon{
+  width: 6.5rem;
+  height: 3.72rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -3.25rem;
+  top: 50%;
+  margin-top: -1.86rem;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.teacherInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 1.9rem;
+  top: -0.9rem;
+  left: 50%;
+  margin-left: -0.95rem;
+}
+.teacherInfo .pimgs{
+  width: 1.4rem;
+  height: 1.4rem;
+  background: #FFF;
+  border-radius: 1.4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.teacherInfo .pimgs .round1{
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 1.3rem;
+  border:1px solid #e9d19c;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.teacherInfo .pimgs .round1 .round2{
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 1.2rem;
+  overflow: hidden;
+}
+.teacherInfo .pimgs .round1 .round2 img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.teacherInfo .pname{
+  color: #deb95f;
+  font-size: 0.28rem;
+}
+.teacherInfo .ptitle{
+  color: #7e7e7e;
+  font-size: 0.2rem;
+}
+.teacherInfo .ptitle{
+  color: #deb95f;
+  font-size: 0.2rem;
+}
+.line{
+  width: 2px;
+  height: 1.2rem;
+  background: #e7cd94;
+  margin-bottom: 0.65rem;
+}
+.btnIconBox{
+  width: 1.26rem;
+  height: 1.58rem;
+  margin-bottom: 0.3rem;
+}
+.btnIconBox img{
+  width: 1.26rem;
+  height: 1.58rem;
+}
+.setBox{
+  width: 100%;
+  height: 4.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.3rem;
+}
+.setBox .heads{
+  width: 6.8rem;
+  display: flex;
+  flex-direction: row;
+}
+.setBox .heads img{
+  width: 1.52rem;
+  height: 0.49rem;
+}
+
+.setBoxShow{
+  margin-top: 0.3rem;
+  width: 6.8rem;
+  height: 100%;
+  background: #FFF;
+  border-radius: 0.1rem;
+  -moz-box-shadow:0rem 0.1rem 0.2rem #cdcdcd, 0.01rem 0rem 0.05rem #cdcdcd, -0.1rem 0rem 0.2rem #cdcdcd;
+  -webkit-box-shadow:0rem 0.1rem 0.2rem #cdcdcd, 0.01rem 0rem 0.05rem #cdcdcd, -0.1rem 0rem 0.2rem #cdcdcd;
+  box-shadow:0rem 0.1rem 0.2rem #cdcdcd, 0.01rem 0rem 0.05rem #cdcdcd, -0.1rem 0rem 0.2rem #cdcdcd;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

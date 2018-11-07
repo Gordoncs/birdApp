@@ -9,6 +9,7 @@ import {EffectluckComponent} from './effectluck/effectluck.component';
 import {PaysureComponent} from './paysure/paysure.component';
 import {AddresComponent} from './localtion/addres/addres.component';
 import {UploadComponent} from './upload/upload.component';
+import {TeacherComponent} from './teacher/teacher.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'effectluck', component: EffectluckComponent},
   { path: 'detail/:goodsId', component: DetailComponent},
   { path: 'address', component: AddresComponent},
+  { path: 'teacher', component: TeacherComponent},
   { path: 'upload', component: UploadComponent},
   { path: '**', component: Code404Component},
 ];
