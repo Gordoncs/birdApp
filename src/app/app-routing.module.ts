@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'paysure', component: PaysureComponent},
   { path: 'myindex', component: MyindexComponent},
   { path: 'effectluck', component: EffectluckComponent},
-  { path: 'detail/:goodsId/:storeId', component: DetailComponent},
+  { path: 'detail/:goodsId', component: DetailComponent},
   { path: 'address', component: AddresComponent},
   { path: 'upload', component: UploadComponent},
   { path: '**', component: Code404Component},

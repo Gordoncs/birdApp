@@ -1,13 +1,23 @@
 
-<div class="uploadBox" [class.show]="isshow">
+<div class="uploadBox"  [class.show]="indexNow==0&&isshow">
   <div class="middleBox" >
-    <img  id="image" src="picture.jpg">
+    <img id="image0" src="">
+  </div>
+  <div class="sureBtn" (click)="sureImg()">确定</div>
+</div>
+<div class="uploadBox" [class.show]="indexNow==1&&isshow">
+  <div class="middleBox" >
+    <img id="image1" src="">
   </div>
   <div class="sureBtn" (click)="sureImg()">确定</div>
 </div>
 
-<div class="photoLookBox">
-  <input type="file" class="uploadInput" accept="image/jpeg" (change)="getImgUrl($event)">
-  <div class="photoList"></div>
+<div class="photoLookBox" *ngFor="let item of cropperArr let i = index">
+  <input type="file" class="uploadInput" accept="image/jpeg" (change)="getImgUrl($event, i)">
+  <div class="photoList psbox{{i}}"></div>
 </div>
+
+
+
+<div  style="width: 100px ;height: 100px;background: yellow" (click)="save()">保存</div>
 

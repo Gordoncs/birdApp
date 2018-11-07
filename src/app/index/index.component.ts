@@ -94,6 +94,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
   }
 
   goDetail(id: any) {
-    this.router.navigate(['/detail', id , 8]);
+    this.router.navigate(['/detail', id]);
   }
 }
