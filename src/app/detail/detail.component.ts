@@ -3,15 +3,20 @@ import Swiper from 'swiper';
 import { Title } from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
+import {Observable} from 'rxjs';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit, AfterViewInit {
-  public showWhitchStatus: any = 1;
+  public  showWhitchStatus: any = 1;
   public  detailInfo: any;
   public  goodsId: any;
+  public  priceArr: any = [];
+  public  choseSkuSpecId: any = [];
+  public  choseSkuStyleId: any = [];
+  public  choseSku: any = '';
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService) { }
   ngOnInit() {
@@ -56,12 +61,44 @@ export class DetailComponent implements OnInit, AfterViewInit {
         for (let i = 0; i < this.detailInfo.skuStyle.length; i++) {
           this.detailInfo.skuStyle[i].ischecked = false;
         }
+        for (let i = 0; i < this.detailInfo.sku.length; i++) {
+          this.priceArr.push(this.detailInfo.sku[i]['price']);
+        }
+        this.priceArr.sort(function (a, b) {
+          return a - b;
+        });
       });
   }
-  selIt(item, arr) {
+  selIt(item, arr, type) {
     for (let i = 0; i < arr.length; i++) {
       arr[i].ischecked = false;
     }
     item.ischecked = true;
+    if (type === 'spec') {
+     this.choseSkuSpecId = item.id;
+    }
+    if (type === 'style') {
+      this.choseSkuStyleId = item.id;
+    }
+    if (this.choseSkuSpecId !== '' && this.choseSkuStyleId !== '' ) {
+      this.getSku();
+    }
+  }
+  getSku() {
+    for (let i = 0; i < this.detailInfo.sku.length; i++) {
+      if (this.detailInfo.sku[i].skuSpecId === this.choseSkuSpecId && this.detailInfo.sku[i].skuStyleId === this.choseSkuStyleId) {
+        this.choseSku = this.detailInfo.sku[i];
+      }
+    }
+  }
+  cartAdd() {
+    const memberId = 3;
+    const skuId = this.choseSku['id'];
+    const storeId = JSON.parse(localStorage.getItem('storeInfo'))['id'];
+    const num = 1;
+    this.userConfigService.cartAdd(memberId, skuId, storeId, num)
+      .subscribe((data) => {
+        console.log(data['data']);
+      });
   }
 }

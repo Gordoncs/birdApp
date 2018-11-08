@@ -10,14 +10,14 @@
     </div>
   </div>
   <div class="priceTitle">
-    ￥12800-49800
+    ￥{{priceArr[0]}}-{{priceArr[priceArr.length-1]}}
   </div>
   <div class="styleChoseBox">
     <div class="heads">
       部位选择
     </div>
     <div class="choseTips">
-      <div *ngFor="let item of detailInfo.skuSpec" (click)="selIt(item,detailInfo.skuSpec)" [class.tipsel]="item.ischecked" class="tips">{{item.name}}</div>
+      <div *ngFor="let item of detailInfo.skuSpec" (click)="selIt(item,detailInfo.skuSpec,'spec')" [class.tipsel]="item.ischecked" class="tips">{{item.name}}</div>
     </div>
   </div>
   <div class="styleChoseBox" style="min-height: 1.6rem;margin-top: 2px">
@@ -25,7 +25,7 @@
       疗程选择
     </div>
     <div class="choseTips">
-      <div *ngFor="let item of detailInfo.skuStyle" (click)="selIt(item,detailInfo.skuStyle)" [class.tipsel]="item.ischecked" class="tips spec">{{item.name}}</div>
+      <div *ngFor="let item of detailInfo.skuStyle" (click)="selIt(item,detailInfo.skuStyle,'style')" [class.tipsel]="item.ischecked" class="tips spec">{{item.name}}</div>
     </div>
   </div>
   <div class="protect">
@@ -66,8 +66,8 @@
   </div>
 </div>
 <div class="priceBar">
-  <div class="price">￥ 330</div>
-  <div class="addCarBtn" routerLink="/cart">加入购物车</div>
+  <div class="price">￥ {{choseSku== ''?0:choseSku.price}}</div>
+  <div class="addCarBtn" (click)="cartAdd()" >加入购物车</div>
   <div class="payBtn" routerLink="/paysure">立即购买</div>
 </div>
 
