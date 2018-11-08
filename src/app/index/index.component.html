@@ -2,9 +2,9 @@
   <div class="headBox">
     <div class="head">
       <div class="searchBox"></div>
-      <div class="searchBoxText" routerLink="/address">
+      <div class="searchBoxText"  [routerLink]="['/address']">
         <img class="icon" src="./assets/image/location.png" alt="">
-        <span class="name">春鸟皮肤管理中心顺义天美1店</span>
+        <span class="name">{{indexInfo['storeInfo'].name}}</span>
         <span class="arrow">></span>
       </div>
     </div>

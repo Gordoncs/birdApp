@@ -71,7 +71,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     // 获取首页数据
     this.getInfo();
     // 获取用户信息
-    this.getbaseMember();
+    // this.getbaseMember();
   }
 
   gotopFn(): void {
@@ -87,9 +87,34 @@ export class IndexComponent implements OnInit, AfterViewInit {
     this.userConfigService.indexView()
       .subscribe((data) => {
         this.indexInfo = data['data'];
-        for (let i = 0; i < this.indexInfo['personIntroduce'].length; i++) {
-          this.indexInfo['personIntroduce'][i].casePictureArr = (this.indexInfo['personIntroduce'][i].casePicture).split(',');
+        const carefullyarr = [];
+        const carouselarr = [];
+        // 处理精选内容
+        for (let i = 0; i < this.indexInfo['carefully'].length; i++) {
+          let url = this.indexInfo['carefully'][i];
+          url = url.split('#');
+          const obj = {
+            'imgs': url[0],
+            'type': url[1],
+            'id': url[2],
+          };
+          carefullyarr.push(obj);
         }
+        this.indexInfo['carefully'] = carefullyarr;
+        // 处理滚动图片
+        for (let i = 0; i < this.indexInfo['carousel'].length; i++) {
+          let url = this.indexInfo['carousel'][i];
+          url = url.split('#');
+          const obj = {
+            'imgs': url[0],
+            'type': url[1],
+            'id': url[2],
+          };
+          carouselarr.push(obj);
+        }
+        this.indexInfo['carousel'] = carouselarr;
+        // 处理店铺信息
+        localStorage.setItem('storeInfo', JSON.stringify(this.indexInfo['storeInfo']));
       });
   }
 

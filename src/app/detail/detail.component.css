@@ -82,6 +82,11 @@
   margin-left: 0.2rem;
   margin-top: 0.2rem;
 }
+.tipsel{
+  border: 1px solid #efcd83 !important;
+  background: #efcd83 !important;
+  color: #FFF !important;
+}
 
 .styleChoseBox .choseTips .spec{
   width: 2.78rem;
@@ -153,6 +158,9 @@
   width: 100%;
   min-height: 6rem;
   text-align: center;
+}
+.boxShowlist .justimg{
+  width: 100%;
 }
 .selit{
   border-bottom: 0.1rem solid #efcd83 !important;

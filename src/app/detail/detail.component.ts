@@ -18,9 +18,9 @@ export class DetailComponent implements OnInit, AfterViewInit {
     /***
      * 设置title
      */
-    this.titleService.setTitle('春鸟科美-素肤净体');
+    this.titleService.setTitle('春鸟科美-精选产品');
     this.routerInfo.params.subscribe((params) => this.goodsId = params['goodsId']);
-    this.getGoodsInfo(this.goodsId, 1);
+    this.getGoodsInfo(this.goodsId, JSON.parse(localStorage.getItem('storeInfo'))['id']);
   }
 
   ngAfterViewInit(): void {
@@ -45,6 +45,23 @@ export class DetailComponent implements OnInit, AfterViewInit {
     this.userConfigService.getGoodsInfo(goodsId, shopId)
       .subscribe((data) => {
         this.detailInfo = data['data'];
+        this.detailInfo['goodsInfo']['mainPhotoAddr'] = (this.detailInfo['goodsInfo']['mainPhotoAddr']).split(',');
+        this.detailInfo['goodsInfo']['serviceInfo'] = (this.detailInfo['goodsInfo']['serviceInfo']).split(',');
+        this.detailInfo['goodsInfo']['scienceInfo'] = (this.detailInfo['goodsInfo']['scienceInfo']).split(',');
+        this.detailInfo['goodsInfo']['qaInfo'] = (this.detailInfo['goodsInfo']['qaInfo']).split(',');
+        this.detailInfo['goodsInfo']['commitmentInfo'] = (this.detailInfo['goodsInfo']['commitmentInfo']).split(',');
+        for (let i = 0; i < this.detailInfo.skuSpec.length; i++) {
+          this.detailInfo.skuSpec[i].ischecked = false;
+        }
+        for (let i = 0; i < this.detailInfo.skuStyle.length; i++) {
+          this.detailInfo.skuStyle[i].ischecked = false;
+        }
       });
+  }
+  selIt(item, arr) {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].ischecked = false;
+    }
+    item.ischecked = true;
   }
 }
