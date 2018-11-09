@@ -6,9 +6,9 @@
       <div class="noselRaido raidoSelit left30">
         <div class="kong shi"></div>
       </div>
-      <span class="shopName ml90">春鸟科美顺义天美No.016店</span>
+      <span class="shopName ml90">{{cartListInfo.storeName}}</span>
     </div>
-    <div class="productList">
+    <div class="productList" *ngFor="let item of cartListInfo.cartDetail">
       <div class="noselRaido raidoSelit left30">
         <div class="kong shi"></div>
       </div>
@@ -16,29 +16,12 @@
         <img src="" alt="">
       </div>
       <div class="productIndec">
-        <div class="name">亮白肌肤瘦身竖形预留行亮白肌肤瘦身竖形预留行</div>
-        <div class="price">￥380.00</div>
+        <div class="name">{{item.goodsName}}</div>
+        <div class="price">￥{{item.price | number:'2.2-2'}}</div>
       </div>
       <div class="caozuoBox">
         <div class="btn cutBtn">-</div>
-        <div class="numBox">2</div>
-        <div class="btn addBtn">+</div>
-      </div>
-    </div>
-    <div class="productList">
-      <div class="noselRaido raidoSelit left30">
-        <div class="kong shi"></div>
-      </div>
-      <div class="productImg ml90">
-        <img src="" alt="">
-      </div>
-      <div class="productIndec">
-        <div class="name">亮白肌肤瘦身竖形预留行亮白肌肤瘦身竖形预留行</div>
-        <div class="price">￥380.00</div>
-      </div>
-      <div class="caozuoBox">
-        <div class="btn cutBtn">-</div>
-        <div class="numBox">2</div>
+        <div class="numBox">{{item.number}}</div>
         <div class="btn addBtn">+</div>
       </div>
     </div>

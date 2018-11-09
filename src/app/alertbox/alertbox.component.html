@@ -1,0 +1,8 @@
+<div *ngIf="alertShow" class='blackBg'></div>
+<div *ngIf="alertShow" class='loadBox'>
+  <img *ngIf="whichStatus=='loading'" src='./assets/image/loading.gif' />
+  <img *ngIf="whichStatus=='error'" src='./assets/image/error.png' />
+  <img *ngIf="whichStatus=='success'" src='./assets/image/success.png' />
+  <div class='title'>{{alertMessage}}</div>
+  <div *ngIf="whichStatus=='error'" class="closeBtn" (click)="alertShow=false">确 定</div>
+</div>

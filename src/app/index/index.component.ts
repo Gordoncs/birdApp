@@ -1,8 +1,9 @@
-import {Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentChecked} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import Swiper from 'swiper';
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
+import {AlertboxComponent} from '../alertbox/alertbox.component';
 
 
 @Component({
@@ -12,10 +13,11 @@ import {UserConfigService} from '../shared/user-config.service';
 })
 export class IndexComponent implements OnInit, AfterViewInit {
   public indexInfo: any;
-
+  // 弹框显示
+  @ViewChild(AlertboxComponent)
+  alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private userConfigService: UserConfigService) {
   }
-
   ngAfterViewInit() {
     const mySwiper = new Swiper('.headSwiper .swiper-container', {
       loop: true, // 循环模式选项
@@ -71,7 +73,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     // 获取首页数据
     this.getInfo();
     // 获取用户信息
-    // this.getbaseMember();
+    this.getbaseMember();
   }
 
   gotopFn(): void {
@@ -80,41 +82,51 @@ export class IndexComponent implements OnInit, AfterViewInit {
   getbaseMember() {
     this.userConfigService.baseMember()
       .subscribe((data) => {
-        localStorage.setItem('memberInfo', data['data']);
+        if (data['result']) {
+          localStorage.setItem('memberInfo', data['data']);
+        } else {
+          this.alertBox.error(data['message']);
+        }
       });
   }
   getInfo() {
+    this.alertBox.load();
     this.userConfigService.indexView()
       .subscribe((data) => {
-        this.indexInfo = data['data'];
-        const carefullyarr = [];
-        const carouselarr = [];
-        // 处理精选内容
-        for (let i = 0; i < this.indexInfo['carefully'].length; i++) {
-          let url = this.indexInfo['carefully'][i];
-          url = url.split('#');
-          const obj = {
-            'imgs': url[0],
-            'type': url[1],
-            'id': url[2],
-          };
-          carefullyarr.push(obj);
+        this.alertBox.close();
+        if (data['result']) {
+          this.indexInfo = data['data'];
+          const carefullyarr = [];
+          const carouselarr = [];
+          // 处理精选内容
+          for (let i = 0; i < this.indexInfo['carefully'].length; i++) {
+            let url = this.indexInfo['carefully'][i];
+            url = url.split('#');
+            const obj = {
+              'imgs': url[0],
+              'type': url[1],
+              'id': url[2],
+            };
+            carefullyarr.push(obj);
+          }
+          this.indexInfo['carefully'] = carefullyarr;
+          // 处理滚动图片
+          for (let i = 0; i < this.indexInfo['carousel'].length; i++) {
+            let url = this.indexInfo['carousel'][i];
+            url = url.split('#');
+            const obj = {
+              'imgs': url[0],
+              'type': url[1],
+              'id': url[2],
+            };
+            carouselarr.push(obj);
+          }
+          this.indexInfo['carousel'] = carouselarr;
+          // 处理店铺信息
+          localStorage.setItem('storeInfo', JSON.stringify(this.indexInfo['storeInfo']));
+        } else {
+          this.alertBox.error(data['message']);
         }
-        this.indexInfo['carefully'] = carefullyarr;
-        // 处理滚动图片
-        for (let i = 0; i < this.indexInfo['carousel'].length; i++) {
-          let url = this.indexInfo['carousel'][i];
-          url = url.split('#');
-          const obj = {
-            'imgs': url[0],
-            'type': url[1],
-            'id': url[2],
-          };
-          carouselarr.push(obj);
-        }
-        this.indexInfo['carousel'] = carouselarr;
-        // 处理店铺信息
-        localStorage.setItem('storeInfo', JSON.stringify(this.indexInfo['storeInfo']));
       });
   }
 

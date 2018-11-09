@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, ViewChild} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map, retry} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
@@ -6,6 +6,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserConfigService {
   /**
    * 头部声明
@@ -36,25 +37,28 @@ export class UserConfigService {
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
+      // 出现客户端或网络错误.
+      console.log(error.error.message);
+      // console.error('An error occurred:', error.error.message);
     } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+      // 后端返回一个不成功的响应代码.
+      // 反应体可能包含错误的线索,
+      const text = 'code:' + error.error.status + ',' + error.error.error;
+      console.log(text);
+      // console.error(
+      //   `Backend returned code ${error.status}, ` +
+      //   `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
     return throwError(
-      'Something bad happened; please try again later.');
+      '接口' + error.error['path'] + '发生了不好的事情，请稍后再试。');
   }
   constructor(private http: HttpClient) {
   }
   /**
    * 获取用户信息
    */
-  baseMember() {
+  baseMember(): Observable<any> {
     return this.http.get(this.configUrl + '/base/member', this.headoptions)
       .pipe(
         retry(1),
@@ -64,7 +68,7 @@ export class UserConfigService {
   /**
    * 首页数据
    */
-  indexView() {
+  indexView(): Observable<any> {
     return this.http.get(this.configUrl + '/indexView?longitude=116.37333&latitude=39.91474', this.headoptions)
       .pipe(
         retry(1),
@@ -75,7 +79,7 @@ export class UserConfigService {
   /**
    * 详情页数据
    */
-  getGoodsInfo(goodsId: any, storeId: any) {
+  getGoodsInfo(goodsId: any, storeId: any): Observable<any> {
     return this.http.get(this.configUrl + '/getGoodsInfo?goodsId=' + goodsId + '&storeId=' + storeId, this.headoptions)
       .pipe(
         retry(1),
@@ -86,19 +90,18 @@ export class UserConfigService {
   /**
    * 加入购物车
    */
-  cartAdd(memberId: any, skuId: any, storeId: any, num: any) {
-
-    const params = {
-      'memberId': memberId,
-      'skuId': skuId,
-      'storeId': storeId,
-      'num': num,
-    };
-    return this.http.post(this.configUrl + '/cart/add',   JSON.stringify({ params: params} ), this.headoptions)
+  cartAdd(memberId: any, skuId: any, storeId: any, number: any): Observable<any> {
+    const params = '?memberId=' + memberId + '&skuId=' + skuId + '&storeId=' + storeId + '&number=' + number;
+    return this.http.get(this.configUrl + '/cart/add' + params, this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
+    // return this.http.post(this.configUrl + '/cart/add',   JSON.stringify({ params: params} ), this.headoptions)
+    //   .pipe(
+    //     retry(1),
+    //     catchError(this.handleError)
+    //   );
 
     // const body =  'FormData1=' + 'onetap' + '&FormData2=' + '123456';
     // return this.http.post(this.configUrl + '/cart/add', body, this.headoptionsPost)
@@ -106,6 +109,28 @@ export class UserConfigService {
     //     retry(1),
     //     catchError(this.handleError)
     //   );
+  }
+  /**
+   * 获取购物车数量
+   */
+  cartGetCartDetailNumber(memberId: any, storeId: any): Observable<any> {
+    const params = '?memberId=' + memberId + '&storeId=' + storeId ;
+    return this.http.get(this.configUrl + '/cart/getCartDetailNumber' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+  /**
+   * 获取购物车列表
+   */
+  cartGetCart(memberId: any, storeId: any): Observable<any> {
+    const params = '?memberId=' + memberId + '&storeId=' + storeId ;
+    return this.http.get(this.configUrl + '/cart/getCart' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 }
 

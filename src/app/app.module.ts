@@ -18,6 +18,7 @@ import { PaysureComponent } from './paysure/paysure.component';
 import { AddresComponent } from './localtion/addres/addres.component';
 import { UploadComponent } from './upload/upload.component';
 import { TeacherComponent } from './teacher/teacher.component';
+import { AlertboxComponent } from './alertbox/alertbox.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { TeacherComponent } from './teacher/teacher.component';
     AddresComponent,
     UploadComponent,
     TeacherComponent,
+    AlertboxComponent
   ],
   imports: [
     BrowserModule,

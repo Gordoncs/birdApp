@@ -1,19 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import {UserConfigService} from '../shared/user-config.service';
+import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-shopcar',
   templateUrl: './shopcar.component.html',
   styleUrls: ['./shopcar.component.css']
 })
 export class ShopcarComponent implements OnInit {
-
-  constructor(private titleService: Title) { }
+  public  cartListInfo: any = [];
+  constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
+              private userConfigService: UserConfigService) { }
 
   ngOnInit() {
     /***
      * 设置title
      */
     this.titleService.setTitle('购物车');
+    this.cartGetCart();
   }
-
+  cartGetCart() {
+    const memberId = 3;
+    const storeId = JSON.parse(localStorage.getItem('storeInfo'))['id'];
+    this.userConfigService.cartGetCart(memberId, storeId)
+      .subscribe((data) => {
+        if (data['result']) {
+          this.cartListInfo = data['data'];
+        } else {
+          alert(data['message']);
+        }
+      });
+  }
 }
