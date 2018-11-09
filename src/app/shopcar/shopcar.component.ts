@@ -27,6 +27,9 @@ export class ShopcarComponent implements OnInit {
       .subscribe((data) => {
         if (data['result']) {
           this.cartListInfo = data['data'];
+          for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
+            this.cartListInfo.cartDetail[i].ischeck = true;
+          }
         } else {
           alert(data['message']);
         }
@@ -39,5 +42,8 @@ export class ShopcarComponent implements OnInit {
     if (item.number > 1) {
       item.number = item.number - 1;
     }
+  }
+  choseList(item) {
+    item.ischeck = !item.ischeck;
   }
 }

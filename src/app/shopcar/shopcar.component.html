@@ -8,9 +8,9 @@
       </div>
       <span class="shopName ml90">{{cartListInfo.storeName}}</span>
     </div>
-    <div class="productList" *ngFor="let item of cartListInfo.cartDetail">
+    <div class="productList" (click)="choseList(item)" *ngFor="let item of cartListInfo.cartDetail">
       <div class="noselRaido raidoSelit left30">
-        <div class="kong shi"></div>
+        <div [class.shi]="item.ischeck" class="kong"></div>
       </div>
       <div class="productImg ml90">
         <img src="{{item.miniPhotoAddr}}" alt="">
@@ -20,9 +20,9 @@
         <div class="price">￥{{item.price | number:'2.2-2'}}</div>
       </div>
       <div class="caozuoBox">
-        <div class="btn cutBtn" (click)="cute(item)">-</div>
+        <div class="btn cutBtn" (click)="cute(item);$event.stopPropagation();">-</div>
         <div class="numBox">{{item.number}}</div>
-        <div class="btn addBtn" (click)="addFn(item)">+</div>
+        <div class="btn addBtn" (click)="addFn(item);$event.stopPropagation();">+</div>
       </div>
     </div>
   </div>
