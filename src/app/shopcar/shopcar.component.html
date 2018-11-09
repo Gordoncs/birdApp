@@ -1,5 +1,5 @@
 <div class="conBg"></div>
-<div class="editBtn">编辑</div>
+<div class="editBtn" (click)="canEdit=!canEdit">{{canEdit?'完成':'编辑'}}</div>
 <div class="cartContent">
   <div class="shopCartBox">
     <div class="heads">
@@ -20,9 +20,9 @@
         <div class="price">￥{{item.price | number:'2.2-2'}}</div>
       </div>
       <div class="caozuoBox">
-        <div class="btn cutBtn">-</div>
+        <div class="btn cutBtn" (click)="cute(item)">-</div>
         <div class="numBox">{{item.number}}</div>
-        <div class="btn addBtn">+</div>
+        <div class="btn addBtn" (click)="addFn(item)">+</div>
       </div>
     </div>
   </div>

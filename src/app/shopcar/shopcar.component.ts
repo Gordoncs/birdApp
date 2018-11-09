@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ShopcarComponent implements OnInit {
   public  cartListInfo: any = [];
+  public  canEdit = false;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService) { }
 
@@ -30,5 +31,13 @@ export class ShopcarComponent implements OnInit {
           alert(data['message']);
         }
       });
+  }
+  addFn(item) {
+    item.number = item.number + 1;
+  }
+  cute(item) {
+    if (item.number > 1) {
+      item.number = item.number - 1;
+    }
   }
 }
