@@ -10,6 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ShopcarComponent implements OnInit {
   public  cartListInfo: any = [];
   public  canEdit = false;
+  public  choseAllStatus = true;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService) { }
 
@@ -36,14 +37,52 @@ export class ShopcarComponent implements OnInit {
       });
   }
   addFn(item) {
-    item.number = item.number + 1;
+    if ( this.canEdit ) {
+      item.number = item.number + 1;
+    }
   }
   cute(item) {
-    if (item.number > 1) {
-      item.number = item.number - 1;
+    if ( this.canEdit ) {
+      if (item.number > 1) {
+        item.number = item.number - 1;
+      }
     }
   }
   choseList(item) {
-    item.ischeck = !item.ischeck;
+    if ( this.canEdit ) {
+      item.ischeck = !item.ischeck;
+    }
+  }
+  choseAll() {
+    if ( this.canEdit ) {
+      this.choseAllStatus = !this.choseAllStatus;
+      if ( this.choseAllStatus ) {
+        for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
+          this.cartListInfo.cartDetail[i].ischeck = true;
+        }
+      } else {
+        for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
+          this.cartListInfo.cartDetail[i].ischeck = false;
+        }
+      }
+    }
+  }
+  choseNum() {
+    let num = 0;
+    for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
+      if ( this.cartListInfo.cartDetail[i].ischeck === true ) {
+        num = num + 1;
+      }
+    }
+    return num;
+  }
+  getAllMoney() {
+    let money = 0;
+    for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
+      if ( this.cartListInfo.cartDetail[i].ischeck === true ) {
+        money = money + this.cartListInfo.cartDetail[i].price * this.cartListInfo.cartDetail[i].number;
+      }
+    }
+    return money;
   }
 }
