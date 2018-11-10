@@ -30,5 +30,27 @@
   <div class="heads">
     <img src="./assets/image/setting.png" alt="">
   </div>
-  <div class="setBoxShow"></div>
+  <div class="setBoxShow">
+    <div *ngIf="!showQr" class="setNumerBox">
+      <div class="lists">
+        <span>折扣设置</span>
+        <input type="number" placeholder="请输入文字">
+        <span>%</span>
+      </div>
+      <div class="lists" style="margin-bottom: 0.1rem;">
+        <span>现金设置</span>
+        <input type="number" placeholder="请输入文字">
+        <span>元</span>
+      </div>
+    </div>
+    <div *ngIf="!showQr" class="setIconBtn" (click)="getQrFn()">
+      <img src="./assets/image/setQRIcon.png" alt="">
+    </div>
+    <img *ngIf="showQr" class="qrBg" src="./assets/image/qrBg.png" alt="">
+    <div *ngIf="showQr" class="qrBox">
+      <div class="qrBoxCon">
+        <img src="./assets/image/qrEx.png" alt="">
+      </div>
+    </div>
+  </div>
 </div>

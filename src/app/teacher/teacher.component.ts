@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teacher.component.css']
 })
 export class TeacherComponent implements OnInit {
-
+  showQr = false;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getQrFn() {
+    this.showQr = true;
   }
 
 }

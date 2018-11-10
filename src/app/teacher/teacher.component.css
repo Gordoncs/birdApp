@@ -137,11 +137,85 @@
   height: 100%;
   background: #FFF;
   border-radius: 0.1rem;
-  -moz-box-shadow:0rem 0.1rem 0.2rem #cdcdcd, 0.01rem 0rem 0.05rem #cdcdcd, -0.1rem 0rem 0.2rem #cdcdcd;
-  -webkit-box-shadow:0rem 0.1rem 0.2rem #cdcdcd, 0.01rem 0rem 0.05rem #cdcdcd, -0.1rem 0rem 0.2rem #cdcdcd;
-  box-shadow:0rem 0.1rem 0.2rem #cdcdcd, 0.01rem 0rem 0.05rem #cdcdcd, -0.1rem 0rem 0.2rem #cdcdcd;
+  -moz-box-shadow:0px 10px 10px #d2cdcd, 4px 0px 10px #d2cdcd, -4px 0px 10px #d2cdcd;
+  -webkit-box-shadow:0px 10px 10px #d2cdcd, 4px 0px 10px #d2cdcd, -4px 0px 10px #d2cdcd;
+  box-shadow:0px 10px 20px #d2cdcd, 4px 0px 10px #d2cdcd, -4px 0px 10px #d2cdcd;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+.setNumerBox{
+  width: 4.5rem;
+  height: 1.55rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.setNumerBox .lists{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-around;
+}
+.setNumerBox .lists span{
+  color: #050d01;
+  font-size: 0.26rem;
+}
+.setNumerBox .lists input{
+  width: 1.98rem;
+  height: 0.5rem;
+  background: #ededed;
+  border: 0px;
+  border-radius: 0.1rem;
+  color: #8e8e8e;
+  font-size: 0.2rem;
+  text-align: center;
+}
+.setIconBtn{
+  width: 1.48rem;
+  height: 1.55rem;
+}
+.setIconBtn img{
+  width: 1.48rem;
+  height: 1.55rem;
+}
+.qrBg{
+  width: 6.8rem;
+  height: 1.66rem;
+}
+.qrBox{
+  width: 1.8rem;
+  height: 1.8rem;
+  background: #FFF;
+  -moz-box-shadow:0px 5px 10px #ece2d0, 5px 0px 10px #ece2d0, -5px 0px 10px #ece2d0;
+  -webkit-box-shadow:0px 5px 10px #ece2d0, 5px 0px 10px #ece2d0, -5px 0px 10px #ece2d0;
+  box-shadow:0px 5px 10px #ece2d0, 5px 0px 10px #ece2d0, -5px 0px 10px #ece2d0;
+  position: absolute;
+  left: 50%;
+  margin-left: -0.9rem;
+  top: 50%;
+  margin-top: -0.9rem;
+  z-index: 9;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+.qrBoxCon{
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid #e8c788;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.qrBoxCon img{
+  display: block;
+  width: 100%;
+  height: 100%;
 }
