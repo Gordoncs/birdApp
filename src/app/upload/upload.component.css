@@ -36,28 +36,217 @@
   font-size: 0.2rem;
 }
 
-.photoLookBox{
-  width: 1.3rem;
-  height: 1.3rem;
-  border-radius: 0.05rem;
-  border: 1px solid #d8d8d8;
-  overflow: hidden;
-  position: relative;
-}
-.photoLookBox .uploadInput{
+.uploadInput{
   width: 100%;
   height: 100%;
   opacity:0;
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: 2;
 }
 .photoList{
-  width: 1.3rem;
-  height: 1.3rem;
-  border-radius: 0.05rem;
-  border: 1px solid #d8d8d8;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
 }
 
+/*************************************************************************/
+.con{
+  width: 100%;
+  min-height: 6rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.8rem;
+}
+.titles{
+  width: 6.95rem;
+  display: flex;
+  flex-direction: row;
+  color: #f27442;
+  font-size: 0.24rem;
+  margin-top: 0.2rem;
+}
+.inputList{
+  width: 6.95rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.2rem;
+}
+.inputList span{
+  color: #333333;
+  font-size: 0.28rem;
+}
+.inputList input{
+  width: 5rem;
+  height: 0.5rem;
+  border: 1px solid #e7cd94;
+  border-radius: 0.2rem;
+}
+.inputList .fwBox{
+  width: 5rem;
+  height: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.inputList .fwBox .tips{
+  width: 1rem;
+  height: 0.46rem;
+  border: 1px solid #cccccc;
+  border-radius: 0.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.24rem;
+  color: #737373;
+}
+.photoBox{
+  width: 6.95rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px;
+  flex-wrap: wrap;
+}
+.duibiBox{
+  width: 2.9rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 0.3rem;
+}
+.photoLists{
+  width: 1.32rem;
+  height: 1.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photoLists .photoCon{
+  width: 1.3rem;
+  height: 1.35rem;
+  border: 1px solid #eeeeee;
+  border-radius: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+.photoLists  .photoCon .icon{
+  width: 0.56rem;
+  height: 0.56rem;
+}
+.photoLists  .photoCon .icon img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.photoLists  .photoCon span{
+  font-size: 0.12rem;
+  color: #c2c2c2;
+  margin-bottom: 0.1rem;
+  margin-top: 0.2rem;
+}
+.photoLists span{
+  font-size: 0.16rem;
+  color: #737373;
+  margin-top: 0.1rem;
+}
+
+.bbsd{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hide{
+  display: none;
+}
+
+.uploadMp4{
+  width: 3.35rem;
+  height: 2.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.3rem;
+}
+.uploadMp4 .box{
+  width: 3.33rem;
+  height: 1.98rem;
+  border: 1px solid #eeeeee;
+  border-radius: 0.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.uploadMp4 .box .icon{
+  width: 0.56rem;
+  height: 0.56rem;
+}
+.uploadMp4 .box .icon img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.uploadMp4 .box span{
+  font-size: 0.2rem;
+  color: #c2c2c2;
+  margin-bottom: 0.35rem;
+  margin-top: 0.15rem;
+}
+.uploadMp4 .t1{
+  font-size: 0.15rem;
+  color: #737373;
+  margin-top: 0.15rem;
+}
+.uploadMp4 .t2{
+  font-size: 0.13rem;
+  color: #e5e5e5;
+}
+.memoBox{
+  width: 6.93rem;
+  height: 1.94rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 0.1rem;
+  overflow: hidden;
+}
+.memoBox textarea{
+  resize: none;
+  border: 0px;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  padding: 0.1rem;
+  color: #737373;
+  font-size: 0.2rem;
+}
+.saveBtn{
+  width: 6.95rem;
+  height: 0.8rem;
+  background: #e7cd94;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  font-size: 0.3rem;
+  position: fixed;
+  left: 50%;
+  margin-left: -3.5rem;
+  bottom: 0.4rem;
+  z-index: 9;
+  border-radius: 0.1rem;
+}

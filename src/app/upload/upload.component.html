@@ -11,13 +11,166 @@
   </div>
   <div class="sureBtn" (click)="sureImg()">确定</div>
 </div>
-
-<div class="photoLookBox" *ngFor="let item of cropperArr let i = index">
-  <input type="file" class="uploadInput" accept="image/jpeg" (change)="getImgUrl($event, i)">
-  <div class="photoList psbox{{i}}"></div>
+<div class="uploadBox"  [class.show]="indexNow==2&&isshow">
+  <div class="middleBox" >
+    <img id="image2" src="">
+  </div>
+  <div class="sureBtn" (click)="sureImg()">确定</div>
+</div>
+<div class="uploadBox" [class.show]="indexNow==3&&isshow">
+  <div class="middleBox" >
+    <img id="image3" src="">
+  </div>
+  <div class="sureBtn" (click)="sureImg()">确定</div>
+</div>
+<div class="uploadBox"  [class.show]="indexNow==4&&isshow">
+  <div class="middleBox" >
+    <img id="image4" src="">
+  </div>
+  <div class="sureBtn" (click)="sureImg()">确定</div>
+</div>
+<div class="uploadBox" [class.show]="indexNow==5&&isshow">
+  <div class="middleBox" >
+    <img id="image5" src="">
+  </div>
+  <div class="sureBtn" (click)="sureImg()">确定</div>
 </div>
 
 
 
-<div  style="width: 100px ;height: 100px;background: yellow" (click)="save()">保存</div>
+<div class="con">
+  <div class="titles">
+    客人基本信息：
+  </div>
+  <div class="inputList">
+    <span>客户年龄：</span>
+    <input type="number">
+  </div>
+  <div class="inputList">
+    <span>服务系列：</span>
+    <div class="fwBox">
+      <div class="tips">体雕</div>
+      <div class="tips">亮白</div>
+      <div class="tips">脱毛</div>
+      <div class="tips">体雕</div>
+    </div>
+  </div>
+  <div class="inputList">
+    <span>服务项目：</span>
+    <input type="text">
+  </div>
+  <div class="titles">
+    照片对比：
+  </div>
+  <div class="photoBox">
+    <div class="duibiBox">
+      <div *ngFor="let item of cropperArr let i = index" [class.hide]="i!=0" class="photoLists">
+        <div class="bbsd" *ngIf="i==0">
+          <div class="photoCon">
+            <div class="icon">
+              <img src="./assets/image/littleUploadIcon.png" alt="">
+            </div>
+            <span>点击上传</span>
+            <input type="file" class="uploadInput" accept="image/jpeg" (change)="getImgUrl($event, i)">
+            <div class="photoList psbox{{i}}"></div>
+          </div>
+          <span>服务前照片</span>
+        </div>
+      </div>
+      <div *ngFor="let item of cropperArr let i = index" [class.hide]="i!=1" class="photoLists">
+        <div class="bbsd" *ngIf="i==1">
+          <div class="photoCon">
+            <div class="icon">
+              <img src="./assets/image/littleUploadIcon.png" alt="">
+            </div>
+            <span>点击上传</span>
+            <input type="file" class="uploadInput" accept="image/jpeg" (change)="getImgUrl($event, i)">
+            <div class="photoList psbox{{i}}"></div>
+          </div>
+          <span>服务后照片</span>
+        </div>
+      </div>
+    </div>
+    <div class="duibiBox">
+      <div *ngFor="let item of cropperArr let i = index" [class.hide]="i!=2" class="photoLists">
+        <div class="bbsd" *ngIf="i==2">
+          <div class="photoCon">
+            <div class="icon">
+              <img src="./assets/image/littleUploadIcon.png" alt="">
+            </div>
+            <span>点击上传</span>
+            <input type="file" class="uploadInput" accept="image/jpeg" (change)="getImgUrl($event, i)">
+            <div class="photoList psbox{{i}}"></div>
+          </div>
+          <span>服务前照片</span>
+        </div>
+      </div>
+      <div *ngFor="let item of cropperArr let i = index" [class.hide]="i!=3" class="photoLists">
+        <div class="bbsd" *ngIf="i==3">
+          <div class="photoCon">
+            <div class="icon">
+              <img src="./assets/image/littleUploadIcon.png" alt="">
+            </div>
+            <span>点击上传</span>
+            <input type="file" class="uploadInput" accept="image/jpeg" (change)="getImgUrl($event, i)">
+            <div class="photoList psbox{{i}}"></div>
+          </div>
+          <span>服务后照片</span>
+        </div>
+      </div>
+    </div>
+    <div class="duibiBox">
+      <div *ngFor="let item of cropperArr let i = index" [class.hide]="i!=4" class="photoLists">
+        <div class="bbsd" *ngIf="i==4">
+          <div class="photoCon">
+            <div class="icon">
+              <img src="./assets/image/littleUploadIcon.png" alt="">
+            </div>
+            <span>点击上传</span>
+            <input type="file" class="uploadInput" accept="image/jpeg" (change)="getImgUrl($event, i)">
+            <div class="photoList psbox{{i}}"></div>
+          </div>
+          <span>服务前照片</span>
+        </div>
+      </div>
+      <div *ngFor="let item of cropperArr let i = index" [class.hide]="i!=5" class="photoLists">
+        <div class="bbsd" *ngIf="i==5">
+          <div class="photoCon">
+            <div class="icon">
+              <img src="./assets/image/littleUploadIcon.png" alt="">
+            </div>
+            <span>点击上传</span>
+            <input type="file" class="uploadInput" accept="image/jpeg" (change)="getImgUrl($event, i)">
+            <div class="photoList psbox{{i}}"></div>
+          </div>
+          <span>服务后照片</span>
+        </div>
+      </div>
+    </div>
+    <div class="duibiBox"></div>
+  </div>
 
+  <div class="titles">
+    视频案例：
+  </div>
+  <div class="uploadMp4">
+    <div class="box">
+      <div class="icon">
+        <img src="./assets/image/uploadMp4.png" alt="">
+      </div>
+      <span>点击上传</span>
+      <!--<input type="file" class="uploadInput" accept="image/jpeg">-->
+    </div>
+    <span class="t1">案例视频上传</span>
+    <span class="t2">支持25MB以内，MP4格式</span>
+  </div>
+
+  <div class="titles">
+    效果描述：
+  </div>
+  <div class="memoBox">
+    <textarea placeholder="请输入文字"></textarea>
+  </div>
+
+  <div class="saveBtn" (click)="save()">确认上传</div>
+</div>
