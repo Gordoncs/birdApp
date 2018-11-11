@@ -20,6 +20,7 @@ import { UploadComponent } from './upload/upload.component';
 import { TeacherComponent } from './teacher/teacher.component';
 import { AlertboxComponent } from './alertbox/alertbox.component';
 import { HexiaoComponent } from './hexiao/hexiao.component';
+import { MyorderComponent } from './myorder/myorder.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { HexiaoComponent } from './hexiao/hexiao.component';
     UploadComponent,
     TeacherComponent,
     AlertboxComponent,
-    HexiaoComponent
+    HexiaoComponent,
+    MyorderComponent
   ],
   imports: [
     BrowserModule,
