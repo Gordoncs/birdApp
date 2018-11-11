@@ -13,6 +13,7 @@ import {TeacherComponent} from './teacher/teacher.component';
 import {HexiaoComponent} from './hexiao/hexiao.component';
 import {MyorderComponent} from './myorder/myorder.component';
 import {JustpayComponent} from './justpay/justpay.component';
+import {PaystausComponent} from './paystaus/paystaus.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'cart', component: ShopcarComponent},
   { path: 'paysure', component: PaysureComponent},
   { path: 'justpay', component: JustpayComponent},
+  { path: 'paystatus', component: PaystausComponent},
   { path: 'myindex', component: MyindexComponent},
   { path: 'myorder', component: MyorderComponent},
   { path: 'effectluck', component: EffectluckComponent},

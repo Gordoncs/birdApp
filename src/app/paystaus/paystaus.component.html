@@ -1,0 +1,52 @@
+<div class="topBox">
+  <img src="./assets/image/paySuccess.png" alt="">
+  <div *ngIf="status" class="baseBox">
+    <div class="left">
+      <img class="tiyan" src="./assets/image/tiyan398.png" alt="">
+    </div>
+    <div class="right">
+      <p>免费福利送亲友</p>
+      <p>本次消费您</p>
+      <p>共获得 <span>2</span> 张398体验券</p>
+      <div class="bigbtn">
+        一键送福利
+      </div>
+    </div>
+  </div>
+  <div *ngIf="status" class="baseBox">
+    <div class="left">
+      <div class="iconBox">
+        <img src="./assets/image/qrEx.png" alt="">
+      </div>
+    </div>
+    <div class="right">
+      <p class="bigTitle">感谢您选择春鸟科美</p>
+      <p>服务消费凭证，</p>
+      <p>可到我的订单查看</p>
+      <div class="btnBox">
+        <div class="btnlist">查看订单</div>
+        <div class="btnlist">分享体验</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="status" class="sideScrollBox">
+    <div class="heads">
+      <img src="./assets/image/zhuanshuIcon.png" alt="">
+    </div>
+    <div class="tuijianList">
+      <img src="./assets/image/ex123.png" alt="">
+    </div>
+    <div class="tuijianList">
+      <img src="./assets/image/ex123.png" alt="">
+    </div>
+  </div>
+
+  <div *ngIf="!status" class="errorBox">
+    <p>抱歉亲爱的</p>
+    <p>本次付款未成功</p>
+    <p>请重新支付</p>
+    <div class="btns">重新支付</div>
+    <div class="btns">返回订单</div>
+  </div>
+</div>
+

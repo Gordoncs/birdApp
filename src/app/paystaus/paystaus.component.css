@@ -1,0 +1,161 @@
+.topBox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.topBox img{
+  width: 100%;
+  height:  1.98rem;
+  display: block;
+}
+.baseBox{
+  width: 7rem;
+  height: 2.85rem;
+  margin-top: 0.35rem;
+  background: #FFF;
+  border-radius: 0.1rem;
+  -moz-box-shadow:0rem 0.08rem 0.3rem #ececef, 0.02rem 0rem 0.2rem #ececef, -0.02rem 0rem 0.2rem #ececef;
+  -webkit-box-shadow:0rem 0.08rem 0.3rem #ececef, 0.02rem 0rem 0.2rem #ececef, -0.02rem 0rem 0.2rem #ececef;
+  box-shadow:0rem 0.08rem 0.3rem #ececef, 0.02rem 0rem 0.2rem #ececef, -0.02rem 0rem 0.2rem #ececef;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.baseBox .left, .baseBox .right{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.baseBox .right{
+  align-items: flex-start;
+}
+.baseBox .left .tiyan{
+  width: 2.26rem;
+  height: 2.14rem;
+}
+.baseBox .left .iconBox{
+  width: 1.86rem;
+  height: 1.86rem;
+  border: 1px solid #e8c788;
+}
+.baseBox .left .iconBox img{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.baseBox .right p{
+  color: #6e6e6d;
+  font-size: 0.24rem;
+}
+.baseBox .right p span{
+  color: #e7cd94;
+}
+
+.baseBox .right .bigbtn{
+  width: 2.35rem;
+  height: 0.5rem;
+  background: #e7cd94;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.24rem;
+  color: #FFF;
+  border-radius: 0.05rem;
+  margin-top: 0.2rem;
+}
+.baseBox .right .btnBox{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0.1rem;
+}
+.baseBox .right .btnBox .btnlist{
+  width: 1.28rem;
+  height: 0.4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 0.24rem;
+  margin-right: 0.1rem;
+  background: #e7cd94;
+  border-radius: 0.05rem;
+}
+.bigTitle{
+  color: #e7cd94 !important;
+  font-size: 0.3rem !important;
+}
+
+.sideScrollBox{
+  width: 100%;
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+}
+.sideScrollBox .heads{
+  width: 7rem;
+  margin-top: 0.25rem;
+}
+.sideScrollBox img{
+  width: 2.17rem;
+  height: 0.5rem;
+  margin-left: 0.1rem;
+}
+.tuijianList{
+  width: 7rem;
+  height: 1.8rem;
+  margin-top: 0.2rem;
+  background: #FFF;
+  border-radius: 0.1rem;
+  -moz-box-shadow:0rem 0.08rem 0.3rem #ececef, 0.02rem 0rem 0.2rem #ececef, -0.02rem 0rem 0.2rem #ececef;
+  -webkit-box-shadow:0rem 0.08rem 0.3rem #ececef, 0.02rem 0rem 0.2rem #ececef, -0.02rem 0rem 0.2rem #ececef;
+  box-shadow:0rem 0.08rem 0.3rem #ececef, 0.02rem 0rem 0.2rem #ececef, -0.02rem 0rem 0.2rem #ececef;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+.tuijianList img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.errorBox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.8rem;
+}
+.errorBox p{
+  color: #6e6e6d;
+  font-size: 0.24rem;
+}
+.errorBox .btns{
+  width: 2.8rem;
+  height: 0.5rem;
+  background: #e7cd94;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.24rem;
+  color: #FFF;
+  border-radius: 0.05rem;
+  margin-top: 0.4rem;
+}
