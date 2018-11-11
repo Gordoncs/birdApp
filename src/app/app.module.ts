@@ -21,6 +21,7 @@ import { TeacherComponent } from './teacher/teacher.component';
 import { AlertboxComponent } from './alertbox/alertbox.component';
 import { HexiaoComponent } from './hexiao/hexiao.component';
 import { MyorderComponent } from './myorder/myorder.component';
+import { JustpayComponent } from './justpay/justpay.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MyorderComponent } from './myorder/myorder.component';
     TeacherComponent,
     AlertboxComponent,
     HexiaoComponent,
-    MyorderComponent
+    MyorderComponent,
+    JustpayComponent
   ],
   imports: [
     BrowserModule,

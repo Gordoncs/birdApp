@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     ).subscribe(x => {
       this.url = x['url'];
       if (this.url.indexOf('detail') > -1 || this.url.indexOf('paysure') > -1 || this.url.indexOf('upload') > -1 ||
-        this.url.indexOf('hexiao') > -1 || this.url.indexOf('myorder') > -1) {
+        this.url.indexOf('hexiao') > -1 || this.url.indexOf('myorder') > -1 || this.url.indexOf('justpay') > -1) {
         this.canShowNav = false;
       } else {
         this.canShowNav = true;
