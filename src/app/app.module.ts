@@ -19,6 +19,7 @@ import { AddresComponent } from './localtion/addres/addres.component';
 import { UploadComponent } from './upload/upload.component';
 import { TeacherComponent } from './teacher/teacher.component';
 import { AlertboxComponent } from './alertbox/alertbox.component';
+import { HexiaoComponent } from './hexiao/hexiao.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AlertboxComponent } from './alertbox/alertbox.component';
     AddresComponent,
     UploadComponent,
     TeacherComponent,
-    AlertboxComponent
+    AlertboxComponent,
+    HexiaoComponent
   ],
   imports: [
     BrowserModule,

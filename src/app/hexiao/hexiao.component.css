@@ -1,0 +1,236 @@
+.heads{
+  width: 100%;
+  height: 1.15rem;
+  display: flex;
+  position: relative;
+}
+.heads .headsBg{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.headsBox{
+  position: absolute;
+  left: 50%;
+  margin-left: -3.45rem;
+  top: 0;
+  width: 6.9rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.headsBox .list{
+  color: #dab57b;
+  font-size: 0.25rem;
+}
+.middleBox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.orderBaseInfo{
+  width: 6.9rem;
+  height: 1.64rem;
+  border-bottom: 2px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.orderBaseInfo .list{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.orderBaseInfo .list .s1{
+  color: #737373;
+  font-size: 0.22rem;
+}
+.orderBaseInfo .list .s2{
+  color: #333333;
+  font-size: 0.22rem;
+}
+.titles{
+  width: 6.9rem;
+  display: flex;
+  flex-direction: row;
+  color: #f27442;
+  font-size: 0.24rem;
+  margin-top: 0.15rem;
+}
+
+
+.shopCartBox{
+  width: 6.9rem;
+  background: #FFF;
+  border-radius: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid #e5e5e5;
+}
+.shopCartBox .heads{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-top: 0.15rem;
+}
+.shopCartBox .heads .shopName{
+  color: #3c3c3c;
+  font-size: 0.28rem;
+}
+.ml50{
+  margin-left: 0.5rem;
+}
+.left30{
+  left: 0.3rem !important;
+}
+.shopCartBox .productList{
+  width: 100%;
+  height: 1.4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 0.15rem;
+}
+.shopCartBox .productList .productImg{
+  width: 1.4rem;
+  height: 1.4rem;
+  background: #eeeeee;
+  border-radius: 0.05rem;
+  overflow: hidden;
+}
+.shopCartBox .productList .productImg img{
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.shopCartBox  .productIndec{
+  width: 2.9rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: -0.6rem;
+}
+.shopCartBox  .productIndec .name{
+  width: 100%;
+  font-size: 0.24rem;
+  color: #737373;
+  word-break:break-all;
+  word-wrap:break-word;
+  line-height: 0.24rem;
+}
+.shopCartBox  .productIndec .classly{
+  width: 100%;
+  word-break:break-all;
+  word-wrap:break-word;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 0.1rem;
+}
+.shopCartBox  .productIndec .classly .list{
+  padding: 0 0.1rem;
+  background: #f8f1df;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.1rem;
+  font-size: 0.16rem;
+  color: #deb95f;
+}
+.shopCartBox  .productIndec  .specBox{
+  width: 100%;
+  word-break:break-all;
+  word-wrap:break-word;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 0.1rem;
+}
+.shopCartBox  .productIndec  .specBox span{
+  font-size: 0.16rem;
+  color: #f27442;
+}
+
+.shopCartBox  .rightBox .price{
+  font-size: 0.28rem;
+  color: #f27442;
+  margin-bottom: 0.05rem;
+}
+.shopCartBox  .rightBox .number{
+  font-size: 0.24rem;
+  color: #737373;
+  margin-top: 0.05rem;
+}
+.shopCartBox  .rightBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.noselRaido{
+  width: 0.34rem;
+  height: 0.34rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 0.34rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0rem;
+  top: 50%;
+  margin-top: -0.17rem;
+}
+.kong{
+  width: 0.17rem;
+  height: 0.17rem;
+  background: none;
+  border-radius: 0.17rem;
+}
+.raidoSelit{
+  border: 1px solid #e7cd94 !important;
+}
+.shi{
+  background: #e7cd94 !important;
+}
+.tipsBox{
+  width: 6.9rem;
+  margin-top: 0.15rem;
+  margin-bottom: 0.15rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.tipsBox img{
+  width: 0.37rem;
+  height: 0.37rem;
+}
+.tipsBox span{
+  color: #b9b9b9;
+  font-size: 0.2rem;
+  margin-left: 0.1rem;
+}
+.saveBtn{
+  width: 6.9rem;
+  height: 0.8rem;
+  background: #e7cd94;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  font-size: 0.3rem;
+  border-radius: 0.1rem;
+}
