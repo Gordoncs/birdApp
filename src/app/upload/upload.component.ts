@@ -9,10 +9,10 @@ import {Title} from '@angular/platform-browser';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
-  private cropperArr = [];
-  private isshow = false;
-  private indexNow = 0;
-  private previewDomNow: any;
+  cropperArr = [];
+  isshow = false;
+  indexNow = 0;
+  previewDomNow: any;
   constructor( private titleService: Title) { }
   ngOnInit() {
     this.titleService.setTitle('案例上传');
