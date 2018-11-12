@@ -12,7 +12,7 @@
   <!--待使用-->
   <div class="headsBox" *ngIf="status==3">
     <div class="leftImg">
-      <img src="./assets/image/daifuIcon.png" alt="">
+      <img style="width: 1.12rem" src="./assets/image/daishiIcon.png" alt="">
     </div>
     <div class="rightInfo">
       <div class="list">用户名：张某</div>
@@ -46,8 +46,13 @@
         <img src="./assets/image/qrEx.png" alt="">
       </div>
     </div>
+    <div class="tips">注意保管，请勿截图分享</div>
   </div>
 
+  <div class="tabBox" *ngIf="status==3">
+    <div class="tablist tablistSel">待服务 (4)</div>
+    <div class="tablist">已完成 (3)</div>
+  </div>
   <div class="titles" >
     服务项目：
   </div>
@@ -91,6 +96,10 @@
 
     </div>
   </div>
+  <div class="juanBox" *ngIf="status==3">
+    <img src="./assets/image/songJuan.png" alt="">
+    <span>（剩余4张）</span>
+  </div>
   <div class="titles" >
     订单信息：
   </div>
@@ -123,8 +132,11 @@
       <div class="name">-2000元</div>
     </div>
   </div>
+  <div class="textBox" *ngIf="status==3">
+    <span></span><span>实付金额：￥10180.00</span>
+  </div>
 </div>
-<div class="priceBar">
+<div class="priceBar" *ngIf="status==2">
   <div class="price">
     <span class="s1">应付金额:</span>
     <span class="s2">￥10380.00</span>

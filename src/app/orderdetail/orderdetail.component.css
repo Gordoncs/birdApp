@@ -352,9 +352,9 @@
 
 .qrBigBox{
   width: 100%;
-  height: 1.62rem;
+  height: 2.8rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -395,4 +395,65 @@
   display: block;
   width: 100%;
   height: 100%;
+}
+.qrBigBox .tips{
+  color: #d0d0d0;
+  font-size: 0.18rem;
+  margin-top: 0.1rem;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 0rem;
+  left: 0;
+}
+.tabBox{
+  width: 6.9rem;
+  height: 0.8rem;
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.15rem;
+  align-items: center;
+  justify-content: space-around;
+}
+.tabBox .tablist{
+  width: 2.6rem;
+  height: 0.45rem;
+  border-radius: 0.2rem;
+  border: 1px solid #d8d8d8;
+  background: #FFF;
+  color: #737373;
+  font-size: 0.24rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+.tablistSel{
+  border: 1px solid #efcd83 !important;
+  color: #FFF !important;
+  background: #efcd83 !important;
+}
+
+.juanBox{
+  width: 7.23rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #e5e5e5;
+  padding-top: 0.1rem ;
+  padding-bottom: 0.1rem;
+  position: relative;
+}
+.juanBox img{
+  width: 7.23rem;
+  height: 1.51rem;
+}
+.juanBox span{
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.5rem;
+  z-index: 3;
+  font-size: 0.2rem;
 }
