@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
       filter((event: Event ) => event instanceof NavigationEnd)
     ).subscribe(x => {
       this.url = x['url'];
-      if (this.url.indexOf('detail') > -1 || this.url.indexOf('paysure') > -1 || this.url.indexOf('upload') > -1 ||
+      if (this.url.indexOf('goodsdetail') > -1 || this.url.indexOf('paysure') > -1 || this.url.indexOf('upload') > -1 ||
         this.url.indexOf('hexiao') > -1 || this.url.indexOf('myorder') > -1 || this.url.indexOf('justpay') > -1) {
         this.canShowNav = false;
       } else {

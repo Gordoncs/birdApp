@@ -23,6 +23,7 @@ import { HexiaoComponent } from './hexiao/hexiao.component';
 import { MyorderComponent } from './myorder/myorder.component';
 import { JustpayComponent } from './justpay/justpay.component';
 import { PaystausComponent } from './paystaus/paystaus.component';
+import { OrderdetailComponent } from './orderdetail/orderdetail.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PaystausComponent } from './paystaus/paystaus.component';
     HexiaoComponent,
     MyorderComponent,
     JustpayComponent,
-    PaystausComponent
+    PaystausComponent,
+    OrderdetailComponent
   ],
   imports: [
     BrowserModule,

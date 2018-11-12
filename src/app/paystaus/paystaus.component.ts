@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-paystaus',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaystausComponent implements OnInit {
   public status = false;
-  constructor() { }
+  constructor(private titleService: Title) { }
 
   ngOnInit() {
+    /***
+     * 设置title
+     */
+    this.titleService.setTitle('支付结果');
   }
 
 }

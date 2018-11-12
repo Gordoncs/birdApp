@@ -10,7 +10,7 @@
     <div *ngIf="showWhitchStatus==1" class="boxShowlist">
       <img class="noOrderImg" src="./assets/image/noOrder.png" alt="">
     </div>
-    <div *ngIf="showWhitchStatus==2" class="boxShowlist">
+    <div *ngIf="showWhitchStatus==2" [routerLink]="['/orderdetail']" class="boxShowlist">
       <img class="noOrderImg" src="./assets/image/noOrder.png" alt="">
       <div class="orderBox">
         <div class="shopInfoCon">

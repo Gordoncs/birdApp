@@ -14,6 +14,7 @@ import {HexiaoComponent} from './hexiao/hexiao.component';
 import {MyorderComponent} from './myorder/myorder.component';
 import {JustpayComponent} from './justpay/justpay.component';
 import {PaystausComponent} from './paystaus/paystaus.component';
+import {OrderdetailComponent} from './orderdetail/orderdetail.component';
 
 
 const routes: Routes = [
@@ -25,8 +26,9 @@ const routes: Routes = [
   { path: 'paystatus', component: PaystausComponent},
   { path: 'myindex', component: MyindexComponent},
   { path: 'myorder', component: MyorderComponent},
+  { path: 'orderdetail', component: OrderdetailComponent},
   { path: 'effectluck', component: EffectluckComponent},
-  { path: 'detail/:goodsId', component: DetailComponent},
+  { path: 'goodsdetail/:goodsId', component: DetailComponent},
   { path: 'address', component: AddresComponent},
   { path: 'teacher', component: TeacherComponent},
   { path: 'upload', component: UploadComponent},

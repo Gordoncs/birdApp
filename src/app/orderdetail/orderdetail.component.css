@@ -1,0 +1,398 @@
+.heads{
+  width: 100%;
+  height: 1.15rem;
+  display: flex;
+  position: relative;
+}
+.heads .headsBg{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.headsBox{
+  position: absolute;
+  left: 50%;
+  margin-left: -3.45rem;
+  top: 0;
+  width: 6.9rem;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.headsBox .leftImg{
+  width: 1.45rem;
+  height: 0.24rem;
+}
+.headsBox .leftImg img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.headsBox .rightInfo{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.headsBox .rightInfo .list{
+  color: #dab57b;
+  font-size: 0.25rem;
+}
+.middleBox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.4rem;
+}
+.orderBaseInfo{
+  width: 6.9rem;
+  height: 1.64rem;
+  border-bottom: 2px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.orderBaseInfo .list{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.orderBaseInfo .list .s1{
+  color: #737373;
+  font-size: 0.22rem;
+}
+.orderBaseInfo .list .s2{
+  color: #333333;
+  font-size: 0.22rem;
+}
+.titles{
+  width: 6.9rem;
+  display: flex;
+  flex-direction: row;
+  color: #f27442;
+  font-size: 0.24rem;
+  margin-top: 0.15rem;
+}
+
+
+.shopCartBox{
+  width: 6.9rem;
+  background: #FFF;
+  border-radius: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid #e5e5e5;
+}
+.shopCartBox .heads{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-top: 0.15rem;
+}
+.shopCartBox .heads .shopName{
+  color: #3c3c3c;
+  font-size: 0.28rem;
+}
+.ml20{
+  margin-left: 0.2rem;
+}
+.left30{
+  left: 0.3rem !important;
+}
+.shopCartBox .productList{
+  width: 100%;
+  height: 1.4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 0.15rem;
+}
+.shopCartBox .productList .productImg{
+  width: 1.4rem;
+  height: 1.4rem;
+  background: #eeeeee;
+  border-radius: 0.05rem;
+  overflow: hidden;
+}
+.shopCartBox .productList .productImg img{
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.shopCartBox  .productIndec{
+  width: 2.9rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: -1rem;
+}
+.shopCartBox  .productIndec .name{
+  width: 100%;
+  font-size: 0.24rem;
+  color: #737373;
+  word-break:break-all;
+  word-wrap:break-word;
+  line-height: 0.24rem;
+}
+.shopCartBox  .productIndec .classly{
+  width: 100%;
+  word-break:break-all;
+  word-wrap:break-word;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 0.1rem;
+}
+.shopCartBox  .productIndec .classly .list{
+  padding: 0 0.1rem;
+  background: #f8f1df;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.1rem;
+  font-size: 0.16rem;
+  color: #deb95f;
+}
+.shopCartBox  .productIndec  .specBox{
+  width: 100%;
+  word-break:break-all;
+  word-wrap:break-word;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 0.1rem;
+}
+.shopCartBox  .productIndec  .specBox span{
+  font-size: 0.16rem;
+  color: #f27442;
+}
+
+.shopCartBox  .rightBox .price{
+  font-size: 0.28rem;
+  color: #f27442;
+  margin-bottom: 0.05rem;
+}
+.shopCartBox  .rightBox .number{
+  font-size: 0.24rem;
+  color: #737373;
+  margin-top: 0.05rem;
+}
+.shopCartBox  .rightBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.noselRaido{
+  width: 0.34rem;
+  height: 0.34rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 0.34rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0rem;
+  top: 50%;
+  margin-top: -0.17rem;
+}
+.kong{
+  width: 0.17rem;
+  height: 0.17rem;
+  background: none;
+  border-radius: 0.17rem;
+}
+.raidoSelit{
+  border: 1px solid #e7cd94 !important;
+}
+.shi{
+  background: #e7cd94 !important;
+}
+
+
+.shopInfoBox{
+  width: 100%;
+  height: 1.62rem;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.1rem solid #eeeeee;
+}
+.shopInfoCon{
+  height: 1.62rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  justify-content: center;
+}
+.shopInfoCon .text{
+  color: #737373;
+  font-size: 0.22rem;
+  margin-left: 0.28rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.shopInfoCon .text img{
+  width: 0.36rem;
+  height: 0.34rem;
+  margin-right: 0.05rem;
+}
+
+.shopInfoBox .rightIcon{
+  width:0.3rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 0.25rem;
+}
+.fz25{
+  font-size: 0.25rem !important;
+}
+.telImg{
+  width: 0.24rem;
+  height: 0.32rem;
+}
+.addressImg{
+  width: 0.19rem;
+  height: 0.27rem;
+}
+.textBox{
+  width: 6.9rem;
+  height: 0.6rem;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #737373;
+  font-size: 0.22rem;
+}
+.textBox .cheapBox{
+  width: 5.7rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.textBox .cheapBox .name{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #f27442;
+  font-size: 0.24rem;
+  line-height: 0.24rem;
+}
+.textBox .cheapBox .name img{
+  width: 0.24rem;
+  height: 0.24rem;
+  margin-left: 0.2rem;
+}
+
+.priceBar{
+  width: 100%;
+  height: 1rem;
+  background: #FFF;
+  position: fixed;
+  left: 0;
+  bottom: 1.2rem;
+  z-index: 9;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+.priceBar .price{
+  width: 73%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.priceBar .price .s1{
+  color: #737373;
+  font-size: 0.28rem;
+  margin-left: 0.35rem;
+  margin-top: 0.1rem;
+}
+.priceBar .price .s2{
+  color: #333333;
+  font-size: 0.46rem;
+  margin-right: 0.2rem;
+}
+
+.priceBar .payBtn{
+  width: 27%;
+  height: 100%;
+  line-height: 1rem;
+  color: #FFF;
+  font-size: 0.30rem;
+  background: #efcd83;
+  text-align: center;
+}
+
+
+.qrBigBox{
+  width: 100%;
+  height: 1.62rem;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 0.1rem solid #eeeeee;
+}
+.qrBg{
+  width: 6.8rem;
+  height: 1.66rem;
+}
+.qrBox{
+  width: 1.8rem;
+  height: 1.8rem;
+  background: #FFF;
+  -moz-box-shadow:0px 5px 10px #ece2d0, 5px 0px 10px #ece2d0, -5px 0px 10px #ece2d0;
+  -webkit-box-shadow:0px 5px 10px #ece2d0, 5px 0px 10px #ece2d0, -5px 0px 10px #ece2d0;
+  box-shadow:0px 5px 10px #ece2d0, 5px 0px 10px #ece2d0, -5px 0px 10px #ece2d0;
+  position: absolute;
+  left: 50%;
+  margin-left: -0.9rem;
+  top: 50%;
+  margin-top: -0.9rem;
+  z-index: 9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.qrBoxCon{
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid #e8c788;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.qrBoxCon img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
