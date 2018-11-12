@@ -15,6 +15,7 @@ import {MyorderComponent} from './myorder/myorder.component';
 import {JustpayComponent} from './justpay/justpay.component';
 import {PaystausComponent} from './paystaus/paystaus.component';
 import {OrderdetailComponent} from './orderdetail/orderdetail.component';
+import {SpecialgoodsComponent} from './specialgoods/specialgoods.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'orderdetail', component: OrderdetailComponent},
   { path: 'effectluck', component: EffectluckComponent},
   { path: 'goodsdetail/:goodsId', component: DetailComponent},
+  { path: 'specialgoods', component: SpecialgoodsComponent},
   { path: 'address', component: AddresComponent},
   { path: 'teacher', component: TeacherComponent},
   { path: 'upload', component: UploadComponent},

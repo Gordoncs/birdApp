@@ -10,7 +10,10 @@ export class OrderdetailComponent implements OnInit {
   public hhh: any;
   public mmm: any;
   public sss: any;
-  public status = 3;
+  /**
+   * 2待支付 ,3待使用 ,4已完成 ,5已取消
+   */
+  public status = 4;
   constructor(private titleService: Title) { }
 
   ngOnInit() {

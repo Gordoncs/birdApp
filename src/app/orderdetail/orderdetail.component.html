@@ -19,6 +19,23 @@
       <div class="list">电话: 1374328984</div>
     </div>
   </div>
+  <!--已完成-->
+  <div class="headsBox" *ngIf="status==4">
+    <div class="leftImg">
+      <img style="width: 1.13rem" src="./assets/image/wancheng.png" alt="">
+    </div>
+    <div class="rightInfo">
+    </div>
+  </div>
+  <!--已取消-->
+  <div class="headsBox" *ngIf="status==5">
+    <div class="leftImg">
+      <img style="width: 1.15rem" src="./assets/image/quxiaoIcon.png" alt="">
+    </div>
+    <div class="rightInfo">
+    </div>
+  </div>
+
 </div>
 <div class="middleBox">
   <div class="shopInfoBox">
@@ -96,7 +113,7 @@
 
     </div>
   </div>
-  <div class="juanBox" *ngIf="status==3">
+  <div class="juanBox" *ngIf="status==3 || status==4">
     <img src="./assets/image/songJuan.png" alt="">
     <span>（剩余4张）</span>
   </div>
@@ -120,6 +137,14 @@
       <span class="s1">支付时间：</span>
       <span class="s2">2018-10-12 14:57:27</span>
     </div>
+    <div class="list" *ngIf="status==4">
+      <span class="s1">使用时间：</span>
+      <span class="s2">2018-10-12 14:57:27</span>
+    </div>
+    <div class="list" *ngIf="status==5">
+      <span class="s1">取消时间：</span>
+      <span class="s2">2018-10-12 14:57:27</span>
+    </div>
   </div>
 
   <div class="textBox">
@@ -132,7 +157,7 @@
       <div class="name">-2000元</div>
     </div>
   </div>
-  <div class="textBox" *ngIf="status==3">
+  <div class="textBox" *ngIf="status==3 || status==4 || status==5">
     <span></span><span>实付金额：￥10180.00</span>
   </div>
 </div>

@@ -1,0 +1,114 @@
+.con{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.titles{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 0.35rem;
+}
+.titleList{
+  width: 2.2rem;
+  height: 1.35rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.1rem;
+  overflow: hidden;
+  border: 1px solid #FFF;
+  -moz-box-shadow:0rem 0.08rem 0.5rem #c3c3c3, 0.02rem 0rem 0.05rem #c3c3c3, -0.02rem 0rem 0.05rem #c3c3c3;
+  -webkit-box-shadow:0rem 0.08rem 0.5rem #c3c3c3, 0.02rem 0rem 0.05rem #c3c3c3, -0.02rem 0rem 0.05rem #c3c3c3;
+  box-shadow:0rem 0.08rem 0.5rem #c3c3c3, 0.02rem 0rem 0.05rem #c3c3c3, -0.02rem 0rem 0.05rem #c3c3c3;
+}
+.titleList .name{
+  width: 100%;
+  height: 0.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #3c3c3c;
+  font-size: 0.3rem;
+}
+.titleList .date{
+  width: 100%;
+  height: 0.55rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #797979;
+  font-size: 0.2rem;
+}
+.thisdatebord{
+  border: 1px solid #e7cd94 !important;
+}
+
+.thisdate{
+  color: #FFF !important;
+  background: #e7cd94 !important;
+}
+
+.mainBox{
+  width: 7rem;
+  height: 9.5rem;
+  background: #FFF;
+  border-radius: 0.1rem;
+  margin-top: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -moz-box-shadow:0rem 0.08rem 0.5rem #c3c3c3;
+  -webkit-box-shadow:0rem 0.08rem 0.5rem #c3c3c3;
+  box-shadow:0rem 0.08rem 0.5rem #c3c3c3;
+  overflow: hidden;
+}
+
+.mainBox .goodsImg{
+  width: 7rem;
+  height: 7.6rem;
+}
+.mainBox .btnBox{
+  width: 100%;
+  height: 1.9rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.littleBox{
+  width: 1.85rem;
+  height: 0.78rem;
+  border: 0.02rem solid #efdeba;
+  border-radius: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.3rem;
+  color: #3c3c3c;
+}
+.bigBox{
+  width: 3.75rem;
+  height: 0.78rem;
+  border: 0.02rem solid #efdeba;
+  border-radius: 0.1rem;
+  background: #e7cd94;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.3rem;
+  color: #FFF;
+}

@@ -24,6 +24,7 @@ import { MyorderComponent } from './myorder/myorder.component';
 import { JustpayComponent } from './justpay/justpay.component';
 import { PaystausComponent } from './paystaus/paystaus.component';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
+import { SpecialgoodsComponent } from './specialgoods/specialgoods.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { OrderdetailComponent } from './orderdetail/orderdetail.component';
     MyorderComponent,
     JustpayComponent,
     PaystausComponent,
-    OrderdetailComponent
+    OrderdetailComponent,
+    SpecialgoodsComponent
   ],
   imports: [
     BrowserModule,
