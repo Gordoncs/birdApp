@@ -125,6 +125,10 @@ export class ShopcarComponent implements OnInit {
         skuIdArr.push(this.cartListInfo.cartDetail[i].id);
       }
     }
+    if (skuIdArr.length === 0) {
+      this.alertBox.error('暂无可操作订单~');
+      return;
+    }
     this.alertBox.load();
     this.userConfigService.cartDelCartGoods(memberId, skuIdArr).
     subscribe(data => {
@@ -143,5 +147,18 @@ export class ShopcarComponent implements OnInit {
         this.alertBox.error(data['message']);
       }
     });
+  }
+  goPaysure() {
+    const skuIdArr = [];
+    for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
+      if (this.cartListInfo.cartDetail[i].ischeck === true) {
+        skuIdArr.push(this.cartListInfo.cartDetail[i].id);
+      }
+    }
+    if (skuIdArr.length === 0) {
+      this.alertBox.error('暂无可操作订单~');
+      return;
+    }
+    this.router.navigate(['/paysure', JSON.stringify(skuIdArr)]);
   }
 }

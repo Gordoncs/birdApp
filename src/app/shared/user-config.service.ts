@@ -165,5 +165,16 @@ export class UserConfigService {
         catchError(this.handleError)
       );
   }
+  /**
+   * 购物车结算跳转支付确认
+   */
+  checkoutInfo(memberId: any, storeId: any, skuId: any): Observable<any> {
+    const params = '?memberId=' + memberId + '&storeId=' + storeId + '&sku=' + skuId ;
+    return this.http.get(this.configUrl + '/checkout/info' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
 }
 

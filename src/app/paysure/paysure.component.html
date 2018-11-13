@@ -5,57 +5,45 @@
   <div class="shopInfoBox">
     <img class="bg" src="./assets/image/paySureHeadBg.png" alt="">
     <div class="shopInfoCon">
-      <div class="text fz25"><img src="./assets/image/shopIcon.png" alt="">春鸟皮肤管理中心顺义天美一店</div>
-      <div class="text">门店地址：北京市顺义区XXXXXXX19号</div>
-      <div class="text">营业时间：10:00-22:00</div>
-      <div class="text">联系电话：13910250215</div>
+      <div class="text fz25"><img src="./assets/image/shopIcon.png" alt="">{{paySureInfo.store.name}}</div>
+      <div class="text">门店地址：{{paySureInfo.store.addr}}</div>
+      <div class="text">营业时间：{{paySureInfo.store.businessHours}}</div>
+      <div class="text">联系电话：{{paySureInfo.store.phone}}</div>
     </div>
     <div class="editShop">修 改 ></div>
   </div>
   <div class="userInfo">
     <div class="tips"><span class="s1">邀约信息：</span><span class="s2">（专属美容导师会及时与您沟通服务时间）</span></div>
     <div class="inputBox">
-      <span>尊客姓名：</span><input type="text">
+      <span>尊客姓名：</span><input type="text" [ngModel]="paySureInfo.hisName">
     </div>
     <div class="inputBox">
-      <span>联系电话：</span><input type="tel">
+      <span>联系电话：</span><input type="tel" [ngModel]="paySureInfo.hisMobile">
     </div>
   </div>
 
   <div class="mainBox">
     <div class="tips">服务项目：</div>
-    <div class="productList">
+    <div class="productList" *ngFor="let item of paySureInfo.cartDetail">
       <div class="productImg ml90">
-        <img src="" alt="">
+        <img src="{{item.miniPhotoAddr}}" alt="">
       </div>
       <div class="productIndec">
-        <div class="name">亮白肌肤瘦身竖形预留行亮白肌肤瘦身竖形预留行</div>
-        <div class="price">￥380.00</div>
+        <div class="name">{{item.name}}</div>
+        <div class="classly">
+          <div class="list">{{item.skuSpecName}}</div>
+        </div>
+        <div class="specBox">
+          <span>{{item.skuStyleName}}</span>
+        </div>
       </div>
-      <div class="nums">x1</div>
-    </div>
-    <div class="productList">
-      <div class="productImg ml90">
-        <img src="" alt="">
+      <div class="rightBox">
+        <div class="number">x{{item.number}}</div>
+        <div class="price">￥{{item.price | number:'2.2-2'}}</div>
       </div>
-      <div class="productIndec">
-        <div class="name">亮白肌肤瘦身竖形预留行亮白肌肤瘦身竖形预留行</div>
-        <div class="price">￥380.00</div>
-      </div>
-      <div class="nums">x1</div>
-    </div>
-    <div class="productList">
-      <div class="productImg ml90">
-        <img src="" alt="">
-      </div>
-      <div class="productIndec">
-        <div class="name">亮白肌肤瘦身竖形预留行亮白肌肤瘦身竖形预留行</div>
-        <div class="price">￥380.00</div>
-      </div>
-      <div class="nums">x1</div>
     </div>
     <div class="textBox">
-      <span>金额合计：</span><span>￥10180.00</span>
+      <span>金额合计：</span><span>￥ {{allMoney | number:'2.2-2'}}</span>
     </div>
     <div class="textBox" style="border-bottom: 1px solid #e5e5e5 ">
       <span>优惠方式：</span>
@@ -83,7 +71,10 @@
 <div class="priceBar">
   <div class="price">
     <span class="s1">应付金额:</span>
-    <span class="s2">￥10380.00</span>
+    <span class="s2">￥{{allMoney | number:'2.2-2'}}</span>
   </div>
   <div class="payBtn" >立即支付</div>
 </div>
+
+
+<app-alertbox></app-alertbox>
