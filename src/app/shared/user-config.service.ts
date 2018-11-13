@@ -88,6 +88,17 @@ export class UserConfigService {
   }
 
   /**
+   * 特卖商品页数据
+   */
+  getOnSalesGoods(): Observable<any> {
+    return this.http.get(this.configUrl + '/getOnSalesGoods', this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  /**
    * 加入购物车
    */
   cartAdd(memberId: any, skuId: any, storeId: any, number: any): Observable<any> {
@@ -127,6 +138,28 @@ export class UserConfigService {
   cartGetCart(memberId: any, storeId: any): Observable<any> {
     const params = '?memberId=' + memberId + '&storeId=' + storeId ;
     return this.http.get(this.configUrl + '/cart/getCart' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+  /**
+   * 购物车数量加减
+   */
+  cartChangeGoodsNumber(memberId: any, skuId: any, number: any): Observable<any> {
+    const params = '?memberId=' + memberId + '&skuId=' + skuId + '&number=' + number ;
+    return this.http.get(this.configUrl + '/cart/changeGoodsNumber' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+  /**
+   * 购物车删除
+   */
+  cartDelCartGoods(memberId: any, skuId: any): Observable<any> {
+    const params = '?memberId=' + memberId + '&skuId=' + skuId ;
+    return this.http.get(this.configUrl + '/cart/delCartGoods' + params, this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

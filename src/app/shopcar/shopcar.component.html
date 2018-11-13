@@ -8,7 +8,7 @@
       </div>
       <span class="shopName ml90">{{cartListInfo.storeName}}</span>
     </div>
-    <div class="productList" (click)="choseList(item)" *ngFor="let item of cartListInfo.cartDetail">
+    <div class="productList" (click)="choseList(item);" *ngFor="let item of cartListInfo.cartDetail">
       <div class="noselRaido raidoSelit left30">
         <div [class.shi]="item.ischeck" class="kong"></div>
       </div>
@@ -43,7 +43,9 @@
     </div>
     <div *ngIf="canEdit" class="quanClass">全选</div>
   </div>
-  <div class="price" *ngIf="!canEdit">￥ {{getAllMoney() | number:'2.2-2'}}</div>
-  <div class="payBtn" *ngIf="canEdit">删除 （{{choseNum()}}）</div>
-  <div class="payBtn" *ngIf="!canEdit" routerLink="../paysure">去结算（{{choseNum()}}）</div>
+  <div class="price" *ngIf="!canEdit">￥ {{allMoney | number:'2.2-2'}}</div>
+  <div class="payBtn" (click)="delGoods()" *ngIf="canEdit">删除 （{{allNum}}）</div>
+  <div class="payBtn" *ngIf="!canEdit" routerLink="../paysure">去结算（{{allNum}}）</div>
 </div>
+
+<app-alertbox></app-alertbox>

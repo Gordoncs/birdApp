@@ -1,25 +1,26 @@
 <div class="con">
   <div class="titles">
-    <div class="titleList">
+    <div class="titleList" [class.thisdatebord]="selStatus=='beforeOnSaleGoods'" (click)="selStatus='beforeOnSaleGoods'">
       <div class="name">上期</div>
-      <div class="date">9月1日~9月7日</div>
+      <div class="date" [class.thisdate]="selStatus=='beforeOnSaleGoods'" *ngIf="detailInfo.beforeOnSaleGoods">{{detailInfo.beforeOnSaleGoods.startTime | date:'MM月dd日' }}~{{detailInfo.beforeOnSaleGoods.endTime | date:'MM月dd日'}}</div>
     </div>
-    <div class="titleList thisdatebord">
+    <div class="titleList" [class.thisdatebord]="selStatus=='nowOnSaleGoods'" (click)="selStatus='nowOnSaleGoods'">
       <div class="name">本期</div>
-      <div class="date thisdate">9月8日~9月15日</div>
+      <div class="date" [class.thisdate]="selStatus=='nowOnSaleGoods'" *ngIf="detailInfo.nowOnSaleGoods">{{detailInfo.nowOnSaleGoods.startTime | date:'MM月dd日'}}~{{detailInfo.nowOnSaleGoods.endTime | date:'MM月dd日'}}</div>
     </div>
-    <div class="titleList">
+    <div class="titleList" [class.thisdatebord]="selStatus=='nextOnSaleGoods'" (click)="selStatus='nextOnSaleGoods'">
       <div class="name">下期</div>
-      <div class="date">9月1日~9月7日</div>
+      <div class="date" [class.thisdate]="selStatus=='nextOnSaleGoods'" *ngIf="detailInfo.nextOnSaleGoods">{{detailInfo.nextOnSaleGoods.startTime | date:'MM月dd日'}}~{{detailInfo.nextOnSaleGoods.endTime | date:'MM月dd日'}}</div>
     </div>
   </div>
 
   <div class="mainBox">
-    <img class="goodsImg" src="./assets/image/ex5.png" alt="">
+    <img class="goodsImg" [src]="detailInfo[selStatus].photoAddr"  alt="">
     <div class="btnBox">
-      <div class="littleBox">返回首页</div>
+      <div class="littleBox" routerLink="/index">返回首页</div>
       <div class="bigBox">立即抢购</div>
     </div>
   </div>
 </div>
 
+<app-alertbox></app-alertbox>

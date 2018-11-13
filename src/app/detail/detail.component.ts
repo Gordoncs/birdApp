@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
 import {Observable} from 'rxjs';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
+import {TongxinService} from '../shared/tongxin.service';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -22,7 +23,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService) { }
+              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
   ngOnInit() {
     /***
      * 设置title
@@ -102,7 +103,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     }
   }
   cartAdd() {
-    const memberId = 3;
+    const memberId = localStorage.getItem('memberId');
     const skuId = this.choseSku['id'];
     const storeId = JSON.parse(localStorage.getItem('storeInfo'))['id'];
     const number = 1;
@@ -115,6 +116,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
       .subscribe((data) => {
         this.alertBox.close();
         if (data['result']) {
+          this.TongXin.cartNum(1);
           this.router.navigate(['/cart']);
         } else {
           this.alertBox.error(data['message']);

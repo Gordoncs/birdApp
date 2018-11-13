@@ -27,7 +27,6 @@ export class UploadComponent implements OnInit {
     $('.photoLookBox').find('input').val('');
   }
   sureImg() {
-    // @ts-ignore
     const cas = this.cropperArr[this.indexNow].obj.getCroppedCanvas();
     const base64 = cas.toDataURL('image/jpeg'); // 转换为base64
     const data = encodeURIComponent(base64);
@@ -39,6 +38,7 @@ export class UploadComponent implements OnInit {
     this.cropperArr[this.indexNow].returnData = data;
     this.indexNow = -1;
     this.isshow = false;
+
   }
   crearImg(imageDom, previewDom) {
     return new Cropper(imageDom, {
