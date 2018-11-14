@@ -15,10 +15,10 @@
   <div class="userInfo">
     <div class="tips"><span class="s1">邀约信息：</span><span class="s2">（专属美容导师会及时与您沟通服务时间）</span></div>
     <div class="inputBox">
-      <span>尊客姓名：</span><input type="text" [ngModel]="paySureInfo.hisName">
+      <span>尊客姓名：</span><input type="text" [(ngModel)]="order.linkman">
     </div>
     <div class="inputBox">
-      <span>联系电话：</span><input type="tel" [ngModel]="paySureInfo.hisMobile">
+      <span>联系电话：</span><input type="tel" [(ngModel)]="order.subscribePhone">
     </div>
   </div>
 
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-    <textarea placeholder="尊客备注：可输入您期望到店时间、或希望专属顾问何时与您联系等要求" class="memoBox"></textarea>
+    <textarea [ngModel]="order.orderRemark" placeholder="尊客备注：可输入您期望到店时间、或希望专属顾问何时与您联系等要求" class="memoBox"></textarea>
   </div>
 </div>
 <div class="priceBar">
@@ -73,7 +73,7 @@
     <span class="s1">应付金额:</span>
     <span class="s2">￥{{allMoney | number:'2.2-2'}}</span>
   </div>
-  <div class="payBtn" >立即支付</div>
+  <div class="payBtn" (click)="payFn()">立即支付</div>
 </div>
 
 

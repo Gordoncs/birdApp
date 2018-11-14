@@ -16,12 +16,12 @@
     </div>
   </div>
   <div *ngIf="showWitch==1" class="effectBox">
-    <div class="effectList">
+    <div *ngFor="let item of effectList" class="effectList">
       <div class="personImgBox">
-        <img src="./assets/image/girl.png" alt="">
+        <img [src]="item.headIconAddr" alt="">
       </div>
       <div class="context">
-        <span class="name">林凡</span>
+        <span class="name">{{item.nickname}}</span>
         <span>2018年10月27日</span>
         <span>因您而更美</span>
       </div>
@@ -30,20 +30,7 @@
         <div class="tips">您获得2次活动机会</div>
       </div>
     </div>
-    <div class="effectList">
-      <div class="personImgBox">
-        <img src="./assets/image/girl.png" alt="">
-      </div>
-      <div class="context">
-        <span class="name">林凡</span>
-        <span>2018年10月27日</span>
-        <span>因您而更美</span>
-      </div>
-      <div class="rightInfo">
-        <img src="./assets/image/effectIcon.png" alt="">
-        <div class="tips">您获得2次活动机会</div>
-      </div>
-    </div>
+
     <div class="effectList">
       <div class="personImgBox">
         <img src="./assets/image/girl.png" alt="">
@@ -101,7 +88,7 @@
       </div>
     </div>
   </div>
-  <div class="luckBox">
+  <div *ngIf="showWitch==2" class="luckBox">
     <div class="luckHead">
       <div class="wordShow">幸运时刻</div>
       <div class="wordShow">幸运值</div>
@@ -125,3 +112,4 @@
 
   </div>
 </div>
+<app-alertbox></app-alertbox>

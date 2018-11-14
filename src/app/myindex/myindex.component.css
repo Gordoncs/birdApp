@@ -85,11 +85,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .orderStatusBox .statusList span{
   color: #393939;
   font-size: 0.2rem;
   margin-top: 0.15rem;
+}
+.orderStatusBox .statusList .numbers{
+  position: absolute;
+  width: 0.26rem;
+  height: 0.26rem;
+  border-radius: 0.26rem;
+  background: #e44645;
+  color: #FFF;
+  font-size: 0.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  right: 0.15rem;
+  top: 0.2rem;
 }
 .effectLuckBox{
   width: 100%;

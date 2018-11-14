@@ -27,6 +27,8 @@ export class UserConfigService {
       'channel': localStorage.getItem('channel'),
       'language': localStorage.getItem('language'),
       'Content-Type': 'application/x-www-form-urlencoded'
+      // 'Content-Type': 'multipart/form-data',
+      // 'Accept': 'application/json'
     })
   };
   /**
@@ -176,5 +178,63 @@ export class UserConfigService {
         catchError(this.handleError)
       );
   }
+  /**
+   * 商品订单结算下单
+   */
+  checkoutAdd(sku: any, type: any, order: any, bean: any): Observable<any> {
+    const params = 'sku=' + sku + '&type=' + type + '&order.memberId=' + order.memberId +
+      '&order.storeId=' + order.storeId + '&order.orderRemark=' + order.orderRemark +
+      '&order.subscribePhone=' + order.subscribePhone + '&order.linkman=' + order.linkman +
+      '&order.discountPriceAmout=' + order.discountPriceAmout + '&bean.id=' + bean.id + '&bean.authCode=' + bean.authCode;
+    return this.http.post(this.configUrl + '/checkout/add', params, this.headoptionsPost)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+  /**
+   * 上传
+   */
+  uploadit(param: any): Observable<any> {
+    return this.http.post(this.configUrl + '/checkout/info', param)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+  /**
+   * 会员主页信息
+   */
+  getMemberIndexInfo(memberId: any): Observable<any> {
+    const params = '?memberId=' + memberId ;
+    return this.http.get(this.configUrl + '/getMemberIndexInfo' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+  /**
+   * 会员影响力列表接口
+   */
+  getMemberInfluenceList(memberId: any, startLimit: any, pageNumber: any): Observable<any> {
+    const params = '?memberId=' + memberId + '&startLimit=' + startLimit + '&pageNumber=' + pageNumber ;
+    return this.http.get(this.configUrl + '/getMemberInfluenceList' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+  /**
+   * 会员幸运指数列表接口
+   */
+  getMemberActivityRecordList(memberId: any, startLimit: any, pageNumber: any): Observable<any> {
+    const params = '?memberId=' + memberId + '&startLimit=' + startLimit + '&pageNumber=' + pageNumber ;
+    return this.http.get(this.configUrl + '/getMemberActivityRecordList' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
 }
 

@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import Cropper from 'cropperjs';
 import * as $ from 'jquery';
 import {Title} from '@angular/platform-browser';
-
+import {UserConfigService} from '../shared/user-config.service';
+import {AlertboxComponent} from '../alertbox/alertbox.component';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -13,7 +14,10 @@ export class UploadComponent implements OnInit {
   isshow = false;
   indexNow = 0;
   previewDomNow: any;
-  constructor( private titleService: Title) { }
+  // 弹框显示
+  @ViewChild(AlertboxComponent)
+  alertBox: AlertboxComponent;
+  constructor( private titleService: Title, private userConfigService: UserConfigService) { }
   ngOnInit() {
     this.titleService.setTitle('案例上传');
     this.creatArr();
@@ -29,12 +33,10 @@ export class UploadComponent implements OnInit {
   sureImg() {
     const cas = this.cropperArr[this.indexNow].obj.getCroppedCanvas();
     const base64 = cas.toDataURL('image/jpeg'); // 转换为base64
-    const data = encodeURIComponent(base64);
+    // const data = encodeURIComponent(base64);
+    const data = this.dataURLtoFile(base64, 'bbq')
     console.log(111, base64)
     console.log(222, data)
-    console.log(this.dataURLtoFile(base64, 'bbq'));
-    // console.log(this.tobeFile(data));
-    // this.tobeFile(base64);
     this.cropperArr[this.indexNow].returnData = data;
     this.indexNow = -1;
     this.isshow = false;
@@ -59,7 +61,21 @@ export class UploadComponent implements OnInit {
     }
   }
   save() {
+    const arr = 'fistimg=' + JSON.stringify(this.cropperArr[0].returnData);
+    const formData = new FormData();
+    formData.append('uploadFile', this.cropperArr[0].returnData);
+    formData.append('uploadFile1', this.cropperArr[1].returnData);
+    formData.append('uploadFile2', this.cropperArr[2].returnData);
+    formData.append('uploadFile3', this.cropperArr[3].returnData);
     console.log(this.cropperArr);
+    this.userConfigService.uploadit(formData)
+      .subscribe((data) => {
+        this.alertBox.close();
+        if (data['result']) {
+        } else {
+          this.alertBox.error(data['message']);
+        }
+      });
   }
 
   dataURLtoFile(dataurl, filename) {// 将base64转换为文件
@@ -72,4 +88,6 @@ export class UploadComponent implements OnInit {
     }
     return new File([u8arr], filename, {type: mime});
   }
+
+
 }

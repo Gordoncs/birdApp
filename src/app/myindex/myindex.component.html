@@ -2,11 +2,11 @@
   <div class="heads">
     <img class="headsBg" src="./assets/image/myindexHead.png" alt="">
     <div class="personImgBox">
-      <img src="{{headimgurl}}" alt="">
+      <img src="{{userInfo.headIconAddr}}" alt="">
     </div>
     <div class="infoBox">
-      <span>微信：{{nickname}}</span>
-      <span>电话：1355845689</span>
+      <span>微信：{{userInfo.nickname}}</span>
+      <span>电话：{{userInfo.phone}}</span>
     </div>
   </div>
   <div class="orderStatusBox">
@@ -17,10 +17,12 @@
       <div class="statusList">
         <img style="width: 0.48rem;height: 0.45rem" src="./assets/image/orderStatus1.png" alt="">
         <span>待支付</span>
+        <div class="numbers" *ngIf="userInfo.noPaymentOrderNum">{{userInfo.noPaymentOrderNum}}</div>
       </div>
       <div class="statusList">
         <img style="width: 0.47rem;height: 0.43rem" src="./assets/image/orderStatus2.png" alt="">
         <span>待使用</span>
+        <div class="numbers" *ngIf="userInfo.finishPaymentOrderNum">{{userInfo.finishPaymentOrderNum}}</div>
       </div>
       <div class="statusList">
         <img style="width: 0.44rem;height: 0.45rem" src="./assets/image/orderStatus3.png" alt="">
@@ -32,14 +34,14 @@
       </div>
     </div>
   </div>
-  <div class="effectLuckBox" [routerLink]="['../effectluck']">
+  <div class="effectLuckBox" [routerLink]="['/effectluck']">
     <div class="effectLuckList">
       <img src="./assets/image/effect.png" alt="">
-      <span>28</span>
+      <span>{{userInfo.influence}}</span>
     </div>
     <div class="effectLuckList">
       <img src="./assets/image/luck.png" alt="">
-      <span>28</span>
+      <span>{{userInfo.luckyIndex}}</span>
     </div>
   </div>
   <div class="zeroShareBox">
@@ -54,3 +56,4 @@
     <img class="mr40" src="./assets/image/rigthArrow.png" alt="">
   </div>
 </div>
+<app-alertbox></app-alertbox>
