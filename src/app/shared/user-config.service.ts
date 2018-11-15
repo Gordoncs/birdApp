@@ -20,6 +20,16 @@ export class UserConfigService {
       'Content-Type': 'application/json',
     })
   };
+  headoptionsPostForm = {
+    headers: new HttpHeaders({
+      'os': localStorage.getItem('os'),
+      'osVersion': localStorage.getItem('osVersion'),
+      'channel': localStorage.getItem('channel'),
+      'language': localStorage.getItem('language'),
+      'Content-Type': 'multipart/form-data',
+      // 'Accept': 'application/json'
+    })
+  };
   headoptionsPost = {
     headers: new HttpHeaders({
       'os': localStorage.getItem('os'),
@@ -182,10 +192,14 @@ export class UserConfigService {
    * 商品订单结算下单
    */
   checkoutAdd(sku: any, type: any, order: any, bean: any): Observable<any> {
-    const params = 'sku=' + sku + '&type=' + type + '&order.memberId=' + order.memberId +
-      '&order.storeId=' + order.storeId + '&order.orderRemark=' + order.orderRemark +
-      '&order.subscribePhone=' + order.subscribePhone + '&order.linkman=' + order.linkman +
-      '&order.discountPriceAmout=' + order.discountPriceAmout + '&bean.id=' + bean.id + '&bean.authCode=' + bean.authCode;
+    // const params = 'sku=' + sku + '&type=' + type + '&order.memberId=' + order.memberId +
+    //   '&order.storeId=' + order.storeId + '&order.orderRemark=' + order.orderRemark +
+    //   '&order.subscribePhone=' + order.subscribePhone + '&order.linkman=' + order.linkman +
+    //   '&order.discountPriceAmout=' + order.discountPriceAmout + '&bean.id=' + bean.id + '&bean.authCode=' + bean.authCode;
+    const params = 'sku=' + sku + '&type=' + type + '&memberId=' + order.memberId +
+      '&storeId=' + order.storeId + '&orderRemark=' + order.orderRemark +
+      '&subscribePhone=' + order.subscribePhone + '&linkman=' + order.linkman +
+      '&discountPriceAmout=' + order.discountPriceAmout + '&id=' + bean.id + '&authCode=' + bean.authCode;
     return this.http.post(this.configUrl + '/checkout/add', params, this.headoptionsPost)
       .pipe(
         retry(1),
@@ -196,7 +210,7 @@ export class UserConfigService {
    * 上传
    */
   uploadit(param: any): Observable<any> {
-    return this.http.post(this.configUrl + '/checkout/info', param)
+    return this.http.post(this.configUrl + '/advisor/saveMemberCase', param, this.headoptionsPost)
       .pipe(
         retry(1),
         catchError(this.handleError)

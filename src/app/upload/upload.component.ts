@@ -14,6 +14,14 @@ export class UploadComponent implements OnInit {
   isshow = false;
   indexNow = 0;
   previewDomNow: any;
+  lookImgUrl = '';
+  memberCase = {
+    'advisorId': localStorage.getItem('memberId'),
+    'memberAge': '',
+    'serviceType': '',
+    'serviceProject': '',
+    'describedResults': '',
+  };
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -25,50 +33,88 @@ export class UploadComponent implements OnInit {
   getImgUrl($event, index) {
     this.indexNow = index;
     this.isshow = true;
-    this.previewDomNow = '.psbox' + index;
+    // this.previewDomNow = '.psbox' + index;
     this.cropperArr[index].obj.replace(window.URL.createObjectURL($event.path[0].files[0])) ;
     console.log(window.URL.createObjectURL($event.path[0].files[0]));
-    $('.photoLookBox').find('input').val('');
+  }
+  delImg(item, index) {
+    item.returnData.real = '';
+    item.returnData.big = '';
+    item.returnData.small = '';
+    $('.upppinput' + index).val('');
+  }
+  showLook(item) {
+    this.lookImgUrl = item.returnData.real;
   }
   sureImg() {
-    const cas = this.cropperArr[this.indexNow].obj.getCroppedCanvas();
-    const base64 = cas.toDataURL('image/jpeg'); // 转换为base64
-    // const data = encodeURIComponent(base64);
-    const data = this.dataURLtoFile(base64, 'bbq')
-    console.log(111, base64)
-    console.log(222, data)
-    this.cropperArr[this.indexNow].returnData = data;
+    // 大图
+    const casbig = this.cropperArr[this.indexNow].obj.getCroppedCanvas();
+    const base64big = casbig.toDataURL('image/jpeg'); // 转换为base64
+    const databig = encodeURIComponent(base64big);
+    // 缩略图
+    const cassmall = this.cropperArr[this.indexNow].obj.getCroppedCanvas({width: 88, height: 150});
+    const base64small = cassmall.toDataURL('image/jpeg'); // 转换为base64
+    const datasamll = encodeURIComponent(base64small);
+    console.log(111, base64big);
+    console.log(222, base64small);
+    this.cropperArr[this.indexNow].returnData.big = databig;
+    this.cropperArr[this.indexNow].returnData.small = datasamll;
+    this.cropperArr[this.indexNow].returnData.real = base64big;
     this.indexNow = -1;
     this.isshow = false;
 
   }
   crearImg(imageDom, previewDom) {
     return new Cropper(imageDom, {
-      aspectRatio: 1 / 1,
+      aspectRatio: 88 / 150,
       movable: true,
       zoomable: true,
       viewMode: 2,
-      preview: previewDom,
-      crop: function(e) {}
+      cropBoxResizable: false,
+      // preview: previewDom,
+      crop: function(e) {
+      }
     });
   }
   creatArr() {
     for (let i = 0; i < 6; i++) {
       this.cropperArr.push(
         {obj: this.crearImg(<HTMLImageElement>document.getElementById('image' + i),
-          '.psbox' + i), returnData: ''}
+          '.psbox' + i), returnData: {'big': '', 'small': '' , 'real': ''}}
       );
     }
   }
   save() {
-    const arr = 'fistimg=' + JSON.stringify(this.cropperArr[0].returnData);
-    const formData = new FormData();
-    formData.append('uploadFile', this.cropperArr[0].returnData);
-    formData.append('uploadFile1', this.cropperArr[1].returnData);
-    formData.append('uploadFile2', this.cropperArr[2].returnData);
-    formData.append('uploadFile3', this.cropperArr[3].returnData);
-    console.log(this.cropperArr);
-    this.userConfigService.uploadit(formData)
+    const panduanJson = [];
+    let imgsUrl = '';
+    for (let i = 0; i < this.cropperArr.length; i++) {
+      panduanJson.push({img : this.cropperArr[i].returnData.big});
+      if (this.cropperArr[i].returnData.big !== '' && this.cropperArr[i].returnData.small !== '') {
+        imgsUrl = imgsUrl + '&img[0].big=' + this.cropperArr[i].returnData.big + '&img[0].small=' + this.cropperArr[i].returnData.small;
+      }
+    }
+    if (!imgsUrl) {
+      this.alertBox.error('您还未上传图片~');
+      return;
+    }
+    if ((panduanJson[0].img !== '' && panduanJson[1].img === '') || (panduanJson[0].img === '' && panduanJson[1].img !== '')) {
+      this.alertBox.error('您少传一张图片~');
+      return;
+    }
+    if ((panduanJson[2].img !== '' && panduanJson[3].img === '') || (panduanJson[2].img === '' && panduanJson[3].img !== '')) {
+      this.alertBox.error('您少传一张图片~');
+      return;
+    }
+    if ((panduanJson[4].img !== '' && panduanJson[5].img === '') || (panduanJson[4].img === '' && panduanJson[5].img !== '')) {
+      this.alertBox.error('您少传一张图片~');
+      return;
+    }
+    const memberCase = '&memberCase.advisorId=' + this.memberCase.advisorId + '&memberCase.memberAge=' + this.memberCase.memberAge
+      + '&memberCase.serviceType=' + this.memberCase.serviceType + '&memberCase.serviceProject='
+      + this.memberCase.serviceProject + '&memberCase.describedResults=' + this.memberCase.describedResults;
+    console.log(imgsUrl);
+    console.log(memberCase);
+    this.userConfigService.uploadit(memberCase + imgsUrl)
       .subscribe((data) => {
         this.alertBox.close();
         if (data['result']) {
@@ -89,5 +135,7 @@ export class UploadComponent implements OnInit {
     return new File([u8arr], filename, {type: mime});
   }
 
-
+  choseType(type) {
+    this.memberCase.serviceType = type;
+  }
 }

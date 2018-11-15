@@ -4,11 +4,12 @@
   bottom: 0;
   top: 0;
   right: 0;
-  z-index: 3;
+  z-index: 6;
   background: #000;
   flex-direction: column;
   align-items: center;
   display: none;
+  justify-content: center;
 }
 .uploadBox .middleBox{
   width: 7.5rem;
@@ -20,20 +21,45 @@
   height: 100%;
 }
 
+.lookBox{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  z-index: 6;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.lookBox .middleBox{
+  width: 7.5rem;
+  height: 10rem;
+}
+.lookBox .middleBox img{
+  display: block;
+  width: 7.5rem;
+  height: 100%;
+}
+
 .show{
   display: flex !important;
 }
 
 .sureBtn{
-  width: 1rem;
   height: 0.5rem;
-  background: #FFF;
-  border-radius: 0.05rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 0.2rem;
+  font-size: 0.3rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  color: #FFF;
+  letter-spacing: 0.1rem;
 }
 
 .uploadInput{
@@ -46,13 +72,13 @@
   z-index: 2;
 }
 .photoList{
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  width: 0.88rem;
+  height: 1.5rem;
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: 3;
+  display: flex;
 }
 
 /*************************************************************************/
@@ -80,6 +106,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 0.2rem;
+  padding: 0.15rem;
 }
 .inputList span{
   color: #333333;
@@ -90,6 +117,8 @@
   height: 0.5rem;
   border: 1px solid #e7cd94;
   border-radius: 0.2rem;
+  font-size: 0.24rem;
+  outline: none;
 }
 .inputList .fwBox{
   width: 5rem;
@@ -110,6 +139,11 @@
   font-size: 0.24rem;
   color: #737373;
 }
+.tipsSel{
+  border: 1px solid #e7cc94 !important;
+  background: #e7cc94 !important;
+  color: #FFF !important;
+}
 .photoBox{
   width: 6.95rem;
   display: flex;
@@ -127,15 +161,29 @@
 }
 .photoLists{
   width: 1.32rem;
-  height: 1.7rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+}
+.photoLists .bbsd .delImg{
+  position: absolute;
+  width: 0.3rem;
+  height: 0.3rem;
+  background: #ecedef;
+  color: #e9cf92;
+  font-size: 0.3rem;
+  line-height: 0.25rem;
+  text-align: center;
+  z-index: 4;
+  right: -0.1rem;
+  top: -0.1rem;
+  border-radius: 0.3rem;
 }
 
 .photoLists .photoCon{
-  width: 1.3rem;
-  height: 1.35rem;
+  width: 0.88rem;
+  height: 1.5rem;
   border: 1px solid #eeeeee;
   border-radius: 0.1rem;
   display: flex;
@@ -169,6 +217,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 .hide{
   display: none;
@@ -222,6 +271,7 @@
   border: 1px solid #e5e5e5;
   border-radius: 0.1rem;
   overflow: hidden;
+  margin-top: 0.15rem;
 }
 .memoBox textarea{
   resize: none;
@@ -229,9 +279,9 @@
   outline: none;
   width: 100%;
   height: 100%;
-  padding: 0.1rem;
+  padding: 0.15rem;
   color: #737373;
-  font-size: 0.2rem;
+  font-size: 0.25rem;
 }
 .saveBtn{
   width: 6.95rem;
@@ -247,6 +297,6 @@
   left: 50%;
   margin-left: -3.5rem;
   bottom: 0.4rem;
-  z-index: 9;
+  z-index: 2;
   border-radius: 0.1rem;
 }
