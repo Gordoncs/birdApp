@@ -90,7 +90,8 @@ export class UploadComponent implements OnInit {
     for (let i = 0; i < this.cropperArr.length; i++) {
       panduanJson.push({img : this.cropperArr[i].returnData.big});
       if (this.cropperArr[i].returnData.big !== '' && this.cropperArr[i].returnData.small !== '') {
-        imgsUrl = imgsUrl + '&img[0].big=' + this.cropperArr[i].returnData.big + '&img[0].small=' + this.cropperArr[i].returnData.small;
+        imgsUrl = imgsUrl + '&caseBean.img[' + i + '].big=' + this.cropperArr[i].returnData.big
+          + '&caseBean.img[' + i + '].small=' + this.cropperArr[i].returnData.small;
       }
     }
     if (!imgsUrl) {
@@ -109,9 +110,10 @@ export class UploadComponent implements OnInit {
       this.alertBox.error('您少传一张图片~');
       return;
     }
-    const memberCase = '&memberCase.advisorId=' + this.memberCase.advisorId + '&memberCase.memberAge=' + this.memberCase.memberAge
-      + '&memberCase.serviceType=' + this.memberCase.serviceType + '&memberCase.serviceProject='
-      + this.memberCase.serviceProject + '&memberCase.describedResults=' + this.memberCase.describedResults;
+    const memberCase = 'caseBean.memberCase.advisorId=' + this.memberCase.advisorId + '&caseBean.memberCase.memberAge=' +
+      this.memberCase.memberAge + '&caseBean.memberCase.serviceType=' + this.memberCase.serviceType +
+      '&caseBean.memberCase.serviceProject=' + this.memberCase.serviceProject +
+      '&caseBean.memberCase.describedResults=' + this.memberCase.describedResults;
     console.log(imgsUrl);
     console.log(memberCase);
     this.userConfigService.uploadit(memberCase + imgsUrl)

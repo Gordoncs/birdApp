@@ -13,6 +13,9 @@ import {AlertboxComponent} from '../alertbox/alertbox.component';
 })
 export class IndexComponent implements OnInit, AfterViewInit {
   public indexInfo: any;
+  public carouselarr = [];
+  public carefullyarr = [];
+  public personIntroduce = [];
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -96,6 +99,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         this.alertBox.close();
         if (data['result']) {
           this.indexInfo = data['data'];
+          this.personIntroduce = this.indexInfo['this.indexInfo'];
           const carefullyarr = [];
           const carouselarr = [];
           // 处理精选内容
@@ -109,7 +113,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
             };
             carefullyarr.push(obj);
           }
-          this.indexInfo['carefully'] = carefullyarr;
+          this.carefullyarr = carefullyarr;
           // 处理滚动图片
           for (let i = 0; i < this.indexInfo['carousel'].length; i++) {
             let url = this.indexInfo['carousel'][i];
@@ -121,7 +125,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
             };
             carouselarr.push(obj);
           }
-          this.indexInfo['carousel'] = carouselarr;
+          this.carouselarr = carouselarr;
           // 处理店铺信息
           localStorage.setItem('storeInfo', JSON.stringify(this.indexInfo['storeInfo']));
         } else {

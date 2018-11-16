@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'cart', component: ShopcarComponent},
   { path: 'paysure/:skuId', component: PaysureComponent},
   { path: 'justpay', component: JustpayComponent},
-  { path: 'paystatus', component: PaystausComponent},
+  { path: 'paystatus/:status', component: PaystausComponent},
   { path: 'myindex', component: MyindexComponent},
   { path: 'myorder', component: MyorderComponent},
   { path: 'orderdetail', component: OrderdetailComponent},

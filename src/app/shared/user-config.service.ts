@@ -44,8 +44,8 @@ export class UserConfigService {
   /**
    * 公共地址
    */
-  // configUrl = 'http://mp.needai.com';
-  configUrl = 'http://47.105.65.44:9000';
+  configUrl = 'http://mp.needai.com';
+  // configUrl = 'http://47.105.65.44:9000';
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -192,14 +192,14 @@ export class UserConfigService {
    * 商品订单结算下单
    */
   checkoutAdd(sku: any, type: any, order: any, bean: any): Observable<any> {
-    // const params = 'sku=' + sku + '&type=' + type + '&order.memberId=' + order.memberId +
-    //   '&order.storeId=' + order.storeId + '&order.orderRemark=' + order.orderRemark +
-    //   '&order.subscribePhone=' + order.subscribePhone + '&order.linkman=' + order.linkman +
-    //   '&order.discountPriceAmout=' + order.discountPriceAmout + '&bean.id=' + bean.id + '&bean.authCode=' + bean.authCode;
-    const params = 'sku=' + sku + '&type=' + type + '&memberId=' + order.memberId +
-      '&storeId=' + order.storeId + '&orderRemark=' + order.orderRemark +
-      '&subscribePhone=' + order.subscribePhone + '&linkman=' + order.linkman +
-      '&discountPriceAmout=' + order.discountPriceAmout + '&id=' + bean.id + '&authCode=' + bean.authCode;
+    const params = 'sku=' + sku + '&type=' + type + '&order.memberId=' + order.memberId +
+      '&order.storeId=' + order.storeId + '&order.orderRemark=' + order.orderRemark +
+      '&order.subscribePhone=' + order.subscribePhone + '&order.linkman=' + order.linkman +
+      '&order.discountPriceAmout=' + order.discountPriceAmout + '&bean.id=' + bean.id + '&bean.authCode=' + bean.authCode;
+    // const params = 'sku=' + sku + '&type=' + type + '&memberId=' + order.memberId +
+    //   '&storeId=' + order.storeId + '&orderRemark=' + order.orderRemark +
+    //   '&subscribePhone=' + order.subscribePhone + '&linkman=' + order.linkman +
+    //   '&discountPriceAmout=' + order.discountPriceAmout + '&id=' + bean.id + '&authCode=' + bean.authCode;
     return this.http.post(this.configUrl + '/checkout/add', params, this.headoptionsPost)
       .pipe(
         retry(1),
@@ -209,8 +209,8 @@ export class UserConfigService {
   /**
    * 发起微信支付请求
    */
-  paymentWechatPrepay(orderNo: any): Observable<any> {
-    return this.http.get(this.configUrl + '/payment/wechat/prepay', this.headoptions)
+  paymentWechatPrepay(orderNo: string): Observable<any> {
+    return this.http.get(this.configUrl + '/payment/wechat/prepay?orderNo=' + orderNo, this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

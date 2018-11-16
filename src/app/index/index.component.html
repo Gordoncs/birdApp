@@ -12,7 +12,7 @@
     <div class="headSwiper">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div *ngFor="let item of indexInfo['carousel']" class="swiper-slide" [routerLink]="['/specialgoods']">
+          <div *ngFor="let item of carouselarr" class="swiper-slide" [routerLink]="['/specialgoods']">
             <img  src="{{item.imgs}}" alt="">
           </div>
         </div>
@@ -31,7 +31,7 @@
     </div>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div *ngFor="let item of indexInfo['carefully'] let i = index" class="swiper-slide" (click)="goDetail(item.id)">
+        <div *ngFor="let item of carefullyarr let i = index" class="swiper-slide" (click)="goDetail(item.id)">
           <img src="{{item.imgs}}" alt="">
         </div>
       </div>
@@ -42,7 +42,7 @@
   </div>
 
   <div class="serveBox">
-    <div *ngFor="let person of indexInfo['personIntroduce'] " class="serveList">
+    <div *ngFor="let person of personIntroduce " class="serveList">
       <div class="servehead">
         <div class="line"></div>
         <div class="person">
@@ -54,7 +54,7 @@
         <img src="{{person.headIcon}}" alt="">
       </div>
       <div class="exImg">
-        <div class="exlist" *ngFor="let imgs of person['casePictureArr']">
+        <div class="exlist" *ngFor="let imgs of person.casePictureArr">
           <img src="{{imgs}}" alt="">
         </div>
       </div>

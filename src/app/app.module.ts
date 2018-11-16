@@ -57,7 +57,7 @@ import { SpecialgoodsComponent } from './specialgoods/specialgoods.component';
   ],
   providers: [
     UserConfigService,
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    // { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })

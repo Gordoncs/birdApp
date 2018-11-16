@@ -16,6 +16,9 @@
     <div class="inputBox">
       <span>付款金额：</span><input type="number">
     </div>
+    <div class="inputBox">
+      <span>订单号：</span><input [(ngModel)]="orderNo" type="text">
+    </div>
     <div class="textBox" >
       <span style="margin-left: 0.1rem">优惠方式：</span>
       <div class="cheapBox">
@@ -31,5 +34,6 @@
       <span class="s2">￥10380.00</span>
     </div>
   </div>
-  <div class="saveBtn">完成本次服务</div>
+  <div class="saveBtn" (click)="wxpay()">完成本次服务</div>
 </div>
+<app-alertbox></app-alertbox>

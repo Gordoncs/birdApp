@@ -17,10 +17,6 @@ const configWeixin = function () {
   const data = JSON.parse(this.response);
   if (data.result.success) {
     console.log(data) ;
-    alert('appId:' + data.result.data.appId);
-    alert('timestamp:' + data.result.data.timestamp);
-    alert('nonceStr:' + data.result.data.noncestr);
-    alert('signature:' + data.result.data.signature);
     wx.config({
       debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
       appId: data.result.data.appId, // 必填，公众号的唯一标识
@@ -29,8 +25,10 @@ const configWeixin = function () {
       signature: data.result.data.signature, // 必填，签名
       jsApiList: ['checkJsApi', 'scanQRCode', 'getLocation', 'uploadImage', 'chooseImage', 'chooseWXPay'] // 必填，需要使用的JS接口列表
     });
-    platformBrowserDynamic().bootstrapModule(AppModule)
-      .catch(err => console.error(err));
+    wx.ready(function() {
+      platformBrowserDynamic().bootstrapModule(AppModule)
+        .catch(err => console.error(err));
+    });
   } else {
     window.location.href = data.result.data;
   }
