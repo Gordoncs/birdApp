@@ -34,6 +34,8 @@ export class UploadComponent implements OnInit {
     this.indexNow = index;
     this.isshow = true;
     // this.previewDomNow = '.psbox' + index;
+    alert(window.URL.createObjectURL($event.path[0].files[0]));
+    $('#ssss').text(window.URL.createObjectURL($event.path[0].files[0]));
     this.cropperArr[index].obj.replace(window.URL.createObjectURL($event.path[0].files[0])) ;
     console.log(window.URL.createObjectURL($event.path[0].files[0]));
   }
@@ -79,7 +81,7 @@ export class UploadComponent implements OnInit {
   creatArr() {
     for (let i = 0; i < 6; i++) {
       this.cropperArr.push(
-        {obj: this.crearImg(<HTMLImageElement>document.getElementById('image' + i),
+        {obj: this.crearImg(document.getElementById('image' + i),
           '.psbox' + i), returnData: {'big': '', 'small': '' , 'real': ''}}
       );
     }
