@@ -207,6 +207,16 @@ export class UserConfigService {
       );
   }
   /**
+   * 发起微信支付请求
+   */
+  paymentWechatPrepay(orderNo: any): Observable<any> {
+    return this.http.get(this.configUrl + '/payment/wechat/prepay', this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+  /**
    * 上传
    */
   uploadit(param: any): Observable<any> {
