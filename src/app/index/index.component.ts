@@ -4,14 +4,14 @@ import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
-
+import wx from 'weixin-js-sdk';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent implements OnInit, AfterViewInit {
+export class IndexComponent implements OnInit {
   public indexInfo: any;
   public storeInfo = {
     'name': ''
@@ -24,30 +24,12 @@ export class IndexComponent implements OnInit, AfterViewInit {
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private userConfigService: UserConfigService) {
   }
-  ngAfterViewInit() {
-    const mySwiper = new Swiper('.headSwiper .swiper-container', {
-      loop: true, // 循环模式选项
-      autoplay: true,
-      // 如果需要分页器
-      pagination: {
-        el: '.swiper-pagination',
-        bulletClass: 'bullets',
-        bulletActiveClass: 'my-bullet-active',
-      },
-    });
-    const sideScrollBox = new Swiper('.sideScrollBox .swiper-container', {
-      slidesPerView: 'auto',
-      spaceBetween: 30,
-    });
+
+  ngOnInit() {
     /***
      * 设置title
      */
     this.titleService.setTitle('春鸟科美');
-
-  }
-
-  ngOnInit() {
-
     /***
      * 懒加载图片
      */
@@ -77,15 +59,24 @@ export class IndexComponent implements OnInit, AfterViewInit {
       }
     };
     // 获取首页数据
-    this.getInfo();
+    const that = this;
+    wx.getLocation({
+      type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+      success: function (res) {
+        that.getInfo(res.latitude, res.longitude);
+      }
+    });
+    // that.getInfo(39.91474, 116.37333);
+
   }
 
   gotopFn(): void {
     document.documentElement.scrollTop = 0;
   }
-  getInfo() {
+  getInfo(latitude , longitude) {
+    const that = this;
     this.alertBox.load();
-    this.userConfigService.indexView()
+    this.userConfigService.indexView(latitude, longitude)
       .subscribe((data) => {
         this.alertBox.close();
         if (data['result']) {
@@ -120,6 +111,9 @@ export class IndexComponent implements OnInit, AfterViewInit {
           // 处理店铺信息
           localStorage.setItem('storeInfo', JSON.stringify(this.indexInfo['storeInfo']));
           this.storeInfo = this.indexInfo['storeInfo'];
+          setTimeout(function () {
+            that.scrollFn();
+          }, 100);
         } else {
           this.alertBox.error(data['message']);
         }
@@ -128,5 +122,21 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
   goDetail(id: any) {
     this.router.navigate(['/goodsdetail', id]);
+  }
+  scrollFn() {
+    const mySwiper = new Swiper('.headSwiper .swiper-container', {
+      loop: true, // 循环模式选项
+      autoplay: true,
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination',
+        bulletClass: 'bullets',
+        bulletActiveClass: 'my-bullet-active',
+      },
+    });
+    const sideScrollBox = new Swiper('.sideScrollBox .swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 30,
+    });
   }
 }

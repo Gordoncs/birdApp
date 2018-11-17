@@ -33,7 +33,7 @@ const configWeixin = function () {
     window.location.href = data.result.data;
   }
 };
-alert('16.25版本');
+alert('23.40版本');
 xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
@@ -65,7 +65,7 @@ localStorage.setItem('channel', 'wxH5');
 localStorage.setItem('language', 'zh_cn');
 
 
-
+// localStorage.setItem('memberId', '3');
 
 
 

@@ -3,6 +3,7 @@ import {ActivatedRoute, Params , Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import {TongxinService} from './shared/tongxin.service';
 import {UserConfigService} from './shared/user-config.service';
+import wx from 'weixin-js-sdk';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
     this.getCartNum();
     // 获取用户信息
     this.getbaseMember();
+    // this.cartGetCartDetailNumber();
   }
   cartGetCartDetailNumber() {
     const memberId = localStorage.getItem('memberId');

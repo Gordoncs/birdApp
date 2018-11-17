@@ -78,16 +78,7 @@ export class UserConfigService {
   /**
    * 首页数据
    */
-  indexView(): Observable<any> {
-    let latitude = 39.91474;
-    let longitude = 116.37333;
-    wx.getLocation({
-      type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-      success: function (res) {
-         latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-         longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-      }
-    });
+  indexView(latitude: any, longitude: any): Observable<any> {
     return this.http.get(this.configUrl + '/indexView?longitude=' + longitude + '&latitude=' + latitude, this.headoptions)
       .pipe(
         retry(1),
@@ -186,6 +177,18 @@ export class UserConfigService {
   checkoutInfo(memberId: any, storeId: any, skuId: any): Observable<any> {
     const params = '?memberId=' + memberId + '&storeId=' + storeId + '&sku=' + skuId ;
     return this.http.get(this.configUrl + '/checkout/info' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 立即购买
+   */
+  checkoutOutrightPurchase(memberId: any, storeId: any, type: any, skuId: any): Observable<any> {
+    const params = 'memberId=' + memberId + '&storeId=' + storeId + '&type=' + type + '&sku=' + skuId ;
+    return this.http.post(this.configUrl + '/checkout/outrightPurchase', params, this.headoptionsPost)
       .pipe(
         retry(1),
         catchError(this.handleError),

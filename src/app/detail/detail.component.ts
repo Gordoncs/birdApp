@@ -123,4 +123,13 @@ export class DetailComponent implements OnInit, AfterViewInit {
         }
       });
   }
+  goPaysure() {
+    const skuIdArr = [];
+    const skuId = this.choseSku['id'];
+    if (!skuId) {
+      this.alertBox.error('请选择产品');
+      return;
+    }
+    this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId)}]);
+  }
 }

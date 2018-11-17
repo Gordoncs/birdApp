@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full'},
   { path: 'index', component: IndexComponent},
   { path: 'cart', component: ShopcarComponent},
-  { path: 'paysure/:skuId', component: PaysureComponent},
+  { path: 'paysure', component: PaysureComponent},
   { path: 'justpay', component: JustpayComponent},
   { path: 'paystatus/:status', component: PaystausComponent},
   { path: 'myindex', component: MyindexComponent},

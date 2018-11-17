@@ -12,6 +12,7 @@ import wx from 'weixin-js-sdk';
 })
 export class PaysureComponent implements OnInit {
   public skuArr: any;
+  public fromData: any;
   public paySureInfo: any;
   public allMoney = 0;
   public order = {
@@ -37,18 +38,44 @@ export class PaysureComponent implements OnInit {
      * 设置title
      */
     this.titleService.setTitle('支付确认');
-
-    this.routerInfo.params.subscribe((params) => this.skuArr = params['skuId']);
-
-    this.checkoutInfo();
+    this.routerInfo.params.subscribe((params) =>
+      this.fromData = params
+    );
+    console.log(this.fromData);
+    this.skuArr = this.fromData['skuIdArr'];
+    if (this.fromData['from'] === 'shopcart') {
+      this.checkoutInfo();
+    } else if (this.fromData['from'] === 'detail') {
+      this.checkoutOutrightPurchase();
+    }
   }
 
   checkoutInfo() {
     const memberId = localStorage.getItem('memberId');
     const storeId = JSON.parse(localStorage.getItem('storeInfo'))['id'];
-    const skuId = JSON.parse(this.skuArr);
+    const skuId = this.skuArr;
     this.alertBox.load();
     this.userConfigService.checkoutInfo(memberId, storeId, skuId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.paySureInfo = data['data'];
+        this.order.subscribePhone = this.paySureInfo.hisMobile;
+        this.order.linkman = this.paySureInfo.hisName;
+        this.getAllMoney();
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+
+  checkoutOutrightPurchase() {
+    const memberId = localStorage.getItem('memberId');
+    const storeId = JSON.parse(localStorage.getItem('storeInfo'))['id'];
+    const type = 0;
+    const skuId = this.skuArr;
+    this.alertBox.load();
+    this.userConfigService.checkoutOutrightPurchase(memberId, storeId, type, skuId).
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
