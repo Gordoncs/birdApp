@@ -1,8 +1,8 @@
 import {Injectable, ViewChild} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
-import {catchError, map, retry} from 'rxjs/operators';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
-
+import {catchError, map, retry, tap} from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import wx from 'weixin-js-sdk';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,16 +20,7 @@ export class UserConfigService {
       'Content-Type': 'application/json',
     })
   };
-  headoptionsPostForm = {
-    headers: new HttpHeaders({
-      'os': localStorage.getItem('os'),
-      'osVersion': localStorage.getItem('osVersion'),
-      'channel': localStorage.getItem('channel'),
-      'language': localStorage.getItem('language'),
-      'Content-Type': 'multipart/form-data',
-      // 'Accept': 'application/json'
-    })
-  };
+
   headoptionsPost = {
     headers: new HttpHeaders({
       'os': localStorage.getItem('os'),
@@ -37,8 +28,6 @@ export class UserConfigService {
       'channel': localStorage.getItem('channel'),
       'language': localStorage.getItem('language'),
       'Content-Type': 'application/x-www-form-urlencoded'
-      // 'Content-Type': 'multipart/form-data',
-      // 'Accept': 'application/json'
     })
   };
   /**
@@ -46,8 +35,16 @@ export class UserConfigService {
    */
   configUrl = 'http://mp.needai.com';
   // configUrl = 'http://47.105.65.44:9000';
-
+  /**
+   * 判断no auth进行地址跳转
+   */
+  private canGoHref(data: any) {
+    if (data.result.message === 'no auth') {
+      window.location.href = data.result.data;
+    }
+  }
   private handleError(error: HttpErrorResponse) {
+    console.log(error);
     if (error.error instanceof ErrorEvent) {
       // 出现客户端或网络错误.
       console.log(error.error.message);
@@ -57,9 +54,9 @@ export class UserConfigService {
       // 反应体可能包含错误的线索,
       const text = 'code:' + error.error.status + ',' + error.error.error;
       console.log(text);
-      // console.error(
-      //   `Backend returned code ${error.status}, ` +
-      //   `body was: ${error.error}`);
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
     return throwError(
@@ -74,17 +71,28 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/base/member', this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
   /**
    * 首页数据
    */
   indexView(): Observable<any> {
-    return this.http.get(this.configUrl + '/indexView?longitude=116.37333&latitude=39.91474', this.headoptions)
+    let latitude = 39.91474;
+    let longitude = 116.37333;
+    wx.getLocation({
+      type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+      success: function (res) {
+         latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+         longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+      }
+    });
+    return this.http.get(this.configUrl + '/indexView?longitude=' + longitude + '&latitude=' + latitude, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
 
@@ -95,7 +103,8 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/getGoodsInfo?goodsId=' + goodsId + '&storeId=' + storeId, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
 
@@ -106,7 +115,8 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/getOnSalesGoods', this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
 
@@ -118,20 +128,9 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/cart/add' + params, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
-    // return this.http.post(this.configUrl + '/cart/add',   JSON.stringify({ params: params} ), this.headoptions)
-    //   .pipe(
-    //     retry(1),
-    //     catchError(this.handleError)
-    //   );
-
-    // const body =  'FormData1=' + 'onetap' + '&FormData2=' + '123456';
-    // return this.http.post(this.configUrl + '/cart/add', body, this.headoptionsPost)
-    //   .pipe(
-    //     retry(1),
-    //     catchError(this.handleError)
-    //   );
   }
   /**
    * 获取购物车数量
@@ -141,7 +140,8 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/cart/getCartDetailNumber' + params, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
   /**
@@ -152,7 +152,8 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/cart/getCart' + params, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
   /**
@@ -163,7 +164,8 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/cart/changeGoodsNumber' + params, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
   /**
@@ -174,7 +176,8 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/cart/delCartGoods' + params, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
   /**
@@ -185,7 +188,8 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/checkout/info' + params, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
   /**
@@ -203,7 +207,8 @@ export class UserConfigService {
     return this.http.post(this.configUrl + '/checkout/add', params, this.headoptionsPost)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
   /**
@@ -213,7 +218,8 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/payment/wechat/prepay?orderNo=' + orderNo, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
   /**
@@ -223,7 +229,8 @@ export class UserConfigService {
     return this.http.post(this.configUrl + '/advisor/saveMemberCase', param, this.headoptionsPost)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
   /**
@@ -245,7 +252,8 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/getMemberInfluenceList' + params, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
   /**
@@ -256,7 +264,8 @@ export class UserConfigService {
     return this.http.get(this.configUrl + '/getMemberActivityRecordList' + params, this.headoptions)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
       );
   }
 

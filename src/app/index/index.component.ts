@@ -13,6 +13,9 @@ import {AlertboxComponent} from '../alertbox/alertbox.component';
 })
 export class IndexComponent implements OnInit, AfterViewInit {
   public indexInfo: any;
+  public storeInfo = {
+    'name': ''
+  };
   public carouselarr = [];
   public carefullyarr = [];
   public personIntroduce = [];
@@ -75,23 +78,10 @@ export class IndexComponent implements OnInit, AfterViewInit {
     };
     // 获取首页数据
     this.getInfo();
-    // 获取用户信息
-    this.getbaseMember();
   }
 
   gotopFn(): void {
     document.documentElement.scrollTop = 0;
-  }
-  getbaseMember() {
-    this.userConfigService.baseMember()
-      .subscribe((data) => {
-        if (data['result']) {
-          localStorage.setItem('memberInfo', data['data']);
-          localStorage.setItem('memberId', data['data']['memberId']);
-        } else {
-          this.alertBox.error(data['message']);
-        }
-      });
   }
   getInfo() {
     this.alertBox.load();
@@ -100,7 +90,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         this.alertBox.close();
         if (data['result']) {
           this.indexInfo = data['data'];
-          this.personIntroduce = this.indexInfo['this.indexInfo'];
+          this.personIntroduce = this.indexInfo['personIntroduce'];
           const carefullyarr = [];
           const carouselarr = [];
           // 处理精选内容
@@ -129,6 +119,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
           this.carouselarr = carouselarr;
           // 处理店铺信息
           localStorage.setItem('storeInfo', JSON.stringify(this.indexInfo['storeInfo']));
+          this.storeInfo = this.indexInfo['storeInfo'];
         } else {
           this.alertBox.error(data['message']);
         }

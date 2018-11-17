@@ -33,9 +33,11 @@ const configWeixin = function () {
     window.location.href = data.result.data;
   }
 };
+alert('16.25版本');
 xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
+
 // platformBrowserDynamic().bootstrapModule(AppModule)
 //   .catch(err => console.error(err));
 /**

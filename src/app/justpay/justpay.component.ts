@@ -11,7 +11,7 @@ import wx from 'weixin-js-sdk';
   styleUrls: ['./justpay.component.css']
 })
 export class JustpayComponent implements OnInit {
-  orderNo = '15419898898701503418';
+  orderInfo: any;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -20,11 +20,13 @@ export class JustpayComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('支付确认');
+    this.routerInfo.params.subscribe((params) => this.orderInfo = params);
+    console.log(this.orderInfo);
   }
   wxpay() {
-    console.log(this.orderNo);
+    console.log(this.orderInfo.orderNo);
     this.alertBox.load();
-    this.userConfigService.paymentWechatPrepay(this.orderNo).
+    this.userConfigService.paymentWechatPrepay(this.orderInfo.orderNo).
     subscribe(data => {
       console.log(data);
       this.alertBox.close();

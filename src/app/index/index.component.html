@@ -4,7 +4,7 @@
       <div class="searchBox"></div>
       <div class="searchBoxText"  [routerLink]="['/address']">
         <img class="icon" src="./assets/image/location.png" alt="">
-        <span class="name">{{indexInfo['storeInfo'].name}}</span>
+        <span class="name">{{storeInfo.name}}</span>
         <span class="arrow">></span>
       </div>
     </div>
@@ -20,7 +20,7 @@
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <div class="payBox" [routerLink]="['/justpay']">
+    <div class="payBox" [routerLink]="['/justpay', {'allMoney': 100, 'orderNo': '123'}]">
       <img src="./assets/image/payIcon.png" alt="">
     </div>
   </div>

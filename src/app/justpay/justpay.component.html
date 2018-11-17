@@ -14,10 +14,10 @@
   </div>
   <div class="userInfo">
     <div class="inputBox">
-      <span>付款金额：</span><input type="number">
+      <span>付款金额：</span><input type="number" [(ngModel)]="orderInfo.allMoney">
     </div>
     <div class="inputBox">
-      <span>订单号：</span><input [(ngModel)]="orderNo" type="text">
+      <span>订单号：</span><input [(ngModel)]="orderInfo.orderNo" type="text">
     </div>
     <div class="textBox" >
       <span style="margin-left: 0.1rem">优惠方式：</span>
@@ -31,7 +31,7 @@
     </div>
     <div class="price">
       <span class="s1">应付金额:</span>
-      <span class="s2">￥10380.00</span>
+      <span class="s2">￥{{orderInfo.allMoney | number:'2.2-2'}}</span>
     </div>
   </div>
   <div class="saveBtn" (click)="wxpay()">完成本次服务</div>
