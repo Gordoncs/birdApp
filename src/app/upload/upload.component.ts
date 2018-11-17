@@ -33,11 +33,8 @@ export class UploadComponent implements OnInit {
   getImgUrl($event, index) {
     this.indexNow = index;
     this.isshow = true;
-    // this.previewDomNow = '.psbox' + index;
-    alert(window.URL.createObjectURL($event.path[0].files[0]));
-    $('#ssss').text(window.URL.createObjectURL($event.path[0].files[0]));
-    this.cropperArr[index].obj.replace(window.URL.createObjectURL($event.path[0].files[0])) ;
-    console.log(window.URL.createObjectURL($event.path[0].files[0]));
+    this.cropperArr[index].obj.replace(window.URL.createObjectURL($event.srcElement['files'][0])) ;
+    console.log(window.URL.createObjectURL($event.srcElement['files'][0]));
   }
   delImg(item, index) {
     item.returnData.real = '';

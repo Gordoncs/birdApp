@@ -36,7 +36,8 @@ const configWeixin = function () {
 xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
-
+// platformBrowserDynamic().bootstrapModule(AppModule)
+//   .catch(err => console.error(err));
 /**
  * 获取当前用户公共信息
  * 取值方式为：
@@ -61,7 +62,7 @@ if (md.os() === 'iOS') {
 localStorage.setItem('channel', 'wxH5');
 localStorage.setItem('language', 'zh_cn');
 
-localStorage.setItem('memberId', '3');
+
 
 
 

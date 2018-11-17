@@ -87,6 +87,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       .subscribe((data) => {
         if (data['result']) {
           localStorage.setItem('memberInfo', data['data']);
+          localStorage.setItem('memberId', data['data']['memberId']);
         } else {
           this.alertBox.error(data['message']);
         }

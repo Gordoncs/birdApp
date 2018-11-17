@@ -1,6 +1,7 @@
 <div class="topBox">
-  <img src="./assets/image/paySuccess.png" alt="">
-  <div *ngIf="status" class="baseBox">
+  <img *ngIf="status=='true'" src="./assets/image/paySuccess.png" alt="">
+  <img *ngIf="status=='false'" src="./assets/image/payError.png" alt="">
+  <div *ngIf="status=='true'" class="baseBox">
     <div class="left">
       <img class="tiyan" src="./assets/image/tiyan398.png" alt="">
     </div>
@@ -13,7 +14,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="status" class="baseBox">
+  <div *ngIf="status=='true'" class="baseBox">
     <div class="left">
       <div class="iconBox">
         <img src="./assets/image/qrEx.png" alt="">
@@ -29,7 +30,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="status" class="sideScrollBox">
+  <div *ngIf="status=='true'" class="sideScrollBox">
     <div class="heads">
       <img src="./assets/image/zhuanshuIcon.png" alt="">
     </div>
@@ -41,7 +42,7 @@
     </div>
   </div>
 
-  <div *ngIf="!status" class="errorBox">
+  <div *ngIf="status=='false'" class="errorBox">
     <p>抱歉亲爱的</p>
     <p>本次付款未成功</p>
     <p>请重新支付</p>

@@ -10,7 +10,7 @@ import {TongxinService} from '../shared/tongxin.service';
   styleUrls: ['./paystaus.component.css']
 })
 export class PaystausComponent implements OnInit {
-  public status = false;
+  public status = 'false';
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 

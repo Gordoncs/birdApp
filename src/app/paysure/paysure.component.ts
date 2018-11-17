@@ -103,15 +103,18 @@ export class PaysureComponent implements OnInit {
           success: function (res) {
             console.log('success方法:' + res);
             this.alertBox.success('支付成功');
+            this.router.navigate(['/paystatus', true]);
           },
           error: function (res) {
             console.log('error方法:' + res);
             this.alertBox.error('支付失败');
+            this.router.navigate(['/paystatus', false]);
           }
         });
 
       } else {
         this.alertBox.error(data['message']);
+        this.router.navigate(['/paystatus', false]);
       }
     });
   }
