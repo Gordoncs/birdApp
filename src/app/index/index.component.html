@@ -12,7 +12,7 @@
     <div class="headSwiper">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div *ngFor="let item of carouselarr" class="swiper-slide" [routerLink]="['/specialgoods']">
+          <div *ngFor="let item of carouselarr" class="swiper-slide" (click)="carouselGoto(item)" [routerLink]="['/specialgoods']">
             <img  src="{{item.imgs}}" alt="">
           </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <div class="payBox" [routerLink]="['/justpay', {'allMoney': 100, 'orderNo': '123'}]">
+    <div class="payBox" [routerLink]="['/justpay', {'allMoney': 0, 'orderNo': '', 'from':'index'}]">
       <img src="./assets/image/payIcon.png" alt="">
     </div>
   </div>

@@ -66,7 +66,7 @@ export class IndexComponent implements OnInit {
         that.getInfo(res.latitude, res.longitude);
       }
     });
-    that.getInfo(39.91474, 116.37333);
+    // that.getInfo(39.91474, 116.37333);
 
   }
 
@@ -138,5 +138,16 @@ export class IndexComponent implements OnInit {
       slidesPerView: 'auto',
       spaceBetween: 30,
     });
+  }
+  carouselGoto(item) {
+    if (item.type === '1') {
+      this.router.navigate(['/goodsdetail', item.id]);
+    }
+    if (item.type === '2') {
+      this.router.navigate(['/specialgoods']);
+    }
+    if (item.type === '3') {
+      alert('跳转体验商品分享页');
+    }
   }
 }

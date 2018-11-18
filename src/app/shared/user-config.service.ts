@@ -33,8 +33,8 @@ export class UserConfigService {
   /**
    * 公共地址
    */
-  // configUrl = 'http://mp.needai.com';
-  configUrl = 'http://47.105.65.44:9000';
+  configUrl = 'http://mp.needai.com';
+  // configUrl = 'http://47.105.65.44:9000';
   /**
    * 判断no auth进行地址跳转
    */
@@ -196,13 +196,41 @@ export class UserConfigService {
       );
   }
   /**
+   * 金额付款订单结算下单
+   */
+  checkoutAddCashOrder(order: any, discounts: any): Observable<any> {
+    const params = 'order.memberId=' + order.memberId + '&order.storeId=' + order.storeId +
+      '&order.orderPriceAmount=' + order.orderPriceAmount + '&order.discountPriceAmout=' + order.discountPriceAmout +
+      '&discounts.id=' + discounts.id + '&discounts.authCode=' + discounts.authCode;
+    return this.http.post(this.configUrl + '/checkout/addCashOrder', params, this.headoptionsPost)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 扫二维码获取订单优惠
+   */
+  checkoutGetSettleAccountsDiscounts(allMoney: any, discounts: any): Observable<any> {
+    const params = '?discounts.id=' + discounts.id + '&discounts.authCode=' + discounts.authCode +
+      '&discounts.priceAmount=' + allMoney;
+    return this.http.post(this.configUrl + '/checkout/getSettleAccountsDiscounts' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
    * 商品订单结算下单
    */
-  checkoutAdd(sku: any, type: any, order: any, bean: any): Observable<any> {
+  checkoutAdd(sku: any, type: any, order: any, discounts: any): Observable<any> {
     const params = 'sku=' + sku + '&type=' + type + '&order.memberId=' + order.memberId +
       '&order.storeId=' + order.storeId + '&order.orderRemark=' + order.orderRemark +
       '&order.subscribePhone=' + order.subscribePhone + '&order.linkman=' + order.linkman +
-      '&order.discountPriceAmout=' + order.discountPriceAmout + '&bean.id=' + bean.id + '&bean.authCode=' + bean.authCode;
+      '&order.discountPriceAmout=' + order.discountPriceAmout + '&discounts.id=' + discounts.id +
+      '&discounts.authCode=' + discounts.authCode;
     // const params = 'sku=' + sku + '&type=' + type + '&memberId=' + order.memberId +
     //   '&storeId=' + order.storeId + '&orderRemark=' + order.orderRemark +
     //   '&subscribePhone=' + order.subscribePhone + '&linkman=' + order.linkman +
@@ -300,7 +328,7 @@ export class UserConfigService {
    */
   cancelOrder(orderId: any): Observable<any> {
     const params = '?orderId=' + orderId;
-    return this.http.get(this.configUrl + '/cancelOrder' + params, this.headoptions)
+    return this.http.get(this.configUrl + '/order/cancelOrder' + params, this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError),

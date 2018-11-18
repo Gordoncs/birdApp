@@ -26,20 +26,20 @@ const configWeixin = function () {
       jsApiList: ['checkJsApi', 'scanQRCode', 'getLocation', 'uploadImage', 'chooseImage', 'chooseWXPay'] // 必填，需要使用的JS接口列表
     });
     wx.ready(function() {
-      // platformBrowserDynamic().bootstrapModule(AppModule)
-      //   .catch(err => console.error(err));
+      platformBrowserDynamic().bootstrapModule(AppModule)
+        .catch(err => console.error(err));
     });
   } else {
     window.location.href = data.result.data;
   }
 };
-// alert('11.20版本');
+alert('20181118,23:30版本');
 xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+// platformBrowserDynamic().bootstrapModule(AppModule)
+//   .catch(err => console.error(err));
 /**
  * 获取当前用户公共信息
  * 取值方式为：

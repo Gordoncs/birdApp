@@ -1,5 +1,5 @@
 <div class="qRcodeTitle">
-  <img src="./assets/image/qRcodeIcon.png" alt="">
+  <img src="./assets/image/qRcodeIcon.png" (click)="sao()" alt="">
 </div>
 <div class="con">
   <div class="shopInfoBox">
@@ -45,13 +45,13 @@
     <div class="textBox">
       <span>金额合计：</span><span>￥ {{allMoney | number:'2.2-2'}}</span>
     </div>
-    <div class="textBox" style="border-bottom: 1px solid #e5e5e5 ">
+    <div class="textBox" style="border-bottom: 1px solid #e5e5e5 " *ngIf="order.discountPriceAmout>0">
       <span>优惠方式：</span>
       <div class="cheapBox">
         <span class="name">内购券优惠-金永涵</span>
         <div class="name">
-          -2000元
-          <img src="./assets/image/closeIcon.png" alt="">
+          -{{order.discountPriceAmout}}元
+          <img src="./assets/image/closeIcon.png" (click)="clearDiscount()" alt="">
         </div>
       </div>
     </div>
@@ -65,13 +65,13 @@
         </div>
       </div>
     </div>
-    <textarea [ngModel]="order.orderRemark" placeholder="尊客备注：可输入您期望到店时间、或希望专属顾问何时与您联系等要求" class="memoBox"></textarea>
+    <textarea [(ngModel)]="order.orderRemark" placeholder="尊客备注：可输入您期望到店时间、或希望专属顾问何时与您联系等要求" class="memoBox"></textarea>
   </div>
 </div>
 <div class="priceBar">
   <div class="price">
     <span class="s1">应付金额:</span>
-    <span class="s2">￥{{allMoney | number:'2.2-2'}}</span>
+    <span class="s2">￥{{(allMoney*1 - order.discountPriceAmout*1) | number:'2.2-2'}}</span>
   </div>
   <div class="payBtn" (click)="payFn()">立即支付</div>
 </div>

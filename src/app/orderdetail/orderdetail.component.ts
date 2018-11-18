@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
 import {TongxinService} from '../shared/tongxin.service';
 import {MyindexComponent} from '../myindex/myindex.component';
-
+import wx from 'weixin-js-sdk';
 @Component({
   selector: 'app-orderdetail',
   templateUrl: './orderdetail.component.html',
@@ -108,6 +108,40 @@ export class OrderdetailComponent implements OnInit {
     });
   }
   payFn() {
-    this.router.navigate(['/justpay', {'allMoney': this.detailInfo.orderAmountPayable, 'orderNo': this.detailInfo.orderNo}]);
+    this.wxpay(this.detailInfo.orderNo);
+  }
+  wxpay(orderNo) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.paymentWechatPrepay(orderNo).
+    subscribe(data => {
+      console.log(data);
+      this.alertBox.close();
+      if (data['result']) {
+        wx.chooseWXPay({
+          appId: data.paySignMap.appId,
+          timestamp: data.paySignMap.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          nonceStr: data.paySignMap.nonceStr, // 支付签名随机串，不长于 32 位
+          package: data.paySignMap.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+          signType: data.paySignMap.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          paySign: data.paySignMap.paySign, // 支付签名
+          success: function (res) {
+            if (res.errMsg === 'chooseWXPay:ok' ) {
+              t.alertBox.success('支付成功');
+              t.router.navigate(['/paystatus', true]);
+            } else {
+              t.alertBox.success('支付失败');
+              t.router.navigate(['/paystatus', false]);
+            }
+          },
+          cancel: function(res) {
+            t.alertBox.success('取消支付');
+            t.router.navigate(['/paystatus', false]);
+          }
+        });
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
   }
 }

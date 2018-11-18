@@ -4,7 +4,7 @@ import {AlertboxComponent} from '../alertbox/alertbox.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
 import * as $ from 'jquery';
-
+import wx from 'weixin-js-sdk';
 @Component({
   selector: 'app-myorder',
   templateUrl: './myorder.component.html',
@@ -141,7 +141,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
   }
   cancelOrder(item, index, arr) {
     this.alertBox.load();
-    this.userConfigService.cancelOrder(item.orderNo).
+    this.userConfigService.cancelOrder(item.id).
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
@@ -152,6 +152,40 @@ export class MyorderComponent implements OnInit, AfterContentInit {
     });
   }
   payFn(item) {
-    this.router.navigate(['/justpay', {'allMoney': item.orderAmountPayable, 'orderNo': item.orderNo}]);
+    this.wxpay(item.orderNo);
+  }
+  wxpay(orderNo) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.paymentWechatPrepay(orderNo).
+    subscribe(data => {
+      console.log(data);
+      this.alertBox.close();
+      if (data['result']) {
+        wx.chooseWXPay({
+          appId: data.paySignMap.appId,
+          timestamp: data.paySignMap.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          nonceStr: data.paySignMap.nonceStr, // 支付签名随机串，不长于 32 位
+          package: data.paySignMap.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+          signType: data.paySignMap.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          paySign: data.paySignMap.paySign, // 支付签名
+          success: function (res) {
+            if (res.errMsg === 'chooseWXPay:ok' ) {
+              t.alertBox.success('支付成功');
+              t.router.navigate(['/paystatus', true]);
+            } else {
+              t.alertBox.success('支付失败');
+              t.router.navigate(['/paystatus', false]);
+            }
+          },
+          cancel: function(res) {
+            t.alertBox.success('取消支付');
+            t.router.navigate(['/paystatus', false]);
+          }
+        });
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
   }
 }

@@ -23,7 +23,7 @@ export class PaysureComponent implements OnInit {
     'linkman': '',
     'discountPriceAmout': 0,
   };
-  public bean = {
+  public discounts = {
     'id': '',
     'authCode': '',
   };
@@ -41,7 +41,6 @@ export class PaysureComponent implements OnInit {
     this.routerInfo.params.subscribe((params) =>
       this.fromData = params
     );
-    console.log(this.fromData);
     this.skuArr = this.fromData['skuIdArr'];
     if (this.fromData['from'] === 'shopcart') {
       this.checkoutInfo();
@@ -102,16 +101,83 @@ export class PaysureComponent implements OnInit {
     }
     const type = this.paySureInfo.type;
     const order = this.order;
-    const bean = this.bean;
+    const discounts = this.discounts;
     this.alertBox.load();
-    this.userConfigService.checkoutAdd(sku, type, order, bean).
+    this.userConfigService.checkoutAdd(sku, type, order, discounts).
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        this.router.navigate(['/justpay', {'allMoney': this.allMoney, 'orderNo': data.data}]);
+        this.wxpay(data.data);
       } else {
         this.alertBox.error(data['message']);
       }
     });
+  }
+  wxpay(orderNo) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.paymentWechatPrepay(orderNo).
+    subscribe(data => {
+      console.log(data);
+      this.alertBox.close();
+      if (data['result']) {
+        wx.chooseWXPay({
+          appId: data.paySignMap.appId,
+          timestamp: data.paySignMap.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          nonceStr: data.paySignMap.nonceStr, // 支付签名随机串，不长于 32 位
+          package: data.paySignMap.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+          signType: data.paySignMap.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          paySign: data.paySignMap.paySign, // 支付签名
+          success: function (res) {
+            if (res.errMsg === 'chooseWXPay:ok' ) {
+              t.alertBox.success('支付成功');
+              t.router.navigate(['/paystatus', true]);
+            } else {
+              t.alertBox.success('支付失败');
+              t.router.navigate(['/paystatus', false]);
+            }
+          },
+          cancel: function(res) {
+            t.alertBox.success('取消支付');
+            t.router.navigate(['/paystatus', false]);
+          }
+        });
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+
+  sao() {
+    const t = this;
+    wx.scanQRCode({
+      needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+      scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有
+      success: function (res) {
+        const discounts = {
+          'id' : res.resultStr.split('#')[0],
+          'authCode' : res.resultStr.split('#')[1],
+        };
+        t.checkoutGetSettleAccountsDiscounts(t.allMoney, discounts);
+      }
+    });
+  }
+  checkoutGetSettleAccountsDiscounts(allMoney, discounts) {
+    this.alertBox.load();
+    this.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.discounts.id = data['data']['id'];
+        this.discounts.authCode = data['data']['authCode'];
+        this.order.discountPriceAmout = data['data']['discountsMoney'];
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  clearDiscount() {
+    this.discounts.id = '';
+    this.discounts.authCode = '';
+    this.order.discountPriceAmout = 0;
   }
 }

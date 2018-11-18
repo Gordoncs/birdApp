@@ -1,39 +1,39 @@
 <div class="qRcodeTitle">
-  <img src="./assets/image/qRcodeIcon.png" alt="">
+  <img src="./assets/image/qRcodeIcon.png" (click)="sao()" alt="">
 </div>
 <div class="con">
   <div class="shopInfoBox">
     <img class="bg" src="./assets/image/paySureHeadBg.png" alt="">
     <div class="shopInfoCon">
-      <div class="text fz25"><img src="./assets/image/shopIcon.png" alt="">春鸟皮肤管理中心顺义天美一店</div>
-      <div class="text">门店地址：北京市顺义区XXXXXXX19号</div>
-      <div class="text">营业时间：10:00-22:00</div>
-      <div class="text">联系电话：13910250215</div>
+      <div class="text fz25"><img src="./assets/image/shopIcon.png" alt="">{{storeInfo.name}}</div>
+      <div class="text">门店地址：{{storeInfo.addr}}</div>
+      <div class="text">营业时间：{{storeInfo.businessHours}}</div>
+      <div class="text">联系电话：{{storeInfo.phone}}</div>
     </div>
     <div class="editShop">修 改 ></div>
   </div>
   <div class="userInfo">
     <div class="inputBox">
-      <span>付款金额：</span><input type="number" [(ngModel)]="orderInfo.allMoney">
+      <span>付款金额：</span><input type="number" [disabled]="orderInfo.from != 'index'" [(ngModel)]="allMoney">
     </div>
-    <div class="inputBox">
+    <div class="inputBox" *ngIf="orderInfo.from != 'index'">
       <span>订单ID：</span><input [(ngModel)]="orderInfo.orderNo" type="text">
     </div>
-    <div class="textBox" >
+    <div class="textBox" *ngIf="discountPriceAmout>0">
       <span style="margin-left: 0.1rem">优惠方式：</span>
       <div class="cheapBox">
         <span class="name">内购券优惠-金永涵</span>
         <div class="name">
-          -2000元
-          <img src="./assets/image/closeIcon.png" alt="">
+          -{{discountPriceAmout}}元
+          <img src="./assets/image/closeIcon.png" (click)="clearDiscount()" alt="">
         </div>
       </div>
     </div>
-    <div class="price">
+    <div class="price" >
       <span class="s1">应付金额:</span>
-      <span class="s2">￥{{orderInfo.allMoney | number:'2.2-2'}}</span>
+      <span class="s2">￥{{(allMoney*1-discountPriceAmout*1) | number:'2.2-2'}}</span>
     </div>
   </div>
-  <div class="saveBtn" (click)="wxpay()">完成本次服务</div>
+  <div class="saveBtn" *ngIf="orderInfo.from == 'index'" (click)="cashpay()">完成本次服务</div>
 </div>
 <app-alertbox></app-alertbox>

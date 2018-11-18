@@ -12,6 +12,13 @@ import wx from 'weixin-js-sdk';
 })
 export class JustpayComponent implements OnInit {
   orderInfo: any;
+  allMoney = 0;
+  discountPriceAmout = 0;
+  discounts = {
+    'id' : '',
+    'authCode' : ''
+  };
+  storeInfo = JSON.parse(localStorage.getItem('storeInfo'));
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -21,14 +28,20 @@ export class JustpayComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('支付确认');
     this.routerInfo.params.subscribe((params) => this.orderInfo = params);
-    console.log(this.orderInfo);
+    this.allMoney = this.orderInfo.allMoney;
   }
-  wxpay() {
-    console.log(this.orderInfo.orderNo);
+  cashpay() {
+    const t = this;
+    const order = {
+      'memberId': localStorage.getItem('memberId'),
+      'storeId': JSON.parse(localStorage.getItem('storeInfo'))['id'],
+      'orderPriceAmount': this.allMoney,
+      'discountPriceAmout': this.discountPriceAmout,
+    };
+    const discounts = this.discounts;
     this.alertBox.load();
-    this.userConfigService.paymentWechatPrepay(this.orderInfo.orderNo).
+    this.userConfigService.checkoutAddCashOrder(order, discounts).
     subscribe(data => {
-      console.log(data);
       this.alertBox.close();
       if (data['result']) {
         wx.chooseWXPay({
@@ -40,21 +53,54 @@ export class JustpayComponent implements OnInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              this.alertBox.success('支付成功');
-              this.router.navigate(['/paystatus', true]);
+              t.alertBox.success('支付成功');
+              t.router.navigate(['/paystatus', true]);
             } else {
-              this.alertBox.success('支付失败');
-              this.router.navigate(['/paystatus', false]);
+              t.alertBox.success('支付失败');
+              t.router.navigate(['/paystatus', false]);
             }
           },
           cancel: function(res) {
-            this.alertBox.success('取消支付');
-            this.router.navigate(['/paystatus', false]);
+            t.alertBox.success('取消支付');
+            t.router.navigate(['/paystatus', false]);
           }
         });
       } else {
         this.alertBox.error(data['message']);
       }
     });
+  }
+
+  sao() {
+    const t = this;
+    wx.scanQRCode({
+      needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+      scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有
+      success: function (res) {
+        const discounts = {
+          'id' : res.resultStr.split('#')[0],
+          'authCode' : res.resultStr.split('#')[1],
+        };
+        t.checkoutGetSettleAccountsDiscounts(t.allMoney, discounts);
+      }
+    });
+  }
+  checkoutGetSettleAccountsDiscounts(allMoney, discounts) {
+    this.alertBox.load();
+    this.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.discounts.id = data['data']['id'];
+        this.discounts.authCode = data['data']['authCode'];
+        this.discountPriceAmout = data['data']['discountsMoney'];
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  clearDiscount() {
+    this.discounts.id = '';
+    this.discounts.authCode = '';
+    this.discountPriceAmout = 0;
   }
 }
