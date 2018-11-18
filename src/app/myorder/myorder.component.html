@@ -1,10 +1,10 @@
 <div class="bigBox">
   <div class="head">
-    <div [class.selit]="showWhitchStatus==1" class="headlist" (click)="showWitch(1,$event)">全部</div>
-    <div [class.selit]="showWhitchStatus==2" class="headlist" (click)="showWitch(2,$event)">待支付</div>
-    <div [class.selit]="showWhitchStatus==3" class="headlist" (click)="showWitch(3,$event)">待使用</div>
-    <div [class.selit]="showWhitchStatus==4" class="headlist" (click)="showWitch(4,$event)">已完成</div>
-    <div [class.selit]="showWhitchStatus==5" class="headlist" (click)="showWitch(5,$event)">已取消</div>
+    <div [class.selit]="showWhitchStatus==1" class="headlist" (click)="showWitch(1)">全部</div>
+    <div [class.selit]="showWhitchStatus==2" class="headlist" (click)="showWitch(2)">待支付</div>
+    <div [class.selit]="showWhitchStatus==3" class="headlist" (click)="showWitch(3)">待使用</div>
+    <div [class.selit]="showWhitchStatus==4" class="headlist" (click)="showWitch(4)">已完成</div>
+    <div [class.selit]="showWhitchStatus==5" class="headlist" (click)="showWitch(5)">已取消</div>
   </div>
   <div class="boxShow">
     <div *ngIf="showWhitchStatus==1" class="boxShowlist">
@@ -177,3 +177,4 @@
     </div>
   </div>
 </div>
+<app-alertbox></app-alertbox>

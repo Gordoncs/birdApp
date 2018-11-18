@@ -37,5 +37,7 @@ export class MyindexComponent implements OnInit {
       }
     });
   }
-
+  goEffectluck() {
+    this.router.navigate(['/effectluck', this.userInfo]);
+  }
 }

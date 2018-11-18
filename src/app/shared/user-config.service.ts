@@ -271,6 +271,17 @@ export class UserConfigService {
         tap(data => this.canGoHref(data))
       );
   }
-
+  /**
+   * 会员订单列表
+   */
+  orderGetMemberOrderList(memberId: any, orderStatus: any, startLimit: any, pageNumber: any): Observable<any> {
+    const params = '?memberId=' + memberId + '&orderStatus=' + orderStatus + '&startLimit=' + startLimit + '&pageNumber=' + pageNumber ;
+    return this.http.get(this.configUrl + '/order/getMemberOrderList' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
 }
 

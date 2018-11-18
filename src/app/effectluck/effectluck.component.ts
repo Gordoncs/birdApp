@@ -13,6 +13,9 @@ export class EffectluckComponent implements OnInit, AfterContentInit {
   public showWitch: any = 1;
   public effectList = [];
   public luckList = [];
+  public userInfo: any;
+  public influenceStart = 0;
+  public activityStart = 0;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -24,20 +27,23 @@ export class EffectluckComponent implements OnInit, AfterContentInit {
      * 设置title
      */
     this.titleService.setTitle('我的实力');
-    this.getMemberInfluenceList(1, 8);
-    this.getMemberActivityRecordList(1, 8);
+    this.routerInfo.params.subscribe((params) => this.userInfo = params);
+    this.getMemberInfluenceList(0, 8);
+    this.getMemberActivityRecordList(0, 12);
   }
   ngAfterContentInit() {
-    $('body').scroll(function() {
-      alert();
-      // var $this =$(this),
-      //   viewH =$(this).height(),//可见高度
-      //   contentH =$(this).get(0).scrollHeight,//内容高度
-      //   scrollTop =$(this).scrollTop();//滚动高度
-      // //if(contentH - viewH - scrollTop <= 100) { //到达底部100px时,加载新内容
-      // if(scrollTop/(contentH -viewH)>=0.95){ //到达底部100px时,加载新内容
-      //   // 这里加载数据..
-      // }
+    const t = this;
+    $(window).scroll(function() {
+      if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+        if (t.showWitch === 1) {
+          t.influenceStart = t.influenceStart + 8;
+          t.getMemberInfluenceList(t.influenceStart, 8);
+        }
+        if (t.showWitch === 2) {
+          t.activityStart = t.activityStart + 12;
+          t.getMemberActivityRecordList(t.activityStart, 12);
+        }
+      }
     });
   }
   choseit(index) {
@@ -54,7 +60,9 @@ export class EffectluckComponent implements OnInit, AfterContentInit {
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        this.effectList = data['data'];
+        for (let i = 0; i < data['data']['list'].length ; i++) {
+          this.effectList.push(data['data']['list'][i]);
+        }
       } else {
         this.alertBox.error(data['message']);
       }
@@ -70,7 +78,9 @@ export class EffectluckComponent implements OnInit, AfterContentInit {
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        this.luckList = data['data'];
+        for (let i = 0; i < data['data']['list'].length ; i++) {
+          this.luckList.push(data['data']['list'][i]);
+        }
       } else {
         this.alertBox.error(data['message']);
       }

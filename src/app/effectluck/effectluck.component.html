@@ -6,85 +6,28 @@
   <div class="allCountBox">
     <img class="headsBg" src="./assets/image/myindexHeadnocolor.png" alt="">
     <div class="personImgBox">
-      <img src="./assets/image/girl.png" alt="">
+      <img [src]="userInfo.headIconAddr" alt="">
     </div>
     <div class="infoBox" *ngIf="showWitch==1">
-      <span>85</span>位好友
+      <span>{{userInfo.influence}}</span>位好友
     </div>
     <div class="infoBox" *ngIf="showWitch==2">
-      <span>482</span>幸福值
+      <span>{{userInfo.luckyIndex}}</span>幸运指数
     </div>
   </div>
   <div *ngIf="showWitch==1" class="effectBox">
     <div *ngFor="let item of effectList" class="effectList">
       <div class="personImgBox">
-        <img [src]="item.headIconAddr" alt="">
+        <img [src]="item.friendHeadIconAddr" alt="">
       </div>
       <div class="context">
-        <span class="name">{{item.nickname}}</span>
-        <span>2018年10月27日</span>
+        <span class="name">{{item.friendNickname}}</span>
+        <span>{{item.insertTime | date:'yyyy年MM月dd日'}}</span>
         <span>因您而更美</span>
       </div>
       <div class="rightInfo">
         <img src="./assets/image/effectIcon.png" alt="">
-        <div class="tips">您获得2次活动机会</div>
-      </div>
-    </div>
-
-    <div class="effectList">
-      <div class="personImgBox">
-        <img src="./assets/image/girl.png" alt="">
-      </div>
-      <div class="context">
-        <span class="name">林凡</span>
-        <span>2018年10月27日</span>
-        <span>因您而更美</span>
-      </div>
-      <div class="rightInfo">
-        <img src="./assets/image/effectIcon.png" alt="">
-        <div class="tips">您获得2次活动机会</div>
-      </div>
-    </div>
-    <div class="effectList">
-      <div class="personImgBox">
-        <img src="./assets/image/girl.png" alt="">
-      </div>
-      <div class="context">
-        <span class="name">林凡</span>
-        <span>2018年10月27日</span>
-        <span>因您而更美</span>
-      </div>
-      <div class="rightInfo">
-        <img src="./assets/image/effectIcon.png" alt="">
-        <div class="tips">您获得2次活动机会</div>
-      </div>
-    </div>
-    <div class="effectList">
-      <div class="personImgBox">
-        <img src="./assets/image/girl.png" alt="">
-      </div>
-      <div class="context">
-        <span class="name">林凡</span>
-        <span>2018年10月27日</span>
-        <span>因您而更美</span>
-      </div>
-      <div class="rightInfo">
-        <img src="./assets/image/effectIcon.png" alt="">
-        <div class="tips">您获得2次活动机会</div>
-      </div>
-    </div>
-    <div class="effectList">
-      <div class="personImgBox">
-        <img src="./assets/image/girl.png" alt="">
-      </div>
-      <div class="context">
-        <span class="name">林凡</span>
-        <span>2018年10月27日</span>
-        <span>因您而更美</span>
-      </div>
-      <div class="rightInfo">
-        <img src="./assets/image/effectIcon.png" alt="">
-        <div class="tips">您获得2次活动机会</div>
+        <div class="tips">您获得{{item.influenceNumber}}次活动机会</div>
       </div>
     </div>
   </div>
@@ -93,23 +36,10 @@
       <div class="wordShow">幸运时刻</div>
       <div class="wordShow">幸运值</div>
     </div>
-    <div class="luckList">
-      <div class="wordShow">2018-10-28</div>
-      <div class="wordShow yellowColor">58</div>
+    <div class="luckList" *ngFor="let item of luckList">
+      <div class="wordShow">{{item.insertTime | date:'yyyy-MM-dd'}}</div>
+      <div class="wordShow yellowColor">{{item.money}}</div>
     </div>
-    <div class="luckList">
-      <div class="wordShow">2018-10-28</div>
-      <div class="wordShow yellowColor">58</div>
-    </div>
-    <div class="luckList">
-      <div class="wordShow">2018-10-28</div>
-      <div class="wordShow yellowColor">58</div>
-    </div>
-    <div class="luckList">
-      <div class="wordShow">2018-10-28</div>
-      <div class="wordShow yellowColor">58</div>
-    </div>
-
   </div>
 </div>
 <app-alertbox></app-alertbox>

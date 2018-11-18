@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  <div class="effectLuckBox" [routerLink]="['/effectluck']">
+  <div class="effectLuckBox" (click)="goEffectluck()" [routerLink]="['/effectluck']">
     <div class="effectLuckList">
       <img src="./assets/image/effect.png" alt="">
       <span>{{userInfo.influence}}</span>

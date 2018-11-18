@@ -75,18 +75,18 @@ export class IndexComponent implements OnInit {
   }
   getInfo(latitude , longitude) {
     const that = this;
-    this.alertBox.load();
-    this.userConfigService.indexView(latitude, longitude)
+    that.alertBox.load();
+    that.userConfigService.indexView(latitude, longitude)
       .subscribe((data) => {
-        this.alertBox.close();
+        that.alertBox.close();
         if (data['result']) {
-          this.indexInfo = data['data'];
-          this.personIntroduce = this.indexInfo['personIntroduce'];
+          that.indexInfo = data['data'];
+          that.personIntroduce = that.indexInfo['personIntroduce'];
           const carefullyarr = [];
           const carouselarr = [];
           // 处理精选内容
-          for (let i = 0; i < this.indexInfo['carefully'].length; i++) {
-            let url = this.indexInfo['carefully'][i];
+          for (let i = 0; i < that.indexInfo['carefully'].length; i++) {
+            let url = that.indexInfo['carefully'][i];
             url = url.split('#');
             const obj = {
               'imgs': url[0],
@@ -95,10 +95,10 @@ export class IndexComponent implements OnInit {
             };
             carefullyarr.push(obj);
           }
-          this.carefullyarr = carefullyarr;
+          that.carefullyarr = carefullyarr;
           // 处理滚动图片
-          for (let i = 0; i < this.indexInfo['carousel'].length; i++) {
-            let url = this.indexInfo['carousel'][i];
+          for (let i = 0; i < that.indexInfo['carousel'].length; i++) {
+            let url = that.indexInfo['carousel'][i];
             url = url.split('#');
             const obj = {
               'imgs': url[0],
@@ -107,15 +107,15 @@ export class IndexComponent implements OnInit {
             };
             carouselarr.push(obj);
           }
-          this.carouselarr = carouselarr;
+          that.carouselarr = carouselarr;
           // 处理店铺信息
-          localStorage.setItem('storeInfo', JSON.stringify(this.indexInfo['storeInfo']));
-          this.storeInfo = this.indexInfo['storeInfo'];
+          localStorage.setItem('storeInfo', JSON.stringify(that.indexInfo['storeInfo']));
+          that.storeInfo = that.indexInfo['storeInfo'];
           setTimeout(function () {
             that.scrollFn();
           }, 100);
         } else {
-          this.alertBox.error(data['message']);
+          that.alertBox.error(data['message']);
         }
       });
   }
