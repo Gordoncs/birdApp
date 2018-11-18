@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'paystatus/:status', component: PaystausComponent},
   { path: 'myindex', component: MyindexComponent},
   { path: 'myorder', component: MyorderComponent},
-  { path: 'orderdetail', component: OrderdetailComponent},
+  { path: 'orderdetail/:orderId', component: OrderdetailComponent},
   { path: 'effectluck', component: EffectluckComponent},
   { path: 'goodsdetail/:goodsId', component: DetailComponent},
   { path: 'specialgoods', component: SpecialgoodsComponent},

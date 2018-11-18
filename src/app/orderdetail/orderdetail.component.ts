@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
+import {AlertboxComponent} from '../alertbox/alertbox.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserConfigService} from '../shared/user-config.service';
+import {TongxinService} from '../shared/tongxin.service';
+import {MyindexComponent} from '../myindex/myindex.component';
 
 @Component({
   selector: 'app-orderdetail',
@@ -10,11 +15,14 @@ export class OrderdetailComponent implements OnInit {
   public hhh: any;
   public mmm: any;
   public sss: any;
-  /**
-   * 2待支付 ,3待使用 ,4已完成 ,5已取消
-   */
-  public status = 4;
-  constructor(private titleService: Title) { }
+  public orderId: any;
+  public detailInfo: any;
+  public userInfo: any;
+  // 弹框显示
+  @ViewChild(AlertboxComponent)
+  alertBox: AlertboxComponent;
+  constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
+              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
     /***
@@ -22,8 +30,11 @@ export class OrderdetailComponent implements OnInit {
      */
     this.titleService.setTitle('订单详情');
 
-    const countDown_time = '00:29:59';
-    this.count_down(countDown_time);
+    // const countDown_time = '00:29:59';
+    // this.count_down(countDown_time);
+    this.routerInfo.params.subscribe((params) => this.orderId = params['orderId']);
+    this.orderGetOrderInfo(this.orderId);
+    this.getMemberIndexInfo();
   }
   count_down(countDown_time) {
     const that = this;
@@ -56,5 +67,34 @@ export class OrderdetailComponent implements OnInit {
       that.mmm = (mmm < 10) ? '0' + mmm : mmm;
       that.hhh = (hhh < 10) ? '0' + hhh : hhh;
     }, 1000);
+  }
+  orderGetOrderInfo(orderId) {
+    this.alertBox.load();
+    this.userConfigService.orderGetOrderInfo(orderId)
+      .subscribe((data) => {
+        this.alertBox.close();
+        if (data['result']) {
+          this.detailInfo = data['data'];
+        } else {
+          this.alertBox.error(data['message']);
+        }
+      });
+  }
+
+  getMemberIndexInfo() {
+    const memberId = localStorage.getItem('memberId');
+    this.alertBox.load();
+    this.userConfigService.getMemberIndexInfo(memberId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.userInfo = data['data'];
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  payFn() {
+    this.router.navigate(['/justpay', {'allMoney':this.detailInfo.orderAmountPayable, 'orderNo': this.detailInfo.orderNo}]);
   }
 }

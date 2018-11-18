@@ -1,26 +1,26 @@
 <div class="heads">
   <img class="headsBg" src="./assets/image/hexiaoTitle.png" alt="">
   <!--待付款-->
-  <div class="headsBox" *ngIf="status==2">
+  <div class="headsBox" *ngIf="detailInfo.orderStatus==0">
     <div class="leftImg">
       <img src="./assets/image/daifuIcon.png" alt="">
     </div>
     <div class="rightInfo">
-      <div class="list">剩余时间 {{hhh}}:{{mmm}}:{{sss}}</div>
+      <!--<div class="list">剩余时间 {{hhh}}:{{mmm}}:{{sss}}</div>-->
     </div>
   </div>
   <!--待使用-->
-  <div class="headsBox" *ngIf="status==3">
+  <div class="headsBox" *ngIf="detailInfo.orderStatus==1">
     <div class="leftImg">
       <img style="width: 1.12rem" src="./assets/image/daishiIcon.png" alt="">
     </div>
     <div class="rightInfo">
-      <div class="list">用户名：张某</div>
-      <div class="list">电话: 1374328984</div>
+      <div class="list">用户名：{{detailInfo.linkman}}</div>
+      <div class="list">电话: {{detailInfo.subscribePhone}}</div>
     </div>
   </div>
   <!--已完成-->
-  <div class="headsBox" *ngIf="status==4">
+  <div class="headsBox" *ngIf="detailInfo.orderStatus==2">
     <div class="leftImg">
       <img style="width: 1.13rem" src="./assets/image/wancheng.png" alt="">
     </div>
@@ -28,7 +28,7 @@
     </div>
   </div>
   <!--已取消-->
-  <div class="headsBox" *ngIf="status==5">
+  <div class="headsBox" *ngIf="detailInfo.orderStatus==9">
     <div class="leftImg">
       <img style="width: 1.15rem" src="./assets/image/quxiaoIcon.png" alt="">
     </div>
@@ -40,10 +40,10 @@
 <div class="middleBox">
   <div class="shopInfoBox">
     <div class="shopInfoCon">
-      <div class="text fz25" style="align-items: end!important;"><img src="./assets/image/shopIconHui.png" alt="">春鸟皮肤管理中心顺义天美一店</div>
-      <div class="text">门店地址：北京市顺义区XXXXXXX19号</div>
-      <div class="text">营业时间：10:00-22:00</div>
-      <div class="text">联系电话：13910250215</div>
+      <div class="text fz25" style="align-items: end!important;"><img src="./assets/image/shopIconHui.png" alt="">{{detailInfo.store.name}}</div>
+      <div class="text">门店地址：{{detailInfo.store.addr}}</div>
+      <div class="text">营业时间：{{detailInfo.store.businessHours}}</div>
+      <div class="text">联系电话：{{detailInfo.store.phone}}</div>
     </div>
     <div class="rightIcon">
       <a href="javascript:;">
@@ -56,17 +56,17 @@
   </div>
 
   <!--待使用显示-->
-  <div class="qrBigBox" *ngIf="status==3">
+  <div class="qrBigBox" *ngIf="detailInfo.orderStatus==1">
     <img  class="qrBg" src="./assets/image/qrBg.png" alt="">
     <div  class="qrBox">
       <div class="qrBoxCon">
-        <img src="./assets/image/qrEx.png" alt="">
+        <img [src]="detailInfo.consumeVerificationQRcode" alt="">
       </div>
     </div>
     <div class="tips">注意保管，请勿截图分享</div>
   </div>
 
-  <div class="tabBox" *ngIf="status==3">
+  <div class="tabBox" *ngIf="detailInfo.orderStatus==1">
     <div class="tablist tablistSel">待服务 (4)</div>
     <div class="tablist">已完成 (3)</div>
   </div>
@@ -74,48 +74,28 @@
     服务项目：
   </div>
   <div class="shopCartBox">
-    <div class="productList"  >
+    <div class="productList"  *ngFor="let list of detailInfo.detail">
       <div class="productImg">
-        <img src="" alt="">
+        <img [src]="list.miniPhotoAddr" alt="">
       </div>
       <div class="productIndec">
-        <div class="name">春鸟科美-素肤净体</div>
+        <div class="name">{{list.goodsName}}</div>
         <div class="classly">
-          <div class="list">贝基尼</div>
+          <div class="list">{{list.skuStyleName}}</div>
         </div>
         <div class="specBox">
-          <span>单次</span>
+          <span>{{list.skuSpecName}}</span>
         </div>
       </div>
       <div class="rightBox">
-        <div class="number">x1</div>
-        <div class="price">￥380.00</div>
+        <div class="number">x{{list.count}}</div>
+        <div class="price">￥{{list.price}}</div>
       </div>
-
-    </div>
-    <div class="productList"  >
-      <div class="productImg">
-        <img src="" alt="">
-      </div>
-      <div class="productIndec">
-        <div class="name">春鸟科美-素肤净体</div>
-        <div class="classly">
-          <div class="list">贝基尼</div>
-        </div>
-        <div class="specBox">
-          <span>单次</span>
-        </div>
-      </div>
-      <div class="rightBox">
-        <div class="number">x1</div>
-        <div class="price">￥380.00</div>
-      </div>
-
     </div>
   </div>
-  <div class="juanBox" *ngIf="status==3 || status==4">
+  <div class="juanBox" *ngIf="detailInfo.orderStatus==1 || detailInfo.orderStatus==2">
     <img src="./assets/image/songJuan.png" alt="">
-    <span>（剩余4张）</span>
+    <span>（剩余{{userInfo.presentRemnant}}张）</span>
   </div>
   <div class="titles" >
     订单信息：
@@ -123,7 +103,7 @@
   <div class="orderBaseInfo">
     <div class="list">
       <span class="s1">订单编号：</span>
-      <span class="s2">7893275982379</span>
+      <span class="s2">{{detailInfo.orderNo}}</span>
     </div>
     <div class="list">
       <span class="s1">支付方式：</span>
@@ -131,40 +111,41 @@
     </div>
     <div class="list">
       <span class="s1">下单时间：</span>
-      <span class="s2">2018-10-12 14:57:27</span>
+      <span class="s2">{{detailInfo.insertTime | date : 'yyyy-MM-dd HH:mm:ss' }}</span>
     </div>
     <div class="list">
       <span class="s1">支付时间：</span>
-      <span class="s2">2018-10-12 14:57:27</span>
+      <span class="s2">{{detailInfo.paymentTime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
     </div>
-    <div class="list" *ngIf="status==4">
+    <div class="list" *ngIf="detailInfo.orderStatus==2">
       <span class="s1">使用时间：</span>
-      <span class="s2">2018-10-12 14:57:27</span>
+      <span class="s2">{{detailInfo.updatetime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
     </div>
-    <div class="list" *ngIf="status==5">
+    <div class="list" *ngIf="detailInfo.orderStatus==9">
       <span class="s1">取消时间：</span>
-      <span class="s2">2018-10-12 14:57:27</span>
+      <span class="s2">{{detailInfo.updatetime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
     </div>
   </div>
 
   <div class="textBox">
-    <span>金额合计：</span><span>￥10180.00</span>
+    <span>金额合计：</span><span>￥{{detailInfo.orderPriceAmount}}</span>
   </div>
-  <div class="textBox" style="border-bottom: 1px solid #e5e5e5 ">
+  <div class="textBox" *ngIf="detailInfo.discountPriceAmout>0" style="border-bottom: 1px solid #e5e5e5 ">
     <span>优惠方式：</span>
     <div class="cheapBox">
-      <span class="name">内购券优惠-金永涵</span>
-      <div class="name">-2000元</div>
+      <!--<span class="name">内购券优惠-金永涵</span>-->
+      <div class="name">-{{detailInfo.discountPriceAmout}}元</div>
     </div>
   </div>
-  <div class="textBox" *ngIf="status==3 || status==4 || status==5">
-    <span></span><span>实付金额：￥10180.00</span>
+  <div class="textBox" *ngIf="detailInfo.orderStatus==1 || detailInfo.orderStatus==2 || detailInfo.orderStatus==9">
+    <span></span><span>实付金额：￥{{detailInfo.orderAmountPayable}}</span>
   </div>
 </div>
-<div class="priceBar" *ngIf="status==2">
+<div class="priceBar" *ngIf="detailInfo.orderStatus==0">
   <div class="price">
     <span class="s1">应付金额:</span>
-    <span class="s2">￥10380.00</span>
+    <span class="s2">￥{{detailInfo.orderAmountPayable}}</span>
   </div>
-  <div class="payBtn" >立即支付</div>
+  <div class="payBtn" (click)="payFn()">立即支付</div>
 </div>
+<app-alertbox></app-alertbox>

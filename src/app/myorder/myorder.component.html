@@ -8,169 +8,209 @@
   </div>
   <div class="boxShow">
     <div *ngIf="showWhitchStatus==1" class="boxShowlist">
-      <img class="noOrderImg" src="./assets/image/noOrder.png" alt="">
-    </div>
-    <div *ngIf="showWhitchStatus==2" [routerLink]="['/orderdetail']" class="boxShowlist">
-      <img class="noOrderImg" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox">
+      <img class="noOrderImg" *ngIf="showWhitchStatusArr1.length==0" src="./assets/image/noOrder.png" alt="">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr1" [routerLink]="['/orderdetail', item.id]">
         <div class="shopInfoCon">
-          <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>春鸟科美顺义天美No.016店</span></div>
+          <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
+          <div class="rightStatus" *ngIf="item.orderStatus==0">
+            <span>待支付</span>
+            <img src="./assets/image/delIcon.png" alt="">
+          </div>
+          <div class="rightStatus" *ngIf="item.orderStatus==1">
+            <span>等待使用</span>
+          </div>
+          <div class="rightStatus" *ngIf="item.orderStatus==2">
+            <span style="color: #868686">已完成</span>
+            <img src="./assets/image/delIcon.png" alt="">
+          </div>
+          <div class="rightStatus" *ngIf="item.orderStatus==9">
+            <span style="color: #868686">已取消</span>
+            <img src="./assets/image/delIcon.png" alt="">
+          </div>
+        </div>
+        <div class="shopCartBox">
+          <div class="productList" *ngFor="let list of item.detail" >
+            <div class="productImg">
+              <img [src]="list.miniPhotoAddr" alt="">
+            </div>
+            <div class="productIndec">
+              <div class="name">{{list.goodsName}}</div>
+              <div class="classly">
+                <div class="list">{{list.skuStyleName}}</div>
+              </div>
+              <div class="specBox">
+                <span>{{list.skuSpecName}}</span>
+              </div>
+            </div>
+            <div class="rightBox">
+              <div >x{{list.count}}</div>
+              <div class="price">￥{{list.price}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="bottomCaozuo" *ngIf="item.orderStatus==0">
+          <div class="leftSpan">
+            <span>共{{item.detail.length}}项服务</span>
+            <span>需支付:￥{{item.orderAmountPayable}}</span>
+          </div>
+          <div class="caozuoBtn">去支付</div>
+        </div>
+        <div class="bottomCaozuo" style="justify-content: flex-end;"  *ngIf="item.orderStatus==1 || item.orderStatus==2 || item.orderStatus==9">
+          <div class="leftSpan" style="margin-right: 0.2rem">
+            <span>共{{item.detail.length}}项服务</span>
+            <span>实付:￥{{item.orderAmountPayable}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showWhitchStatus==2" class="boxShowlist">
+      <img class="noOrderImg" *ngIf="showWhitchStatusArr2.length==0" src="./assets/image/noOrder.png" alt="">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr2" [routerLink]="['/orderdetail', item.id]">
+        <div class="shopInfoCon">
+          <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">
             <span>待支付</span>
             <img src="./assets/image/delIcon.png" alt="">
           </div>
         </div>
         <div class="shopCartBox">
-          <div class="productList"  >
+          <div class="productList" *ngFor="let list of item.detail" >
             <div class="productImg">
-              <img src="" alt="">
+              <img [src]="list.miniPhotoAddr" alt="">
             </div>
             <div class="productIndec">
-              <div class="name">春鸟科美-素肤净体</div>
+              <div class="name">{{list.goodsName}}</div>
               <div class="classly">
-                <div class="list">贝基尼</div>
+                <div class="list">{{list.skuStyleName}}</div>
               </div>
               <div class="specBox">
-                <span>单次</span>
+                <span>{{list.skuSpecName}}</span>
               </div>
             </div>
             <div class="rightBox">
-              <div class="price">￥380.00</div>
-            </div>
-          </div>
-          <div class="productList"  >
-            <div class="productImg">
-              <img src="" alt="">
-            </div>
-            <div class="productIndec">
-              <div class="name">春鸟科美-素肤净体</div>
-              <div class="classly">
-                <div class="list">贝基尼</div>
-              </div>
-              <div class="specBox">
-                <span>单次</span>
-              </div>
-            </div>
-            <div class="rightBox">
-              <div class="price">￥380.00</div>
+              <div >x{{list.count}}</div>
+              <div class="price">￥{{list.price}}</div>
             </div>
           </div>
         </div>
         <div class="bottomCaozuo">
           <div class="leftSpan">
-            <span>共2项服务</span>
-            <span>需支付:￥380.00</span>
+            <span>共{{item.detail.length}}项服务</span>
+            <span>需支付:￥{{item.orderAmountPayable}}</span>
           </div>
           <div class="caozuoBtn">去支付</div>
         </div>
       </div>
     </div>
     <div *ngIf="showWhitchStatus==3" class="boxShowlist">
-      <img class="noOrderImg" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox">
+      <img class="noOrderImg" *ngIf="showWhitchStatusArr3.length==0" src="./assets/image/noOrder.png" alt="">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr3" [routerLink]="['/orderdetail', item.id]">
         <div class="shopInfoCon">
-          <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>春鸟科美顺义天美No.016店</span></div>
+          <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">
             <span>等待使用</span>
           </div>
         </div>
         <div class="shopCartBox">
-          <div class="productList"  >
+          <div class="productList" *ngFor="let list of item.detail" >
             <div class="productImg">
-              <img src="" alt="">
+              <img [src]="list.miniPhotoAddr" alt="">
             </div>
             <div class="productIndec">
-              <div class="name">春鸟科美-素肤净体</div>
+              <div class="name">{{list.goodsName}}</div>
               <div class="classly">
-                <div class="list">贝基尼</div>
+                <div class="list">{{list.skuStyleName}}</div>
               </div>
               <div class="specBox">
-                <span>单次</span>
+                <span>{{list.skuSpecName}}</span>
               </div>
             </div>
             <div class="rightBox">
-              <div class="price">￥380.00</div>
+              <div >x{{list.count}}</div>
+              <div class="price">￥{{list.price}}</div>
             </div>
           </div>
         </div>
         <div class="bottomCaozuo" style="justify-content: flex-end;">
           <div class="leftSpan" style="margin-right: 0.2rem">
-            <span>共2项服务</span>
-            <span>实付:￥380.00</span>
+            <span>共{{item.detail.length}}项服务</span>
+            <span>实付:￥{{item.orderAmountPayable}}</span>
           </div>
         </div>
       </div>
     </div>
     <div *ngIf="showWhitchStatus==4" class="boxShowlist">
-      <img class="noOrderImg" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox">
+      <img class="noOrderImg" *ngIf="showWhitchStatusArr4.length==0" src="./assets/image/noOrder.png" alt="">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr4" [routerLink]="['/orderdetail', item.id]">
         <div class="shopInfoCon">
-          <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>春鸟科美顺义天美No.016店</span></div>
+          <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">
             <span style="color: #868686">已完成</span>
             <img src="./assets/image/delIcon.png" alt="">
           </div>
         </div>
         <div class="shopCartBox">
-          <div class="productList"  >
+          <div class="productList" *ngFor="let list of item.detail" >
             <div class="productImg">
-              <img src="" alt="">
+              <img [src]="list.miniPhotoAddr" alt="">
             </div>
             <div class="productIndec">
-              <div class="name">春鸟科美-素肤净体</div>
+              <div class="name">{{list.goodsName}}</div>
               <div class="classly">
-                <div class="list">贝基尼</div>
+                <div class="list">{{list.skuStyleName}}</div>
               </div>
               <div class="specBox">
-                <span>单次</span>
+                <span>{{list.skuSpecName}}</span>
               </div>
             </div>
             <div class="rightBox">
-              <div class="price">￥380.00</div>
+              <div >x{{list.count}}</div>
+              <div class="price">￥{{list.price}}</div>
             </div>
           </div>
         </div>
         <div class="bottomCaozuo" style="justify-content: flex-end;">
           <div class="leftSpan" style="margin-right: 0.2rem">
-            <span>共2项服务</span>
-            <span>实付:￥380.00</span>
+            <span>共{{item.detail.length}}项服务</span>
+            <span>实付:￥{{item.orderAmountPayable}}</span>
           </div>
         </div>
       </div>
     </div>
     <div *ngIf="showWhitchStatus==5" class="boxShowlist">
-      <img class="noOrderImg" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox">
+      <img class="noOrderImg" *ngIf="showWhitchStatusArr5.length==0" src="./assets/image/noOrder.png" alt="">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr5" [routerLink]="['/orderdetail', item.id]">
         <div class="shopInfoCon">
-          <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>春鸟科美顺义天美No.016店</span></div>
+          <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">
             <span style="color: #868686">已取消</span>
             <img src="./assets/image/delIcon.png" alt="">
           </div>
         </div>
         <div class="shopCartBox">
-          <div class="productList"  >
+          <div class="productList" *ngFor="let list of item.detail" >
             <div class="productImg">
-              <img src="" alt="">
+              <img [src]="list.miniPhotoAddr" alt="">
             </div>
             <div class="productIndec">
-              <div class="name">春鸟科美-素肤净体</div>
+              <div class="name">{{list.goodsName}}</div>
               <div class="classly">
-                <div class="list">贝基尼</div>
+                <div class="list">{{list.skuStyleName}}</div>
               </div>
               <div class="specBox">
-                <span>单次</span>
+                <span>{{list.skuSpecName}}</span>
               </div>
             </div>
             <div class="rightBox">
-              <div class="price">￥380.00</div>
+              <div >x{{list.count}}</div>
+              <div class="price">￥{{list.price}}</div>
             </div>
           </div>
         </div>
         <div class="bottomCaozuo" style="justify-content: flex-end;">
           <div class="leftSpan" style="margin-right: 0.2rem">
-            <span>共2项服务</span>
-            <span>实付:￥380.00</span>
+            <span>共{{item.detail.length}}项服务</span>
+            <span>实付:￥{{item.orderAmountPayable}}</span>
           </div>
         </div>
       </div>

@@ -66,7 +66,7 @@ export class IndexComponent implements OnInit {
         that.getInfo(res.latitude, res.longitude);
       }
     });
-    // that.getInfo(39.91474, 116.37333);
+    that.getInfo(39.91474, 116.37333);
 
   }
 

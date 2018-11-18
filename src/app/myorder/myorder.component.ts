@@ -91,7 +91,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
       if (data['result']) {
         if (this.showWhitchStatus === 1) {
           if (form === 'click') {
-            this.showWhitchStatusArr1 = data['data'];
+            this.showWhitchStatusArr1 = data['data']['list'];
           } else {
             for (let i = 0; i < data['data']['list'].length ; i++) {
               this.showWhitchStatusArr1.push(data['data']['list'][i]);
@@ -100,7 +100,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
         }
         if (this.showWhitchStatus === 2) {
           if (form === 'click') {
-            this.showWhitchStatusArr2 = data['data'];
+            this.showWhitchStatusArr2 = data['data']['list'];
           } else {
             for (let i = 0; i < data['data']['list'].length ; i++) {
               this.showWhitchStatusArr2.push(data['data']['list'][i]);
@@ -109,7 +109,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
         }
         if (this.showWhitchStatus === 3) {
           if (form === 'click') {
-            this.showWhitchStatusArr3 = data['data'];
+            this.showWhitchStatusArr3 = data['data']['list'];
           } else {
             for (let i = 0; i < data['data']['list'].length ; i++) {
               this.showWhitchStatusArr3.push(data['data']['list'][i]);
@@ -118,7 +118,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
         }
         if (this.showWhitchStatus === 4) {
           if (form === 'click') {
-            this.showWhitchStatusArr4 = data['data'];
+            this.showWhitchStatusArr4 = data['data']['list'];
           } else {
             for (let i = 0; i < data['data']['list'].length ; i++) {
               this.showWhitchStatusArr4.push(data['data']['list'][i]);
@@ -127,7 +127,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
         }
         if (this.showWhitchStatus === 5) {
           if (form === 'click') {
-            this.showWhitchStatusArr5 = data['data'];
+            this.showWhitchStatusArr5 = data['data']['list'];
           } else {
             for (let i = 0; i < data['data']['list'].length ; i++) {
               this.showWhitchStatusArr5.push(data['data']['list'][i]);

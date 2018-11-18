@@ -1,13 +1,9 @@
 .bigBox{
   width: 100%;
+  height: 100%;
+  background: #dcdcdc;
   display: flex;
   flex-direction: column;
-  background: #dcdcdc;
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
 }
 .bigBox .head{
   width: 100%;
@@ -16,6 +12,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9;
 }
 
 .bigBox .headlist{
@@ -31,10 +31,10 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: 0.9rem;
 }
 .boxShowlist{
   width: 100%;
-  min-height: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,7 +56,6 @@
   top: 50%;
   margin-top: -1.1rem;
   z-index: 9;
-  display: none;
 }
 .orderBox{
   width: 7.25rem;
@@ -222,6 +221,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  align-items: flex-end;
 }
 .bottomCaozuo{
   width: 100%;
