@@ -295,5 +295,17 @@ export class UserConfigService {
         tap(data => this.canGoHref(data))
       );
   }
+  /**
+   * 取消订单
+   */
+  cancelOrder(orderId: any): Observable<any> {
+    const params = '?orderId=' + orderId;
+    return this.http.get(this.configUrl + '/cancelOrder' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
 }
 

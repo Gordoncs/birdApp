@@ -18,6 +18,9 @@ export class OrderdetailComponent implements OnInit {
   public orderId: any;
   public detailInfo: any;
   public userInfo: any;
+  public iscomplete = false;
+  public allServers = 0;
+  public useServers = 0;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -75,6 +78,16 @@ export class OrderdetailComponent implements OnInit {
         this.alertBox.close();
         if (data['result']) {
           this.detailInfo = data['data'];
+          let allServers = 0;
+          let useServers = 0;
+          if (this.detailInfo.orderStatus === 1) {
+            for (let i = 0 ; i < this.detailInfo.detail.length ; i++) {
+              allServers = allServers + this.detailInfo.detail[i].goodsNumber * 1;
+              useServers = useServers + (this.detailInfo.detail[i].checkoffNumber || 0) * 1;
+            }
+            this.allServers = allServers;
+            this.useServers = useServers;
+          }
         } else {
           this.alertBox.error(data['message']);
         }
@@ -95,6 +108,6 @@ export class OrderdetailComponent implements OnInit {
     });
   }
   payFn() {
-    this.router.navigate(['/justpay', {'allMoney':this.detailInfo.orderAmountPayable, 'orderNo': this.detailInfo.orderNo}]);
+    this.router.navigate(['/justpay', {'allMoney': this.detailInfo.orderAmountPayable, 'orderNo': this.detailInfo.orderNo}]);
   }
 }

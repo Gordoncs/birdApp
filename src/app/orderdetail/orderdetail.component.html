@@ -67,13 +67,13 @@
   </div>
 
   <div class="tabBox" *ngIf="detailInfo.orderStatus==1">
-    <div class="tablist tablistSel">待服务 (4)</div>
-    <div class="tablist">已完成 (3)</div>
+    <div class="tablist" [class.tablistSel]="iscomplete==false" (click)="iscomplete=false">待服务 ({{allServers-useServers}})</div>
+    <div class="tablist" [class.tablistSel]="iscomplete==true" (click)="iscomplete=true">已完成 ({{useServers}})</div>
   </div>
   <div class="titles" >
     服务项目：
   </div>
-  <div class="shopCartBox">
+  <div class="shopCartBox" *ngIf="detailInfo.orderStatus!=1">
     <div class="productList"  *ngFor="let list of detailInfo.detail">
       <div class="productImg">
         <img [src]="list.miniPhotoAddr" alt="">
@@ -93,6 +93,47 @@
       </div>
     </div>
   </div>
+  <!--待使用切换所需显示部分-->
+  <div class="shopCartBox" *ngIf="detailInfo.orderStatus==1&&iscomplete==false">
+    <div class="productList" [class.hide]="list.goodsNumber==list.checkoffNumber" *ngFor="let list of detailInfo.detail">
+      <div class="productImg">
+        <img [src]="list.miniPhotoAddr" alt="">
+      </div>
+      <div class="productIndec">
+        <div class="name">{{list.goodsName}}</div>
+        <div class="classly">
+
+        </div>
+        <div class="specBox">
+          <span>{{list.skuSpecName}}</span>
+        </div>
+      </div>
+      <div class="rightBox">
+        <div class="number">x{{list.goodsNumber-(list.checkoffNumber||0)}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="shopCartBox" *ngIf="detailInfo.orderStatus==1&&iscomplete==true">
+    <div class="productList"  *ngFor="let list of detailInfo.checkoff">
+      <div class="productImg">
+        <img [src]="list.miniPhotoAddr" alt="">
+      </div>
+      <div class="productIndec">
+        <div class="name">{{list.goodsName}}</div>
+        <div class="classly">
+
+        </div>
+        <div class="specBox">
+          <span>{{list.skuSpecName}}</span>
+        </div>
+      </div>
+      <div class="rightBox">
+        <div class="number">x{{list.checkedNumber}}</div>
+      </div>
+    </div>
+  </div>
+  <!--待使用切换所需显示部分结束-->
+
   <div class="juanBox" *ngIf="detailInfo.orderStatus==1 || detailInfo.orderStatus==2">
     <img src="./assets/image/songJuan.png" alt="">
     <span>（剩余{{userInfo.presentRemnant}}张）</span>

@@ -139,4 +139,19 @@ export class MyorderComponent implements OnInit, AfterContentInit {
       }
     });
   }
+  cancelOrder(item, index, arr) {
+    this.alertBox.load();
+    this.userConfigService.cancelOrder(item.orderNo).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        arr.splice(index, 1);
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  payFn(item) {
+    this.router.navigate(['/justpay', {'allMoney': item.orderAmountPayable, 'orderNo': item.orderNo}]);
+  }
 }

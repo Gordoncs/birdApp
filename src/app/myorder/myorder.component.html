@@ -9,23 +9,23 @@
   <div class="boxShow">
     <div *ngIf="showWhitchStatus==1" class="boxShowlist">
       <img class="noOrderImg" *ngIf="showWhitchStatusArr1.length==0" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox" *ngFor="let item of showWhitchStatusArr1" [routerLink]="['/orderdetail', item.id]">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr1 let i = index" [routerLink]="['/orderdetail', item.id]">
         <div class="shopInfoCon">
           <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus" *ngIf="item.orderStatus==0">
             <span>待支付</span>
-            <img src="./assets/image/delIcon.png" alt="">
+            <img src="./assets/image/delIcon.png" (click)="cancelOrder(item,i,showWhitchStatusArr1);$event.stopPropagation();" alt="">
           </div>
           <div class="rightStatus" *ngIf="item.orderStatus==1">
             <span>等待使用</span>
           </div>
           <div class="rightStatus" *ngIf="item.orderStatus==2">
             <span style="color: #868686">已完成</span>
-            <img src="./assets/image/delIcon.png" alt="">
+            <img src="./assets/image/delIcon.png" (click)="cancelOrder(item,i,showWhitchStatusArr1);$event.stopPropagation();" alt="">
           </div>
           <div class="rightStatus" *ngIf="item.orderStatus==9">
             <span style="color: #868686">已取消</span>
-            <img src="./assets/image/delIcon.png" alt="">
+            <img src="./assets/image/delIcon.png" (click)="cancelOrder(item,i,showWhitchStatusArr1);$event.stopPropagation();" alt="">
           </div>
         </div>
         <div class="shopCartBox">
@@ -53,7 +53,7 @@
             <span>共{{item.detail.length}}项服务</span>
             <span>需支付:￥{{item.orderAmountPayable}}</span>
           </div>
-          <div class="caozuoBtn">去支付</div>
+          <div class="caozuoBtn" (click)="payFn(item);$event.stopPropagation();">去支付</div>
         </div>
         <div class="bottomCaozuo" style="justify-content: flex-end;"  *ngIf="item.orderStatus==1 || item.orderStatus==2 || item.orderStatus==9">
           <div class="leftSpan" style="margin-right: 0.2rem">
@@ -65,12 +65,12 @@
     </div>
     <div *ngIf="showWhitchStatus==2" class="boxShowlist">
       <img class="noOrderImg" *ngIf="showWhitchStatusArr2.length==0" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox" *ngFor="let item of showWhitchStatusArr2" [routerLink]="['/orderdetail', item.id]">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr2 let i = index" [routerLink]="['/orderdetail', item.id]">
         <div class="shopInfoCon">
           <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">
             <span>待支付</span>
-            <img src="./assets/image/delIcon.png" alt="">
+            <img src="./assets/image/delIcon.png" (click)="cancelOrder(item,i,showWhitchStatusArr2);$event.stopPropagation();" alt="">
           </div>
         </div>
         <div class="shopCartBox">
@@ -98,7 +98,7 @@
             <span>共{{item.detail.length}}项服务</span>
             <span>需支付:￥{{item.orderAmountPayable}}</span>
           </div>
-          <div class="caozuoBtn">去支付</div>
+          <div class="caozuoBtn" (click)="payFn(item);$event.stopPropagation();">去支付</div>
         </div>
       </div>
     </div>
@@ -141,12 +141,12 @@
     </div>
     <div *ngIf="showWhitchStatus==4" class="boxShowlist">
       <img class="noOrderImg" *ngIf="showWhitchStatusArr4.length==0" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox" *ngFor="let item of showWhitchStatusArr4" [routerLink]="['/orderdetail', item.id]">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr4 let i = index" [routerLink]="['/orderdetail', item.id]">
         <div class="shopInfoCon">
           <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">
             <span style="color: #868686">已完成</span>
-            <img src="./assets/image/delIcon.png" alt="">
+            <img src="./assets/image/delIcon.png" (click)="cancelOrder(item,i,showWhitchStatusArr4);$event.stopPropagation();" alt="">
           </div>
         </div>
         <div class="shopCartBox">
@@ -179,12 +179,12 @@
     </div>
     <div *ngIf="showWhitchStatus==5" class="boxShowlist">
       <img class="noOrderImg" *ngIf="showWhitchStatusArr5.length==0" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox" *ngFor="let item of showWhitchStatusArr5" [routerLink]="['/orderdetail', item.id]">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr5 let i = index" [routerLink]="['/orderdetail', item.id]">
         <div class="shopInfoCon">
           <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">
             <span style="color: #868686">已取消</span>
-            <img src="./assets/image/delIcon.png" alt="">
+            <img src="./assets/image/delIcon.png" (click)="cancelOrder(item,i,showWhitchStatusArr5);$event.stopPropagation();" alt="">
           </div>
         </div>
         <div class="shopCartBox">
