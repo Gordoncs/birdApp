@@ -53,6 +53,10 @@
           <span class="tips">{{person.title}}</span>
         </div>
       </div>
+      <div class="headTips">
+        <img src="./assets/image/indexTips.png" alt="">
+        <div class="text">{{person.serviceType}}</div>
+      </div>
       <div class="exImg">
         <div class="exlist" *ngFor="let imgs of person.casePictureArr">
           <div class="listsc">
@@ -76,7 +80,7 @@
 <div class="gotop" (click)="gotopFn()">
   <img src="./assets/image/gotop.png" alt="">
 </div>
-<div class="kefu" routerLink="/teacher">
+<div class="kefu" routerLink="/teacher" *ngIf="isManager">
   <img src="./assets/image/kefu.png" alt="">
 </div>
 <app-alertbox></app-alertbox>

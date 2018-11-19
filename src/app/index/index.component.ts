@@ -12,19 +12,17 @@ import wx from 'weixin-js-sdk';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-  public indexInfo: any;
-  public storeInfo = {
-    'name': ''
-  };
-  public carouselarr = [];
-  public carefullyarr = [];
-  public personIntroduce = [];
+  public indexInfo: any = {};
+  public isManager: any = JSON.parse(localStorage.getItem('memberInfo')).isManager;
+  public storeInfo: any = {};
+  public carouselarr: any = [];
+  public carefullyarr: any = [];
+  public personIntroduce: any = [];
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private userConfigService: UserConfigService) {
   }
-
   ngOnInit() {
     /***
      * 设置title

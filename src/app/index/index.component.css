@@ -236,6 +236,30 @@
   width: 100%;
   height: 100%;
 }
+.serveBox .headTips{
+  width: 0.84rem;
+  height: 0.85rem;
+  position: absolute;
+  right: 0.15rem;
+  top: 0.2rem;
+  z-index: 1;
+}
+.serveBox .headTips img{
+  width: 0.84rem;
+  height: 0.85rem;
+}
+.serveBox .headTips .text{
+  color: #ffffff;
+  font-size: 0.24rem;
+  transform: rotate(-10deg);
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  margin-left: -0.24rem;
+  bottom: 0.2rem;
+  /*-webkit-transform: rotateX(10deg); !* Safari and Chrome *!*/
+  /*-webkit-transform: rotateY(120deg); !* Safari and Chrome *!*/
+}
 .serveBox .exImg{
   width: 100%;
   display: flex;
