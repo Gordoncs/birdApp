@@ -13,7 +13,7 @@ import {TongxinService} from '../shared/tongxin.service';
 })
 export class DetailComponent implements OnInit, AfterViewInit {
   public  showWhitchStatus: any = 1;
-  public  detailInfo: any;
+  public  detailInfo: any = {};
   public  goodsId: any;
   public  priceArr: any = [];
   public  choseSkuSpecId: any = [];

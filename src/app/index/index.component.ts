@@ -13,7 +13,7 @@ import wx from 'weixin-js-sdk';
 })
 export class IndexComponent implements OnInit {
   public indexInfo: any = {};
-  public isManager: any = JSON.parse(localStorage.getItem('memberInfo')).isManager;
+  public isManager: any = false;
   public storeInfo: any = {};
   public carouselarr: any = [];
   public carefullyarr: any = [];
@@ -57,9 +57,9 @@ export class IndexComponent implements OnInit {
       }
     };
     // 获取首页数据
-    // this.getInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
-    this.getInfo(39.91474, 116.37333);
-
+    this.getInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
+    // this.getInfo(39.91474, 116.37333);
+    this.getbaseMember();
   }
 
   gotopFn(): void {
@@ -167,5 +167,20 @@ export class IndexComponent implements OnInit {
     if (item.type === '3') {
       alert('跳转体验商品分享页');
     }
+  }
+  /***
+   * 获取用户信息
+   */
+  getbaseMember() {
+    this.userConfigService.baseMember()
+      .subscribe((data) => {
+        if (data['result']) {
+          this.isManager = data['data'].isManager;
+          localStorage.setItem('memberInfo', data['data']);
+          localStorage.setItem('memberId', data['data']['memberId']);
+        } else {
+          console.log(data['message']);
+        }
+      });
   }
 }

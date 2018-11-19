@@ -35,7 +35,10 @@ export class AppComponent implements OnInit {
      * 获取购物车数字
      */
     this.getCartNum();
-    this.cartGetCartDetailNumber();
+    const  t = this;
+    setTimeout(function() {
+      t.cartGetCartDetailNumber();
+    }, 1000);
   }
   cartGetCartDetailNumber() {
     const memberId = localStorage.getItem('memberId');
@@ -55,4 +58,19 @@ export class AppComponent implements OnInit {
       this.cartGetCartDetailNumber();
     });
   }
+  // /***
+  //  * 获取用户信息
+  //  */
+  // getbaseMember() {
+  //   this.userConfigService.baseMember()
+  //     .subscribe((data) => {
+  //       if (data['result']) {
+  //         localStorage.setItem('memberInfo', data['data']);
+  //         localStorage.setItem('memberId', data['data']['memberId']);
+  //         this.cartGetCartDetailNumber();
+  //       } else {
+  //         console.log(data['message']);
+  //       }
+  //     });
+  // }
 }
