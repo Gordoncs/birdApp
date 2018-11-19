@@ -27,19 +27,26 @@ const configWeixin = function () {
       jsApiList: ['checkJsApi', 'scanQRCode', 'getLocation', 'uploadImage', 'chooseImage', 'chooseWXPay'] // 必填，需要使用的JS接口列表
     });
     wx.ready(function() {
+      wx.getLocation({
+        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+        success: function (res) {
+          localStorage.setItem('latitude', res.latitude);
+          localStorage.setItem('longitude', res.longitude);
+        }
+      });
       getbaseMember();
     });
   } else {
     window.location.href = data.result.data;
   }
 };
-// alert('20181118,23:30版本');
+alert('20181119,17:20版本');
 xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+// platformBrowserDynamic().bootstrapModule(AppModule)
+//   .catch(err => console.error(err));
 
 /***
  * 获取用户id

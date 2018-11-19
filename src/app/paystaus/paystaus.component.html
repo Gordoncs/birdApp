@@ -25,7 +25,7 @@
       <p>服务消费凭证，</p>
       <p>可到我的订单查看</p>
       <div class="btnBox">
-        <div class="btnlist">查看订单</div>
+        <div class="btnlist" [routerLink]="['/myorder']">查看订单</div>
         <div class="btnlist">分享体验</div>
       </div>
     </div>
@@ -46,8 +46,8 @@
     <p>抱歉亲爱的</p>
     <p>本次付款未成功</p>
     <p>请重新支付</p>
-    <div class="btns">重新支付</div>
-    <div class="btns">返回订单</div>
+    <div class="btns" (click)="pay()">重新支付</div>
+    <div class="btns" [routerLink]="['/myorder']">返回订单</div>
   </div>
 </div>
-
+<app-alertbox></app-alertbox>

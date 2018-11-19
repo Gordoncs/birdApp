@@ -23,13 +23,13 @@ export class HexiaoComponent implements OnInit {
      * 设置title
      */
     this.titleService.setTitle('扫码销单');
-    this.routerInfo.params.subscribe((params) => this.code = params['code']);
-    this.advisorGetOrderCheckoffDetail(this.code);
+    this.routerInfo.params.subscribe((params) => this.code = params);
+    this.advisorGetOrderCheckoffDetail(this.code.code.split('#')[0], this.code.code.split('#')[1]);
   }
 
-  advisorGetOrderCheckoffDetail(code) {
+  advisorGetOrderCheckoffDetail(id , code) {
     this.alertBox.load();
-    this.userConfigService.advisorGetOrderCheckoffDetail(code).
+    this.userConfigService.advisorGetOrderCheckoffDetail(id, code).
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {

@@ -59,14 +59,8 @@ export class IndexComponent implements OnInit {
       }
     };
     // 获取首页数据
-    const that = this;
-    // wx.getLocation({
-    //   type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-    //   success: function (res) {
-    //     that.getInfo(res.latitude, res.longitude);
-    //   }
-    // });
-    that.getInfo(39.91474, 116.37333);
+    // this.getInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
+    this.getInfo(39.91474, 116.37333);
 
   }
 
@@ -82,6 +76,32 @@ export class IndexComponent implements OnInit {
         if (data['result']) {
           that.indexInfo = data['data'];
           that.personIntroduce = that.indexInfo['personIntroduce'];
+          for (let i = 0; i < that.personIntroduce.length; i++) {
+            that.personIntroduce[i].casePicture = JSON.parse(that.personIntroduce[i].casePicture);
+            that.personIntroduce[i].casePictureArr = [
+              {'before' : '', 'after' : ''},
+              {'before' : '', 'after' : ''},
+              {'before' : '', 'after' : ''}
+            ];
+            if (that.personIntroduce[i].casePicture.length === 2) {
+              that.personIntroduce[i].casePictureArr[0].before = that.personIntroduce[i].casePicture[0].small;
+              that.personIntroduce[i].casePictureArr[0].after = that.personIntroduce[i].casePicture[1].small;
+            }
+            if (that.personIntroduce[i].casePicture.length === 4) {
+              that.personIntroduce[i].casePictureArr[0].before = that.personIntroduce[i].casePicture[0].small;
+              that.personIntroduce[i].casePictureArr[0].after = that.personIntroduce[i].casePicture[1].small;
+              that.personIntroduce[i].casePictureArr[1].before = that.personIntroduce[i].casePicture[2].small;
+              that.personIntroduce[i].casePictureArr[1].after = that.personIntroduce[i].casePicture[3].small;
+            }
+            if (that.personIntroduce[i].casePicture.length === 6) {
+              that.personIntroduce[i].casePictureArr[0].before = that.personIntroduce[i].casePicture[0].small;
+              that.personIntroduce[i].casePictureArr[0].after = that.personIntroduce[i].casePicture[1].small;
+              that.personIntroduce[i].casePictureArr[1].before = that.personIntroduce[i].casePicture[2].small;
+              that.personIntroduce[i].casePictureArr[1].after = that.personIntroduce[i].casePicture[3].small;
+              that.personIntroduce[i].casePictureArr[2].before = that.personIntroduce[i].casePicture[4].small;
+              that.personIntroduce[i].casePictureArr[2].after = that.personIntroduce[i].casePicture[5].small;
+            }
+          }
           const carefullyarr = [];
           const carouselarr = [];
           // 处理精选内容

@@ -90,12 +90,13 @@ export class TeacherComponent implements OnInit {
 
   sao() {
     const t = this;
+    // t.router.navigate(['/hexiao', {'code': '119#15424717055823526503'}]);
     wx.scanQRCode({
       needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
       scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有
       success: function (res) {
         alert(res.resultStr);
-        t.router.navigate(['/hexiao', res.resultStr]);
+        t.router.navigate(['/hexiao', {'code': res.resultStr}]);
       }
     });
   }

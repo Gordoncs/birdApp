@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
 import {TongxinService} from '../shared/tongxin.service';
-
+import {AlertboxComponent} from '../alertbox/alertbox.component';
+import wx from 'weixin-js-sdk';
 @Component({
   selector: 'app-paystaus',
   templateUrl: './paystaus.component.html',
@@ -11,15 +12,98 @@ import {TongxinService} from '../shared/tongxin.service';
 })
 export class PaystausComponent implements OnInit {
   public status = 'false';
+  public fromData: any = {};
+  // 弹框显示
+  @ViewChild(AlertboxComponent)
+  alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
-
+              private userConfigService: UserConfigService) { }
   ngOnInit() {
     /***
      * 设置title
      */
     this.titleService.setTitle('支付结果');
-    this.routerInfo.params.subscribe((params) => this.status = params['status']);
+    this.routerInfo.params.subscribe((params) => this.fromData = params);
+    this.status = this.fromData.res;
+    console.log(this.fromData);
+  }
+  pay() {
+    if (this.fromData.from === 'justpay') {
+      this.justpaypay(JSON.parse(this.fromData.order), JSON.parse(this.fromData.discounts));
+    }
+    if (this.fromData.from === 'paysure') {
+      this.paysurepay(this.fromData.orderNo);
+    }
+  }
+  paysurepay(orderNo) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.paymentWechatPrepay(orderNo).
+    subscribe(data => {
+      console.log(data);
+      this.alertBox.close();
+      if (data['result']) {
+        wx.chooseWXPay({
+          appId: data.paySignMap.appId,
+          timestamp: data.paySignMap.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          nonceStr: data.paySignMap.nonceStr, // 支付签名随机串，不长于 32 位
+          package: data.paySignMap.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+          signType: data.paySignMap.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          paySign: data.paySignMap.paySign, // 支付签名
+          success: function (res) {
+            if (res.errMsg === 'chooseWXPay:ok' ) {
+              t.alertBox.success('支付成功');
+              t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderNo, 'from': 'paysure'}]);
+            } else {
+              t.alertBox.success('支付失败');
+              t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderNo, 'from': 'paysure' }]);
+            }
+          },
+          cancel: function(res) {
+            t.alertBox.success('取消支付');
+            t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderNo, 'from': 'paysure'}]);
+          }
+        });
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
   }
 
+  justpaypay(order, discounts) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.checkoutAddCashOrder(order, discounts).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        wx.chooseWXPay({
+          appId: data.paySignMap.appId,
+          timestamp: data.paySignMap.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          nonceStr: data.paySignMap.nonceStr, // 支付签名随机串，不长于 32 位
+          package: data.paySignMap.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+          signType: data.paySignMap.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          paySign: data.paySignMap.paySign, // 支付签名
+          success: function (res) {
+            if (res.errMsg === 'chooseWXPay:ok' ) {
+              t.alertBox.success('支付成功');
+              t.router.navigate(['/paystatus', {'res': true, 'order': JSON.stringify(order),
+                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+            } else {
+              t.alertBox.success('支付失败');
+              t.router.navigate(['/paystatus', {'res': false, 'order': JSON.stringify(order),
+                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+            }
+          },
+          cancel: function(res) {
+            t.alertBox.success('取消支付');
+            t.router.navigate(['/paystatus', {'res': false, 'order': JSON.stringify(order),
+              'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+          }
+        });
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
 }

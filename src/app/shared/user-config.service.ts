@@ -33,8 +33,8 @@ export class UserConfigService {
   /**
    * 公共地址
    */
-  // configUrl = 'http://mp.needai.com';
-  configUrl = 'http://47.105.65.44:9000';
+  configUrl = 'http://mp.needai.com';
+  // configUrl = 'http://47.105.65.44:9000';
   /**
    * 判断no auth进行地址跳转
    */
@@ -280,8 +280,8 @@ export class UserConfigService {
   /**
    * 导师扫码销单获取详情
    */
-  advisorGetOrderCheckoffDetail(code: any): Observable<any> {
-    const params = '?code=' + code ;
+  advisorGetOrderCheckoffDetail(id: any, code: any): Observable<any> {
+    const params = '?id=' + id + '&code=' + code ;
     return this.http.get(this.configUrl + '/advisor/getOrderCheckoffDetail' + params , this.headoptions)
       .pipe(
         retry(1),

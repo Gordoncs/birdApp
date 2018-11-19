@@ -39,6 +39,9 @@ export class JustpayComponent implements OnInit {
       'discountPriceAmout': this.discountPriceAmout,
     };
     const discounts = this.discounts;
+    t.router.navigate(['/paystatus', {'res': false, 'order': JSON.stringify(order),
+      'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+    return;
     this.alertBox.load();
     this.userConfigService.checkoutAddCashOrder(order, discounts).
     subscribe(data => {
@@ -54,15 +57,18 @@ export class JustpayComponent implements OnInit {
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
               t.alertBox.success('支付成功');
-              t.router.navigate(['/paystatus', true]);
+              t.router.navigate(['/paystatus', {'res': true, 'order': JSON.stringify(order),
+                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
             } else {
               t.alertBox.success('支付失败');
-              t.router.navigate(['/paystatus', false]);
+              t.router.navigate(['/paystatus', {'res': false, 'order': JSON.stringify(order),
+                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
             }
           },
           cancel: function(res) {
             t.alertBox.success('取消支付');
-            t.router.navigate(['/paystatus', false]);
+            t.router.navigate(['/paystatus', {'res': false, 'order': JSON.stringify(order),
+              'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
           }
         });
       } else {

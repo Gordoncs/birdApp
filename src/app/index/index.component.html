@@ -45,17 +45,24 @@
     <div *ngFor="let person of personIntroduce " class="serveList">
       <div class="servehead">
         <div class="line"></div>
+        <div class="headImg">
+          <img src="{{person.headIcon}}" alt="">
+        </div>
         <div class="person">
           <span class="name">{{person.name}}</span>
           <span class="tips">{{person.title}}</span>
         </div>
       </div>
-      <div class="headImg">
-        <img src="{{person.headIcon}}" alt="">
-      </div>
       <div class="exImg">
         <div class="exlist" *ngFor="let imgs of person.casePictureArr">
-          <img src="{{imgs}}" alt="">
+          <div class="listsc">
+            <img *ngIf="imgs.before!=''" src="{{imgs.before}}" alt="">
+            <p *ngIf="imgs.before==''">服务前</p>
+          </div>
+          <div class="listsc">
+            <img *ngIf="imgs.before!=''" src="{{imgs.after}}" alt="">
+            <p *ngIf="imgs.before==''">服务前</p>
+          </div>
         </div>
       </div>
       <p class="declist">会员年龄：{{person.memberAge}}岁</p>

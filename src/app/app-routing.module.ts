@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'cart', component: ShopcarComponent},
   { path: 'paysure', component: PaysureComponent},
   { path: 'justpay', component: JustpayComponent},
-  { path: 'paystatus/:status', component: PaystausComponent},
+  { path: 'paystatus', component: PaystausComponent},
   { path: 'myindex', component: MyindexComponent},
   { path: 'myorder', component: MyorderComponent},
   { path: 'orderdetail/:orderId', component: OrderdetailComponent},
@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'address', component: AddresComponent},
   { path: 'teacher', component: TeacherComponent},
   { path: 'upload', component: UploadComponent},
-  { path: 'hexiao/:code', component: HexiaoComponent},
+  { path: 'hexiao', component: HexiaoComponent},
   { path: '**', component: Code404Component},
 ];
 
