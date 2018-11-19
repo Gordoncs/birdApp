@@ -278,6 +278,31 @@ export class UserConfigService {
       );
   }
   /**
+   * 导师扫码销单获取详情
+   */
+  advisorGetOrderCheckoffDetail(code: any): Observable<any> {
+    const params = '?code=' + code ;
+    return this.http.get(this.configUrl + '/advisor/getOrderCheckoffDetail' + params , this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 导师确认核销订单
+   */
+  advisorCheckoffOrderDetail(detailId: any , orderId: any , advisorId: any): Observable<any> {
+    const params = '?detailId=' + detailId + '&orderId=' + orderId + '&advisorId=' + advisorId;
+    return this.http.get(this.configUrl + '/advisor/checkoffOrderDetail' + params , this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+
+  /**
    * 上传
    */
   uploadit(param: any): Observable<any> {

@@ -119,7 +119,9 @@ export class UploadComponent implements OnInit {
         this.alertBox.close();
         if (data['result']) {
           this.alertBox.success(data['message']);
-          history.go(-1);
+          setTimeout(function () {
+            history.go(-1);
+          }, 2000);
         } else {
           this.alertBox.error(data['message']);
         }

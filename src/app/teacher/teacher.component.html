@@ -15,7 +15,7 @@
         <div class="ptitle">{{teacherInfo.title}}</div>
         <div class="ptel">{{teacherInfo.phone}}</div>
       </div>
-      <div class="btnIconBox" [routerLink]="['/hexiao']">
+      <div class="btnIconBox" (click)="sao()" >
         <img  src="./assets/image/sao.png" alt="">
       </div>
       <div class="line"></div>

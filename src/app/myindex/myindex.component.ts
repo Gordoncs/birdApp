@@ -10,7 +10,7 @@ import {UserConfigService} from '../shared/user-config.service';
   styleUrls: ['./myindex.component.css']
 })
 export class MyindexComponent implements OnInit {
-  userInfo = {};
+  userInfo: any = {};
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;

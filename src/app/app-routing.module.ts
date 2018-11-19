@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'address', component: AddresComponent},
   { path: 'teacher', component: TeacherComponent},
   { path: 'upload', component: UploadComponent},
-  { path: 'hexiao', component: HexiaoComponent},
+  { path: 'hexiao/:code', component: HexiaoComponent},
   { path: '**', component: Code404Component},
 ];
 
