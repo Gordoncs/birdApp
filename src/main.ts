@@ -5,6 +5,7 @@ import {AppModule} from './app/app.module';
 import {environment} from './environments/environment';
 import wx from 'weixin-js-sdk';
 import * as MobileDetect from 'mobile-detect';
+import * as $ from 'jquery';
 if (environment.production) {
   enableProdMode();
 }
@@ -26,20 +27,41 @@ const configWeixin = function () {
       jsApiList: ['checkJsApi', 'scanQRCode', 'getLocation', 'uploadImage', 'chooseImage', 'chooseWXPay'] // 必填，需要使用的JS接口列表
     });
     wx.ready(function() {
-      platformBrowserDynamic().bootstrapModule(AppModule)
-        .catch(err => console.error(err));
+      getbaseMember();
     });
   } else {
     window.location.href = data.result.data;
   }
 };
-alert('20181118,23:30版本');
+// alert('20181118,23:30版本');
 xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
 
-// platformBrowserDynamic().bootstrapModule(AppModule)
-//   .catch(err => console.error(err));
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+
+/***
+ * 获取用户id
+ */
+const getbaseMember = function() {
+  $.ajax({
+    url: 'http://' + window.location.host + '/base/member',
+    type: 'get',
+    success: function(data) {
+      if (data['result']) {
+        localStorage.setItem('memberInfo', data['data']);
+        localStorage.setItem('memberId', data['data']['memberId']);
+        platformBrowserDynamic().bootstrapModule(AppModule)
+          .catch(err => console.error(err));
+      } else {
+        alert(data['message']);
+      }
+    }
+  });
+};
+
+
 /**
  * 获取当前用户公共信息
  * 取值方式为：
@@ -63,10 +85,5 @@ if (md.os() === 'iOS') {
 }
 localStorage.setItem('channel', 'wxH5');
 localStorage.setItem('language', 'zh_cn');
-
-
-// localStorage.setItem('memberId', '3');
-
-
 
 

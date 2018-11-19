@@ -78,6 +78,7 @@ export class OrderdetailComponent implements OnInit {
         this.alertBox.close();
         if (data['result']) {
           this.detailInfo = data['data'];
+          this.detailInfo.consumeVerificationQRcode = 'data:image/jpeg;base64,' + this.detailInfo.consumeVerificationQRcode;
           let allServers = 0;
           let useServers = 0;
           if (this.detailInfo.orderStatus === 1) {

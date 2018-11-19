@@ -33,8 +33,8 @@ export class UserConfigService {
   /**
    * 公共地址
    */
-  configUrl = 'http://mp.needai.com';
-  // configUrl = 'http://47.105.65.44:9000';
+  // configUrl = 'http://mp.needai.com';
+  configUrl = 'http://47.105.65.44:9000';
   /**
    * 判断no auth进行地址跳转
    */
@@ -187,7 +187,7 @@ export class UserConfigService {
    * 立即购买
    */
   checkoutOutrightPurchase(memberId: any, storeId: any, type: any, skuId: any): Observable<any> {
-    const params = 'memberId=' + memberId + '&storeId=' + storeId + '&type=' + type + '&sku=' + skuId ;
+    const params = 'memberId=' + memberId + '&storeId=' + storeId + '&type=' + type + '&id=' + skuId ;
     return this.http.post(this.configUrl + '/checkout/outrightPurchase', params, this.headoptionsPost)
       .pipe(
         retry(1),
@@ -247,6 +247,30 @@ export class UserConfigService {
    */
   paymentWechatPrepay(orderNo: string): Observable<any> {
     return this.http.get(this.configUrl + '/payment/wechat/prepay?orderNo=' + orderNo, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 获取导师信息
+   */
+  advisorGetAdvisorByMember(memberId: string): Observable<any> {
+    return this.http.get(this.configUrl + '/advisor/getAdvisorByMember?memberId=' + memberId, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 获取导师优惠二维码
+   */
+  advisorGetAdvisorDiscounts(discounts: any): Observable<any> {
+    const params = '?discounts.advisorId=' + discounts.advisorId + '&discounts.discountsType=' + discounts.discountsType +
+      '&discounts.discounts=' + discounts.discounts;
+    return this.http.get(this.configUrl + '/advisor/getAdvisorDiscounts' + params , this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError),

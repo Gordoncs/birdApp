@@ -60,13 +60,13 @@ export class IndexComponent implements OnInit {
     };
     // 获取首页数据
     const that = this;
-    wx.getLocation({
-      type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-      success: function (res) {
-        that.getInfo(res.latitude, res.longitude);
-      }
-    });
-    // that.getInfo(39.91474, 116.37333);
+    // wx.getLocation({
+    //   type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+    //   success: function (res) {
+    //     that.getInfo(res.latitude, res.longitude);
+    //   }
+    // });
+    that.getInfo(39.91474, 116.37333);
 
   }
 

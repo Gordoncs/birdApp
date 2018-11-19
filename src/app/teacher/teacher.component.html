@@ -7,13 +7,13 @@
         <div class="pimgs">
           <div class="round1">
             <div class="round2">
-              <img class="teacherConBg" src="./assets/image/headimg.png" alt="">
+              <img class="teacherConBg" [src]="teacherInfo.photoAddr" alt="">
             </div>
           </div>
         </div>
-        <div class="pname">贾超超</div>
-        <div class="ptitle">北大皮肤管理学博士</div>
-        <div class="ptel">13910260215</div>
+        <div class="pname">{{teacherInfo.name}}</div>
+        <div class="ptitle">{{teacherInfo.title}}</div>
+        <div class="ptel">{{teacherInfo.phone}}</div>
       </div>
       <div class="btnIconBox" [routerLink]="['/hexiao']">
         <img  src="./assets/image/sao.png" alt="">
@@ -34,12 +34,12 @@
     <div *ngIf="!showQr" class="setNumerBox">
       <div class="lists">
         <span>折扣设置</span>
-        <input type="number" placeholder="请输入文字">
+        <input type="number" [(ngModel)]="zhekouInput" (keyup)="changeit('折扣')" placeholder="请输入折扣">
         <span>%</span>
       </div>
       <div class="lists" style="margin-bottom: 0.1rem;">
         <span>现金设置</span>
-        <input type="number" placeholder="请输入文字">
+        <input type="number" [(ngModel)]="cashInput" (keyup)="changeit('现金')" placeholder="请输入现金">
         <span>元</span>
       </div>
     </div>
@@ -49,8 +49,9 @@
     <img *ngIf="showQr" class="qrBg" src="./assets/image/qrBg.png" alt="">
     <div *ngIf="showQr" class="qrBox">
       <div class="qrBoxCon">
-        <img src="./assets/image/qrEx.png" alt="">
+        <img [src]="qrImg" alt="">
       </div>
     </div>
   </div>
 </div>
+<app-alertbox></app-alertbox>

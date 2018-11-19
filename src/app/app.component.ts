@@ -35,9 +35,7 @@ export class AppComponent implements OnInit {
      * 获取购物车数字
      */
     this.getCartNum();
-    // 获取用户信息
-    this.getbaseMember();
-    // this.cartGetCartDetailNumber();
+    this.cartGetCartDetailNumber();
   }
   cartGetCartDetailNumber() {
     const memberId = localStorage.getItem('memberId');
@@ -56,20 +54,5 @@ export class AppComponent implements OnInit {
     this.TongXin.Status$.subscribe(res => {
       this.cartGetCartDetailNumber();
     });
-  }
-  /***
-   * 获取用户信息
-   */
-  getbaseMember() {
-    this.userConfigService.baseMember()
-      .subscribe((data) => {
-        if (data['result']) {
-          localStorage.setItem('memberInfo', data['data']);
-          localStorage.setItem('memberId', data['data']['memberId']);
-          this.cartGetCartDetailNumber();
-        } else {
-          console.log(data['message']);
-        }
-      });
   }
 }

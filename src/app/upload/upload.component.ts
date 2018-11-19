@@ -113,12 +113,13 @@ export class UploadComponent implements OnInit {
       this.memberCase.memberAge + '&caseBean.memberCase.serviceType=' + this.memberCase.serviceType +
       '&caseBean.memberCase.serviceProject=' + this.memberCase.serviceProject +
       '&caseBean.memberCase.describedResults=' + this.memberCase.describedResults;
-    console.log(imgsUrl);
-    console.log(memberCase);
+    this.alertBox.load();
     this.userConfigService.uploadit(memberCase + imgsUrl)
       .subscribe((data) => {
         this.alertBox.close();
         if (data['result']) {
+          this.alertBox.success(data['message']);
+          history.go(-1);
         } else {
           this.alertBox.error(data['message']);
         }

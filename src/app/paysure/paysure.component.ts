@@ -156,7 +156,7 @@ export class PaysureComponent implements OnInit {
       success: function (res) {
         const discounts = {
           'id' : res.resultStr.split('#')[0],
-          'authCode' : res.resultStr.split('#')[1],
+          'authCode' : res.resultStr.split('#')[2],
         };
         t.checkoutGetSettleAccountsDiscounts(t.allMoney, discounts);
       }
