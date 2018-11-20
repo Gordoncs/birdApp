@@ -93,7 +93,7 @@ export class AddresComponent implements OnInit {
     ];
     for (let i = 0; i < tipsArrAddress.length; i++) {
       latlngs.push(
-        new qq.maps.LatLng(tipsArrAddress[i].longitude, tipsArrAddress[i].latitude)
+        new qq.maps.LatLng( tipsArrAddress[i].latitude, tipsArrAddress[i].longitude)
       );
     }
     for (let i = 0; i < latlngs.length; i++) {
