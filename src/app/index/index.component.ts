@@ -57,8 +57,8 @@ export class IndexComponent implements OnInit {
       }
     };
     // 获取首页数据
-    this.getInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
-    // this.getInfo(39.91474, 116.37333);
+    // this.getInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
+    this.getInfo(39.91474, 116.37333);
     // this.getInfo(31.5785354265, 117.3339843750);
     this.getbaseMember();
   }
@@ -173,7 +173,7 @@ export class IndexComponent implements OnInit {
       this.router.navigate(['/specialgoods']);
     }
     if (item.type === '3') {
-      alert('跳转体验商品分享页');
+      this.router.navigate(['/freetake', item.id]);
     }
   }
   /***

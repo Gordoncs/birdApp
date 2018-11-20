@@ -45,13 +45,13 @@ const configWeixin = function () {
     window.location.href = data.result.data;
   }
 };
-alert('20181120,19:05版本');
+// alert('20181120,19:05版本');
 xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
 
-// platformBrowserDynamic().bootstrapModule(AppModule)
-//   .catch(err => console.error(err));
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
 
 /***
  * 获取用户id

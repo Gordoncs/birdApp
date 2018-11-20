@@ -25,6 +25,7 @@ import { JustpayComponent } from './justpay/justpay.component';
 import { PaystausComponent } from './paystaus/paystaus.component';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
 import { SpecialgoodsComponent } from './specialgoods/specialgoods.component';
+import { FreetakeComponent } from './freetake/freetake.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SpecialgoodsComponent } from './specialgoods/specialgoods.component';
     JustpayComponent,
     PaystausComponent,
     OrderdetailComponent,
-    SpecialgoodsComponent
+    SpecialgoodsComponent,
+    FreetakeComponent
   ],
   imports: [
     BrowserModule,

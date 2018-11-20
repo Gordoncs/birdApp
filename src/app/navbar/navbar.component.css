@@ -37,11 +37,9 @@
 .car{
   width: 0.49rem;
   height: 0.50rem;
-  background: url("../../../src/assets/image/car.png") top center;
 }
 .person{
   width: 0.52rem;
   height: 0.53rem;
-  background: url("../../../src/assets/image/person.png") top center;
 }
 

@@ -16,6 +16,7 @@ import {JustpayComponent} from './justpay/justpay.component';
 import {PaystausComponent} from './paystaus/paystaus.component';
 import {OrderdetailComponent} from './orderdetail/orderdetail.component';
 import {SpecialgoodsComponent} from './specialgoods/specialgoods.component';
+import {FreetakeComponent} from './freetake/freetake.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'effectluck', component: EffectluckComponent},
   { path: 'goodsdetail/:goodsId', component: DetailComponent},
   { path: 'specialgoods', component: SpecialgoodsComponent},
+  { path: 'freetake/:goodsId', component: FreetakeComponent},
   { path: 'address/:status', component: AddresComponent},
   { path: 'teacher', component: TeacherComponent},
   { path: 'upload', component: UploadComponent},
