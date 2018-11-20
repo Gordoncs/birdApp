@@ -33,8 +33,8 @@ export class UserConfigService {
   /**
    * 公共地址
    */
-  configUrl = 'http://mp.needai.com';
-  // configUrl = 'http://47.105.65.44:9000';
+  // configUrl = 'http://mp.needai.com';
+  configUrl = 'http://47.105.65.44:9000';
   /**
    * 判断no auth进行地址跳转
    */
@@ -378,6 +378,18 @@ export class UserConfigService {
   cancelOrder(orderId: any): Observable<any> {
     const params = '?orderId=' + orderId;
     return this.http.get(this.configUrl + '/order/cancelOrder' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 获取定位最近店铺信息
+   */
+  getNextStoreInfo(latitude: any, longitude: any): Observable<any> {
+    const params = '?latitude=' + latitude + '&longitude=' + longitude;
+    return this.http.get(this.configUrl + '/getNextStoreInfo' + params, this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError),

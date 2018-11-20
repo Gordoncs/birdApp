@@ -19,7 +19,7 @@
   </div>
 </div>
 <div [@openClose]="isOpen ? 'open' : 'closed'" class="shopBox">
-  <div class="list">
+  <div class="list" *ngFor="let item of shopArr let i = index" (click)="sureClick(item.latitude,item.longitude,item)">
     <div class="line"></div>
     <div class="shopImg">
       <img  src="./assets/image/shopImg.png" alt="">
@@ -28,81 +28,15 @@
       <div class="top">
         <div class="iconImg">
           <img src="./assets/image/addressIcon.png" alt="">
-          <span>1</span>
+          <span>{{i+1}}</span>
         </div>
         <div class="textCon">
-          <span class="titles">春鸟国际亦庄店</span>
-          <span class="miller">距您：3km</span>
+          <span class="titles">{{item.name}}</span>
+          <span class="miller">距您：{{item.distance}}km</span>
         </div>
       </div>
       <div class="bottom">
-        北京市大兴区天华西路天华园一里四区中央公馆10号楼底商
-      </div>
-    </div>
-    <img class="telImg" src="./assets/image/telIcon.png" alt="">
-  </div>
-  <div class="list">
-    <div class="line"></div>
-    <div class="shopImg">
-      <img  src="./assets/image/shopImg.png" alt="">
-    </div>
-    <div class="middle">
-      <div class="top">
-        <div class="iconImg">
-          <img src="./assets/image/addressIcon.png" alt="">
-          <span>1</span>
-        </div>
-        <div class="textCon">
-          <span class="titles">春鸟国际亦庄店</span>
-          <span class="miller">距您：3km</span>
-        </div>
-      </div>
-      <div class="bottom">
-        北京市大兴区天华西路天华园一里四区中央公馆10号楼底商
-      </div>
-    </div>
-    <img class="telImg" src="./assets/image/telIcon.png" alt="">
-  </div>
-  <div class="list">
-    <div class="line"></div>
-    <div class="shopImg">
-      <img  src="./assets/image/shopImg.png" alt="">
-    </div>
-    <div class="middle">
-      <div class="top">
-        <div class="iconImg">
-          <img src="./assets/image/addressIcon.png" alt="">
-          <span>1</span>
-        </div>
-        <div class="textCon">
-          <span class="titles">春鸟国际亦庄店</span>
-          <span class="miller">距您：3km</span>
-        </div>
-      </div>
-      <div class="bottom">
-        北京市大兴区天华西路天华园一里四区中央公馆10号楼底商
-      </div>
-    </div>
-    <img class="telImg" src="./assets/image/telIcon.png" alt="">
-  </div>
-  <div class="list">
-    <div class="line"></div>
-    <div class="shopImg">
-      <img  src="./assets/image/shopImg.png" alt="">
-    </div>
-    <div class="middle">
-      <div class="top">
-        <div class="iconImg">
-          <img src="./assets/image/addressIcon.png" alt="">
-          <span>1</span>
-        </div>
-        <div class="textCon">
-          <span class="titles">春鸟国际亦庄店</span>
-          <span class="miller">距您：3km</span>
-        </div>
-      </div>
-      <div class="bottom">
-        北京市大兴区天华西路天华园一里四区中央公馆10号楼底商
+        {{item.addr}}
       </div>
     </div>
     <img class="telImg" src="./assets/image/telIcon.png" alt="">
@@ -114,3 +48,4 @@
   </div>
 </div>
 
+<app-alertbox></app-alertbox>

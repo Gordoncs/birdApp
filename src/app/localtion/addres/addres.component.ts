@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 declare var  qq: any;
 import {
   trigger,
@@ -7,6 +7,11 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import {AlertboxComponent} from '../../alertbox/alertbox.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
+import {UserConfigService} from '../../shared/user-config.service';
+import {TongxinService} from '../../shared/tongxin.service';
 @Component({
   selector: 'app-addres',
   templateUrl: './addres.component.html',
@@ -32,11 +37,18 @@ export class AddresComponent implements OnInit {
   public searchText = '';
   public searchService: any;
   public searchResults = [];
-  constructor() { }
+  public shopArr: any = [];
+  public status = 'have';
+  public locallat: any = localStorage.getItem('latitude');
+  public locallong: any =  localStorage.getItem('longitude');
+  // 弹框显示
+  @ViewChild(AlertboxComponent)
+  alertBox: AlertboxComponent;
+  constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
+              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
     const t = this;
-    this.init();
     this.searchService = new qq.maps.SearchService({
       pageCapacity: 5,
       pageIndex: 1,
@@ -49,59 +61,41 @@ export class AddresComponent implements OnInit {
         // error doing
       }
     });
+    this.routerInfo.params.subscribe((params) => this.status = params['status']);
+    if (this.status === 'nohave') {
+      // 外省访问
+      this.getNextStoreInfo(39.908 , 116.3974);
+    } else {
+      // 北京本地访问
+      this.getNextStoreInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
+    }
   }
   toggle() {
     this.isOpen = !this.isOpen;
   }
-  init() {
-    const center = new qq.maps.LatLng(39.914850, 116.403765);
+  init(centerAddress, tipsArrAddress) {
+    const t = this;
+    const center = new qq.maps.LatLng(centerAddress.latitude, centerAddress.longitude);
     const map = new qq.maps.Map(
       document.getElementById('container'),
       {
         center: center,
-        zoom: 13
+        zoom: 10
       }
     );
     const  markerIcon = new qq.maps.MarkerImage(
         './assets/image/addressIcon.png',
       );
+    const  markerIconSel = new qq.maps.MarkerImage(
+      './assets/image/addressIconSel.png',
+    );
     const latlngs = [
-      new qq.maps.LatLng(39.91474, 116.37333),
-      new qq.maps.LatLng(39.90884, 116.41306)
     ];
-    for (let i = 0; i < latlngs.length; i++) {
-      (function(n) {
-        const decoration = new qq.maps.MarkerDecoration(
-          '<span style="color:#FFF;font-size:0.2rem;font-weight:bold;">' + (n + 1) + '</span>'
-          , new qq.maps.Point(0, -8));
-        const marker = new qq.maps.Marker({
-          position: latlngs[n],
-          map: map,
-          content: '文本标注',
-          decoration: decoration
-        });
-        marker.setIcon(markerIcon);
-        qq.maps.event.addListener(marker, 'click', function(event) {
-          console.log(event);
-        });
-      })(i);
+    for (let i = 0; i < tipsArrAddress.length; i++) {
+      latlngs.push(
+        new qq.maps.LatLng(tipsArrAddress[i].longitude, tipsArrAddress[i].latitude)
+      );
     }
-  }
-  init2() {
-    const center = new qq.maps.LatLng(39.914850, 116.403765);
-    const map = new qq.maps.Map(
-      document.getElementById('container'),
-      {
-        center: center,
-        zoom: 13
-      }
-    );
-    const  markerIcon = new qq.maps.MarkerImage(
-      './assets/image/addressIcon.png',
-    );
-    const latlngs = [
-      new qq.maps.LatLng(39.91474, 116.37333),
-    ];
     for (let i = 0; i < latlngs.length; i++) {
       (function(n) {
         const decoration = new qq.maps.MarkerDecoration(
@@ -111,11 +105,17 @@ export class AddresComponent implements OnInit {
           position: latlngs[n],
           map: map,
           content: '文本标注',
-          decoration: decoration
+          decoration: decoration,
+          shopInfo: tipsArrAddress[n].shopInfo
         });
-        marker.setIcon(markerIcon);
+        if (marker.position.lat * 1 === t.locallat * 1 && marker.position.lng * 1 === t.locallong * 1) {
+        // if (marker.position.lat * 1 === t.locallong * 1 && marker.position.lng * 1 === t.locallat * 1) {
+          marker.setIcon(markerIconSel);
+        } else {
+          marker.setIcon(markerIcon);
+        }
         qq.maps.event.addListener(marker, 'click', function(event) {
-          console.log(event);
+          t.sureClick(event.latLng.lat, event.latLng.lng, event.target.shopInfo);
         });
       })(i);
     }
@@ -128,12 +128,43 @@ export class AddresComponent implements OnInit {
     if (this.searchText !== '') {
       setTimeout(function() {
         const region = new qq.maps.LatLng(39.916527, 116.397128);
-        t.searchService.searchNearBy(t.searchText, region , 2000);
+        t.searchService.searchNearBy(t.searchText, region , 100000);
       }, 500);
     }
   }
   choseAddress(item) {
+    console.log(item);
+    this.getNextStoreInfo(item.latLng.lat, item.latLng.lng);
     this.isfocus = false;
-    this.init2();
   }
+
+  getNextStoreInfo(latitude, longitude) {
+    this.alertBox.load();
+    this.userConfigService.getNextStoreInfo(latitude, longitude)
+      .subscribe((data) => {
+        this.alertBox.close();
+        if (data['result']) {
+          this.shopArr = data['data'];
+          const centerAddress = {'latitude': latitude, 'longitude': longitude};
+          const tipsArrAddress = [];
+          for (let i = 0 ; i < this.shopArr.length ; i++) {
+            tipsArrAddress.push(
+              {'latitude': this.shopArr[i].latitude, 'longitude': this.shopArr[i].longitude, 'shopInfo': this.shopArr[i]}
+            );
+          }
+          this.init(centerAddress, tipsArrAddress);
+        } else {
+          console.log(data['message']);
+        }
+      });
+  }
+  sureClick(latitude, longitude, item) {
+    alert(latitude);
+    alert(longitude);
+    localStorage.setItem('latitude', latitude);
+    localStorage.setItem('longitude', longitude);
+    localStorage.setItem('storeInfo', JSON.stringify(item));
+    history.go(-1);
+  }
+
 }

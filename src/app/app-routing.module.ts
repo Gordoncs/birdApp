@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'effectluck', component: EffectluckComponent},
   { path: 'goodsdetail/:goodsId', component: DetailComponent},
   { path: 'specialgoods', component: SpecialgoodsComponent},
-  { path: 'address', component: AddresComponent},
+  { path: 'address/:status', component: AddresComponent},
   { path: 'teacher', component: TeacherComponent},
   { path: 'upload', component: UploadComponent},
   { path: 'hexiao', component: HexiaoComponent},

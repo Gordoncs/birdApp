@@ -59,6 +59,7 @@ export class IndexComponent implements OnInit {
     // 获取首页数据
     this.getInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
     // this.getInfo(39.91474, 116.37333);
+    // this.getInfo(31.5785354265, 117.3339843750);
     this.getbaseMember();
   }
 
@@ -127,13 +128,20 @@ export class IndexComponent implements OnInit {
           }
           that.carouselarr = carouselarr;
           // 处理店铺信息
-          localStorage.setItem('storeInfo', JSON.stringify(that.indexInfo['storeInfo']));
           that.storeInfo = that.indexInfo['storeInfo'];
+          if ( that.storeInfo === null) {
+            this.router.navigate(['/address', 'nohave']);
+          } else {
+            localStorage.setItem('storeInfo', JSON.stringify(that.indexInfo['storeInfo']));
+          }
           setTimeout(function () {
             that.scrollFn();
           }, 100);
         } else {
           that.alertBox.error(data['message']);
+          setTimeout(function () {
+            that.router.navigate(['/address', 'nohave']);
+          }, 1000);
         }
       });
   }
