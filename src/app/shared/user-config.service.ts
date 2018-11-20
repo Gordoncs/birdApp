@@ -199,9 +199,11 @@ export class UserConfigService {
    * 金额付款订单结算下单
    */
   checkoutAddCashOrder(order: any, discounts: any): Observable<any> {
-    const params = 'order.memberId=' + order.memberId + '&order.storeId=' + order.storeId +
-      '&order.orderPriceAmount=' + order.orderPriceAmount + '&order.discountPriceAmout=' + order.discountPriceAmout +
-      '&discounts.id=' + discounts.id + '&discounts.authCode=' + discounts.authCode;
+    let params = 'order.memberId=' + order.memberId + '&order.storeId=' + order.storeId +
+      '&order.orderPriceAmount=' + order.orderPriceAmount + '&order.discountPriceAmout=' + order.discountPriceAmout;
+    if (discounts.id !== '') {
+      params = params + '&discounts.id=' + discounts.id + '&discounts.authCode=' + discounts.authCode;
+    }
     return this.http.post(this.configUrl + '/checkout/addCashOrder', params, this.headoptionsPost)
       .pipe(
         retry(1),
@@ -226,15 +228,13 @@ export class UserConfigService {
    * 商品订单结算下单
    */
   checkoutAdd(sku: any, type: any, order: any, discounts: any): Observable<any> {
-    const params = 'sku=' + sku + '&type=' + type + '&order.memberId=' + order.memberId +
+    let params = 'sku=' + sku + '&type=' + type + '&order.memberId=' + order.memberId +
       '&order.storeId=' + order.storeId + '&order.orderRemark=' + order.orderRemark +
       '&order.subscribePhone=' + order.subscribePhone + '&order.linkman=' + order.linkman +
-      '&order.discountPriceAmout=' + order.discountPriceAmout + '&discounts.id=' + discounts.id +
-      '&discounts.authCode=' + discounts.authCode;
-    // const params = 'sku=' + sku + '&type=' + type + '&memberId=' + order.memberId +
-    //   '&storeId=' + order.storeId + '&orderRemark=' + order.orderRemark +
-    //   '&subscribePhone=' + order.subscribePhone + '&linkman=' + order.linkman +
-    //   '&discountPriceAmout=' + order.discountPriceAmout + '&id=' + bean.id + '&authCode=' + bean.authCode;
+      '&order.discountPriceAmout=' + order.discountPriceAmout;
+    if (discounts.id !== '') {
+      params = params + '&discounts.id=' + discounts.id + '&discounts.authCode=' + discounts.authCode;
+    }
     return this.http.post(this.configUrl + '/checkout/add', params, this.headoptionsPost)
       .pipe(
         retry(1),

@@ -12,7 +12,7 @@
     <div class="headSwiper">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div *ngFor="let item of carouselarr" class="swiper-slide" (click)="carouselGoto(item)" [routerLink]="['/specialgoods']">
+          <div *ngFor="let item of carouselarr" class="swiper-slide" (click)="carouselGoto(item)" >
             <img  src="{{item.imgs}}" alt="">
           </div>
         </div>

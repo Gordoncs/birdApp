@@ -15,10 +15,10 @@
   </div>
 
   <div class="mainBox">
-    <img class="goodsImg" [src]="detailInfo[selStatus].photoAddr"  alt="">
+    <img class="goodsImg" [src]="detailInfo[selStatus]['photoAddr']"  alt="">
     <div class="btnBox">
       <div class="littleBox" routerLink="/index">返回首页</div>
-      <div class="bigBox">立即抢购</div>
+      <div class="bigBox" *ngIf="selStatus=='nowOnSaleGoods'" (click)="goPaysure()">立即抢购</div>
     </div>
   </div>
 </div>

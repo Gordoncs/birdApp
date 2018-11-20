@@ -9,7 +9,7 @@ import {AlertboxComponent} from '../alertbox/alertbox.component';
   styleUrls: ['./specialgoods.component.css']
 })
 export class SpecialgoodsComponent implements OnInit {
-  public  detailInfo: any;
+  public  detailInfo: any = {};
   public  selStatus = 'nowOnSaleGoods';
   // 弹框显示
   @ViewChild(AlertboxComponent)
@@ -34,5 +34,13 @@ export class SpecialgoodsComponent implements OnInit {
           this.alertBox.error(data['message']);
         }
       });
+  }
+  goPaysure() {
+    const skuId = this.detailInfo[this.selStatus].id;
+    if (!skuId) {
+      this.alertBox.error('请选择产品');
+      return;
+    }
+    this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId)}]);
   }
 }

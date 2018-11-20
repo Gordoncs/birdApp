@@ -1,14 +1,14 @@
 <div class="navbar">
   <div class="navbarList" [routerLink]="['/index']" routerLinkActive="activeIndex" #rla="routerLinkActive">
-    <img class="index" src="{{rla.isActive?'./assets/image/indexSel.png':'./assets/image/index.png'}}" alt="">
+    <img class="index" [src]="rla.isActive?'./assets/image/indexSel.png':'./assets/image/index.png'" alt="">
     <div class="text">首页</div>
   </div>
   <div class="navbarList" [routerLink]="['/cart']" routerLinkActive="activeIndex" #rlacar="routerLinkActive">
-    <img class="car" src="{{rlacar.isActive?'./assets/image/carSel.png':'./assets/image/car.png'}}" alt="">
+    <img class="car" [src]="rlacar.isActive?'./assets/image/carSel.png':'./assets/image/car.png'" alt="">
     <div class="text">购物车{{cartNum}}</div>
   </div>
   <div class="navbarList"  [routerLink]="['/myindex']" routerLinkActive="activeIndex" #rlaperson="routerLinkActive">
-    <img class="person" src="{{rlaperson.isActive?'./assets/image/personSel.png':'./assets/image/person.png'}}"  alt="">
+    <img class="person" [src]="rlaperson.isActive?'./assets/image/personSel.png':'./assets/image/person.png'"  alt="">
     <div class="text">我的</div>
   </div>
 </div>
