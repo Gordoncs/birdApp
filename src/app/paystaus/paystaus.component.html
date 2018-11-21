@@ -8,8 +8,8 @@
     <div class="right">
       <p>免费福利送亲友</p>
       <p>本次消费您</p>
-      <p>共获得 <span>2</span> 张398体验券</p>
-      <div class="bigbtn">
+      <p>共获得 <span>{{userInfo.presentRemnant}}</span> 张398体验券</p>
+      <div class="bigbtn" [routerLink]="['/newerdec']">
         一键送福利
       </div>
     </div>
@@ -26,7 +26,7 @@
       <p>可到我的订单查看</p>
       <div class="btnBox">
         <div class="btnlist" [routerLink]="['/myorder']">查看订单</div>
-        <div class="btnlist">分享体验</div>
+        <div class="btnlist" [routerLink]="['/newerdec']">分享体验</div>
       </div>
     </div>
   </div>

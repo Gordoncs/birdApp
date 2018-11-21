@@ -134,7 +134,7 @@
   </div>
   <!--待使用切换所需显示部分结束-->
 
-  <div class="juanBox" *ngIf="detailInfo.orderStatus==1 || detailInfo.orderStatus==2">
+  <div class="juanBox" [routerLink]="['/newerdec']" *ngIf="detailInfo.orderStatus==1 || detailInfo.orderStatus==2">
     <img src="./assets/image/songJuan.png" alt="">
     <span>（剩余{{userInfo.presentRemnant}}张）</span>
   </div>

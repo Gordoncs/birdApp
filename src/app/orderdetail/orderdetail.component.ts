@@ -21,6 +21,9 @@ export class OrderdetailComponent implements OnInit {
   public iscomplete = false;
   public allServers = 0;
   public useServers = 0;
+  /**
+   * 订单状态：0=未付款，1=已付款，2=已完成，9=已取消；null=全部订单列表
+   */
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -129,15 +132,15 @@ export class OrderdetailComponent implements OnInit {
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
               t.alertBox.success('支付成功');
-              t.router.navigate(['/paystatus', true]);
+              t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderNo, 'from': 'paysure'}]);
             } else {
               t.alertBox.success('支付失败');
-              t.router.navigate(['/paystatus', false]);
+              t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderNo, 'from': 'paysure'}]);
             }
           },
           cancel: function(res) {
             t.alertBox.success('取消支付');
-            t.router.navigate(['/paystatus', false]);
+            t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderNo, 'from': 'paysure'}]);
           }
         });
       } else {

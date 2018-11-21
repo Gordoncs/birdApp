@@ -39,9 +39,6 @@ export class JustpayComponent implements OnInit {
       'discountPriceAmout': this.discountPriceAmout,
     };
     const discounts = this.discounts;
-    t.router.navigate(['/paystatus', {'res': false, 'order': JSON.stringify(order),
-      'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
-    return;
     this.alertBox.load();
     this.userConfigService.checkoutAddCashOrder(order, discounts).
     subscribe(data => {

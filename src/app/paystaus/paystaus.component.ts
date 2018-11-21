@@ -13,6 +13,7 @@ import wx from 'weixin-js-sdk';
 export class PaystausComponent implements OnInit {
   public status = 'false';
   public fromData: any = {};
+  public userInfo: any = {};
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -26,6 +27,7 @@ export class PaystausComponent implements OnInit {
     this.routerInfo.params.subscribe((params) => this.fromData = params);
     this.status = this.fromData.res;
     console.log(this.fromData);
+    this.getMemberIndexInfo();
   }
   pay() {
     if (this.fromData.from === 'justpay') {
@@ -101,6 +103,20 @@ export class PaystausComponent implements OnInit {
               'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
           }
         });
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+
+  getMemberIndexInfo() {
+    const memberId = localStorage.getItem('memberId');
+    this.alertBox.load();
+    this.userConfigService.getMemberIndexInfo(memberId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.userInfo = data['data'];
       } else {
         this.alertBox.error(data['message']);
       }
