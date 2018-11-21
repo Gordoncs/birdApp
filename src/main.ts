@@ -30,7 +30,7 @@ const configWeixin = function () {
   const data = JSON.parse(this.response);
   if (data.result.success) {
     wx.config({
-      debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+      debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
       appId: data.result.data.appId, // 必填，公众号的唯一标识
       timestamp: data.result.data.timestamp, // 必填，生成签名的时间戳
       nonceStr: data.result.data.noncestr, // 必填，生成签名的随机串
@@ -58,7 +58,7 @@ const configWeixin = function () {
     window.location.href = data.result.data;
   }
 };
-alert('20181122,0:11版本');
+// alert('20181122,0:11版本');
 xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
@@ -78,7 +78,7 @@ const getbaseMember = function() {
         localStorage.setItem('memberInfo', data['data']);
         localStorage.setItem('memberId', data['data']['memberId']);
       } else {
-        alert(data['message']);
+        console.log(data['message']);
       }
     }
   });
@@ -94,7 +94,7 @@ const getNextStoreInfo = function(latitude, longitude) {
       if (data['result']) {
         localStorage.setItem('storeInfo', JSON.stringify(data['data']));
       } else {
-        alert(data['message']);
+        console.log(data['message']);
       }
     }
   });

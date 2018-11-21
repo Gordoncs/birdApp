@@ -159,8 +159,6 @@ export class AddresComponent implements OnInit {
       });
   }
   sureClick(latitude, longitude, item) {
-    alert(latitude);
-    alert(longitude);
     localStorage.setItem('latitude', latitude);
     localStorage.setItem('longitude', longitude);
     localStorage.setItem('storeInfo', JSON.stringify(item));
