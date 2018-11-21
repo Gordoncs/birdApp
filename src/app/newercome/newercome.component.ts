@@ -24,14 +24,15 @@ export class NewercomeComponent implements OnInit {
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
-    this.titleService.setTitle('新人分享');
-    this.routerInfo.params.subscribe((params) => this.goodsId = params['goodsId']);
+    this.titleService.setTitle('免费领取');
+    alert('分享url跟的参数id为：' + localStorage.getItem('canshu') + ', 1朋友点进来，2朋友圈点进来');
     // const  t = this;
     // html2canvas(document.body).then(function(canvas) {
     //   t.imgsarr = canvas.toDataURL('image/jpeg');
     // });
   }
   goPaysure() {
+    localStorage.setItem('canshu', '');
     const skuId = this.tiyanInfo['sku'][0]['id'];
     this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId)}]);
   }

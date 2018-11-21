@@ -11,9 +11,21 @@ if (environment.production) {
 }
 const md = new MobileDetect(window.navigator.userAgent);
 
+const locationUrl = location.href;
+let signatureUrl = '';
+// 判断是否为外部跳转过来的页面
+if (locationUrl.indexOf('?') > -1) {
+  const currUrl = locationUrl;
+  const canshu = locationUrl.substr(locationUrl.indexOf('?') + 1) || '';
+  localStorage.setItem('canshu', canshu);
+  signatureUrl = '/signature?redirectUrl=g/index.html?' + canshu + '&currUrl=' + currUrl;
+} else {
+  const currUrl = 'http://' + window.location.host + '/g/index.html';
+  signatureUrl = '/signature?redirectUrl=g/index.html&currUrl=' + currUrl;
+}
+
 const xhr = new XMLHttpRequest();
-const currUrl = 'http://' + window.location.host + '/g/index.html';
-const signatureUrl = '/signature?redirectUrl=g/index.html&currUrl=' + currUrl;
+
 const configWeixin = function () {
   const data = JSON.parse(this.response);
   if (data.result.success) {
@@ -23,7 +35,8 @@ const configWeixin = function () {
       timestamp: data.result.data.timestamp, // 必填，生成签名的时间戳
       nonceStr: data.result.data.noncestr, // 必填，生成签名的随机串
       signature: data.result.data.signature, // 必填，签名
-      jsApiList: ['checkJsApi', 'scanQRCode', 'getLocation', 'uploadImage', 'chooseImage', 'chooseWXPay'] // 必填，需要使用的JS接口列表
+      jsApiList: ['checkJsApi', 'scanQRCode', 'getLocation', 'uploadImage', 'chooseImage',
+        'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData'] // 必填，需要使用的JS接口列表
     });
     wx.ready(function() {
       wx.getLocation({
@@ -38,20 +51,20 @@ const configWeixin = function () {
       setTimeout(function() {
         platformBrowserDynamic().bootstrapModule(AppModule)
           .catch(err => console.error(err));
-      }, 3000);
+      }, 2000);
 
     });
   } else {
     window.location.href = data.result.data;
   }
 };
-// alert('20181120,19:05版本');
+alert('20181122,0:11版本');
 xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+// platformBrowserDynamic().bootstrapModule(AppModule)
+//   .catch(err => console.error(err));
 
 /***
  * 获取用户id

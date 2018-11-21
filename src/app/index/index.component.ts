@@ -57,8 +57,8 @@ export class IndexComponent implements OnInit {
       }
     };
     // 获取首页数据
-    // this.getInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
-    this.getInfo(39.91474, 116.37333);
+    this.getInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
+    // this.getInfo(39.91474, 116.37333);
     // this.getInfo(31.5785354265, 117.3339843750);
     this.getbaseMember();
   }
@@ -133,6 +133,9 @@ export class IndexComponent implements OnInit {
             this.router.navigate(['/address', 'nohave']);
           } else {
             localStorage.setItem('storeInfo', JSON.stringify(that.indexInfo['storeInfo']));
+            if (localStorage.getItem('canshu')) {
+              this.router.navigate(['/newercome']);
+            }
           }
           setTimeout(function () {
             that.scrollFn();
