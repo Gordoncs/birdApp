@@ -67,6 +67,11 @@
 </div>
 <div class="priceBar">
   <div class="price">￥ {{(choseSku== ''?0:choseSku.price) | number:'2.2-2'}}</div>
+  <div class="navbarList" [routerLink]="['/cart']" >
+    <div class="numbers">{{cartNum}}</div>
+    <img class="car"  src='./assets/image/carSel.png' alt="">
+    <div class="text">购物车</div>
+  </div>
   <div class="addCarBtn" (click)="cartAdd()" >加入购物车</div>
   <div class="payBtn" (click)="goPaysure()">立即购买</div>
 </div>

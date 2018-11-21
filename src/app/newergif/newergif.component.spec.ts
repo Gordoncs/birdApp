@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FreetakeComponent } from './freetake.component';
+import { NewergifComponent } from './newergif.component';
 
-describe('FreetakeComponent', () => {
-  let component: FreetakeComponent;
-  let fixture: ComponentFixture<FreetakeComponent>;
+describe('NewergifComponent', () => {
+  let component: NewergifComponent;
+  let fixture: ComponentFixture<NewergifComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FreetakeComponent ]
+      declarations: [ NewergifComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FreetakeComponent);
+    fixture = TestBed.createComponent(NewergifComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

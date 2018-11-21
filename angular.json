@@ -28,6 +28,7 @@
               "./node_modules/cropperjs/dist/cropper.css"
             ],
             "scripts": [
+              "src/assets/js/html2canvas.min.js",
               "./node_modules/swiper/dist/js/swiper.min.js",
               "./node_modules/cropperjs/dist/cropper.js"
             ]

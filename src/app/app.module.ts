@@ -25,7 +25,10 @@ import { JustpayComponent } from './justpay/justpay.component';
 import { PaystausComponent } from './paystaus/paystaus.component';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
 import { SpecialgoodsComponent } from './specialgoods/specialgoods.component';
-import { FreetakeComponent } from './freetake/freetake.component';
+import { SharedpageComponent } from './sharedpage/sharedpage.component';
+import { NewergifComponent } from './newergif/newergif.component';
+import { NewerdecComponent } from './newerdec/newerdec.component';
+import { NewercomeComponent } from './newercome/newercome.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { FreetakeComponent } from './freetake/freetake.component';
     PaystausComponent,
     OrderdetailComponent,
     SpecialgoodsComponent,
-    FreetakeComponent
+    SharedpageComponent,
+    NewergifComponent,
+    NewerdecComponent,
+    NewercomeComponent
   ],
   imports: [
     BrowserModule,

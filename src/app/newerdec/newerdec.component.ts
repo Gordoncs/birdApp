@@ -6,15 +6,17 @@ import {UserConfigService} from '../shared/user-config.service';
 import {TongxinService} from '../shared/tongxin.service';
 
 @Component({
-  selector: 'app-freetake',
-  templateUrl: './freetake.component.html',
-  styleUrls: ['./freetake.component.css']
+  selector: 'app-newerdec',
+  templateUrl: './newerdec.component.html',
+  styleUrls: ['./newerdec.component.css']
 })
-export class FreetakeComponent implements OnInit {
+export class NewerdecComponent implements OnInit {
   public showTips = false;
+  public goodsId: any = '';
   public tiyanInfo: any = {
     id: 1
   };
+  public imgsarr: any = '';
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -22,10 +24,7 @@ export class FreetakeComponent implements OnInit {
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
-    this.titleService.setTitle('抢购产品');
-  }
-  goPaysure() {
-    const skuId = this.tiyanInfo['id'];
-    this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId)}]);
+    this.titleService.setTitle('新人专享礼0元介绍分享页');
+    this.routerInfo.params.subscribe((params) => this.goodsId = params['goodsId']);
   }
 }

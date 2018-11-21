@@ -19,6 +19,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
   public  choseSkuSpecId: any = [];
   public  choseSkuStyleId: any = [];
   public  choseSku: any = '';
+  public cartNum = 0 ;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -117,7 +118,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
         this.alertBox.close();
         if (data['result']) {
           this.TongXin.cartNum(1);
-          this.router.navigate(['/cart']);
+          this.cartGetCartDetailNumber();
         } else {
           this.alertBox.error(data['message']);
         }
@@ -131,5 +132,15 @@ export class DetailComponent implements OnInit, AfterViewInit {
       return;
     }
     this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId)}]);
+  }
+  cartGetCartDetailNumber() {
+    const memberId = localStorage.getItem('memberId');
+    const storeId = JSON.parse(localStorage.getItem('storeInfo'))['id'];
+    this.userConfigService.cartGetCartDetailNumber(memberId, storeId)
+      .subscribe((data) => {
+        if (data['result']) {
+          this.cartNum = data['data'];
+        }
+      });
   }
 }

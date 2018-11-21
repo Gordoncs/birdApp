@@ -173,7 +173,7 @@ export class IndexComponent implements OnInit {
       this.router.navigate(['/specialgoods']);
     }
     if (item.type === '3') {
-      this.router.navigate(['/freetake', item.id]);
+      this.router.navigate(['/newergif', item.id]);
     }
   }
   /***
