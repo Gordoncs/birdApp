@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'goodsdetail/:goodsId', component: DetailComponent},
   { path: 'specialgoods', component: SpecialgoodsComponent},
   { path: 'newergif/:goodsId', component: NewergifComponent},
-  { path: 'newerdec', component: NewerdecComponent},
+  { path: 'newerdec/:nums', component: NewerdecComponent},
   { path: 'newercome', component: NewercomeComponent},
   { path: 'sharedpage', component: SharedpageComponent},
   { path: 'address/:status', component: AddresComponent},

@@ -3,22 +3,22 @@
     <img src="./assets/image/newerdec.png" alt="">
   </div>
 </div>
-<div class="floatBox">
-  <div class="shareTipsBoxBg"></div>
-  <div class="shareTipsBox">
-    <span (click)="showTips = !showTips">分享规则</span>
-  </div>
-  <div class="tipsTextBox" *ngIf="showTips">
-    <p>1.1、邀请好友首次成功在春鸟科美体验服务，即可获得砸金蛋机会</p>
-    <p>1.2、您的好友分享活动，您也有机会可以直接获得翻倍砸蛋机会；</p>
-    <p>1.3、砸金蛋活动单次最高可获得2019元现金；</p>
-    <p>1.4、北京春鸟国际科技有限公司在法律规定的范围内对此活动有解释权；</p>
-  </div>
-  <div class="tipsTextBoxBg" *ngIf="showTips"></div>
-</div>
+<!--<div class="floatBox">-->
+  <!--<div class="shareTipsBoxBg"></div>-->
+  <!--<div class="shareTipsBox">-->
+    <!--<span (click)="showTips = !showTips">分享规则</span>-->
+  <!--</div>-->
+  <!--<div class="tipsTextBox" *ngIf="showTips">-->
+    <!--<p>1.1、邀请好友首次成功在春鸟科美体验服务，即可获得砸金蛋机会</p>-->
+    <!--<p>1.2、您的好友分享活动，您也有机会可以直接获得翻倍砸蛋机会；</p>-->
+    <!--<p>1.3、砸金蛋活动单次最高可获得2019元现金；</p>-->
+    <!--<p>1.4、北京春鸟国际科技有限公司在法律规定的范围内对此活动有解释权；</p>-->
+  <!--</div>-->
+  <!--<div class="tipsTextBoxBg" *ngIf="showTips"></div>-->
+<!--</div>-->
 
 <div class="bottom">
-  <div class="leftInfo">已购买人数 99999</div>
+  <div class="leftInfo">免费分享礼{{nums}}份</div>
   <div class="btns bggreen" [routerLink]="['/sharedpage']">免费分享</div>
 </div>
 <app-alertbox></app-alertbox>

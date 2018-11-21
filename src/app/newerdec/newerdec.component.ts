@@ -12,11 +12,7 @@ import {TongxinService} from '../shared/tongxin.service';
 })
 export class NewerdecComponent implements OnInit {
   public showTips = false;
-  public goodsId: any = '';
-  public tiyanInfo: any = {
-    id: 1
-  };
-  public imgsarr: any = '';
+  public nums: any = '';
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -25,6 +21,6 @@ export class NewerdecComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('新人专享礼0元介绍分享页');
-    this.routerInfo.params.subscribe((params) => this.goodsId = params['goodsId']);
+    this.routerInfo.params.subscribe((params) => this.nums = params['nums']);
   }
 }
