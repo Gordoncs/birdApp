@@ -60,11 +60,11 @@
       <div class="exImg">
         <div class="exlist" *ngFor="let imgs of person.casePictureArr">
           <div class="listsc">
-            <img *ngIf="imgs.before!=''" src="{{imgs.before}}" alt="">
+            <img *ngIf="imgs.before!=''" src="{{imgs.before}}" (click)="showLook(imgs.beforebig)" alt="">
             <p *ngIf="imgs.before==''">服务前</p>
           </div>
           <div class="listsc">
-            <img *ngIf="imgs.before!=''" src="{{imgs.after}}" alt="">
+            <img *ngIf="imgs.before!=''" src="{{imgs.after}}" (click)="showLook(imgs.afterbig)" alt="">
             <p *ngIf="imgs.before==''">服务前</p>
           </div>
         </div>
@@ -83,4 +83,12 @@
 <div class="kefu" routerLink="/teacher" *ngIf="isManager">
   <img src="./assets/image/kefu.png" alt="">
 </div>
+
+<div class="lookBox" *ngIf="lookImgUrl!=''">
+  <div class="middleBox" >
+    <img  [src]="lookImgUrl">
+  </div>
+  <div class="sureBtn" (click)="lookImgUrl=''">X</div>
+</div>
+
 <app-alertbox></app-alertbox>

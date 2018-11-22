@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
 import wx from 'weixin-js-sdk';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-index',
@@ -18,6 +19,7 @@ export class IndexComponent implements OnInit {
   public carouselarr: any = [];
   public carefullyarr: any = [];
   public personIntroduce: any = [];
+  public lookImgUrl: any = [];
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -64,7 +66,7 @@ export class IndexComponent implements OnInit {
   }
 
   gotopFn(): void {
-    document.documentElement.scrollTop = 0;
+    $(window).animate({scrollTop: 0}, 'slow');
   }
   getInfo(latitude , longitude) {
     const that = this;
@@ -84,21 +86,33 @@ export class IndexComponent implements OnInit {
             ];
             if (that.personIntroduce[i].casePicture.length === 2) {
               that.personIntroduce[i].casePictureArr[0].before = that.personIntroduce[i].casePicture[0].small;
+              that.personIntroduce[i].casePictureArr[0].beforebig = that.personIntroduce[i].casePicture[0].big;
               that.personIntroduce[i].casePictureArr[0].after = that.personIntroduce[i].casePicture[1].small;
+              that.personIntroduce[i].casePictureArr[0].afterbig = that.personIntroduce[i].casePicture[1].big;
             }
             if (that.personIntroduce[i].casePicture.length === 4) {
               that.personIntroduce[i].casePictureArr[0].before = that.personIntroduce[i].casePicture[0].small;
+              that.personIntroduce[i].casePictureArr[0].beforebig = that.personIntroduce[i].casePicture[0].big;
               that.personIntroduce[i].casePictureArr[0].after = that.personIntroduce[i].casePicture[1].small;
+              that.personIntroduce[i].casePictureArr[0].afterbig = that.personIntroduce[i].casePicture[1].big;
               that.personIntroduce[i].casePictureArr[1].before = that.personIntroduce[i].casePicture[2].small;
+              that.personIntroduce[i].casePictureArr[1].beforebig = that.personIntroduce[i].casePicture[2].big;
               that.personIntroduce[i].casePictureArr[1].after = that.personIntroduce[i].casePicture[3].small;
+              that.personIntroduce[i].casePictureArr[1].afterbig = that.personIntroduce[i].casePicture[3].big;
             }
             if (that.personIntroduce[i].casePicture.length === 6) {
               that.personIntroduce[i].casePictureArr[0].before = that.personIntroduce[i].casePicture[0].small;
+              that.personIntroduce[i].casePictureArr[0].beforebig = that.personIntroduce[i].casePicture[0].big;
               that.personIntroduce[i].casePictureArr[0].after = that.personIntroduce[i].casePicture[1].small;
+              that.personIntroduce[i].casePictureArr[0].afterbig = that.personIntroduce[i].casePicture[1].big;
               that.personIntroduce[i].casePictureArr[1].before = that.personIntroduce[i].casePicture[2].small;
+              that.personIntroduce[i].casePictureArr[1].beforebig = that.personIntroduce[i].casePicture[2].big;
               that.personIntroduce[i].casePictureArr[1].after = that.personIntroduce[i].casePicture[3].small;
+              that.personIntroduce[i].casePictureArr[1].afterbig = that.personIntroduce[i].casePicture[3].big;
               that.personIntroduce[i].casePictureArr[2].before = that.personIntroduce[i].casePicture[4].small;
+              that.personIntroduce[i].casePictureArr[2].beforebig = that.personIntroduce[i].casePicture[4].big;
               that.personIntroduce[i].casePictureArr[2].after = that.personIntroduce[i].casePicture[5].small;
+              that.personIntroduce[i].casePictureArr[2].afterbig = that.personIntroduce[i].casePicture[5].big;
             }
           }
           const carefullyarr = [];
@@ -193,5 +207,8 @@ export class IndexComponent implements OnInit {
           console.log(data['message']);
         }
       });
+  }
+  showLook(img) {
+    this.lookImgUrl = img;
   }
 }

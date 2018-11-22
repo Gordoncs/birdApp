@@ -22,7 +22,7 @@
   <div class="list" *ngFor="let item of shopArr let i = index" (click)="sureClick(item.latitude,item.longitude,item)">
     <div class="line"></div>
     <div class="shopImg">
-      <img  src="./assets/image/shopImg.png" alt="">
+      <img  [src]="item.photoAddr" alt="">
     </div>
     <div class="middle">
       <div class="top">

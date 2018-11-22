@@ -26,6 +26,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
   ngOnInit() {
+    this.scrollFn();
     /***
      * 设置title
      */
@@ -35,15 +36,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const mySwiper = new Swiper ('.headSwiper .swiper-container', {
-      loop: true, // 循环模式选项
-      autoplay: true,
-      // 如果需要分页器
-      pagination: {
-        el: '.swiper-pagination',
-        type: 'fraction',
-      },
-    });
+
   }
   showWitch(index, event) {
     this.showWhitchStatus = index;
@@ -145,5 +138,31 @@ export class DetailComponent implements OnInit, AfterViewInit {
           this.cartNum = data['data'];
         }
       });
+  }
+  scrollFn() {
+    const mySwiper = new Swiper ('.headSwiper .swiper-container', {
+      loop: true, // 循环模式选项
+      autoplay: true,
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'fraction',
+      },
+    });
+    const detailSwiper = new Swiper('.boxShow .swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        bulletClass: 'detailbullets',
+        bulletActiveClass: 'my-bullet-active',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
   }
 }
