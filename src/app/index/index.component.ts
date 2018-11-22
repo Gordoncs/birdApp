@@ -65,9 +65,6 @@ export class IndexComponent implements OnInit {
     this.getbaseMember();
   }
 
-  gotopFn(): void {
-    $(window).animate({scrollTop: 0}, 'slow');
-  }
   getInfo(latitude , longitude) {
     const that = this;
     that.alertBox.load();
