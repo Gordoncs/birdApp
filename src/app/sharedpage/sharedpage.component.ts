@@ -42,7 +42,7 @@ export class SharedpageComponent implements OnInit {
    * 自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
    */
   wxupdateTimelineShareData(title, desc, link, imgUrl) {
-    wx.updateAppMessageShareData({
+    wx.updateTimelineShareData({
       title: title, // 分享标题
       link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
       imgUrl: imgUrl, // 分享图标

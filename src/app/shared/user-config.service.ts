@@ -245,8 +245,8 @@ export class UserConfigService {
   /**
    * 发起微信支付请求
    */
-  paymentWechatPrepay(orderNo: string): Observable<any> {
-    return this.http.get(this.configUrl + '/payment/wechat/prepay?orderNo=' + orderNo, this.headoptions)
+  paymentWechatPrepay(orderId: string): Observable<any> {
+    return this.http.get(this.configUrl + '/payment/wechat/prepay?orderId=' + orderId, this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError),

@@ -97,6 +97,9 @@ export class DetailComponent implements OnInit, AfterViewInit {
     }
   }
   getSku() {
+    // console.log('skuSpecId', this.choseSkuSpecId);
+    // console.log('skuStyleId', this.choseSkuStyleId);
+    // console.log(this.detailInfo.sku);
     for (let i = 0; i < this.detailInfo.sku.length; i++) {
       if (this.detailInfo.sku[i].skuSpecId === this.choseSkuSpecId && this.detailInfo.sku[i].skuStyleId === this.choseSkuStyleId) {
         this.choseSku = this.detailInfo.sku[i];

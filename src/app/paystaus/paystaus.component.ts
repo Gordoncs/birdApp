@@ -37,10 +37,10 @@ export class PaystausComponent implements OnInit {
       this.paysurepay(this.fromData.orderNo);
     }
   }
-  paysurepay(orderNo) {
+  paysurepay(orderId) {
     const t = this;
     this.alertBox.load();
-    this.userConfigService.paymentWechatPrepay(orderNo).
+    this.userConfigService.paymentWechatPrepay(orderId).
     subscribe(data => {
       console.log(data);
       this.alertBox.close();
@@ -55,15 +55,15 @@ export class PaystausComponent implements OnInit {
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
               t.alertBox.success('支付成功');
-              t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderNo, 'from': 'paysure'}]);
+              t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
             } else {
               t.alertBox.success('支付失败');
-              t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderNo, 'from': 'paysure' }]);
+              t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
             }
           },
           cancel: function(res) {
             t.alertBox.success('取消支付');
-            t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderNo, 'from': 'paysure'}]);
+            t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
           }
         });
       } else {
