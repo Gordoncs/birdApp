@@ -26,7 +26,6 @@ export class DetailComponent implements OnInit, AfterViewInit {
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
   ngOnInit() {
-    this.scrollFn();
     /***
      * 设置title
      */
@@ -36,7 +35,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
+    this.scrollFn();
   }
   showWitch(index, event) {
     this.showWhitchStatus = index;
@@ -53,6 +52,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
         if (data['result']) {
           this.detailInfo = data['data'];
           this.detailInfo['goodsInfo']['mainPhotoAddr'] = (this.detailInfo['goodsInfo']['mainPhotoAddr']).split(',');
+          // this.detailInfo['goodsInfo']['service_case'] = (this.detailInfo['goodsInfo']['service_case']).split(',');
           this.detailInfo['goodsInfo']['serviceInfo'] = (this.detailInfo['goodsInfo']['serviceInfo']).split(',');
           this.detailInfo['goodsInfo']['scienceInfo'] = (this.detailInfo['goodsInfo']['scienceInfo']).split(',');
           this.detailInfo['goodsInfo']['qaInfo'] = (this.detailInfo['goodsInfo']['qaInfo']).split(',');
@@ -127,7 +127,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
       this.alertBox.error('请选择产品');
       return;
     }
-    this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId)}]);
+    this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 2}]);
   }
   cartGetCartDetailNumber() {
     const memberId = localStorage.getItem('memberId');

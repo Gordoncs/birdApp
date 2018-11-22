@@ -41,6 +41,6 @@ export class SpecialgoodsComponent implements OnInit {
       this.alertBox.error('请选择产品');
       return;
     }
-    this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId)}]);
+    this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 9}]);
   }
 }

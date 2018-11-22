@@ -159,6 +159,6 @@ export class ShopcarComponent implements OnInit {
       this.alertBox.error('暂无可操作订单~');
       return;
     }
-    this.router.navigate(['/paysure', {'from': 'shopcart', 'skuIdArr': skuIdArr.join(',')}]);
+    this.router.navigate(['/paysure', {'from': 'shopcart', 'skuIdArr': skuIdArr.join(','), 'liuchengType': 0}]);
   }
 }

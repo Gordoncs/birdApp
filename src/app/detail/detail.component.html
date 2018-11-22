@@ -3,7 +3,7 @@
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide" *ngFor="let item of detailInfo.goodsInfo.mainPhotoAddr">
-          <img src="{{item}}" alt="">
+          <img [src]="item" alt="">
         </div>
       </div>
       <div class="swiper-pagination"></div>
@@ -53,17 +53,8 @@
       <div *ngIf="showWhitchStatus==1" class="boxShowlist">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="./assets/image/protect2.png" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="./assets/image/protect2.png" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="./assets/image/protect2.png" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="./assets/image/protect2.png" alt="">
+            <div class="swiper-slide" *ngFor="let item of detailInfo.goodsInfo.service_case" >
+              <img [src]="item" alt="">
             </div>
           </div>
           <!-- Add Pagination -->
@@ -72,16 +63,16 @@
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
         </div>
-        <img *ngFor="let item of detailInfo['goodsInfo']['serviceInfo']" class="justimg" src="{{item}}" alt="">
+        <img *ngFor="let item of detailInfo['goodsInfo']['serviceInfo']" class="justimg" [src]="item" alt="">
       </div>
       <div *ngIf="showWhitchStatus==2" class="boxShowlist">
-        <img *ngFor="let item of detailInfo['goodsInfo']['scienceInfo']" class="justimg" src="{{item}}" alt="">
+        <img *ngFor="let item of detailInfo['goodsInfo']['scienceInfo']" class="justimg" [src]="item" alt="">
       </div>
       <div *ngIf="showWhitchStatus==3" class="boxShowlist">
-        <img *ngFor="let item of detailInfo['goodsInfo']['qaInfo']" class="justimg" src="{{item}}" alt="">
+        <img *ngFor="let item of detailInfo['goodsInfo']['qaInfo']" class="justimg" [src]="item" alt="">
       </div>
       <div *ngIf="showWhitchStatus==4" class="boxShowlist">
-        <img *ngFor="let item of detailInfo['goodsInfo']['commitmentInfo']" class="justimg" src="{{item}}" alt="">
+        <img *ngFor="let item of detailInfo['goodsInfo']['commitmentInfo']" class="justimg" [src]="item" alt="">
       </div>
     </div>
   </div>

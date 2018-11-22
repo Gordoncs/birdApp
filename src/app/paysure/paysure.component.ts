@@ -75,7 +75,7 @@ export class PaysureComponent implements OnInit {
   checkoutOutrightPurchase() {
     const memberId = localStorage.getItem('memberId');
     const storeId = JSON.parse(localStorage.getItem('storeInfo'))['id'];
-    const type = 0;
+    const type = this.fromData['liuchengType'];
     const skuId = this.skuArr;
     this.alertBox.load();
     this.userConfigService.checkoutOutrightPurchase(memberId, storeId, type, skuId).
@@ -103,7 +103,8 @@ export class PaysureComponent implements OnInit {
     for (let i = 0; i < this.paySureInfo.cartDetail.length; i++) {
       sku.push(this.paySureInfo.cartDetail[i].id);
     }
-    const type = this.paySureInfo.type;
+    // const type = this.paySureInfo.type;
+    const type = this.fromData['liuchengType'];
     const order = this.order;
     const discounts = this.discounts;
     this.alertBox.load();
