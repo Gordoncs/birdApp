@@ -99,6 +99,14 @@ export class PaysureComponent implements OnInit {
     this.allMoney =  money;
   }
   payFn() {
+    if (this.order.linkman === '') {
+      this.alertBox.error('请填写尊客姓名');
+      return false;
+    }
+    if (!(/^1[3456789]\d{9}$/.test(this.order.subscribePhone))) {
+      this.alertBox.error('手机号码有误');
+      return false;
+    }
     const sku = [];
     for (let i = 0; i < this.paySureInfo.cartDetail.length; i++) {
       sku.push(this.paySureInfo.cartDetail[i].id);

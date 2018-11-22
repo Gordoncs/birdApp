@@ -63,6 +63,10 @@ export class DetailComponent implements OnInit, AfterViewInit {
           for (let i = 0; i < this.detailInfo.skuStyle.length; i++) {
             this.detailInfo.skuStyle[i].ischecked = false;
           }
+          if (this.detailInfo.skuStyle.length === 1) {
+            this.detailInfo.skuStyle[0].ischecked = true;
+            this.choseSkuStyleId = this.detailInfo.skuStyle[0].id;
+          }
           for (let i = 0; i < this.detailInfo.sku.length; i++) {
             this.priceArr.push(this.detailInfo.sku[i]['price']);
           }

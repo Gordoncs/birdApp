@@ -34,6 +34,7 @@
         <div *ngFor="let item of carefullyarr let i = index" class="swiper-slide" (click)="goDetail(item.id)">
           <img src="{{item.imgs}}" alt="">
         </div>
+        <div class="swiper-slide" style="width: 0;border: 0"></div>
       </div>
     </div>
   </div>
@@ -77,7 +78,7 @@
 </div>
 
 
-<div class="gotop">
+<div class="gotop" *ngIf="showGotopBtn">
   <a href="#">
     <img src="./assets/image/gotop.png" alt="">
   </a>

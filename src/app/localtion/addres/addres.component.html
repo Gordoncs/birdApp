@@ -3,6 +3,7 @@
   <div class="editInput" [class.noShadow]="isfocus">
     <img src="./assets/image/searchIcon.png" alt="">
     <input [class.bgHui]="isfocus" type="text" [(ngModel)]="searchText" (focus)="focusFn()" (keyup)="searchAddress()" placeholder="请输入文字">
+    <div class="sureBtn" *ngIf="!isfocus" (click)="sureFn()">确认</div>
   </div>
   <div class="resultBox" *ngIf="isfocus">
     <div class="resultList" (click)="choseAddress(item)" *ngFor="let item of searchResults let i=index">
@@ -19,27 +20,31 @@
   </div>
 </div>
 <div [@openClose]="isOpen ? 'open' : 'closed'" class="shopBox">
-  <div class="list" *ngFor="let item of shopArr let i = index" (click)="sureClick(item.latitude,item.longitude,item)">
-    <div class="line"></div>
-    <div class="shopImg">
-      <img  [src]="item.photoAddr" alt="">
-    </div>
-    <div class="middle">
-      <div class="top">
-        <div class="iconImg">
-          <img src="./assets/image/addressIcon.png" alt="">
-          <span>{{i+1}}</span>
+  <div class="list" *ngFor="let item of shopArr let i = index" >
+    <div style="display: flex;flex-direction: row;"  (click)="choseClick(item.latitude,item.longitude,item)">
+      <div class="line"></div>
+      <div class="shopImg">
+        <img  [src]="item.photoAddr" alt="">
+      </div>
+      <div class="middle">
+        <div class="top">
+          <div class="iconImg">
+            <img src="./assets/image/addressIcon.png" alt="">
+            <span>{{i+1}}</span>
+          </div>
+          <div class="textCon">
+            <span class="titles">{{item.name}}</span>
+            <span class="miller">距您：{{item.distance}}km</span>
+          </div>
         </div>
-        <div class="textCon">
-          <span class="titles">{{item.name}}</span>
-          <span class="miller">距您：{{item.distance}}km</span>
+        <div class="bottom">
+          {{item.addr}}
         </div>
       </div>
-      <div class="bottom">
-        {{item.addr}}
-      </div>
     </div>
-    <img class="telImg" src="./assets/image/telIcon.png" alt="">
+    <a href="tel:{{item.phone}}">
+      <img class="telImg" src="./assets/image/telIcon.png" alt="">
+    </a>
   </div>
 </div>
 <div class="shopBox2" [@openClose]="isOpen ? 'open' : 'closed'">

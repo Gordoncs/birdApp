@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild, AfterContentInit} from '@angular/core';
 import Swiper from 'swiper';
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
@@ -12,7 +12,7 @@ import * as $ from 'jquery';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent implements OnInit {
+export class IndexComponent implements OnInit, AfterContentInit {
   public indexInfo: any = {};
   public isManager: any = false;
   public storeInfo: any = {};
@@ -20,6 +20,7 @@ export class IndexComponent implements OnInit {
   public carefullyarr: any = [];
   public personIntroduce: any = [];
   public lookImgUrl: any = [];
+  public showGotopBtn = false;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -64,7 +65,17 @@ export class IndexComponent implements OnInit {
     // this.getInfo(31.5785354265, 117.3339843750);
     this.getbaseMember();
   }
-
+  ngAfterContentInit() {
+    const t = this;
+    const threePin = $(document).height() * 2;
+    $(window).scroll(function() {
+      if ($(window).scrollTop() + $(window).height() > threePin) {
+        t.showGotopBtn = true;
+      } else {
+        t.showGotopBtn = false;
+      }
+    });
+  }
   getInfo(latitude , longitude) {
     const that = this;
     that.alertBox.load();

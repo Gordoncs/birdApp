@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {UserConfigService} from '../../shared/user-config.service';
 import {TongxinService} from '../../shared/tongxin.service';
+import wx from 'weixin-js-sdk';
 @Component({
   selector: 'app-addres',
   templateUrl: './addres.component.html',
@@ -39,8 +40,15 @@ export class AddresComponent implements OnInit {
   public searchResults = [];
   public shopArr: any = [];
   public status = 'have';
-  public locallat: any = localStorage.getItem('latitude');
-  public locallong: any =  localStorage.getItem('longitude');
+  public choseInfo: any = {
+    'latitude': '',
+    'longitude': '',
+    'storeInfo': ''
+  };
+  // public locallat: any = localStorage.getItem('latitude');
+  // public locallong: any =  localStorage.getItem('longitude');
+  public locallat: any = '';
+  public locallong: any =  '';
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -55,6 +63,11 @@ export class AddresComponent implements OnInit {
       complete: function(results) {
         console.log(results);
         t.searchResults = results.detail.pois;
+        for (let i = 0 ; i < t.searchResults.length ; i++) {
+          if (t.searchResults[i].name.indexOf('公交站') > -1) {
+            t.searchResults[i].address = '';
+          }
+        }
       },
       error: function(e) {
         console.log(e);
@@ -62,13 +75,31 @@ export class AddresComponent implements OnInit {
       }
     });
     this.routerInfo.params.subscribe((params) => this.status = params['status']);
-    if (this.status === 'nohave') {
-      // 外省访问
-      this.getNextStoreInfo(39.908 , 116.3974);
-    } else {
-      // 北京本地访问
-      this.getNextStoreInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
-    }
+
+    wx.getLocation({
+      type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+      success: function (res) {
+        t.locallat = res.latitude;
+        t.locallong = res.longitude;
+        if (t.status === 'nohave') {
+          // 外省访问
+          t.getNextStoreInfo(39.908 , 116.3974);
+        } else {
+          // 北京本地访问
+          t.getNextStoreInfo(t.locallat, t.locallong);
+        }
+      }
+    });
+
+    // t.locallat = '39.908';
+    // t.locallong = '116.3974';
+    // if (t.status === 'nohave') {
+    //   // 外省访问
+    //   t.getNextStoreInfo(39.908 , 116.3974);
+    // } else {
+    //   // 北京本地访问
+    //   t.getNextStoreInfo(t.locallat, t.locallong);
+    // }
   }
   toggle() {
     this.isOpen = !this.isOpen;
@@ -80,7 +111,7 @@ export class AddresComponent implements OnInit {
       document.getElementById('container'),
       {
         center: center,
-        zoom: 10
+        zoom: 13
       }
     );
     const  markerIcon = new qq.maps.MarkerImage(
@@ -108,14 +139,14 @@ export class AddresComponent implements OnInit {
           decoration: decoration,
           shopInfo: tipsArrAddress[n].shopInfo
         });
-        if (marker.position.lat * 1 === t.locallat * 1 && marker.position.lng * 1 === t.locallong * 1) {
+        if (marker.position.lat * 1 === t.choseInfo.latitude * 1 && marker.position.lng * 1 === t.choseInfo.longitude * 1) {
         // if (marker.position.lat * 1 === t.locallong * 1 && marker.position.lng * 1 === t.locallat * 1) {
           marker.setIcon(markerIconSel);
         } else {
           marker.setIcon(markerIcon);
         }
         qq.maps.event.addListener(marker, 'click', function(event) {
-          t.sureClick(event.latLng.lat, event.latLng.lng, event.target.shopInfo);
+          t.choseClick(event.latLng.lat, event.latLng.lng, event.target.shopInfo);
         });
       })(i);
     }
@@ -133,7 +164,6 @@ export class AddresComponent implements OnInit {
     }
   }
   choseAddress(item) {
-    console.log(item);
     this.getNextStoreInfo(item.latLng.lat, item.latLng.lng);
     this.isfocus = false;
   }
@@ -158,11 +188,18 @@ export class AddresComponent implements OnInit {
         }
       });
   }
-  sureClick(latitude, longitude, item) {
-    localStorage.setItem('latitude', latitude);
-    localStorage.setItem('longitude', longitude);
-    localStorage.setItem('storeInfo', JSON.stringify(item));
+  choseClick(latitude, longitude, item) {
+    this.choseInfo.latitude = latitude;
+    this.choseInfo.longitude = longitude;
+    this.choseInfo.storeInfo = JSON.stringify(item);
+    this.getNextStoreInfo(latitude, longitude);
+    this.isOpen = false;
+  }
+  sureFn() {
+    console.log( this.choseInfo);
+    localStorage.setItem('latitude', this.choseInfo.latitude);
+    localStorage.setItem('longitude', this.choseInfo.longitude);
+    localStorage.setItem('storeInfo', this.choseInfo.storeInfo);
     history.go(-1);
   }
-
 }
