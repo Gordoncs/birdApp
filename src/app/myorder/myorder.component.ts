@@ -62,6 +62,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
         }
       }
     });
+    $('.bigBox').height($(window).height());
   }
   showWitch(index) {
     this.showWhitchStatus = index;

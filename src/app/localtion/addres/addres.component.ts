@@ -90,10 +90,10 @@ export class AddresComponent implements OnInit {
         }
       },
       fail: function (res) {
-        alert(res);
+        console.log(res);
       }
     });
-
+    //
     // t.locallat = '39.908';
     // t.locallong = '116.3974';
     // if (t.status === 'nohave') {
@@ -108,13 +108,14 @@ export class AddresComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
   init(centerAddress, tipsArrAddress) {
+    $('#container').html('');
     const t = this;
     const center = new qq.maps.LatLng(centerAddress.latitude, centerAddress.longitude);
     const map = new qq.maps.Map(
       document.getElementById('container'),
       {
         center: center,
-        zoom: 13
+        zoom: 16
       }
     );
     const  markerIcon = new qq.maps.MarkerImage(

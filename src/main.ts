@@ -27,10 +27,16 @@ if (locationUrl.indexOf('?') > -1) {
 const xhr = new XMLHttpRequest();
 
 const configWeixin = function () {
+  const platformBrowserDynamics = function() {
+    platformBrowserDynamic().bootstrapModule(AppModule)
+    .catch(err => console.error(err));
+  };
+  platformBrowserDynamics();
   const data = JSON.parse(this.response);
+
   if (data.result.success) {
     wx.config({
-      debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+      debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
       appId: data.result.data.appId, // 必填，公众号的唯一标识
       timestamp: data.result.data.timestamp, // 必填，生成签名的时间戳
       nonceStr: data.result.data.noncestr, // 必填，生成签名的随机串
@@ -39,24 +45,29 @@ const configWeixin = function () {
         'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData'] // 必填，需要使用的JS接口列表
     });
     wx.ready(function() {
-      wx.checkJsApi({
-        jsApiList: [
-          // 所有要调用的 API 都要加到这个列表中
-          'getLocation',
-          'chooseWXPay',
-          'updateAppMessageShareData',
-          'updateTimelineShareData'
-        ], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-        success: function(res) {
-          alert(JSON.stringify(res));
-          // 以键值对的形式返回，可用的api值true，不可用为false
-          // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-        }
-      });
+      // wx.checkJsApi({
+      //   jsApiList: [
+      //     // 所有要调用的 API 都要加到这个列表中
+      //     'getLocation',
+      //     'chooseWXPay',
+      //     'updateAppMessageShareData',
+      //     'updateTimelineShareData'
+      //   ], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+      //   success: function(res) {
+      //     alert(JSON.stringify(res));
+      //     // 以键值对的形式返回，可用的api值true，不可用为false
+      //     // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+      //   }
+      // });
       wx.getLocation({
         success: function (res) {
           localStorage.setItem('latitude', res.latitude);
           localStorage.setItem('longitude', res.longitude);
+          alert(res.latitude);
+          alert(res.longitude);
+          setTimeout(function() {
+            platformBrowserDynamics();
+          }, 1500);
           getNextStoreInfo(res.latitude, res.longitude);
         },
         fail: function (res) {
@@ -64,11 +75,6 @@ const configWeixin = function () {
         }
       });
       getbaseMember();
-      setTimeout(function() {
-        platformBrowserDynamic().bootstrapModule(AppModule)
-          .catch(err => console.error(err));
-      }, 2000);
-
     });
   } else {
     window.location.href = data.result.data;
@@ -79,8 +85,6 @@ xhr.open('get', signatureUrl);
 xhr.addEventListener('load', configWeixin, false);
 xhr.send();
 
-// platformBrowserDynamic().bootstrapModule(AppModule)
-//   .catch(err => console.error(err));
 
 /***
  * 获取用户id
