@@ -21,6 +21,7 @@ export class OrderdetailComponent implements OnInit {
   public iscomplete = false;
   public allServers = 0;
   public useServers = 0;
+  public daohangUrl: any = '';
   /**
    * 订单状态：0=未付款，1=已付款，2=已完成，9=已取消；null=全部订单列表
    */
@@ -81,6 +82,9 @@ export class OrderdetailComponent implements OnInit {
         this.alertBox.close();
         if (data['result']) {
           this.detailInfo = data['data'];
+          this.daohangUrl = 'https://apis.map.qq.com/uri/v1/marker?marker=coord:'
+             + this.detailInfo.store.latitude + ',' + this.detailInfo.store.longitude + ';title:'
+             + this.detailInfo.store.name + ';addr:' + this.detailInfo.store.addr + '&referer=春鸟科技';
           this.detailInfo.consumeVerificationQRcode = 'data:image/jpeg;base64,' + this.detailInfo.consumeVerificationQRcode;
           let allServers = 0;
           let useServers = 0;

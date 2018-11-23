@@ -46,10 +46,10 @@
       <div class="text">联系电话：{{detailInfo.store.phone}}</div>
     </div>
     <div class="rightIcon">
-      <a href="javascript:;">
+      <a href="tel:{{detailInfo.store.phone}}">
         <img class="telImg" src="./assets/image/lettertelIcon.png" alt="">
       </a>
-      <a href="javascript:;">
+      <a [href]="daohangUrl">
         <img class="addressImg" src="./assets/image/letterAddressIcon.png" alt="">
       </a>
     </div>
@@ -166,7 +166,7 @@
       <span class="s1">取消时间：</span>
       <span class="s2">{{detailInfo.updatetime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
     </div>
-    <textarea [(ngModel)]="detailInfo.orderRemark"  class="memoBox"></textarea>
+    <textarea disabled [(ngModel)]="detailInfo.orderRemark"  class="memoBox"></textarea>
   </div>
 
   <div class="textBox">

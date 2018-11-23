@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild, AfterContentInit} from '@angular/core';
 import Swiper from 'swiper';
 import { Title } from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -6,12 +6,13 @@ import {UserConfigService} from '../shared/user-config.service';
 import {Observable} from 'rxjs';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
 import {TongxinService} from '../shared/tongxin.service';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class DetailComponent implements OnInit, AfterViewInit {
+export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit {
   public  showWhitchStatus: any = 1;
   public  detailInfo: any = {};
   public  goodsId: any;
@@ -20,6 +21,8 @@ export class DetailComponent implements OnInit, AfterViewInit {
   public  choseSkuStyleId: any = [];
   public  choseSku: any = '';
   public cartNum = 0 ;
+  public fixed = false;
+  public allDomHeight: any = 0;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -37,8 +40,22 @@ export class DetailComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.scrollFn();
   }
+  ngAfterContentInit() {
+    $(window).scrollTop(0);
+    const t = this;
+    t.allDomHeight = $('.bigBox').offset().top;
+    $(window).scroll(function() {
+      if ($(window).scrollTop() > t.allDomHeight) {
+        t.fixed = true;
+      } else {
+        t.fixed = false;
+      }
+    });
+  }
   showWitch(index, event) {
     this.showWhitchStatus = index;
+    const hrefTop = $('.boxShowlist' + index).offset().top;
+    $(window).scrollTop(hrefTop - 100);
   }
 
   /**
@@ -52,7 +69,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
         if (data['result']) {
           this.detailInfo = data['data'];
           this.detailInfo['goodsInfo']['mainPhotoAddr'] = (this.detailInfo['goodsInfo']['mainPhotoAddr']).split(',');
-          // this.detailInfo['goodsInfo']['service_case'] = (this.detailInfo['goodsInfo']['service_case']).split(',');
+          this.detailInfo['goodsInfo']['serviceCase'] = (this.detailInfo['goodsInfo']['serviceCase']).split(',');
           this.detailInfo['goodsInfo']['serviceInfo'] = (this.detailInfo['goodsInfo']['serviceInfo']).split(',');
           this.detailInfo['goodsInfo']['scienceInfo'] = (this.detailInfo['goodsInfo']['scienceInfo']).split(',');
           this.detailInfo['goodsInfo']['qaInfo'] = (this.detailInfo['goodsInfo']['qaInfo']).split(',');

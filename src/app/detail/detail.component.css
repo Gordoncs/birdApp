@@ -139,7 +139,12 @@
   flex-direction: row;
   justify-content: space-around;
 }
-
+.fixed{
+  position: fixed !important;
+  z-index: 999;
+  left: 0;
+  top: 0;
+}
 .bigBox .headlist{
   width: 0.9rem;
   height: 1.05rem;
@@ -246,23 +251,22 @@
 
 /**/
 .boxShow .swiper-container {
-  width: 7rem;
-  height: 3.6rem;
+  width: 85%;
   border-radius: 0.1rem;
   background: #FFF;
   position: absolute;
   left: 50%;
-  margin-left: -3.5rem;
-  top: 9.7rem;
+  margin-left: -42.5%;
+  top: -1.5rem;
   z-index: 3;
 }
 .boxShow .swiper-container img{
   width: 100%;
   height: 100%;
+  display: block;
 }
 .boxShow  .swiper-pagination{
   height: 0.5rem;
-  background: #ff702a;
   bottom: 0px !important;
 }
 

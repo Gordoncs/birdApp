@@ -13,6 +13,7 @@ import {Title} from '@angular/platform-browser';
 import {UserConfigService} from '../../shared/user-config.service';
 import {TongxinService} from '../../shared/tongxin.service';
 import wx from 'weixin-js-sdk';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-addres',
   templateUrl: './addres.component.html',
@@ -175,14 +176,7 @@ export class AddresComponent implements OnInit {
         this.alertBox.close();
         if (data['result']) {
           this.shopArr = data['data'];
-          const centerAddress = {'latitude': latitude, 'longitude': longitude};
-          const tipsArrAddress = [];
-          for (let i = 0 ; i < this.shopArr.length ; i++) {
-            tipsArrAddress.push(
-              {'latitude': this.shopArr[i].latitude, 'longitude': this.shopArr[i].longitude, 'shopInfo': this.shopArr[i]}
-            );
-          }
-          this.init(centerAddress, tipsArrAddress);
+          this.allInit(latitude, longitude);
         } else {
           console.log(data['message']);
         }
@@ -192,8 +186,12 @@ export class AddresComponent implements OnInit {
     this.choseInfo.latitude = latitude;
     this.choseInfo.longitude = longitude;
     this.choseInfo.storeInfo = JSON.stringify(item);
-    this.getNextStoreInfo(latitude, longitude);
+    const index = this.shopArr.indexOf(item);
+    this.shopArr.splice(index, 1);
+    this.shopArr.unshift(item);
+    this.allInit(latitude, longitude);
     this.isOpen = false;
+    $('.shopBox').scrollTop(0);
   }
   sureFn() {
     console.log( this.choseInfo);
@@ -201,5 +199,18 @@ export class AddresComponent implements OnInit {
     localStorage.setItem('longitude', this.choseInfo.longitude);
     localStorage.setItem('storeInfo', this.choseInfo.storeInfo);
     history.go(-1);
+  }
+  allInit(latitude , longitude) {
+    const centerAddress = {'latitude': latitude, 'longitude': longitude};
+    const tipsArrAddress = [];
+    for (let i = 0 ; i < this.shopArr.length ; i++) {
+      tipsArrAddress.push(
+        {'latitude': this.shopArr[i].latitude, 'longitude': this.shopArr[i].longitude, 'shopInfo': this.shopArr[i]}
+      );
+    }
+    this.init(centerAddress, tipsArrAddress);
+  }
+  restFn() {
+    this.allInit(this.locallat, this.locallong);
   }
 }

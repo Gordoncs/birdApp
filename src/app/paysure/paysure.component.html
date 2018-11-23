@@ -15,7 +15,7 @@
   <div class="userInfo">
     <div class="tips"><span class="s1">邀约信息：</span><span class="s2">（专属美容导师会及时与您沟通服务时间）</span></div>
     <div class="inputBox">
-      <span>尊客姓名：</span><input type="text" [(ngModel)]="order.linkman">
+      <span>尊客姓名：</span><input type="text" maxlength="25" [(ngModel)]="order.linkman">
     </div>
     <div class="inputBox">
       <span>联系电话：</span><input type="tel" [(ngModel)]="order.subscribePhone">
@@ -48,7 +48,7 @@
     <div class="textBox" style="border-bottom: 1px solid #e5e5e5 " *ngIf="order.discountPriceAmout>0">
       <span>优惠方式：</span>
       <div class="cheapBox">
-        <span class="name">内购券优惠-金永涵</span>
+        <!--<span class="name">内购券优惠-金永涵</span>-->
         <div class="name">
           -{{order.discountPriceAmout}}元
           <img src="./assets/image/closeIcon.png" (click)="clearDiscount()" alt="">
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-    <textarea [(ngModel)]="order.orderRemark" placeholder="尊客备注：可输入您期望到店时间、或希望专属顾问何时与您联系等要求" class="memoBox"></textarea>
+    <textarea maxlength="100" [(ngModel)]="order.orderRemark" placeholder="尊客备注：可输入您期望到店时间、或希望专属顾问何时与您联系等要求" class="memoBox"></textarea>
   </div>
 </div>
 <div class="priceBar">

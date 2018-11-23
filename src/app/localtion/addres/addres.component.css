@@ -256,3 +256,15 @@
   top: 0;
   z-index: 3;
 }
+.restBtn{
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #000;
+  z-index: 999;
+  position: absolute;
+  left: 0.3rem;
+  top: 8.4rem;
+}
+.bgnone{
+  background: none !important;
+}

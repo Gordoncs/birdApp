@@ -1,7 +1,7 @@
 <div class="conBg"></div>
 <div class="editBtn" (click)="canEdit=!canEdit">{{canEdit?'完成':'编辑'}}</div>
 <div class="cartContent">
-  <div class="shopCartBox">
+  <div class="shopCartBox" *ngIf="cartListInfo.cartDetail.length>0">
     <div class="heads">
       <div class="noselRaido raidoSelit left30">
         <div class="kong shi"></div>

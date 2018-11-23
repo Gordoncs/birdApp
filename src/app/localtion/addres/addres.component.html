@@ -1,9 +1,13 @@
 <div id="container" style="width: 100%;"></div>
+<div class="restBtn" (click)="restFn()">
+
+</div>
 <div class="serachBox" [class.bgWhite]="isfocus">
   <div class="editInput" [class.noShadow]="isfocus">
     <img src="./assets/image/searchIcon.png" alt="">
     <input [class.bgHui]="isfocus" type="text" [(ngModel)]="searchText" (focus)="focusFn()" (keyup)="searchAddress()" placeholder="请输入文字">
     <div class="sureBtn" *ngIf="!isfocus" (click)="sureFn()">确认</div>
+    <div class="sureBtn" *ngIf="isfocus" [class.bgnone]="isfocus" (click)="isfocus=false">返回</div>
   </div>
   <div class="resultBox" *ngIf="isfocus">
     <div class="resultList" (click)="choseAddress(item)" *ngFor="let item of searchResults let i=index">

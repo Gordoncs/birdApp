@@ -14,11 +14,11 @@
   </div>
   <div class="userInfo">
     <div class="inputBox">
-      <span>付款金额：</span><input type="number" [disabled]="orderInfo.from != 'index'" [(ngModel)]="allMoney">
+      <span>付款金额：</span><input  id="moneyInput" type="number" [disabled]="orderInfo.from != 'index'" [(ngModel)]="allMoney">
     </div>
-    <div class="inputBox" *ngIf="orderInfo.from != 'index'">
-      <span>订单ID：</span><input [(ngModel)]="orderInfo.orderNo" type="text">
-    </div>
+    <!--<div class="inputBox" *ngIf="orderInfo.from != 'index'">-->
+      <!--<span>订单ID：</span><input [(ngModel)]="orderInfo.orderNo" type="text">-->
+    <!--</div>-->
     <div class="textBox" *ngIf="discountPriceAmout>0">
       <span style="margin-left: 0.1rem">优惠方式：</span>
       <div class="cheapBox">
@@ -31,7 +31,7 @@
     </div>
     <div class="price" >
       <span class="s1">应付金额:</span>
-      <span class="s2">￥{{(allMoney*1-discountPriceAmout*1) | number:'2.2-2'}}</span>
+      <span class="s2">￥{{(allMoney*1-discountPriceAmout*1) | number:'1.2-2'}}</span>
     </div>
   </div>
   <div class="saveBtn" *ngIf="orderInfo.from == 'index'" (click)="cashpay()">完成本次服务</div>

@@ -103,8 +103,8 @@ export class PaysureComponent implements OnInit {
       this.alertBox.error('请填写尊客姓名');
       return false;
     }
-    if (!(/^1[3456789]\d{9}$/.test(this.order.subscribePhone))) {
-      this.alertBox.error('手机号码有误');
+    if (!(/^1[3456789]\d{9}$/.test(this.order.subscribePhone)) && !(/^0\d{2,3}-?\d{7,8}$/.test(this.order.subscribePhone))) {
+      this.alertBox.error('请正确填写座机手机号');
       return false;
     }
     const sku = [];

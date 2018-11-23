@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
@@ -10,9 +10,9 @@ import wx from 'weixin-js-sdk';
   templateUrl: './justpay.component.html',
   styleUrls: ['./justpay.component.css']
 })
-export class JustpayComponent implements OnInit {
+export class JustpayComponent implements OnInit, AfterContentInit {
   orderInfo: any;
-  allMoney = 0;
+  allMoney: number ;
   discountPriceAmout = 0;
   discounts = {
     'id' : '',
@@ -29,6 +29,9 @@ export class JustpayComponent implements OnInit {
     this.titleService.setTitle('支付确认');
     this.routerInfo.params.subscribe((params) => this.orderInfo = params);
     this.allMoney = this.orderInfo.allMoney;
+  }
+  ngAfterContentInit() {
+    $('#moneyInput').focus();
   }
   cashpay() {
     const t = this;

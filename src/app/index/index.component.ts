@@ -67,7 +67,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
   }
   ngAfterContentInit() {
     const t = this;
-    const threePin = $(document).height() * 2;
+    const threePin = $(document).height() * 1.5;
     $(window).scroll(function() {
       if ($(window).scrollTop() + $(window).height() > threePin) {
         t.showGotopBtn = true;

@@ -12,7 +12,7 @@
   <div class="priceTitle">
     ￥{{(choseSku== ''?(priceArr[0]+'-'+priceArr[priceArr.length-1]):(choseSku.price| number:'2.2-2')) }}
   </div>
-  <div class="styleChoseBox">
+  <div class="styleChoseBox chose1">
     <div class="heads">
       部位选择
     </div>
@@ -20,7 +20,7 @@
       <div *ngFor="let item of detailInfo.skuSpec" (click)="selIt(item,detailInfo.skuSpec,'spec')" [class.tipsel]="item.ischecked" class="tips">{{item.name}}</div>
     </div>
   </div>
-  <div class="styleChoseBox" style="min-height: 1.6rem;margin-top: 2px">
+  <div class="styleChoseBox chose2" style="min-height: 1.6rem;margin-top: 2px">
     <div class="heads">
       疗程选择
     </div>
@@ -43,35 +43,39 @@
     </div>
   </div>
   <div class="bigBox">
-    <div class="head">
+    <div class="head" [class.fixed]="fixed">
       <div [class.selit]="showWhitchStatus==1" class="headlist" (click)="showWitch(1,$event)">详情</div>
       <div [class.selit]="showWhitchStatus==2" class="headlist" (click)="showWitch(2,$event)">科普</div>
       <div [class.selit]="showWhitchStatus==3" class="headlist" (click)="showWitch(3,$event)">Q&A</div>
       <div [class.selit]="showWhitchStatus==4" class="headlist" (click)="showWitch(4,$event)">承诺</div>
     </div>
+    <div class="head" *ngIf="fixed"></div>
     <div class="boxShow">
-      <div *ngIf="showWhitchStatus==1" class="boxShowlist">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" *ngFor="let item of detailInfo.goodsInfo.service_case" >
-              <img [src]="item" alt="">
+      <div  class="boxShowlist boxShowlist1">
+        <img class="justimg" [src]="detailInfo['goodsInfo']['serviceInfo'][0]" alt="">
+        <div class="justimg"  style="position: relative;">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" *ngFor="let item of detailInfo.goodsInfo.serviceCase" >
+                <img [src]="item" alt="">
+              </div>
             </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
           </div>
-          <!-- Add Pagination -->
-          <div class="swiper-pagination"></div>
-          <!-- Add Arrows -->
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
         </div>
-        <img *ngFor="let item of detailInfo['goodsInfo']['serviceInfo']" class="justimg" [src]="item" alt="">
+        <img class="justimg" [src]="detailInfo['goodsInfo']['serviceInfo'][1]" alt="">
       </div>
-      <div *ngIf="showWhitchStatus==2" class="boxShowlist">
+      <div  class="boxShowlist boxShowlist2">
         <img *ngFor="let item of detailInfo['goodsInfo']['scienceInfo']" class="justimg" [src]="item" alt="">
       </div>
-      <div *ngIf="showWhitchStatus==3" class="boxShowlist">
+      <div  class="boxShowlist boxShowlist3">
         <img *ngFor="let item of detailInfo['goodsInfo']['qaInfo']" class="justimg" [src]="item" alt="">
       </div>
-      <div *ngIf="showWhitchStatus==4" class="boxShowlist">
+      <div  class="boxShowlist boxShowlist4">
         <img *ngFor="let item of detailInfo['goodsInfo']['commitmentInfo']" class="justimg" [src]="item" alt="">
       </div>
     </div>
