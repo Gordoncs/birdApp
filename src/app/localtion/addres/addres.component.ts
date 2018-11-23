@@ -78,7 +78,6 @@ export class AddresComponent implements OnInit {
     this.routerInfo.params.subscribe((params) => this.status = params['status']);
 
     wx.getLocation({
-      type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
       success: function (res) {
         t.locallat = res.latitude;
         t.locallong = res.longitude;
@@ -89,6 +88,9 @@ export class AddresComponent implements OnInit {
           // 北京本地访问
           t.getNextStoreInfo(t.locallat, t.locallong);
         }
+      },
+      fail: function (res) {
+        alert(res);
       }
     });
 

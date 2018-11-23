@@ -40,11 +40,13 @@ const configWeixin = function () {
     });
     wx.ready(function() {
       wx.getLocation({
-        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
         success: function (res) {
           localStorage.setItem('latitude', res.latitude);
           localStorage.setItem('longitude', res.longitude);
           getNextStoreInfo(res.latitude, res.longitude);
+        },
+        fail: function (res) {
+          alert(res);
         }
       });
       getbaseMember();
