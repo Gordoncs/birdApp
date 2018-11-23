@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
@@ -10,7 +10,7 @@ import wx from 'weixin-js-sdk';
   templateUrl: './paysure.component.html',
   styleUrls: ['./paysure.component.css']
 })
-export class PaysureComponent implements OnInit {
+export class PaysureComponent implements OnInit, AfterContentInit {
   public skuArr: any;
   public fromData: any = {};
   public paySureInfo: any = {
@@ -52,7 +52,9 @@ export class PaysureComponent implements OnInit {
       this.checkoutOutrightPurchase();
     }
   }
-
+  ngAfterContentInit() {
+    this.changeURL();
+  }
   checkoutInfo() {
     const memberId = localStorage.getItem('memberId');
     const storeId = JSON.parse(localStorage.getItem('storeInfo'))['id'];
@@ -135,7 +137,7 @@ export class PaysureComponent implements OnInit {
       this.alertBox.close();
       if (data['result']) {
         wx.chooseWXPay({
-          timestamp: data.paySignMap.timeStamp + '', // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          timestamp: data.paySignMap.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
           nonceStr: data.paySignMap.nonceStr, // 支付签名随机串，不长于 32 位
           package: data.paySignMap.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
           signType: data.paySignMap.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
@@ -191,5 +193,8 @@ export class PaysureComponent implements OnInit {
     this.discounts.id = '';
     this.discounts.authCode = '';
     this.order.discountPriceAmout = 0;
+  }
+  changeURL() {
+    window.history.pushState(null, null, '/g/');
   }
 }

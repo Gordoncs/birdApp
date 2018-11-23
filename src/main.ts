@@ -31,7 +31,7 @@ const configWeixin = function () {
     platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(err => console.error(err));
   };
-  platformBrowserDynamics();
+  // platformBrowserDynamics();
   const data = JSON.parse(this.response);
 
   if (data.result.success) {

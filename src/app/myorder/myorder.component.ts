@@ -62,7 +62,8 @@ export class MyorderComponent implements OnInit, AfterContentInit {
         }
       }
     });
-    $('.bigBox').height($(window).height());
+    $('.bigBox').css('min-height', $(window).height() + 'px');
+    this.changeURL();
   }
   showWitch(index) {
     this.showWhitchStatus = index;
@@ -188,5 +189,8 @@ export class MyorderComponent implements OnInit, AfterContentInit {
         this.alertBox.error(data['message']);
       }
     });
+  }
+  changeURL() {
+    window.history.pushState(null, null, '/g/');
   }
 }

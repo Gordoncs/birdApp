@@ -76,7 +76,7 @@ export class AddresComponent implements OnInit {
       }
     });
     this.routerInfo.params.subscribe((params) => this.status = params['status']);
-
+    this.changeURL();
     wx.getLocation({
       success: function (res) {
         t.locallat = res.latitude;
@@ -215,5 +215,8 @@ export class AddresComponent implements OnInit {
   }
   restFn() {
     this.allInit(this.locallat, this.locallong);
+  }
+  changeURL() {
+    window.history.pushState(null, null, '/g/');
   }
 }

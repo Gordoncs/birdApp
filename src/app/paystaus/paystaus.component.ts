@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
@@ -10,7 +10,7 @@ import wx from 'weixin-js-sdk';
   templateUrl: './paystaus.component.html',
   styleUrls: ['./paystaus.component.css']
 })
-export class PaystausComponent implements OnInit {
+export class PaystausComponent implements OnInit, AfterContentInit {
   public status = 'false';
   public fromData: any = {};
   public userInfo: any = {};
@@ -28,6 +28,9 @@ export class PaystausComponent implements OnInit {
     this.status = this.fromData.res;
     console.log(this.fromData);
     this.getMemberIndexInfo();
+  }
+  ngAfterContentInit() {
+    this.changeURL();
   }
   pay() {
     if (this.fromData.from === 'justpay') {
@@ -121,5 +124,8 @@ export class PaystausComponent implements OnInit {
         this.alertBox.error(data['message']);
       }
     });
+  }
+  changeURL() {
+    window.history.pushState(null, null, '/g/');
   }
 }

@@ -32,6 +32,7 @@ export class JustpayComponent implements OnInit, AfterContentInit {
   }
   ngAfterContentInit() {
     $('#moneyInput').focus();
+    this.changeURL();
   }
   cashpay() {
     const t = this;
@@ -107,5 +108,8 @@ export class JustpayComponent implements OnInit, AfterContentInit {
     this.discounts.id = '';
     this.discounts.authCode = '';
     this.discountPriceAmout = 0;
+  }
+  changeURL() {
+    window.history.pushState(null, null, '/g/');
   }
 }

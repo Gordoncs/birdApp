@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -6,12 +6,13 @@ import {UserConfigService} from '../shared/user-config.service';
 import {TongxinService} from '../shared/tongxin.service';
 import {MyindexComponent} from '../myindex/myindex.component';
 import wx from 'weixin-js-sdk';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-orderdetail',
   templateUrl: './orderdetail.component.html',
   styleUrls: ['./orderdetail.component.css']
 })
-export class OrderdetailComponent implements OnInit {
+export class OrderdetailComponent implements OnInit, AfterContentInit {
   public hhh: any;
   public mmm: any;
   public sss: any;
@@ -42,6 +43,9 @@ export class OrderdetailComponent implements OnInit {
     this.routerInfo.params.subscribe((params) => this.orderId = params['orderId']);
     this.orderGetOrderInfo(this.orderId);
     this.getMemberIndexInfo();
+  }
+  ngAfterContentInit() {
+    this.changeURL();
   }
   count_down(countDown_time) {
     const that = this;
@@ -151,5 +155,8 @@ export class OrderdetailComponent implements OnInit {
         this.alertBox.error(data['message']);
       }
     });
+  }
+  changeURL() {
+    window.history.pushState(null, null, '/g/');
   }
 }
