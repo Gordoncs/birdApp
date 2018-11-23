@@ -39,6 +39,20 @@ const configWeixin = function () {
         'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData'] // 必填，需要使用的JS接口列表
     });
     wx.ready(function() {
+      wx.checkJsApi({
+        jsApiList: [
+          // 所有要调用的 API 都要加到这个列表中
+          'getLocation',
+          'chooseWXPay',
+          'updateAppMessageShareData',
+          'updateTimelineShareData'
+        ], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+        success: function(res) {
+          alert(JSON.stringify(res));
+          // 以键值对的形式返回，可用的api值true，不可用为false
+          // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+        }
+      });
       wx.getLocation({
         success: function (res) {
           localStorage.setItem('latitude', res.latitude);
