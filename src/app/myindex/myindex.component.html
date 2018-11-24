@@ -13,22 +13,22 @@
     <div class="statusHead">
       订单状态
     </div>
-    <div class="statusCon" routerLink="/myorder">
-      <div class="statusList">
+    <div class="statusCon">
+      <div class="statusList" [routerLink]="['/myorder', {type:2}]">
         <img style="width: 0.48rem;height: 0.45rem" src="./assets/image/orderStatus1.png" alt="">
         <span>待支付</span>
         <div class="numbers" *ngIf="userInfo.noPaymentOrderNum">{{userInfo.noPaymentOrderNum}}</div>
       </div>
-      <div class="statusList">
+      <div class="statusList" [routerLink]="['/myorder', {type:3}]">
         <img style="width: 0.47rem;height: 0.43rem" src="./assets/image/orderStatus2.png" alt="">
         <span>待使用</span>
         <div class="numbers" *ngIf="userInfo.finishPaymentOrderNum">{{userInfo.finishPaymentOrderNum}}</div>
       </div>
-      <div class="statusList">
+      <div class="statusList" [routerLink]="['/myorder', {type:4}]">
         <img style="width: 0.44rem;height: 0.45rem" src="./assets/image/orderStatus3.png" alt="">
         <span>已完成</span>
       </div>
-      <div class="statusList">
+      <div class="statusList" [routerLink]="['/myorder', {type:1}]">
         <img style="width: 0.43rem;height: 0.45rem" src="./assets/image/orderStatus4.png" alt="">
         <span>全部订单</span>
       </div>
@@ -44,6 +44,7 @@
       <span>{{userInfo.luckyIndex}}</span>
     </div>
   </div>
+
   <div class="zeroShareBox">
     <img src="./assets/image/zeroShare.png" alt="">
   </div>

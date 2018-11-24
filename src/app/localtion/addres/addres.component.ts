@@ -40,7 +40,9 @@ export class AddresComponent implements OnInit {
   public searchService: any;
   public searchResults = [];
   public shopArr: any = [];
-  public status = 'have';
+  public statusInfo: any = {
+    'status': 'have'
+  } ;
   public choseInfo: any = {
     'latitude': '',
     'longitude': '',
@@ -75,15 +77,16 @@ export class AddresComponent implements OnInit {
         // error doing
       }
     });
-    this.routerInfo.params.subscribe((params) => this.status = params['status']);
-    if (this.userConfigService.wxConfigFn()) {
+    this.routerInfo.params.subscribe((params) => this.statusInfo = params);
+    this.userConfigService.wxConfigFn();
+    wx.ready(function() {
       wx.getLocation({
         success: function (res) {
           t.locallat = res.latitude;
           t.locallong = res.longitude;
-          if (t.status === 'nohave') {
+          if (t.statusInfo.status === 'nohave') {
             // 外省访问
-            t.getNextStoreInfo(39.908 , 116.3974);
+            t.getNextStoreInfo(39.908, 116.3974);
           } else {
             // 北京本地访问
             t.getNextStoreInfo(t.locallat, t.locallong);
@@ -93,11 +96,11 @@ export class AddresComponent implements OnInit {
           console.log(res);
         }
       });
-    }
+    });
     //
     // t.locallat = '39.908';
     // t.locallong = '116.3974';
-    // if (t.status === 'nohave') {
+    // if (t.statusInfo.status === 'nohave') {
     //   // 外省访问
     //   t.getNextStoreInfo(39.908 , 116.3974);
     // } else {

@@ -50,40 +50,31 @@ export class ShopcarComponent implements OnInit {
       });
   }
   addFn(item) {
-    if ( this.canEdit ) {
-      this.changeNum(localStorage.getItem('memberId'), item.id, 1, item);
-    }
+    this.changeNum(localStorage.getItem('memberId'), item.id, 1, item);
   }
   cute(item) {
-    if ( this.canEdit ) {
-      if (item.number > 1) {
-        this.changeNum(localStorage.getItem('memberId'), item.id, -1, item);
-      }
+    if (item.number > 1) {
+      this.changeNum(localStorage.getItem('memberId'), item.id, -1, item);
     }
   }
   choseList(item) {
-    if ( this.canEdit ) {
-      item.ischeck = !item.ischeck;
-      this.getAllMoney();
-      this.choseNum();
-    }
+    item.ischeck = !item.ischeck;
+    this.getAllMoney();
+    this.choseNum();
   }
   choseAll() {
-    if ( this.canEdit ) {
-
-      this.choseAllStatus = !this.choseAllStatus;
-      if ( this.choseAllStatus ) {
-        for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
-          this.cartListInfo.cartDetail[i].ischeck = true;
-        }
-      } else {
-        for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
-          this.cartListInfo.cartDetail[i].ischeck = false;
-        }
+    this.choseAllStatus = !this.choseAllStatus;
+    if ( this.choseAllStatus ) {
+      for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
+        this.cartListInfo.cartDetail[i].ischeck = true;
       }
-      this.getAllMoney();
-      this.choseNum();
+    } else {
+      for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
+        this.cartListInfo.cartDetail[i].ischeck = false;
+      }
     }
+    this.getAllMoney();
+    this.choseNum();
   }
   choseNum() {
     let num = 0;
@@ -160,5 +151,8 @@ export class ShopcarComponent implements OnInit {
       return;
     }
     this.router.navigate(['/paysure', {'from': 'shopcart', 'skuIdArr': skuIdArr.join(','), 'liuchengType': 0}]);
+  }
+  goGoodsDetail(item) {
+    this.router.navigate(['/goodsdetail', item]);
   }
 }

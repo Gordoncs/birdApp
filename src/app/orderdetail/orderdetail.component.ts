@@ -40,7 +40,7 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
 
     // const countDown_time = '00:29:59';
     // this.count_down(countDown_time);
-    this.routerInfo.params.subscribe((params) => this.orderId = params['orderId']);
+    this.routerInfo.params.subscribe((params) => this.orderId = params['id']);
     this.orderGetOrderInfo(this.orderId);
     this.getMemberIndexInfo();
   }
@@ -139,15 +139,12 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.alertBox.success('支付成功');
               t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
             } else {
-              t.alertBox.success('支付失败');
               t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
             }
           },
           cancel: function(res) {
-            t.alertBox.success('取消支付');
             t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
           }
         });

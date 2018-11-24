@@ -9,7 +9,7 @@
   <div class="boxShow">
     <div *ngIf="showWhitchStatus==1" class="boxShowlist">
       <img class="noOrderImg" *ngIf="showWhitchStatusArr1.length==0" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox" *ngFor="let item of showWhitchStatusArr1 let i = index" [routerLink]="['/orderdetail', item.id]">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr1 let i = index" [routerLink]="['/orderdetail', {id: item.id}]">
         <div class="shopInfoCon">
           <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus" *ngIf="item.orderStatus==0">
@@ -65,7 +65,7 @@
     </div>
     <div *ngIf="showWhitchStatus==2" class="boxShowlist">
       <img class="noOrderImg" *ngIf="showWhitchStatusArr2.length==0" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox" *ngFor="let item of showWhitchStatusArr2 let i = index" [routerLink]="['/orderdetail', item.id]">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr2 let i = index" [routerLink]="['/orderdetail', {id: item.id}]">
         <div class="shopInfoCon">
           <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">
@@ -104,7 +104,7 @@
     </div>
     <div *ngIf="showWhitchStatus==3" class="boxShowlist">
       <img class="noOrderImg" *ngIf="showWhitchStatusArr3.length==0" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox" *ngFor="let item of showWhitchStatusArr3" [routerLink]="['/orderdetail', item.id]">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr3" [routerLink]="['/orderdetail', {id: item.id}]">
         <div class="shopInfoCon">
           <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">
@@ -141,7 +141,7 @@
     </div>
     <div *ngIf="showWhitchStatus==4" class="boxShowlist">
       <img class="noOrderImg" *ngIf="showWhitchStatusArr4.length==0" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox" *ngFor="let item of showWhitchStatusArr4 let i = index" [routerLink]="['/orderdetail', item.id]">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr4 let i = index" [routerLink]="['/orderdetail', {id: item.id}]">
         <div class="shopInfoCon">
           <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">
@@ -179,7 +179,7 @@
     </div>
     <div *ngIf="showWhitchStatus==5" class="boxShowlist">
       <img class="noOrderImg" *ngIf="showWhitchStatusArr5.length==0" src="./assets/image/noOrder.png" alt="">
-      <div class="orderBox" *ngFor="let item of showWhitchStatusArr5 let i = index" [routerLink]="['/orderdetail', item.id]">
+      <div class="orderBox" *ngFor="let item of showWhitchStatusArr5 let i = index" [routerLink]="['/orderdetail', {id: item.id}]">
         <div class="shopInfoCon">
           <div class="shopName"><img src="./assets/image/shopIconHui.png" alt=""><span>{{item.store.name}}</span></div>
           <div class="rightStatus">

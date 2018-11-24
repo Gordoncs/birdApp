@@ -22,7 +22,9 @@ export class MyorderComponent implements OnInit, AfterContentInit {
   public  startLimt4 = 0;
   public  showWhitchStatusArr5 = [];
   public  startLimt5 = 0;
-
+  /**
+   * 订单状态：0=未付款，1=已付款，2=已完成，9=已取消；null=全部订单列表
+   */
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -34,6 +36,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
      * 设置title
      */
     this.titleService.setTitle('我的订单');
+    this.routerInfo.params.subscribe((params) => this.showWhitchStatus = params['type']);
     this.showWitch(this.showWhitchStatus);
   }
   ngAfterContentInit() {
@@ -173,15 +176,12 @@ export class MyorderComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.alertBox.success('支付成功');
               t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
             } else {
-              t.alertBox.success('支付失败');
               t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
             }
           },
           cancel: function(res) {
-            t.alertBox.success('取消支付');
             t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
           }
         });

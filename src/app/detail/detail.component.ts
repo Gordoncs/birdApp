@@ -16,6 +16,7 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
   public  showWhitchStatus: any = 1;
   public  detailInfo: any = {};
   public  goodsId: any;
+  public  fromGoods: any = {};
   public  priceArr: any = [];
   public  choseSkuSpecId: any = [];
   public  choseSkuStyleId: any = [];
@@ -33,8 +34,12 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
      * 设置title
      */
     this.titleService.setTitle('春鸟科美-精选产品');
-    this.routerInfo.params.subscribe((params) => this.goodsId = params['goodsId']);
+    this.routerInfo.params.subscribe((params) =>
+     this.fromGoods = params
+    );
+    this.goodsId = this.fromGoods['goodsId'];
     this.getGoodsInfo(this.goodsId, JSON.parse(localStorage.getItem('storeInfo'))['id']);
+    this.cartGetCartDetailNumber();
   }
 
   ngAfterViewInit(): void {
@@ -90,12 +95,18 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
           this.priceArr.sort(function (a, b) {
             return a - b;
           });
+          if (this.fromGoods.skuSpecId) {
+            this.fromChoseit();
+          }
         } else {
           this.alertBox.error(data['message']);
         }
       });
   }
   selIt(item, arr, type) {
+    if (this.fromGoods.skuSpecId) {
+      return false;
+    }
     for (let i = 0; i < arr.length; i++) {
       arr[i].ischecked = false;
     }
@@ -185,5 +196,26 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
         prevEl: '.swiper-button-prev',
       },
     });
+  }
+  fromChoseit() {
+    const item = this.fromGoods;
+
+    for (let i = 0; i < this.detailInfo.skuSpec.length; i++) {
+      this.detailInfo.skuSpec[i].ischecked = false;
+      if (this.detailInfo.skuSpec[i].id * 1 ===  item.skuSpecId * 1) {
+        this.detailInfo.skuSpec[i].ischecked = true;
+      }
+    }
+    for (let i = 0; i < this.detailInfo.skuStyle.length; i++) {
+      this.detailInfo.skuStyle[i].ischecked = false;
+      if (this.detailInfo.skuStyle[i].id * 1 ===  item.skuStyleId * 1) {
+        this.detailInfo.skuStyle[i].ischecked = true;
+      }
+    }
+    for (let i = 0; i < this.detailInfo.sku.length; i++) {
+      if (this.detailInfo.sku[i].skuSpecId * 1 === item.skuSpecId * 1 && this.detailInfo.sku[i].skuStyleId * 1 === item.skuStyleId * 1) {
+        this.choseSku = this.detailInfo.sku[i];
+      }
+    }
   }
 }

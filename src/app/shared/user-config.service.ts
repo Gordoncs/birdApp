@@ -34,8 +34,8 @@ export class UserConfigService {
   /**
    * 公共地址
    */
-  // configUrl = 'http://mp.needai.com';
-  configUrl = 'http://47.105.65.44:9000';
+  configUrl = 'https://mp.needai.com';
+  // configUrl = 'http://47.105.65.44:9000';
   /**
    * 判断no auth进行地址跳转
    */
@@ -216,8 +216,8 @@ export class UserConfigService {
    * 扫二维码获取订单优惠
    */
   checkoutGetSettleAccountsDiscounts(allMoney: any, discounts: any): Observable<any> {
-    const params = '?discounts.id=' + discounts.id + '&discounts.authCode=' + discounts.authCode +
-      '&discounts.priceAmount=' + allMoney;
+    const params = '?id=' + discounts.id + '&authCode=' + discounts.authCode +
+      '&priceAmount=' + allMoney;
     return this.http.post(this.configUrl + '/checkout/getSettleAccountsDiscounts' + params, this.headoptions)
       .pipe(
         retry(1),
@@ -404,28 +404,28 @@ export class UserConfigService {
   wxConfigFn() {
     const  witchOS = localStorage.getItem('os');
     const currUrl =  witchOS === 'AndroidOS' ? location.href.split('#')[0] : window['entryUrl'];
+    const parms = location.href.split('#')[1] === undefined ? '' : ('#' + location.href.split('#')[1]);
     $.ajax({
-      url: '/signature',
-      dataType: 'json',
-      type: 'get',
-      data: 'redirectUrl=#' + location.href.split('#')[1] + '&currUrl=' + currUrl,
-      success: function(data) {
-        if (data['result']) {
-          wx.config({
-            debug: false,
-            appId: data.result.data.appId,
-            timestamp: data.result.data.timestamp,
-            nonceStr: data.result.data.noncestr,
-            signature: data.result.data.signature,
-            jsApiList: ['scanQRCode', 'getLocation', 'uploadImage', 'chooseImage',
-              'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData']
-          });
-          return true;
-        } else {
-          window.location.href = data.result.data;
+        url: '/signature',
+        dataType: 'json',
+        type: 'get',
+        data: 'redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl,
+        success: function(data) {
+          if (data.result.success) {
+            wx.config({
+              debug: false,
+              appId: data.result.data.appId,
+              timestamp: data.result.data.timestamp,
+              nonceStr: data.result.data.noncestr,
+              signature: data.result.data.signature,
+              jsApiList: ['scanQRCode', 'getLocation', 'uploadImage', 'chooseImage',
+                'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData']
+            });
+          } else {
+            window.location.href = data.result.data;
+          }
         }
-      }
-    });
+      });
   }
 }
 

@@ -144,10 +144,8 @@ export class PaysureComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.alertBox.success('支付成功');
               t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
             } else {
-              t.alertBox.success('支付失败');
               t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
             }
           },

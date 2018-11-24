@@ -6,7 +6,6 @@ import {environment} from './environments/environment';
 import wx from 'weixin-js-sdk';
 import * as MobileDetect from 'mobile-detect';
 import * as $ from 'jquery';
-import QRCode from 'qrcode';
 if (environment.production) {
   enableProdMode();
 }
@@ -20,14 +19,18 @@ const locationUrl = location.href;
 let signatureUrl = '';
 // 判断是否为外部跳转过来的页面
 if (locationUrl.indexOf('?') > -1) {
-  const currUrl = locationUrl;
+  const currUrl = location.href.split('#')[0];
   const canshu = locationUrl.substr(locationUrl.indexOf('?') + 1) || '';
   localStorage.setItem('canshu', canshu);
-  signatureUrl = '/signature?redirectUrl=g/index.html?' + canshu + '&currUrl=' + currUrl;
+  signatureUrl = '/signature?redirectUrl=#' + location.href.split('#')[1] + '&currUrl=' + currUrl;
 } else {
-  const currUrl = 'http://' + window.location.host + '/g/index.html';
-  signatureUrl = '/signature?redirectUrl=g/index.html&currUrl=' + currUrl;
+  const currUrl = location.href.split('#')[0];
+  const parms = location.href.split('#')[1] === undefined ? '' : ('#' + location.href.split('#')[1]);
+  alert('配置currUrl:' + currUrl);
+  signatureUrl = '/signature?redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl;
+  alert('配置signatureUrl:' + signatureUrl);
 }
+
 
 const xhr = new XMLHttpRequest();
 
@@ -36,7 +39,7 @@ const configWeixin = function () {
     platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(err => console.error(err));
   };
-  platformBrowserDynamics();
+  // platformBrowserDynamics();
   const data = JSON.parse(this.response);
 
   if (data.result.success) {
@@ -58,14 +61,12 @@ const configWeixin = function () {
             platformBrowserDynamics();
           }, 1500);
           getNextStoreInfo(res.latitude, res.longitude);
-        },
-        fail: function (res) {
-          alert(res);
         }
       });
       getbaseMember();
     });
   } else {
+    alert('signatureUrl接口错误返回跳转url:' + data.result.data);
     window.location.href = data.result.data;
   }
 };
@@ -80,7 +81,7 @@ xhr.send();
  */
 const getbaseMember = function() {
   $.ajax({
-    url: 'http://' + window.location.host + '/base/member',
+    url: '/base/member',
     type: 'get',
     success: function(data) {
       if (data['result']) {
@@ -93,11 +94,11 @@ const getbaseMember = function() {
   });
 };
 /***
- * 获取用户id
+ * 获取店铺
  */
 const getNextStoreInfo = function(latitude, longitude) {
   $.ajax({
-    url: 'http://' + window.location.host + '/getNextStoreInfo?latitude=' + latitude + '&longitude=' + longitude,
+    url: '/getNextStoreInfo?latitude=' + latitude + '&longitude=' + longitude,
     type: 'get',
     success: function(data) {
       if (data['result']) {

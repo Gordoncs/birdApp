@@ -20,8 +20,12 @@ export class SharedpageComponent implements OnInit {
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
-    this.wxupdateAppMessageShareData('测试给朋友', '测试描述', 'http://mp.needai.com/g/index.html?id=1', 'http://img.needai.com/index/jx1.png');
-    this.wxupdateTimelineShareData('测试给朋友圈', '测试描述', 'http://mp.needai.com/g/index.html?id=2', 'http://img.needai.com/index/jx1.png');
+    this.userConfigService.wxConfigFn();
+    const t = this;
+    wx.ready(function() {
+      t.wxupdateAppMessageShareData('测试给朋友', '测试描述', 'http://mp.needai.com/g/index.html?id=1', 'http://img.needai.com/index/jx1.png');
+      t.wxupdateTimelineShareData('测试给朋友圈', '测试描述', 'http://mp.needai.com/g/index.html?id=2', 'http://img.needai.com/index/jx1.png');
+    });
   }
 
   /**

@@ -8,8 +8,8 @@
       </div>
       <span class="shopName ml90">{{cartListInfo.storeName}}</span>
     </div>
-    <div class="productList" (click)="choseList(item);" *ngFor="let item of cartListInfo.cartDetail">
-      <div class="noselRaido raidoSelit left30">
+    <div class="productList"  (click)="goGoodsDetail(item)" *ngFor="let item of cartListInfo.cartDetail">
+      <div class="noselRaido raidoSelit left30" (click)="choseList(item);$event.stopPropagation();">
         <div [class.shi]="item.ischeck" class="kong"></div>
       </div>
       <div class="productImg ml90">

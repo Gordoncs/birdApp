@@ -83,13 +83,13 @@
 </div>
 <div class="priceBar">
   <div class="price">￥ {{(choseSku.price?(choseSku.price):0)*1| number }}</div>
-  <div class="navbarList" [routerLink]="['/cart']" >
+  <div class="navbarList" *ngIf="!fromGoods.skuSpecId" [routerLink]="['/cart']" >
     <div class="numbers">{{cartNum}}</div>
     <img class="car"  src='./assets/image/carSel.png' alt="">
     <div class="text">购物车</div>
   </div>
-  <div class="addCarBtn" (click)="cartAdd()" >加入购物车</div>
-  <div class="payBtn" (click)="goPaysure()">立即购买</div>
+  <div class="addCarBtn" *ngIf="!fromGoods.skuSpecId" (click)="cartAdd()" >加入购物车</div>
+  <div class="payBtn" *ngIf="!fromGoods.skuSpecId" (click)="goPaysure()">立即购买</div>
 </div>
 
 

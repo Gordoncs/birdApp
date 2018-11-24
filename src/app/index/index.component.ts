@@ -152,7 +152,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
           // 处理店铺信息
           that.storeInfo = that.indexInfo['storeInfo'];
           if ( that.storeInfo === null) {
-            this.router.navigate(['/address', 'nohave']);
+            this.router.navigate(['/address',  {'status': 'nohave'}]);
           } else {
             localStorage.setItem('storeInfo', JSON.stringify(that.indexInfo['storeInfo']));
             if (localStorage.getItem('canshu')) {
@@ -172,7 +172,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
   }
 
   goDetail(id: any) {
-    this.router.navigate(['/goodsdetail', id]);
+    this.router.navigate(['/goodsdetail', {'goodsId': id}]);
   }
   scrollFn() {
     const mySwiper = new Swiper('.headSwiper .swiper-container', {
@@ -192,7 +192,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
   }
   carouselGoto(item) {
     if (item.type === '1') {
-      this.router.navigate(['/goodsdetail', item.id]);
+      this.router.navigate(['/goodsdetail', {'goodsId': item.id}]);
     }
     if (item.type === '2') {
       this.router.navigate(['/specialgoods']);
