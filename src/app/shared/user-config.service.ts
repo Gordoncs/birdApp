@@ -216,9 +216,9 @@ export class UserConfigService {
    * 扫二维码获取订单优惠
    */
   checkoutGetSettleAccountsDiscounts(allMoney: any, discounts: any): Observable<any> {
-    const params = '?id=' + discounts.id + '&authCode=' + discounts.authCode +
+    const params = 'id=' + discounts.id + '&authCode=' + discounts.authCode +
       '&priceAmount=' + allMoney;
-    return this.http.post(this.configUrl + '/checkout/getSettleAccountsDiscounts' + params, this.headoptions)
+    return this.http.post(this.configUrl + '/checkout/getSettleAccountsDiscounts', params, this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError),
@@ -405,15 +405,18 @@ export class UserConfigService {
     const  witchOS = localStorage.getItem('os');
     const currUrl =  witchOS === 'AndroidOS' ? location.href.split('#')[0] : window['entryUrl'];
     const parms = location.href.split('#')[1] === undefined ? '' : ('#' + location.href.split('#')[1]);
+    const signatureUrl = '/signature?redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl + parms;
+    alert('内部页面设置currUrl:' + currUrl + parms);
+    alert('内部页面配置signatureUrl:' + signatureUrl);
     $.ajax({
         url: '/signature',
         dataType: 'json',
         type: 'get',
-        data: 'redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl,
+        data: 'redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl + parms,
         success: function(data) {
           if (data.result.success) {
             wx.config({
-              debug: false,
+              debug: true,
               appId: data.result.data.appId,
               timestamp: data.result.data.timestamp,
               nonceStr: data.result.data.noncestr,

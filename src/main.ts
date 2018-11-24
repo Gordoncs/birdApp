@@ -27,7 +27,7 @@ if (locationUrl.indexOf('?') > -1) {
   const currUrl = location.href.split('#')[0];
   const parms = location.href.split('#')[1] === undefined ? '' : ('#' + location.href.split('#')[1]);
   alert('配置currUrl:' + currUrl);
-  signatureUrl = '/signature?redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl;
+  signatureUrl = '/signature?redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl + parms;
   alert('配置signatureUrl:' + signatureUrl);
 }
 

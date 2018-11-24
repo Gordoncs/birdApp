@@ -76,6 +76,7 @@ export class JustpayComponent implements OnInit, AfterContentInit {
 
   sao() {
     const t = this;
+    // t.checkoutGetSettleAccountsDiscounts(300, {'id': 1, 'authCode': 391971});
     wx.scanQRCode({
       needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
       scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有

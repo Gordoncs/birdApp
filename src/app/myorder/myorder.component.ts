@@ -37,7 +37,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
      */
     this.titleService.setTitle('我的订单');
     this.routerInfo.params.subscribe((params) => this.showWhitchStatus = params['type']);
-    this.showWitch(this.showWhitchStatus);
+    this.showWitch(this.showWhitchStatus * 1);
   }
   ngAfterContentInit() {
     const t = this;
