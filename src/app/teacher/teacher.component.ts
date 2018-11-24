@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {UserConfigService} from '../shared/user-config.service';
 import wx from 'weixin-js-sdk';
+import QRCode from 'qrcode';
 @Component({
   selector: 'app-teacher',
   templateUrl: './teacher.component.html',
@@ -81,7 +82,7 @@ export class TeacherComponent implements OnInit {
       this.alertBox.close();
       if (data['result']) {
         this.showQr = true;
-        this.qrImg = 'data:image/jpeg;base64,' + data['data'];
+        this.useqrcode(data['data']);
       } else {
         this.alertBox.error(data['message']);
       }
@@ -97,6 +98,14 @@ export class TeacherComponent implements OnInit {
       success: function (res) {
         t.router.navigate(['/hexiao', {'code': res.resultStr}]);
       }
+    });
+  }
+
+  // 动态生成二维码
+  useqrcode(code) {
+    const t = this;
+    QRCode.toDataURL(code, function (err, url) {
+      t.qrImg = url;
     });
   }
 }

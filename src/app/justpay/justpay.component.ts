@@ -32,7 +32,7 @@ export class JustpayComponent implements OnInit, AfterContentInit {
   }
   ngAfterContentInit() {
     $('#moneyInput').focus();
-    this.changeURL();
+    this.userConfigService.wxConfigFn();
   }
   cashpay() {
     const t = this;

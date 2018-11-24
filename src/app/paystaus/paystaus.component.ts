@@ -30,7 +30,7 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     this.getMemberIndexInfo();
   }
   ngAfterContentInit() {
-    this.changeURL();
+    this.userConfigService.wxConfigFn();
   }
   pay() {
     if (this.fromData.from === 'justpay') {

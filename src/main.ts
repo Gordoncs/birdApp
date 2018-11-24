@@ -6,11 +6,16 @@ import {environment} from './environments/environment';
 import wx from 'weixin-js-sdk';
 import * as MobileDetect from 'mobile-detect';
 import * as $ from 'jquery';
+import QRCode from 'qrcode';
 if (environment.production) {
   enableProdMode();
 }
-const md = new MobileDetect(window.navigator.userAgent);
 
+// 记录进入app的url，后面微信sdk
+if (window['entryUrl'] === '' || window['entryUrl'] === undefined || window['entryUrl'] === null) {
+  window['entryUrl'] = location.href.split('#')[0];
+}
+const md = new MobileDetect(window.navigator.userAgent);
 const locationUrl = location.href;
 let signatureUrl = '';
 // 判断是否为外部跳转过来的页面
@@ -31,7 +36,7 @@ const configWeixin = function () {
     platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(err => console.error(err));
   };
-  // platformBrowserDynamics();
+  platformBrowserDynamics();
   const data = JSON.parse(this.response);
 
   if (data.result.success) {
@@ -45,26 +50,10 @@ const configWeixin = function () {
         'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData'] // 必填，需要使用的JS接口列表
     });
     wx.ready(function() {
-      // wx.checkJsApi({
-      //   jsApiList: [
-      //     // 所有要调用的 API 都要加到这个列表中
-      //     'getLocation',
-      //     'chooseWXPay',
-      //     'updateAppMessageShareData',
-      //     'updateTimelineShareData'
-      //   ], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-      //   success: function(res) {
-      //     alert(JSON.stringify(res));
-      //     // 以键值对的形式返回，可用的api值true，不可用为false
-      //     // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-      //   }
-      // });
       wx.getLocation({
         success: function (res) {
           localStorage.setItem('latitude', res.latitude);
           localStorage.setItem('longitude', res.longitude);
-          alert(res.latitude);
-          alert(res.longitude);
           setTimeout(function() {
             platformBrowserDynamics();
           }, 1500);

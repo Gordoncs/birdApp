@@ -45,7 +45,7 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
     this.getMemberIndexInfo();
   }
   ngAfterContentInit() {
-    this.changeURL();
+    this.userConfigService.wxConfigFn();
   }
   count_down(countDown_time) {
     const that = this;

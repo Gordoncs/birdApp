@@ -63,7 +63,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
       }
     });
     $('.bigBox').css('min-height', $(window).height() + 'px');
-    this.changeURL();
+    this.userConfigService.wxConfigFn();
   }
   showWitch(index) {
     this.showWhitchStatus = index;

@@ -53,7 +53,7 @@ export class PaysureComponent implements OnInit, AfterContentInit {
     }
   }
   ngAfterContentInit() {
-    this.changeURL();
+    this.userConfigService.wxConfigFn();
   }
   checkoutInfo() {
     const memberId = localStorage.getItem('memberId');

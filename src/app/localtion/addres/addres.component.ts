@@ -76,23 +76,24 @@ export class AddresComponent implements OnInit {
       }
     });
     this.routerInfo.params.subscribe((params) => this.status = params['status']);
-    this.changeURL();
-    wx.getLocation({
-      success: function (res) {
-        t.locallat = res.latitude;
-        t.locallong = res.longitude;
-        if (t.status === 'nohave') {
-          // 外省访问
-          t.getNextStoreInfo(39.908 , 116.3974);
-        } else {
-          // 北京本地访问
-          t.getNextStoreInfo(t.locallat, t.locallong);
+    if (this.userConfigService.wxConfigFn()) {
+      wx.getLocation({
+        success: function (res) {
+          t.locallat = res.latitude;
+          t.locallong = res.longitude;
+          if (t.status === 'nohave') {
+            // 外省访问
+            t.getNextStoreInfo(39.908 , 116.3974);
+          } else {
+            // 北京本地访问
+            t.getNextStoreInfo(t.locallat, t.locallong);
+          }
+        },
+        fail: function (res) {
+          console.log(res);
         }
-      },
-      fail: function (res) {
-        console.log(res);
-      }
-    });
+      });
+    }
     //
     // t.locallat = '39.908';
     // t.locallong = '116.3974';

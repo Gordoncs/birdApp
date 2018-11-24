@@ -3,6 +3,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, map, retry, tap} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import wx from 'weixin-js-sdk';
+import * as $ from 'jquery';
 @Injectable({
   providedIn: 'root'
 })
@@ -33,8 +34,8 @@ export class UserConfigService {
   /**
    * 公共地址
    */
-  configUrl = 'http://mp.needai.com';
-  // configUrl = 'http://47.105.65.44:9000';
+  // configUrl = 'http://mp.needai.com';
+  configUrl = 'http://47.105.65.44:9000';
   /**
    * 判断no auth进行地址跳转
    */
@@ -395,6 +396,36 @@ export class UserConfigService {
         catchError(this.handleError),
         tap(data => this.canGoHref(data))
       );
+  }
+
+  /**
+   * 微信签名
+   */
+  wxConfigFn() {
+    const  witchOS = localStorage.getItem('os');
+    const currUrl =  witchOS === 'AndroidOS' ? location.href.split('#')[0] : window['entryUrl'];
+    $.ajax({
+      url: '/signature',
+      dataType: 'json',
+      type: 'get',
+      data: 'redirectUrl=#' + location.href.split('#')[1] + '&currUrl=' + currUrl,
+      success: function(data) {
+        if (data['result']) {
+          wx.config({
+            debug: false,
+            appId: data.result.data.appId,
+            timestamp: data.result.data.timestamp,
+            nonceStr: data.result.data.noncestr,
+            signature: data.result.data.signature,
+            jsApiList: ['scanQRCode', 'getLocation', 'uploadImage', 'chooseImage',
+              'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData']
+          });
+          return true;
+        } else {
+          window.location.href = data.result.data;
+        }
+      }
+    });
   }
 }
 
