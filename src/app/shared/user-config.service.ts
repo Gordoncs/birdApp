@@ -269,8 +269,8 @@ export class UserConfigService {
    * 获取导师优惠二维码
    */
   advisorGetAdvisorDiscounts(discounts: any): Observable<any> {
-    const params = '?discounts.advisorId=' + discounts.advisorId + '&discounts.discountsType=' + discounts.discountsType +
-      '&discounts.discounts=' + discounts.discounts;
+    const params = '?advisorId=' + discounts.advisorId + '&discountsType=' + discounts.discountsType +
+      '&discounts=' + discounts.discounts;
     return this.http.get(this.configUrl + '/advisor/getAdvisorDiscounts' + params , this.headoptions)
       .pipe(
         retry(1),

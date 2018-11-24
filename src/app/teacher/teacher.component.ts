@@ -82,7 +82,7 @@ export class TeacherComponent implements OnInit {
       this.alertBox.close();
       if (data['result']) {
         this.showQr = true;
-        this.useqrcode(data['data']);
+        this.qrImg = 'data:image/jpeg;base64,' + data['data'];
       } else {
         this.alertBox.error(data['message']);
       }
