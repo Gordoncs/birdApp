@@ -66,7 +66,6 @@ const configWeixin = function () {
       getbaseMember();
     });
   } else {
-    alert('signatureUrl接口错误返回跳转url:' + data.result.data);
     window.location.href = data.result.data;
   }
 };
