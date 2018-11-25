@@ -45,8 +45,9 @@
     </div>
   </div>
 
-  <div class="zeroShareBox">
-    <img src="./assets/image/zeroShare.png" alt="">
+  <div class="zeroShareBox" >
+    <img [routerLink]="['/newerdec', {'nums': 1}]" *ngIf="userInfo.presentRemnant>0" src="./assets/image/zeroShare.png" alt="">
+    <img style="width: 7.25rem;height: 2.2rem" [routerLink]="['/newergif', {'goodsId': 5}]" *ngIf="userInfo.presentRemnant==0" src="./assets/image/newperson.png" alt="">
   </div>
   <div class="birdList">
     <span class="ml55">春鸟服务承诺</span>

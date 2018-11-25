@@ -33,7 +33,13 @@ export class NewergifComponent implements OnInit {
     // });
   }
   goPaysure() {
-    const skuId = this.tiyanInfo['sku'][0]['id'];
+    const skuId = {
+      'id': this.tiyanInfo['sku'][0]['id'],
+      'goodsId': this.tiyanInfo['sku'][0]['goodsId'],
+      'skuSpecId': this.tiyanInfo['sku'][0]['skuSpecId'],
+      'skuStyleId': this.tiyanInfo['sku'][0]['skuStyleId'],
+      'goodsType': this.tiyanInfo['goodsInfo'].type,
+    };
     this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 1}]);
   }
   /**

@@ -66,7 +66,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
       }
     });
     $('.bigBox').css('min-height', $(window).height() + 'px');
-    this.userConfigService.wxConfigFn();
+    // this.userConfigService.wxConfigFn();
   }
   showWitch(index) {
     this.showWhitchStatus = index;
@@ -176,13 +176,13 @@ export class MyorderComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
             } else {
-              t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
             }
           },
           cancel: function(res) {
-            t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
           }
         });
       } else {

@@ -34,8 +34,8 @@ export class UserConfigService {
   /**
    * 公共地址
    */
-  // configUrl = 'https://mp.needai.com';
-  configUrl = 'http://47.105.65.44:9000';
+  configUrl = 'https://mp.needai.com';
+  // configUrl = 'http://47.105.65.44:9000';
   /**
    * 判断no auth进行地址跳转
    */
@@ -187,8 +187,10 @@ export class UserConfigService {
   /**
    * 立即购买
    */
-  checkoutOutrightPurchase(memberId: any, storeId: any, type: any, skuId: any): Observable<any> {
-    const params = 'memberId=' + memberId + '&storeId=' + storeId + '&type=' + type + '&id=' + skuId ;
+  checkoutOutrightPurchase(memberId: any, storeId: any, type: any, sku: any): Observable<any> {
+    const params = 'memberId=' + memberId + '&storeId=' + storeId + '&type=' + type + '&sku.id=' + sku.id
+      + '&sku.goodsId=' + sku.goodsId + '&sku.skuSpecId=' + sku.skuSpecId + '&sku.skuStyleId=' + sku.skuStyleId
+      + '&sku.goodsType=' + sku.goodsType;
     return this.http.post(this.configUrl + '/checkout/outrightPurchase', params, this.headoptionsPost)
       .pipe(
         retry(1),
@@ -218,7 +220,7 @@ export class UserConfigService {
   checkoutGetSettleAccountsDiscounts(allMoney: any, discounts: any): Observable<any> {
     const params = 'id=' + discounts.id + '&authCode=' + discounts.authCode +
       '&priceAmount=' + allMoney;
-    return this.http.post(this.configUrl + '/checkout/getSettleAccountsDiscounts', params, this.headoptions)
+    return this.http.post(this.configUrl + '/checkout/getSettleAccountsDiscounts', params, this.headoptionsPost)
       .pipe(
         retry(1),
         catchError(this.handleError),
@@ -403,16 +405,21 @@ export class UserConfigService {
    */
   wxConfigFn() {
     const  witchOS = localStorage.getItem('os');
-    const currUrl =  witchOS === 'AndroidOS' ? location.href.split('#')[0] : window['entryUrl'];
+    let currUrl = '';
     const parms = location.href.split('#')[1] === undefined ? '' : ('#' + location.href.split('#')[1]);
-    const signatureUrl = '/signature?redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl + parms;
-    alert('内部页面设置currUrl:' + currUrl + parms);
+    if (witchOS === 'AndroidOS') {
+      currUrl =  location.href.split('#')[0] + 'index.html' + parms;
+    } else {
+      // currUrl =  location.href.split('#')[0] + 'index.html' + parms;
+      currUrl = window['entryUrl'];
+    }
+    const signatureUrl = '/signature?redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl;
     alert('内部页面配置signatureUrl:' + signatureUrl);
     $.ajax({
         url: '/signature',
         dataType: 'json',
         type: 'get',
-        data: 'redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl + parms,
+        data: 'redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl,
         success: function(data) {
           if (data.result.success) {
             wx.config({

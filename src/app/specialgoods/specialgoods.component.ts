@@ -36,7 +36,7 @@ export class SpecialgoodsComponent implements OnInit {
       });
   }
   goPaysure() {
-    const skuId = this.detailInfo[this.selStatus].id;
+    const skuId = this.detailInfo[this.selStatus];
     if (!skuId) {
       this.alertBox.error('请选择产品');
       return;

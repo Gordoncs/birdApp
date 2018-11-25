@@ -140,7 +140,7 @@ export class UploadComponent implements OnInit {
       .subscribe((data) => {
         this.alertBox.close();
         if (data['result']) {
-          this.alertBox.success(data['message']);
+          this.alertBox.success('上传成功！');
           setTimeout(function () {
             history.go(-1);
           }, 2000);

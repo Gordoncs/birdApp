@@ -33,7 +33,7 @@ export class NewercomeComponent implements OnInit {
   }
   goPaysure() {
     localStorage.setItem('canshu', '');
-    const skuId = this.tiyanInfo['sku'][0]['id'];
+    const skuId = this.tiyanInfo['sku'][0];
     this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 1}]);
   }
 

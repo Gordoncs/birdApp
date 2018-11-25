@@ -26,7 +26,9 @@ export class HexiaoComponent implements OnInit {
     this.titleService.setTitle('扫码销单');
     this.routerInfo.params.subscribe((params) => this.code = params);
     this.advisorGetOrderCheckoffDetail(this.code.code.split('#')[0], this.code.code.split('#')[1]);
+    // this.advisorGetOrderCheckoffDetail('380', '15431532083246963003');
     this.advisorId = this.code.advisorId;
+    // this.advisorId = 5;
   }
 
   advisorGetOrderCheckoffDetail(id , code) {
@@ -56,6 +58,9 @@ export class HexiaoComponent implements OnInit {
     }
     const orderId = this.hexiaoInfo.id;
     const advisorId = this.advisorId;
+    alert('detailId' + detailId);
+    alert('orderId' + orderId);
+    alert('advisorId' + advisorId);
     this.alertBox.load();
     this.userConfigService.advisorCheckoffOrderDetail(detailId, orderId, advisorId).
     subscribe(data => {

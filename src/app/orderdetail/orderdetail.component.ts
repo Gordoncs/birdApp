@@ -45,7 +45,7 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
     this.getMemberIndexInfo();
   }
   ngAfterContentInit() {
-    this.userConfigService.wxConfigFn();
+    // this.userConfigService.wxConfigFn();
   }
   count_down(countDown_time) {
     const that = this;
@@ -139,13 +139,13 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
             } else {
-              t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
             }
           },
           cancel: function(res) {
-            t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
           }
         });
       } else {

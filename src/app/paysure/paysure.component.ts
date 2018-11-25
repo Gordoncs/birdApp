@@ -45,7 +45,7 @@ export class PaysureComponent implements OnInit, AfterContentInit {
     this.routerInfo.params.subscribe((params) =>
       this.fromData = params
     );
-    this.skuArr = this.fromData['skuIdArr'];
+    this.skuArr = JSON.parse(this.fromData['skuIdArr']);
     if (this.fromData['from'] === 'shopcart') {
       this.checkoutInfo();
     } else if (this.fromData['from'] === 'detail') {
@@ -53,7 +53,7 @@ export class PaysureComponent implements OnInit, AfterContentInit {
     }
   }
   ngAfterContentInit() {
-    this.userConfigService.wxConfigFn();
+    // this.userConfigService.wxConfigFn();
   }
   checkoutInfo() {
     const memberId = localStorage.getItem('memberId');
@@ -144,14 +144,14 @@ export class PaysureComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
             } else {
-              t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
+              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
             }
           },
           cancel: function(res) {
             t.alertBox.success('取消支付');
-            t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
           }
         });
       } else {

@@ -32,7 +32,7 @@ export class JustpayComponent implements OnInit, AfterContentInit {
   }
   ngAfterContentInit() {
     $('#moneyInput').focus();
-    this.userConfigService.wxConfigFn();
+    // this.userConfigService.wxConfigFn();
   }
   cashpay() {
     const t = this;
@@ -56,15 +56,15 @@ export class JustpayComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['/paystatus', {'res': true, 'order': JSON.stringify(order),
+              t.router.navigate(['paystatus', {'res': true, 'order': JSON.stringify(order),
                 'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
             } else {
-              t.router.navigate(['/paystatus', {'res': false, 'order': JSON.stringify(order),
+              t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
                 'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
             }
           },
           cancel: function(res) {
-            t.router.navigate(['/paystatus', {'res': false, 'order': JSON.stringify(order),
+            t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
               'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
           }
         });
@@ -75,13 +75,15 @@ export class JustpayComponent implements OnInit, AfterContentInit {
   }
 
   sao() {
+    if (this.allMoney <= 0) {
+      this.alertBox.error('请输入金额再扫码');
+      return;
+    }
     const t = this;
-    // t.checkoutGetSettleAccountsDiscounts(300, {'id': 19, 'authCode': 180734});
     wx.scanQRCode({
       needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
       scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有
       success: function (res) {
-        alert('扫码结果' + res);
         const discounts = {
           'id' : res.resultStr.split('#')[0],
           'authCode' : res.resultStr.split('#')[2],
@@ -91,15 +93,10 @@ export class JustpayComponent implements OnInit, AfterContentInit {
     });
   }
   checkoutGetSettleAccountsDiscounts(allMoney, discounts) {
-    alert('进入扫二维码获取订单优惠方法')
     this.alertBox.load();
     this.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        alert( data['data']);
-        alert('discounts.id:' + data['data']['id']);
-        alert('discounts.authCode:' + data['data']['authCode']);
-        alert('discounts.discountsMoney:' + data['data']['discountsMoney']);
         this.discounts.id = data['data']['id'];
         this.discounts.authCode = data['data']['authCode'];
         this.discountPriceAmout = data['data']['discountsMoney'];

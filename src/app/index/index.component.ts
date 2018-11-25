@@ -198,7 +198,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
       this.router.navigate(['/specialgoods']);
     }
     if (item.type === '3') {
-      this.router.navigate(['/newergif', item.id]);
+      this.router.navigate(['/newergif', {'goodsId': 5}]);
     }
   }
   /***

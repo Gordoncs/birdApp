@@ -154,11 +154,18 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
   }
   goPaysure() {
     const skuIdArr = [];
-    const skuId = this.choseSku['id'];
-    if (!skuId) {
+    const skuId = {
+      'id': this.choseSku['id'],
+      'goodsId': this.choseSku['goodsId'],
+      'skuSpecId': this.choseSku['skuSpecId'],
+      'skuStyleId': this.choseSku['skuStyleId'],
+      'goodsType': this.detailInfo['goodsInfo'].type,
+    };
+    if (!skuId.id) {
       this.alertBox.error('请选择产品');
       return;
     }
+    console.log(skuId);
     this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 2}]);
   }
   cartGetCartDetailNumber() {

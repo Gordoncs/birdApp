@@ -30,7 +30,12 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     this.getMemberIndexInfo();
   }
   ngAfterContentInit() {
-    this.userConfigService.wxConfigFn();
+    // this.userConfigService.wxConfigFn();
+    // this.pushHistory();
+    const  t = this;
+    window.addEventListener('popstate', function(e) {
+      t.router.navigate(['orderdetail', {id: t.fromData.orderNo}]);
+    });
   }
   pay() {
     if (this.fromData.from === 'justpay') {
@@ -57,13 +62,13 @@ export class PaystausComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
             } else {
-              t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
+              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
             }
           },
           cancel: function(res) {
-            t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
           }
         });
       } else {
@@ -88,15 +93,15 @@ export class PaystausComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['/paystatus', {'res': true, 'order': JSON.stringify(order),
+              t.router.navigate(['paystatus', {'res': true, 'order': JSON.stringify(order),
                 'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
             } else {
-              t.router.navigate(['/paystatus', {'res': false, 'order': JSON.stringify(order),
+              t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
                 'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
             }
           },
           cancel: function(res) {
-            t.router.navigate(['/paystatus', {'res': false, 'order': JSON.stringify(order),
+            t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
               'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
           }
         });
@@ -121,5 +126,12 @@ export class PaystausComponent implements OnInit, AfterContentInit {
   }
   changeURL() {
     window.history.pushState(null, null, '/g/');
+  }
+  pushHistory() {
+    const state = {
+      title: 'myCenter',
+      url: '__SELF__'
+    };
+    window.history.pushState(state, state.title, state.url);
   }
 }
