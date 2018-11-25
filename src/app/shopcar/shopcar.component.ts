@@ -155,4 +155,7 @@ export class ShopcarComponent implements OnInit {
   goGoodsDetail(item) {
     this.router.navigate(['/goodsdetail', item]);
   }
+  goback() {
+    history.go(-1);
+  }
 }

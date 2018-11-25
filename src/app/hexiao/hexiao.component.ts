@@ -11,6 +11,7 @@ import {UserConfigService} from '../shared/user-config.service';
 })
 export class HexiaoComponent implements OnInit {
   code: any = '';
+  advisorId: any = '';
   hexiaoInfo: any = {};
   // 弹框显示
   @ViewChild(AlertboxComponent)
@@ -25,6 +26,7 @@ export class HexiaoComponent implements OnInit {
     this.titleService.setTitle('扫码销单');
     this.routerInfo.params.subscribe((params) => this.code = params);
     this.advisorGetOrderCheckoffDetail(this.code.code.split('#')[0], this.code.code.split('#')[1]);
+    this.advisorId = this.code.advisorId;
   }
 
   advisorGetOrderCheckoffDetail(id , code) {
@@ -53,13 +55,13 @@ export class HexiaoComponent implements OnInit {
       }
     }
     const orderId = this.hexiaoInfo.id;
-    const advisorId = localStorage.getItem('memberId');
+    const advisorId = this.advisorId;
     this.alertBox.load();
     this.userConfigService.advisorCheckoffOrderDetail(detailId, orderId, advisorId).
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        this.alertBox.success(data['message']);
+        this.alertBox.success('核销成功');
         setTimeout(function () {
           history.go(-1);
         }, 2000);

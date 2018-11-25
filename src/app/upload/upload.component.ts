@@ -4,6 +4,8 @@ import * as $ from 'jquery';
 import {Title} from '@angular/platform-browser';
 import {UserConfigService} from '../shared/user-config.service';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TongxinService} from '../shared/tongxin.service';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -16,7 +18,7 @@ export class UploadComponent implements OnInit {
   previewDomNow: any;
   lookImgUrl = '';
   memberCase = {
-    'advisorId': localStorage.getItem('memberId'),
+    'advisorId': '',
     'memberAge': '',
     'serviceType': '',
     'serviceProject': '',
@@ -25,9 +27,13 @@ export class UploadComponent implements OnInit {
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
-  constructor( private titleService: Title, private userConfigService: UserConfigService) { }
+  constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
+              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
   ngOnInit() {
     this.titleService.setTitle('案例上传');
+    this.routerInfo.params.subscribe((params) =>
+      this.memberCase.advisorId = params['advisorId']
+    );
     this.creatArr();
   }
   getImgUrl($event, index) {
@@ -84,6 +90,18 @@ export class UploadComponent implements OnInit {
     }
   }
   save() {
+    if (this.memberCase.memberAge === '') {
+      this.alertBox.error('您还未填写客户年龄~');
+      return;
+    }
+    if (this.memberCase.serviceType === '') {
+      this.alertBox.error('您还未选择服务系列~');
+      return;
+    }
+    if (this.memberCase.serviceProject === '') {
+      this.alertBox.error('您还未填写服务项目~');
+      return;
+    }
     const panduanJson = [];
     let imgsUrl = '';
     for (let i = 0; i < this.cropperArr.length; i++) {
@@ -107,6 +125,10 @@ export class UploadComponent implements OnInit {
     }
     if ((panduanJson[4].img !== '' && panduanJson[5].img === '') || (panduanJson[4].img === '' && panduanJson[5].img !== '')) {
       this.alertBox.error('您少传一张图片~');
+      return;
+    }
+    if (this.memberCase.describedResults === '') {
+      this.alertBox.error('您还未填写效果描述~');
       return;
     }
     const memberCase = 'caseBean.memberCase.advisorId=' + this.memberCase.advisorId + '&caseBean.memberCase.memberAge=' +

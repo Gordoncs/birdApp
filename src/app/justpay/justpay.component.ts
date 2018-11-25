@@ -76,11 +76,12 @@ export class JustpayComponent implements OnInit, AfterContentInit {
 
   sao() {
     const t = this;
-    // t.checkoutGetSettleAccountsDiscounts(300, {'id': 1, 'authCode': 391971});
+    // t.checkoutGetSettleAccountsDiscounts(300, {'id': 19, 'authCode': 180734});
     wx.scanQRCode({
       needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
       scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有
       success: function (res) {
+        alert('扫码结果' + res);
         const discounts = {
           'id' : res.resultStr.split('#')[0],
           'authCode' : res.resultStr.split('#')[2],
@@ -90,10 +91,15 @@ export class JustpayComponent implements OnInit, AfterContentInit {
     });
   }
   checkoutGetSettleAccountsDiscounts(allMoney, discounts) {
+    alert('进入扫二维码获取订单优惠方法')
     this.alertBox.load();
     this.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
+        alert( data['data']);
+        alert('discounts.id:' + data['data']['id']);
+        alert('discounts.authCode:' + data['data']['authCode']);
+        alert('discounts.discountsMoney:' + data['data']['discountsMoney']);
         this.discounts.id = data['data']['id'];
         this.discounts.authCode = data['data']['authCode'];
         this.discountPriceAmout = data['data']['discountsMoney'];
@@ -109,5 +115,8 @@ export class JustpayComponent implements OnInit, AfterContentInit {
   }
   changeURL() {
     window.history.pushState(null, null, '/g/');
+  }
+  goback() {
+    history.go(-1);
   }
 }

@@ -15,7 +15,7 @@ export class TeacherComponent implements OnInit {
   qrImg = null;
   teacherInfo: any = {};
   discounts = {
-    'advisorId': localStorage.getItem('memberId'),
+    'advisorId': '',
     'discountsType': null,
     'discounts': null,
   };
@@ -42,6 +42,7 @@ export class TeacherComponent implements OnInit {
       this.alertBox.close();
       if (data['result']) {
         this.teacherInfo = data['data'];
+        this.discounts.advisorId = this.teacherInfo.id;
       } else {
         this.alertBox.error(data['message']);
       }

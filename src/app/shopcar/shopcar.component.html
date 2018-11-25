@@ -1,5 +1,8 @@
 <div class="conBg"></div>
-<div class="editBtn" (click)="canEdit=!canEdit">{{canEdit?'完成':'编辑'}}</div>
+<div class="topNavbar">
+  <img class="leftArrow" (click)="goback()" src="./assets/image/leftArrow.png" alt="">
+  <div class="editBtn" (click)="canEdit=!canEdit">{{canEdit?'完成':'编辑'}}</div>
+</div>
 <div class="cartContent">
   <div class="shopCartBox" *ngIf="cartListInfo.cartDetail.length>0">
     <div class="heads">
@@ -35,7 +38,9 @@
 
     </div>
   </div>
+  <p class="nogoodsTips" *ngIf="cartListInfo.cartDetail.length==0">购物车是空的~</p>
 </div>
+
 <div class="priceBar">
   <div (click)="choseAll()">
     <div class="noselRaido raidoSelit">

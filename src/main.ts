@@ -26,9 +26,9 @@ if (locationUrl.indexOf('?') > -1) {
 } else {
   const currUrl = location.href.split('#')[0];
   const parms = location.href.split('#')[1] === undefined ? '' : ('#' + location.href.split('#')[1]);
-  alert('配置currUrl:' + currUrl);
+  // alert('配置currUrl:' + currUrl);
   signatureUrl = '/signature?redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl + parms;
-  alert('配置signatureUrl:' + signatureUrl);
+  // alert('配置signatureUrl:' + signatureUrl);
 }
 
 
@@ -39,7 +39,7 @@ const configWeixin = function () {
     platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(err => console.error(err));
   };
-  // platformBrowserDynamics();
+  platformBrowserDynamics();
   const data = JSON.parse(this.response);
 
   if (data.result.success) {
