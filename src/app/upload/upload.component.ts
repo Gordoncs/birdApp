@@ -30,6 +30,7 @@ export class UploadComponent implements OnInit {
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
   ngOnInit() {
+    window.URL = window.URL || window['webkitURL'];
     this.titleService.setTitle('案例上传');
     this.routerInfo.params.subscribe((params) =>
       this.memberCase.advisorId = params['advisorId']

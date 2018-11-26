@@ -64,11 +64,10 @@
 }
 .headBg{
   width: 100%;
-  height: 7.03rem;
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: -1;
 }
 .headSwiper .swiper-container {
   width: 7rem;
@@ -319,11 +318,7 @@
 .lookBox .middleBox{
   width: 7.5rem;
   height: 10rem;
-}
-.lookBox .middleBox img{
-  display: block;
-  width: 7.5rem;
-  height: 100%;
+  position: relative;
 }
 .sureBtn{
   height: 0.5rem;
@@ -340,4 +335,20 @@
 }
 .overflowhide{
   overflow: hidden;
+}
+
+.middleBox .swiper-container{
+  width: 100%;
+  height: 100%;
+}
+.middleBox .swiper-slide{
+  width: 100%;
+}
+.middleBox .swiper-slide img{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.hide{
+  display: none !important;
 }

@@ -8,7 +8,6 @@
 }
 .headSwiper{
   width: 100%;
-  height: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,11 +16,10 @@
 }
 .headSwiper .swiper-container {
   width: 100%;
-  height: 5rem;
 }
 .headSwiper .swiper-slide img{
   width: 100%;
-  height: 5rem;
+  display: block;
 }
 
 .headSwiper .swiper-pagination-fraction{
@@ -197,9 +195,10 @@
   width: 27%;
   height: 100%;
   line-height: 1rem;
-  color: #555555;
+  color: #FFF;
   font-size: 0.30rem;
   text-align: center;
+  background: #f23157;
 }
 .priceBar .payBtn{
   width: 27%;

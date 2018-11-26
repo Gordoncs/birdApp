@@ -217,6 +217,32 @@ export class IndexComponent implements OnInit, AfterContentInit {
       });
   }
   showLook(img) {
-    this.lookImgUrl = img;
+    const imgsarr = [];
+    for (let i = 0 ; i < img.length ; i++) {
+      if (img[i].before !== '') {
+        imgsarr.push(img[i].beforebig);
+      }
+      if (img[i].after !== '') {
+        imgsarr.push(img[i].afterbig);
+      }
+    }
+    this.lookImgUrl = imgsarr;
+    setTimeout(function () {
+      const swiperss = new Swiper('.middleBox .swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          bulletClass: 'detailbullets',
+          bulletActiveClass: 'my-bullet-active',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    }, 1000);
   }
 }

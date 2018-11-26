@@ -13,10 +13,11 @@ import wx from 'weixin-js-sdk';
 export class JustpayComponent implements OnInit, AfterContentInit {
   orderInfo: any;
   allMoney: number ;
-  discountPriceAmout = 0;
+  discountPriceAmout: number = null ;
   discounts = {
     'id' : '',
-    'authCode' : ''
+    'authCode' : '',
+    'advisorName' : ''
   };
   storeInfo = JSON.parse(localStorage.getItem('storeInfo'));
   // 弹框显示
@@ -48,6 +49,73 @@ export class JustpayComponent implements OnInit, AfterContentInit {
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
+        this.wxpay(data.data);
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+
+  sao() {
+    if (this.allMoney <= 0) {
+      this.alertBox.error('请输入金额再扫码');
+      return;
+    }
+    // this.checkoutGetSettleAccountsDiscounts(this.allMoney, {'id': '45', 'authCode': '665388'});
+    const t = this;
+    wx.scanQRCode({
+      needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+      scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有
+      success: function (res) {
+        const discounts = {
+          'id' : res.resultStr.split('#')[0],
+          'authCode' : res.resultStr.split('#')[2],
+        };
+        t.checkoutGetSettleAccountsDiscounts(t.allMoney, discounts);
+      }
+    });
+  }
+  checkoutGetSettleAccountsDiscounts(allMoney, discounts) {
+    this.alertBox.load();
+    this.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.discounts.id = data['data']['id'];
+        this.discounts.authCode = data['data']['authCode'];
+        this.discounts.advisorName = data['data']['advisorName'];
+        this.discountPriceAmout = data['data']['discountsMoney'];
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  clearDiscount() {
+    this.discounts.id = '';
+    this.discounts.authCode = '';
+    this.discountPriceAmout = null;
+  }
+  changeURL() {
+    window.history.pushState(null, null, '/g/');
+  }
+  goback() {
+    history.go(-1);
+  }
+  wxpay(orderId) {
+    const t = this;
+    this.alertBox.load();
+    const order = {
+      'memberId': localStorage.getItem('memberId'),
+      'storeId': JSON.parse(localStorage.getItem('storeInfo'))['id'],
+      'orderPriceAmount': this.allMoney,
+      'discountPriceAmout': this.discountPriceAmout,
+    };
+    const discounts = this.discounts;
+    this.userConfigService.paymentWechatPrepay(orderId).
+    subscribe(data => {
+      console.log(data);
+      this.alertBox.close();
+      if (data['result']) {
         wx.chooseWXPay({
           timestamp: data.paySignMap.timeStamp + '', // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
           nonceStr: data.paySignMap.nonceStr, // 支付签名随机串，不长于 32 位
@@ -72,48 +140,5 @@ export class JustpayComponent implements OnInit, AfterContentInit {
         this.alertBox.error(data['message']);
       }
     });
-  }
-
-  sao() {
-    if (this.allMoney <= 0) {
-      this.alertBox.error('请输入金额再扫码');
-      return;
-    }
-    const t = this;
-    wx.scanQRCode({
-      needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-      scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有
-      success: function (res) {
-        const discounts = {
-          'id' : res.resultStr.split('#')[0],
-          'authCode' : res.resultStr.split('#')[2],
-        };
-        t.checkoutGetSettleAccountsDiscounts(t.allMoney, discounts);
-      }
-    });
-  }
-  checkoutGetSettleAccountsDiscounts(allMoney, discounts) {
-    this.alertBox.load();
-    this.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).subscribe(data => {
-      this.alertBox.close();
-      if (data['result']) {
-        this.discounts.id = data['data']['id'];
-        this.discounts.authCode = data['data']['authCode'];
-        this.discountPriceAmout = data['data']['discountsMoney'];
-      } else {
-        this.alertBox.error(data['message']);
-      }
-    });
-  }
-  clearDiscount() {
-    this.discounts.id = '';
-    this.discounts.authCode = '';
-    this.discountPriceAmout = 0;
-  }
-  changeURL() {
-    window.history.pushState(null, null, '/g/');
-  }
-  goback() {
-    history.go(-1);
   }
 }

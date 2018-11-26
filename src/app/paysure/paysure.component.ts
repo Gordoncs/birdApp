@@ -25,11 +25,12 @@ export class PaysureComponent implements OnInit, AfterContentInit {
     'orderRemark': '',
     'subscribePhone': '',
     'linkman': '',
-    'discountPriceAmout': 0,
+    'discountPriceAmout': null,
   };
   public discounts: any = {
     'id': '',
     'authCode': '',
+    'advisorName': ''
   };
   // 弹框显示
   @ViewChild(AlertboxComponent)
@@ -45,10 +46,11 @@ export class PaysureComponent implements OnInit, AfterContentInit {
     this.routerInfo.params.subscribe((params) =>
       this.fromData = params
     );
+    console.log(this.fromData);
     this.skuArr = JSON.parse(this.fromData['skuIdArr']);
     if (this.fromData['from'] === 'shopcart') {
       this.checkoutInfo();
-    } else if (this.fromData['from'] === 'detail') {
+    } else if (this.fromData['from'] === 'detail' || this.fromData['from'] === 'special') {
       this.checkoutOutrightPurchase();
     }
   }
@@ -109,9 +111,13 @@ export class PaysureComponent implements OnInit, AfterContentInit {
       this.alertBox.error('请正确填写座机手机号');
       return false;
     }
-    const sku = [];
+    let sku = [];
     for (let i = 0; i < this.paySureInfo.cartDetail.length; i++) {
       sku.push(this.paySureInfo.cartDetail[i].id);
+    }
+    if (this.fromData['from'] === 'special') {
+      sku = [];
+      sku.push(this.skuArr['id']);
     }
     // const type = this.paySureInfo.type;
     const type = this.fromData['liuchengType'];
@@ -162,6 +168,7 @@ export class PaysureComponent implements OnInit, AfterContentInit {
 
   sao() {
     const t = this;
+    // this.checkoutGetSettleAccountsDiscounts(this.allMoney, {'id': '47', 'authCode': '899149'});
     wx.scanQRCode({
       needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
       scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有
@@ -176,11 +183,13 @@ export class PaysureComponent implements OnInit, AfterContentInit {
   }
   checkoutGetSettleAccountsDiscounts(allMoney, discounts) {
     this.alertBox.load();
-    this.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).subscribe(data => {
+    this.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).
+    subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
         this.discounts.id = data['data']['id'];
         this.discounts.authCode = data['data']['authCode'];
+        this.discounts.advisorName = data['data']['advisorName'];
         this.order.discountPriceAmout = data['data']['discountsMoney'];
       } else {
         this.alertBox.error(data['message']);
@@ -190,7 +199,7 @@ export class PaysureComponent implements OnInit, AfterContentInit {
   clearDiscount() {
     this.discounts.id = '';
     this.discounts.authCode = '';
-    this.order.discountPriceAmout = 0;
+    this.order.discountPriceAmout = null;
   }
   changeURL() {
     window.history.pushState(null, null, '/g/');

@@ -202,10 +202,13 @@ export class UserConfigService {
    * 金额付款订单结算下单
    */
   checkoutAddCashOrder(order: any, discounts: any): Observable<any> {
+    if (order.discountPriceAmout === null) {
+      order.discountPriceAmout = 0;
+    }
     let params = 'order.memberId=' + order.memberId + '&order.storeId=' + order.storeId +
       '&order.orderPriceAmount=' + order.orderPriceAmount + '&order.discountPriceAmout=' + order.discountPriceAmout;
     if (discounts.id !== '') {
-      params = params + '&discounts.id=' + discounts.id + '&discounts.authCode=' + discounts.authCode;
+      params = params + '&bean.id=' + discounts.id + '&bean.authCode=' + discounts.authCode;
     }
     return this.http.post(this.configUrl + '/checkout/addCashOrder', params, this.headoptionsPost)
       .pipe(
@@ -231,12 +234,15 @@ export class UserConfigService {
    * 商品订单结算下单
    */
   checkoutAdd(sku: any, type: any, order: any, discounts: any): Observable<any> {
+    if (order.discountPriceAmout === null) {
+      order.discountPriceAmout = 0;
+    }
     let params = 'sku=' + sku + '&type=' + type + '&order.memberId=' + order.memberId +
       '&order.storeId=' + order.storeId + '&order.orderRemark=' + order.orderRemark +
       '&order.subscribePhone=' + order.subscribePhone + '&order.linkman=' + order.linkman +
       '&order.discountPriceAmout=' + order.discountPriceAmout;
     if (discounts.id !== '') {
-      params = params + '&discounts.id=' + discounts.id + '&discounts.authCode=' + discounts.authCode;
+      params = params + '&bean.id=' + discounts.id + '&bean.authCode=' + discounts.authCode;
     }
     return this.http.post(this.configUrl + '/checkout/add', params, this.headoptionsPost)
       .pipe(
@@ -408,22 +414,27 @@ export class UserConfigService {
     let currUrl = '';
     const parms = location.href.split('#')[1] === undefined ? '' : ('#' + location.href.split('#')[1]);
     if (witchOS === 'AndroidOS') {
-      currUrl =  location.href.split('#')[0] + 'index.html' + parms;
+      // currUrl =  location.href.split('#')[0] + 'index.html' + parms;
+      currUrl =  location.href.split('#')[0];
     } else {
       // currUrl =  location.href.split('#')[0] + 'index.html' + parms;
       currUrl = window['entryUrl'];
     }
-    const signatureUrl = '/signature?redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl;
-    alert('内部页面配置signatureUrl:' + signatureUrl);
+    // alert('内部页面location.href:' + location.href.split('#')[0]);
+    // alert('内部页面配置redirectUrl:' + 'g/index.html' + parms);
+    // alert('内部页面配置currUrl:' + currUrl);
     $.ajax({
         url: '/signature',
         dataType: 'json',
         type: 'get',
-        data: 'redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl,
+        data: {
+          'redirectUrl': 'g/index.html' + parms,
+          'currUrl': currUrl,
+        },
         success: function(data) {
           if (data.result.success) {
             wx.config({
-              debug: true,
+              debug: false,
               appId: data.result.data.appId,
               timestamp: data.result.data.timestamp,
               nonceStr: data.result.data.noncestr,

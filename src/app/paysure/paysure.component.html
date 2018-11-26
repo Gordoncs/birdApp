@@ -45,10 +45,10 @@
     <div class="textBox">
       <span>金额合计：</span><span>￥ {{allMoney | number:'2.2-2'}}</span>
     </div>
-    <div class="textBox" style="border-bottom: 1px solid #e5e5e5 " *ngIf="order.discountPriceAmout>0">
+    <div class="textBox" style="border-bottom: 1px solid #e5e5e5 " *ngIf="order.discountPriceAmout">
       <span>优惠方式：</span>
       <div class="cheapBox">
-        <!--<span class="name">内购券优惠-金永涵</span>-->
+        <span class="name">内购券优惠-{{discounts.advisorName}}</span>
         <div class="name">
           -{{order.discountPriceAmout}}元
           <img src="./assets/image/closeIcon.png" (click)="clearDiscount()" alt="">

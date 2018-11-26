@@ -10,7 +10,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-// 记录进入app的url，后面微信sdk
+// ios记录进入app的url，后面微信sdk
 if (window['entryUrl'] === '' || window['entryUrl'] === undefined || window['entryUrl'] === null) {
   window['entryUrl'] = location.href.split('#')[0];
 }
@@ -26,53 +26,51 @@ if (locationUrl.indexOf('?') > -1) {
 } else {
   const currUrl = location.href.split('#')[0];
   const parms = location.href.split('#')[1] === undefined ? '' : ('#' + location.href.split('#')[1]);
-  // alert('配置currUrl:' + currUrl);
-  signatureUrl = '/signature?redirectUrl=' + 'g/index.html' + parms + '&currUrl=' + currUrl + parms;
-  // alert('配置signatureUrl:' + signatureUrl);
-}
-
-
-const xhr = new XMLHttpRequest();
-
-const configWeixin = function () {
+  // alert('开始进入配置redirectUrl:' + 'g/index.html' + parms);
+  // alert('开始进入配置currUrl:' + currUrl);
   const platformBrowserDynamics = function() {
     platformBrowserDynamic().bootstrapModule(AppModule)
-    .catch(err => console.error(err));
+      .catch(err => console.error(err));
   };
   // platformBrowserDynamics();
-  const data = JSON.parse(this.response);
-
-  if (data.result.success) {
-    wx.config({
-      debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-      appId: data.result.data.appId, // 必填，公众号的唯一标识
-      timestamp: data.result.data.timestamp, // 必填，生成签名的时间戳
-      nonceStr: data.result.data.noncestr, // 必填，生成签名的随机串
-      signature: data.result.data.signature, // 必填，签名
-      jsApiList: ['checkJsApi', 'scanQRCode', 'getLocation', 'uploadImage', 'chooseImage',
-        'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData'] // 必填，需要使用的JS接口列表
-    });
-    wx.ready(function() {
-      wx.getLocation({
-        success: function (res) {
-          localStorage.setItem('latitude', res.latitude);
-          localStorage.setItem('longitude', res.longitude);
-          setTimeout(function() {
-            platformBrowserDynamics();
-          }, 1500);
-          getNextStoreInfo(res.latitude, res.longitude);
-        }
-      });
-      getbaseMember();
-    });
-  } else {
-    window.location.href = data.result.data;
-  }
-};
-// alert('20181122,0:11版本');
-xhr.open('get', signatureUrl);
-xhr.addEventListener('load', configWeixin, false);
-xhr.send();
+  $.ajax({
+    url: '/signature',
+    dataType: 'json',
+    type: 'get',
+    data: {
+      'redirectUrl': 'g/index.html' + parms,
+      'currUrl': currUrl,
+    },
+    success: function(data) {
+      if (data.result.success) {
+        wx.config({
+          debug: false,
+          appId: data.result.data.appId,
+          timestamp: data.result.data.timestamp,
+          nonceStr: data.result.data.noncestr,
+          signature: data.result.data.signature,
+          jsApiList: ['scanQRCode', 'getLocation', 'uploadImage', 'chooseImage',
+            'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData']
+        });
+        wx.ready(function() {
+          wx.getLocation({
+            success: function (res) {
+              localStorage.setItem('latitude', res.latitude);
+              localStorage.setItem('longitude', res.longitude);
+              setTimeout(function() {
+                platformBrowserDynamics();
+              }, 1500);
+              getNextStoreInfo(res.latitude, res.longitude);
+            }
+          });
+          getbaseMember();
+        });
+      } else {
+        window.location.href = data.result.data;
+      }
+    }
+  });
+}
 
 
 /***

@@ -29,14 +29,17 @@
     <div class="heads">
       <img src="./assets/image/sideScrollBoxHead.png" alt="">
     </div>
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div *ngFor="let item of carefullyarr let i = index" class="swiper-slide" (click)="goDetail(item.id)">
-          <img src="{{item.imgs}}" alt="">
+    <div style="width: 7.5rem;overflow: hidden">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div *ngFor="let item of carefullyarr let i = index" class="swiper-slide" (click)="goDetail(item.id)">
+            <img src="{{item.imgs}}" alt="">
+          </div>
+          <div class="swiper-slide" style="width: 0;border: 0"></div>
         </div>
-        <div class="swiper-slide" style="width: 0;border: 0"></div>
       </div>
     </div>
+
   </div>
   <div class="tiyanBox" [routerLink]="['/newergif',  {'goodsId': 5}]">
     <img src="./assets/image/newperson.png" alt="">
@@ -61,11 +64,11 @@
       <div class="exImg">
         <div class="exlist" *ngFor="let imgs of person.casePictureArr">
           <div class="listsc">
-            <img *ngIf="imgs.before!=''" src="{{imgs.before}}" (click)="showLook(imgs.beforebig)" alt="">
+            <img *ngIf="imgs.before!=''" src="{{imgs.before}}" (click)="showLook(person.casePictureArr)" alt="">
             <p *ngIf="imgs.before==''">服务前</p>
           </div>
           <div class="listsc">
-            <img *ngIf="imgs.before!=''" src="{{imgs.after}}" (click)="showLook(imgs.afterbig)" alt="">
+            <img *ngIf="imgs.before!=''" src="{{imgs.after}}" (click)="showLook(person.casePictureArr)" alt="">
             <p *ngIf="imgs.before==''">服务前</p>
           </div>
         </div>
@@ -75,6 +78,8 @@
       <p class="declist">实际效果：{{person.describedResults}}</p>
     </div>
   </div>
+
+
 </div>
 
 
@@ -87,11 +92,22 @@
   <img src="./assets/image/kefu.png" alt="">
 </div>
 
-<div class="lookBox" *ngIf="lookImgUrl!=''">
+<div class="lookBox" [class.hide]="lookImgUrl.length == 0" >
   <div class="middleBox" >
-    <img  [src]="lookImgUrl">
+    <div class="swiper-container">
+      <div class="swiper-wrapper" >
+        <div class="swiper-slide" *ngFor="let imgs of lookImgUrl">
+          <img  src="{{imgs}}"  alt="">
+        </div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
   </div>
-  <div class="sureBtn" (click)="lookImgUrl=''">X</div>
+  <div class="sureBtn" (click)="lookImgUrl=[]">X</div>
 </div>
 
 <app-alertbox></app-alertbox>
