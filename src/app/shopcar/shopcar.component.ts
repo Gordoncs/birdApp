@@ -16,6 +16,7 @@ export class ShopcarComponent implements OnInit {
   public  choseAllStatus = true;
   public  allMoney = 0;
   public  allNum = 0;
+  public  zhestatus = false;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -95,10 +96,10 @@ export class ShopcarComponent implements OnInit {
     this.allMoney =  money;
   }
   changeNum(memberId: any, skuId: any, number: any , item: any) {
-    this.alertBox.load();
+    this.zhestatus = true;
     this.userConfigService.cartChangeGoodsNumber(memberId, skuId, number).
       subscribe( data => {
-        this.alertBox.close();
+        this.zhestatus = false;
         if (data['result']) {
           item.number = item.number + number;
           this.getAllMoney();

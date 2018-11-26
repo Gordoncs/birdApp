@@ -20,7 +20,7 @@ import {SharedpageComponent} from './sharedpage/sharedpage.component';
 import {NewergifComponent} from './newergif/newergif.component';
 import {NewerdecComponent} from './newerdec/newerdec.component';
 import {NewercomeComponent} from './newercome/newercome.component';
-
+import {PaystatusGuard} from './shared/paystatus.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full'},
@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'cart', component: ShopcarComponent},
   { path: 'paysure', component: PaysureComponent},
   { path: 'justpay', component: JustpayComponent},
-  { path: 'paystatus', component: PaystausComponent},
+  { path: 'paystatus', canDeactivate: [PaystatusGuard], component: PaystausComponent},
   { path: 'myindex', component: MyindexComponent},
   { path: 'myorder', component: MyorderComponent},
   { path: 'orderdetail', component: OrderdetailComponent},
@@ -48,7 +48,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [PaystatusGuard]
 })
 export class AppRoutingModule {
 }

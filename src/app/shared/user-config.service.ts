@@ -34,8 +34,8 @@ export class UserConfigService {
   /**
    * 公共地址
    */
-  configUrl = 'https://mp.needai.com';
-  // configUrl = 'http://47.105.65.44:9000';
+  // configUrl = 'https://mp.needai.com';
+  configUrl = 'http://47.105.65.44:9000';
   /**
    * 判断no auth进行地址跳转
    */
@@ -405,7 +405,28 @@ export class UserConfigService {
         tap(data => this.canGoHref(data))
       );
   }
-
+  /**
+   * 获取新人礼分享图片地址
+   */
+  shareNewmember(): Observable<any> {
+    return this.http.get(this.configUrl + '/share/newmember', this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 0元分享页生成
+   */
+  shareZore(): Observable<any> {
+    return this.http.get(this.configUrl + '/share/zore', this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
   /**
    * 微信签名
    */

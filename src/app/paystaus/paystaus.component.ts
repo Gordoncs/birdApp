@@ -1,6 +1,6 @@
 import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
 import {TongxinService} from '../shared/tongxin.service';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
@@ -28,14 +28,21 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     this.status = this.fromData.res;
     console.log(this.fromData);
     this.getMemberIndexInfo();
+    localStorage.setItem('isBecomeOrder', '');
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationStart) {
+    //     console.log(event);
+    //   }
+    // });
   }
   ngAfterContentInit() {
     // this.userConfigService.wxConfigFn();
     // this.pushHistory();
-    const  t = this;
-    window.addEventListener('popstate', function(e) {
-      t.router.navigate(['orderdetail', {id: t.fromData.orderNo}]);
-    });
+    // const  t = this;
+    // window.addEventListener('popstate', function(e) {
+    //   console.log(e);
+    //   // t.router.navigate(['orderdetail', {id: t.fromData.orderNo}]);
+    // });
   }
   pay() {
     if (this.fromData.from === 'justpay') {
@@ -133,5 +140,17 @@ export class PaystausComponent implements OnInit, AfterContentInit {
       url: '__SELF__'
     };
     window.history.pushState(state, state.title, state.url);
+  }
+  go398() {
+    localStorage.setItem('isBecomeOrder', 'ss');
+    this.router.navigate(['newerdec', {'nums': this.userInfo.presentRemnant}]);
+  }
+  gogift() {
+    localStorage.setItem('isBecomeOrder', 'ss');
+    this.router.navigate(['newergif', {'goodsId': 5}]);
+  }
+  godetail() {
+    localStorage.setItem('isBecomeOrder', 'ss');
+    this.router.navigate(['orderdetail', {id: this.fromData.orderNo}]);
   }
 }

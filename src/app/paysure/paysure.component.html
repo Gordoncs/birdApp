@@ -10,7 +10,7 @@
       <div class="text">营业时间：{{paySureInfo.store.businessHours}}</div>
       <div class="text">联系电话：{{paySureInfo.store.phone}}</div>
     </div>
-    <div class="editShop" [routerLink]="['/address', 'have']">修 改 ></div>
+    <div class="editShop" [routerLink]="['/address', {'status': 'have'}]">修 改 ></div>
   </div>
   <div class="userInfo">
     <div class="tips"><span class="s1">邀约信息：</span><span class="s2">（专属美容导师会及时与您沟通服务时间）</span></div>

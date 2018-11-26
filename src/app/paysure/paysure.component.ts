@@ -46,11 +46,12 @@ export class PaysureComponent implements OnInit, AfterContentInit {
     this.routerInfo.params.subscribe((params) =>
       this.fromData = params
     );
-    console.log(this.fromData);
-    this.skuArr = JSON.parse(this.fromData['skuIdArr']);
+    this.skuArr = this.fromData['skuIdArr'];
     if (this.fromData['from'] === 'shopcart') {
       this.checkoutInfo();
-    } else if (this.fromData['from'] === 'detail' || this.fromData['from'] === 'special') {
+    } else if (this.fromData['from'] === 'detail') {
+      this.checkoutOutrightPurchase();
+    } else if ( this.fromData['from'] === 'special') {
       this.checkoutOutrightPurchase();
     }
   }
@@ -80,7 +81,7 @@ export class PaysureComponent implements OnInit, AfterContentInit {
     const memberId = localStorage.getItem('memberId');
     const storeId = JSON.parse(localStorage.getItem('storeInfo'))['id'];
     const type = this.fromData['liuchengType'];
-    const skuId = this.skuArr;
+    const skuId = JSON.parse(this.skuArr);
     this.alertBox.load();
     this.userConfigService.checkoutOutrightPurchase(memberId, storeId, type, skuId).
     subscribe(data => {
@@ -156,7 +157,6 @@ export class PaysureComponent implements OnInit, AfterContentInit {
             }
           },
           cancel: function(res) {
-            t.alertBox.success('取消支付');
             t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
           }
         });

@@ -9,7 +9,7 @@
       <p>免费福利送亲友</p>
       <p>本次消费您</p>
       <p>共获得 <span>{{userInfo.presentRemnant}}</span> 张398体验券</p>
-      <div class="bigbtn" [routerLink]="['/newerdec',  {'nums': userInfo.presentRemnant}]">
+      <div class="bigbtn" (click)="go398()" >
         一键送福利
       </div>
     </div>
@@ -25,8 +25,8 @@
       <p>服务消费凭证，</p>
       <p>可到我的订单查看</p>
       <div class="btnBox">
-        <div class="btnlist" [routerLink]="['/orderdetail', {id: fromData.orderNo}]">查看订单</div>
-        <div class="btnlist" [routerLink]="['/newergif', {'goodsId': 5}]">分享体验</div>
+        <div class="btnlist"  (click)="godetail()" >查看订单</div>
+        <div class="btnlist" (click)="gogift()" >分享体验</div>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@
     <p>本次付款未成功</p>
     <p>请重新支付</p>
     <div class="btns" (click)="pay()">重新支付</div>
-    <div class="btns" [routerLink]="['/orderdetail', {id: fromData.orderNo}]">返回订单</div>
+    <div class="btns" (click)="godetail()">返回订单</div>
   </div>
 </div>
 <app-alertbox></app-alertbox>

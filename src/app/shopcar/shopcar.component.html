@@ -1,4 +1,5 @@
 <div class="conBg"></div>
+<div class="zheBg" *ngIf="zhestatus"></div>
 <div class="topNavbar">
   <img class="leftArrow" (click)="goback()" src="./assets/image/leftArrow.png" alt="">
   <div class="editBtn" (click)="canEdit=!canEdit">{{canEdit?'完成':'编辑'}}</div>

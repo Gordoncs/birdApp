@@ -46,7 +46,8 @@
   </div>
 
   <div class="zeroShareBox" >
-    <img [routerLink]="['/newerdec', {'nums': 1}]" *ngIf="userInfo.presentRemnant>0" src="./assets/image/zeroShare.png" alt="">
+    <!--<img [routerLink]="['/newerdec', {'nums': userInfo.presentRemnant}]" src="./assets/image/zeroShare.png" alt="">-->
+    <img [routerLink]="['/newerdec', {'nums': userInfo.presentRemnant}]" *ngIf="userInfo.presentRemnant>0" src="./assets/image/zeroShare.png" alt="">
     <img style="width: 7.25rem;height: 2.2rem" [routerLink]="['/newergif', {'goodsId': 5}]" *ngIf="userInfo.presentRemnant==0" src="./assets/image/newperson.png" alt="">
   </div>
   <div class="birdList">

@@ -12,7 +12,8 @@ import wx from 'weixin-js-sdk';
   styleUrls: ['./sharedpage.component.css']
 })
 export class SharedpageComponent implements OnInit {
-
+  form: any;
+  img: any = '';
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -20,14 +21,12 @@ export class SharedpageComponent implements OnInit {
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
-    // this.userConfigService.wxConfigFn();
-    const t = this;
-    setTimeout(function () {
-      wx.ready(function() {
-        t.wxupdateAppMessageShareData('测试给朋友', '测试描述', 'http://mp.needai.com/g/index.html?id=1', 'http://img.needai.com/index/jx1.png');
-        t.wxupdateTimelineShareData('测试给朋友圈', '测试描述', 'http://mp.needai.com/g/index.html?id=2', 'http://img.needai.com/index/jx1.png');
-      });
-    }, 1500);
+    this.routerInfo.params.subscribe((params) => this.form = params['from']);
+    if (this.form === 'newergif') {
+      this.shareNewmember();
+    } else if (this.form === 'newerdec') {
+      this.shareZore();
+    }
   }
 
   /**
@@ -54,6 +53,36 @@ export class SharedpageComponent implements OnInit {
       imgUrl: imgUrl, // 分享图标
       success: function () {
         // 设置成功
+      }
+    });
+  }
+  shareNewmember() {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.shareNewmember().
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.img = data['data']['imgUrl'];
+        t.wxupdateAppMessageShareData('测试给朋友', '测试描述', 'https://mp.needai.com/g/index.html?id=1', this.img);
+        t.wxupdateTimelineShareData('测试给朋友圈', '测试描述', 'https://mp.needai.com/g/index.html?id=2', this.img);
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  shareZore() {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.shareZore().
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.img = data['data']['imgUrl'];
+        t.wxupdateAppMessageShareData('测试给朋友', '测试描述', 'https://mp.needai.com/g/index.html?id=1', this.img);
+        t.wxupdateTimelineShareData('测试给朋友圈', '测试描述', 'https://mp.needai.com/g/index.html?id=2', this.img);
+      } else {
+        this.alertBox.error(data['message']);
       }
     });
   }
