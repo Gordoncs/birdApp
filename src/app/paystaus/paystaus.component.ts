@@ -18,7 +18,7 @@ export class PaystausComponent implements OnInit, AfterContentInit {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService) { }
+              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
   ngOnInit() {
     /***
      * 设置title
@@ -29,6 +29,7 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     console.log(this.fromData);
     this.getMemberIndexInfo();
     localStorage.setItem('isBecomeOrder', '');
+    this.TongXin.cartNum(1);
     // this.router.events.subscribe(event => {
     //   if (event instanceof NavigationStart) {
     //     console.log(event);
