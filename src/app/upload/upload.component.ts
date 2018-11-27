@@ -38,10 +38,12 @@ export class UploadComponent implements OnInit {
     this.creatArr();
   }
   getImgUrl($event, index) {
+    alert(window.URL);
+    alert(window['webkitURL']);
+    alert(window.URL.createObjectURL($event.srcElement['files'][0]));
     this.indexNow = index;
     this.isshow = true;
     this.cropperArr[index].obj.replace(window.URL.createObjectURL($event.srcElement['files'][0])) ;
-    console.log(window.URL.createObjectURL($event.srcElement['files'][0]));
   }
   delImg(item, index) {
     item.returnData.real = '';

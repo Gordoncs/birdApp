@@ -25,16 +25,38 @@ export class NewercomeComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('免费领取');
-    alert('分享url跟的参数id为：' + localStorage.getItem('canshu'));
+    this.getGoodsInfo(5, JSON.parse(localStorage.getItem('storeInfo'))['id']);
+    localStorage.setItem('canshu', '');
+    localStorage.setItem('fromPage', '');
     // const  t = this;
     // html2canvas(document.body).then(function(canvas) {
     //   t.imgsarr = canvas.toDataURL('image/jpeg');
     // });
   }
   goPaysure() {
-    localStorage.setItem('canshu', '');
-    const skuId = this.tiyanInfo['sku'][0];
-    this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 1}]);
+    const skuId = {
+      'id': this.tiyanInfo['sku'][0]['id'],
+      'goodsId': this.tiyanInfo['sku'][0]['goodsId'],
+      'skuSpecId': this.tiyanInfo['sku'][0]['skuSpecId'] || 0,
+      'skuStyleId': this.tiyanInfo['sku'][0]['skuStyleId'] || 0,
+      'goodsType': this.tiyanInfo['goodsInfo'].type,
+    };
+    this.router.navigate(['/paysure', {'from': 'zero', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 1}]);
+  }
+  /**
+   * 获取详情页数据
+   */
+  getGoodsInfo(goodsId: any, shopId: any) {
+    this.alertBox.load();
+    this.userConfigService.getGoodsInfo(goodsId, shopId)
+      .subscribe((data) => {
+        this.alertBox.close();
+        if (data['result']) {
+          this.tiyanInfo = data['data'];
+        } else {
+          this.alertBox.error(data['message']);
+        }
+      });
   }
 
 }

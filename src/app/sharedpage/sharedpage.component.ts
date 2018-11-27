@@ -14,6 +14,7 @@ import wx from 'weixin-js-sdk';
 export class SharedpageComponent implements OnInit {
   form: any;
   img: any = '';
+  memberInfo: any =  JSON.parse(localStorage.getItem('memberInfo'));
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -21,11 +22,28 @@ export class SharedpageComponent implements OnInit {
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
+    const t = this;
     this.routerInfo.params.subscribe((params) => this.form = params['from']);
     if (this.form === 'newergif') {
       this.shareNewmember();
+      const title = '抽空体验一下，颜值需要呵护，一小时容颜焕发';
+      const desc = '春鸟科美超值体验活动，等你来体验，打造无纹面庞，精致神曲，水水嫩嫩，尽享魅力人生。';
+      const link = 'https://mp.needai.com/g/index.html?authCode=' + this.memberInfo.authCode +
+        '&guideId=' + localStorage.getItem('memberId') +
+        '&frompage=newergif';
+      const imgUrl = this.memberInfo.headimgurl;
+      t.wxupdateAppMessageShareData(title, desc, link, imgUrl);
+      t.wxupdateTimelineShareData(title, desc, link, imgUrl);
     } else if (this.form === 'newerdec') {
       this.shareZore();
+      const title = this.memberInfo.nickname + '已经为您买单，科技美容免费选，速戳！！';
+      const desc = '逆龄抗衰、塑形体雕、净体脱毛等15项任选其一，单已买，就差您来了。';
+      const link = 'https://mp.needai.com/g/index.html?authCode=' + this.memberInfo.authCode +
+        '&guideId=' + localStorage.getItem('memberId') +
+        '&frompage=newerdec';
+      const imgUrl = this.memberInfo.headimgurl;
+      t.wxupdateAppMessageShareData(title, desc, link, imgUrl);
+      t.wxupdateTimelineShareData(title, desc, link, imgUrl);
     }
   }
 
@@ -57,15 +75,13 @@ export class SharedpageComponent implements OnInit {
     });
   }
   shareNewmember() {
-    const t = this;
+
     this.alertBox.load();
     this.userConfigService.shareNewmember().
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
         this.img = data['data']['imgUrl'];
-        t.wxupdateAppMessageShareData('测试给朋友', '测试描述', 'https://mp.needai.com/g/index.html?id=1', this.img);
-        t.wxupdateTimelineShareData('测试给朋友圈', '测试描述', 'https://mp.needai.com/g/index.html?id=2', this.img);
       } else {
         this.alertBox.error(data['message']);
       }
@@ -79,8 +95,6 @@ export class SharedpageComponent implements OnInit {
       this.alertBox.close();
       if (data['result']) {
         this.img = data['data']['imgUrl'];
-        t.wxupdateAppMessageShareData('测试给朋友', '测试描述', 'https://mp.needai.com/g/index.html?id=1', this.img);
-        t.wxupdateTimelineShareData('测试给朋友圈', '测试描述', 'https://mp.needai.com/g/index.html?id=2', this.img);
       } else {
         this.alertBox.error(data['message']);
       }

@@ -155,8 +155,13 @@ export class IndexComponent implements OnInit, AfterContentInit {
             this.router.navigate(['/address',  {'status': 'nohave'}]);
           } else {
             localStorage.setItem('storeInfo', JSON.stringify(that.indexInfo['storeInfo']));
-            if (localStorage.getItem('canshu')) {
-              this.router.navigate(['/newercome']);
+            if (localStorage.getItem('fromPage')) {
+              if (localStorage.getItem('fromPage')  === 'newergif') {
+                this.router.navigate(['newergif', {'goodsId': 5}]);
+              }
+              if (localStorage.getItem('fromPage')  === 'newerdec') {
+                this.router.navigate(['newercome']);
+              }
             }
           }
           setTimeout(function () {
@@ -209,7 +214,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
       .subscribe((data) => {
         if (data['result']) {
           this.isManager = data['data'].isManager;
-          localStorage.setItem('memberInfo', data['data']);
+          localStorage.setItem('memberInfo', JSON.stringify(data['data']));
           localStorage.setItem('memberId', data['data']['memberId']);
         } else {
           console.log(data['message']);

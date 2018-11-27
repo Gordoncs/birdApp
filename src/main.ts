@@ -13,7 +13,7 @@ const platformBrowserDynamics = function() {
   platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(err => console.error(err));
 };
-// platformBrowserDynamics();
+platformBrowserDynamics();
 // ios记录进入app的url，后面微信sdk
 if (window['entryUrl'] === '' || window['entryUrl'] === undefined || window['entryUrl'] === null) {
   window['entryUrl'] = location.href.split('#')[0];
@@ -111,12 +111,26 @@ if (locationUrl.indexOf('?') > -1) {
  * 获取用户id
  */
 const getbaseMember = function() {
+  const savedata = {};
+  if (localStorage.getItem('canshu')) {
+    const canshu = localStorage.getItem('canshu').split('&');
+    for (let i = 0; i < canshu.length; i++) {
+      const temp = canshu[i].split('=');
+      if (temp.length < 2) {
+        savedata[temp[0]] = '';
+      } else {
+        savedata[temp[0]] = temp[1];
+      }
+    }
+    localStorage.setItem('fromPage', savedata['frompage']);
+  }
   $.ajax({
     url: '/base/member',
     type: 'get',
+    data: savedata,
     success: function(data) {
       if (data['result']) {
-        localStorage.setItem('memberInfo', data['data']);
+        localStorage.setItem('memberInfo', JSON.stringify(data['data']));
         localStorage.setItem('memberId', data['data']['memberId']);
       } else {
         console.log(data['message']);

@@ -34,8 +34,8 @@ export class UserConfigService {
   /**
    * 公共地址
    */
-  configUrl = 'https://mp.needai.com';
-  // configUrl = 'http://47.105.65.44:9000';
+  // configUrl = 'https://mp.needai.com';
+  configUrl = 'http://47.105.65.44:9000';
   /**
    * 判断no auth进行地址跳转
    */
@@ -428,6 +428,24 @@ export class UserConfigService {
       );
   }
   /**
+   * 0元体验商品领取下单接口
+   */
+  checkoutAddFreeExperience(sku: any, storeId: any, order: any): Observable<any> {
+    if (order.discountPriceAmout === null) {
+      order.discountPriceAmout = 0;
+    }
+    const params = 'sku=' + sku + '&storeId=' + storeId + '&order.memberId=' + order.memberId +
+      '&order.storeId=' + order.storeId + '&order.orderRemark=' + order.orderRemark +
+      '&order.subscribePhone=' + order.subscribePhone + '&order.linkman=' + order.linkman +
+      '&order.discountPriceAmout=' + order.discountPriceAmout;
+    return this.http.post(this.configUrl + '/checkout/addFreeExperience', params, this.headoptionsPost)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
    * 微信签名
    */
   wxConfigFn() {
@@ -455,7 +473,7 @@ export class UserConfigService {
         success: function(data) {
           if (data.result.success) {
             wx.config({
-              debug: false,
+              debug: true,
               appId: data.result.data.appId,
               timestamp: data.result.data.timestamp,
               nonceStr: data.result.data.noncestr,
@@ -468,6 +486,29 @@ export class UserConfigService {
           }
         }
       });
+  }
+
+  /**
+   * 微信通用分享
+   */
+  wxBaseShare() {
+    wx.updateAppMessageShareData({
+      title: '变美不剁手，全城有店，等你来撩', // 分享标题
+      desc: '点击查看春鸟皮肤管理中心具体服务项目和附近店铺吧，体验更美人生，打造精致生活，创造自信人生', // 分享描述
+      link: 'https://mp.needai.com/g/index.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+      imgUrl: 'http://img.needai.com/index/jx1.png', // 分享图标
+      success: function () {
+        // 设置成功
+      }
+    });
+    wx.updateTimelineShareData({
+      title: '变美不剁手，全城有店，等你来撩', // 分享标题
+      link: 'https://mp.needai.com/g/index.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+      imgUrl: 'http://img.needai.com/index/jx1.png', // 分享图标
+      success: function () {
+        // 设置成功
+      }
+    });
   }
 }
 

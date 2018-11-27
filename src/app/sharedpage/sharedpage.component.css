@@ -1,8 +1,5 @@
 img{
   display: block;
   width: 90%;
-  position: absolute;
-  left: 50%;
-  margin-left: -50%;
-  top: 1.5rem;
+  margin: 0px auto;
 }

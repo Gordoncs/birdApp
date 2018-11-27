@@ -33,6 +33,9 @@ export class AppComponent implements OnInit {
       } else {
         this.canShowNav = true;
       }
+      if ((this.url.indexOf('newerdec') < 0) && (this.url.indexOf('newergif') < 0)) {
+        this.userConfigService.wxBaseShare();
+      }
     });
     /***
      * 获取购物车数字

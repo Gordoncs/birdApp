@@ -53,6 +53,8 @@ export class PaysureComponent implements OnInit, AfterContentInit {
       this.checkoutOutrightPurchase();
     } else if ( this.fromData['from'] === 'special') {
       this.checkoutOutrightPurchase();
+    } else if ( this.fromData['from'] === 'zero') {
+      this.checkoutOutrightPurchase();
     }
   }
   ngAfterContentInit() {
@@ -203,5 +205,31 @@ export class PaysureComponent implements OnInit, AfterContentInit {
   }
   changeURL() {
     window.history.pushState(null, null, '/g/');
+  }
+  payzeroFn() {
+    if (this.order.linkman === '') {
+      this.alertBox.error('请填写尊客姓名');
+      return false;
+    }
+    if (!(/^1[3456789]\d{9}$/.test(this.order.subscribePhone)) && !(/^0\d{2,3}-?\d{7,8}$/.test(this.order.subscribePhone))) {
+      this.alertBox.error('请正确填写座机手机号');
+      return false;
+    }
+    const storeId =  this.order.storeId;
+    const sku = [];
+    for (let i = 0; i < this.paySureInfo.cartDetail.length; i++) {
+      sku.push(this.paySureInfo.cartDetail[i].id);
+    }
+    const order = this.order;
+    this.alertBox.load();
+    this.userConfigService.checkoutAddFreeExperience(sku, storeId, order).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        // this.router.navigate(['paystatus', {'res': true, 'orderNo': data.data, 'from': 'paysure'}]);
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
   }
 }

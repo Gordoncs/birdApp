@@ -27,6 +27,8 @@ export class NewergifComponent implements OnInit {
     this.titleService.setTitle('新人分享');
     this.routerInfo.params.subscribe((params) => this.goodsId = params['goodsId']);
     this.getGoodsInfo(this.goodsId, JSON.parse(localStorage.getItem('storeInfo'))['id']);
+    localStorage.setItem('canshu', '');
+    localStorage.setItem('fromPage', '');
     // const  t = this;
     // html2canvas(document.body).then(function(canvas) {
     //   t.imgsarr = canvas.toDataURL('image/jpeg');
@@ -36,8 +38,8 @@ export class NewergifComponent implements OnInit {
     const skuId = {
       'id': this.tiyanInfo['sku'][0]['id'],
       'goodsId': this.tiyanInfo['sku'][0]['goodsId'],
-      'skuSpecId': this.tiyanInfo['sku'][0]['skuSpecId'],
-      'skuStyleId': this.tiyanInfo['sku'][0]['skuStyleId'],
+      'skuSpecId': this.tiyanInfo['sku'][0]['skuSpecId'] || 0,
+      'skuStyleId': this.tiyanInfo['sku'][0]['skuStyleId'] || 0,
       'goodsType': this.tiyanInfo['goodsInfo'].type,
     };
     this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 1}]);
