@@ -13,7 +13,7 @@ const platformBrowserDynamics = function() {
   platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(err => console.error(err));
 };
-platformBrowserDynamics();
+// platformBrowserDynamics();
 // ios记录进入app的url，后面微信sdk
 if (window['entryUrl'] === '' || window['entryUrl'] === undefined || window['entryUrl'] === null) {
   window['entryUrl'] = location.href.split('#')[0];
