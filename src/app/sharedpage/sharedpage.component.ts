@@ -51,28 +51,53 @@ export class SharedpageComponent implements OnInit {
    * 自定义“分享给朋友”及“分享到QQ”按钮的分享内容（1.4.0）
    */
   wxupdateAppMessageShareData(title, desc, link, imgUrl) {
-    wx.updateAppMessageShareData({
-      title: title, // 分享标题
-      desc: desc, // 分享描述
-      link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-      imgUrl: imgUrl, // 分享图标
-      success: function () {
-        // 设置成功
-      }
-    });
+    const  witchOS = localStorage.getItem('os');
+    if (witchOS === 'AndroidOS') {
+      // （即将废弃）
+      wx.onMenuShareAppMessage({
+        title: title, // 分享标题
+        desc: desc, // 分享描述
+        link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: imgUrl, // 分享图标
+        success: function () {
+        }
+      });
+    } else {
+      wx.updateAppMessageShareData({
+        title: title, // 分享标题
+        desc: desc, // 分享描述
+        link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: imgUrl, // 分享图标
+        success: function () {
+          // 设置成功
+        }
+      });
+    }
   }
   /**
    * 自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
    */
   wxupdateTimelineShareData(title, desc, link, imgUrl) {
-    wx.updateTimelineShareData({
-      title: title, // 分享标题
-      link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-      imgUrl: imgUrl, // 分享图标
-      success: function () {
-        // 设置成功
-      }
-    });
+    const  witchOS = localStorage.getItem('os');
+    if (witchOS === 'AndroidOS') {
+      // （即将废弃）
+      wx.onMenuShareTimeline({
+        title: title, // 分享标题
+        link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: imgUrl, // 分享图标
+        success: function () {
+        }
+      });
+    } else {
+      wx.updateTimelineShareData({
+        title: title, // 分享标题
+        link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: imgUrl, // 分享图标
+        success: function () {
+          // 设置成功
+        }
+      });
+    }
   }
   shareNewmember() {
 
