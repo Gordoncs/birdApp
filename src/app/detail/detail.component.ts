@@ -46,7 +46,6 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
     this.scrollFn();
   }
   ngAfterContentInit() {
-    $(window).scrollTop(0);
     const t = this;
     t.allDomHeight = $('.bigBox').offset().top;
     $(window).scroll(function() {

@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 })
 
 export class UserConfigService {
+
   /**
    * 头部声明
    */
@@ -473,7 +474,7 @@ export class UserConfigService {
         success: function(data) {
           if (data.result.success) {
             wx.config({
-              debug: true,
+              debug: false,
               appId: data.result.data.appId,
               timestamp: data.result.data.timestamp,
               nonceStr: data.result.data.noncestr,

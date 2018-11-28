@@ -1,7 +1,7 @@
 <div class="topBox">
   <img *ngIf="status=='true'" src="./assets/image/paySuccess.png" alt="">
   <img *ngIf="status=='false'" src="./assets/image/payError.png" alt="">
-  <div *ngIf="status=='true'" class="baseBox">
+  <div *ngIf="status=='true'&&userInfo.presentRemnant>0" class="baseBox">
     <div class="left">
       <img class="tiyan" src="./assets/image/tiyan398.png" alt="">
     </div>

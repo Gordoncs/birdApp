@@ -7,11 +7,11 @@
     <img class="bg" src="./assets/image/paySureHeadBg.png" alt="">
     <div class="shopInfoCon">
       <div class="text fz25"><img src="./assets/image/shopIcon.png" alt="">{{storeInfo.name}}</div>
-      <div class="text">门店地址：{{storeInfo.addr}}</div>
+      <div class="text">门店地址：{{storeInfo.addr}} </div>
       <div class="text">营业时间：{{storeInfo.businessHours}}</div>
       <div class="text">联系电话：{{storeInfo.phone}}</div>
     </div>
-    <div class="editShop" [routerLink]="['/address', 'have']">修 改 ></div>
+    <div class="editShop" [routerLink]="['/address', {'status': 'have'}]">修 改 ></div>
   </div>
   <div class="userInfo">
     <div class="inputBox">

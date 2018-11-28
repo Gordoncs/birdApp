@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, Directive, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
@@ -10,10 +10,10 @@ import wx from 'weixin-js-sdk';
   templateUrl: './justpay.component.html',
   styleUrls: ['./justpay.component.css']
 })
-export class JustpayComponent implements OnInit, AfterContentInit {
+export class JustpayComponent implements OnInit, AfterContentInit, OnDestroy {
   orderInfo: any;
   allMoney: number ;
-  discountPriceAmout: number = null ;
+  discountPriceAmout = null;
   discounts = {
     'id' : '',
     'authCode' : '',
@@ -24,7 +24,7 @@ export class JustpayComponent implements OnInit, AfterContentInit {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService) { }
+              private userConfigService: UserConfigService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.titleService.setTitle('支付确认');
@@ -33,7 +33,11 @@ export class JustpayComponent implements OnInit, AfterContentInit {
   }
   ngAfterContentInit() {
     $('#moneyInput').focus();
+    this.allMoney = null;
     // this.userConfigService.wxConfigFn();
+  }
+  ngOnDestroy() {
+
   }
   cashpay() {
     const t = this;
@@ -61,8 +65,8 @@ export class JustpayComponent implements OnInit, AfterContentInit {
       this.alertBox.error('请输入金额再扫码');
       return;
     }
-    // this.checkoutGetSettleAccountsDiscounts(this.allMoney, {'id': '45', 'authCode': '665388'});
     const t = this;
+    // this.checkoutGetSettleAccountsDiscounts(this.allMoney, {'id': '67', 'authCode': '235868'}, this);
     wx.scanQRCode({
       needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
       scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有
@@ -71,28 +75,35 @@ export class JustpayComponent implements OnInit, AfterContentInit {
           'id' : res.resultStr.split('#')[0],
           'authCode' : res.resultStr.split('#')[2],
         };
-        t.checkoutGetSettleAccountsDiscounts(t.allMoney, discounts);
+        t.checkoutGetSettleAccountsDiscounts(t.allMoney, discounts, t);
       }
     });
   }
-  checkoutGetSettleAccountsDiscounts(allMoney, discounts) {
-    this.alertBox.load();
-    this.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).
+  checkoutGetSettleAccountsDiscounts(allMoney, discounts, t) {
+    t.alertBox.load();
+    t.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).
     subscribe(data => {
-      this.alertBox.close();
+      t.alertBox.close();
       if (data['result']) {
-        this.discounts.id = data['data']['id'];
-        this.discounts.authCode = data['data']['authCode'];
-        this.discounts.advisorName = data['data']['advisorName'];
-        this.discountPriceAmout = data['data']['discountsMoney'];
+        t.discounts = {
+          'id' : data['data']['id'],
+          'authCode' : data['data']['authCode'],
+          'advisorName' : data['data']['advisorName']
+        };
+        t.discountPriceAmout = data['data']['discountsMoney'];
+        t.changeDetectorRef.markForCheck();
+        t.changeDetectorRef.detectChanges();
       } else {
-        this.alertBox.error(data['message']);
+        t.alertBox.error(data['message']);
       }
     });
   }
   clearDiscount() {
-    this.discounts.id = '';
-    this.discounts.authCode = '';
+    this.discounts = {
+      'id' : '',
+      'authCode' : '',
+      'advisorName' : ''
+    };
     this.discountPriceAmout = null;
   }
   changeURL() {

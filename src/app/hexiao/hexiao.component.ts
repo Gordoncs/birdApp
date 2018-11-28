@@ -50,6 +50,8 @@ export class HexiaoComponent implements OnInit {
     item.ischeck = !item.ischeck;
   }
   save() {
+
+    const t = this;
     const detailId = [];
     for (let i = 0; i <  this.hexiaoInfo.detail.length; i++) {
       if ( this.hexiaoInfo.detail[i].ischeck === true) {
@@ -58,9 +60,6 @@ export class HexiaoComponent implements OnInit {
     }
     const orderId = this.hexiaoInfo.id;
     const advisorId = this.advisorId;
-    alert('detailId' + detailId);
-    alert('orderId' + orderId);
-    alert('advisorId' + advisorId);
     this.alertBox.load();
     this.userConfigService.advisorCheckoffOrderDetail(detailId, orderId, advisorId).
     subscribe(data => {
@@ -68,7 +67,7 @@ export class HexiaoComponent implements OnInit {
       if (data['result']) {
         this.alertBox.success('核销成功');
         setTimeout(function () {
-          history.go(-1);
+          t.router.navigate(['teacher']);
         }, 2000);
       } else {
         this.alertBox.error(data['message']);

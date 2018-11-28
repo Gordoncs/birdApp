@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import {TongxinService} from './shared/tongxin.service';
 import {UserConfigService} from './shared/user-config.service';
 import wx from 'weixin-js-sdk';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter((event: Event ) => event instanceof NavigationEnd)
     ).subscribe(x => {
-      // console.log(x);
+      $(window).scrollTop(0);
       this.userConfigService.wxConfigFn();
       this.url = x['url'];
       if (this.url.indexOf('goodsdetail') > -1 || this.url.indexOf('paysure') > -1 || this.url.indexOf('upload') > -1 ||

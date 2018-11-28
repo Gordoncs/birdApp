@@ -49,9 +49,7 @@ if (locationUrl.indexOf('?') > -1) {
             success: function (res) {
               localStorage.setItem('latitude', res.latitude);
               localStorage.setItem('longitude', res.longitude);
-              setTimeout(function() {
-                platformBrowserDynamics();
-              }, 1500);
+              platformBrowserDynamics();
               getNextStoreInfo(res.latitude, res.longitude);
             }
           });
@@ -91,9 +89,7 @@ if (locationUrl.indexOf('?') > -1) {
             success: function (res) {
               localStorage.setItem('latitude', res.latitude);
               localStorage.setItem('longitude', res.longitude);
-              setTimeout(function() {
-                platformBrowserDynamics();
-              }, 1500);
+              platformBrowserDynamics();
               getNextStoreInfo(res.latitude, res.longitude);
             }
           });

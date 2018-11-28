@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
@@ -10,7 +10,7 @@ import wx from 'weixin-js-sdk';
   templateUrl: './paysure.component.html',
   styleUrls: ['./paysure.component.css']
 })
-export class PaysureComponent implements OnInit, AfterContentInit {
+export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
   public skuArr: any;
   public fromData: any = {};
   public paySureInfo: any = {
@@ -36,7 +36,7 @@ export class PaysureComponent implements OnInit, AfterContentInit {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService) { }
+              private userConfigService: UserConfigService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     /***
@@ -59,6 +59,11 @@ export class PaysureComponent implements OnInit, AfterContentInit {
   }
   ngAfterContentInit() {
     // this.userConfigService.wxConfigFn();
+  }
+
+  ngOnDestroy() {
+    /*this.checkoutInfo.unsubscribe();
+    this.checkoutOutrightPurchase.unsubscribe();*/
   }
   checkoutInfo() {
     const memberId = localStorage.getItem('memberId');
@@ -179,22 +184,24 @@ export class PaysureComponent implements OnInit, AfterContentInit {
           'id' : res.resultStr.split('#')[0],
           'authCode' : res.resultStr.split('#')[2],
         };
-        t.checkoutGetSettleAccountsDiscounts(t.allMoney, discounts);
+        t.checkoutGetSettleAccountsDiscounts(t.allMoney, discounts, t);
       }
     });
   }
-  checkoutGetSettleAccountsDiscounts(allMoney, discounts) {
-    this.alertBox.load();
-    this.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).
+  checkoutGetSettleAccountsDiscounts(allMoney, discounts, t) {
+    t.alertBox.load();
+    t.userConfigService.checkoutGetSettleAccountsDiscounts(allMoney, discounts).
     subscribe(data => {
-      this.alertBox.close();
+      t.alertBox.close();
       if (data['result']) {
-        this.discounts.id = data['data']['id'];
-        this.discounts.authCode = data['data']['authCode'];
-        this.discounts.advisorName = data['data']['advisorName'];
-        this.order.discountPriceAmout = data['data']['discountsMoney'];
+        t.discounts.id = data['data']['id'];
+        t.discounts.authCode = data['data']['authCode'];
+        t.discounts.advisorName = data['data']['advisorName'];
+        t.order.discountPriceAmout = data['data']['discountsMoney'];
+        t.changeDetectorRef.markForCheck();
+        t.changeDetectorRef.detectChanges();
       } else {
-        this.alertBox.error(data['message']);
+        t.alertBox.error(data['message']);
       }
     });
   }
