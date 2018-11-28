@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
+import {UserConfigService} from '../shared/user-config.service';
+import {TongxinService} from '../shared/tongxin.service';
 
 @Component({
   selector: 'app-alertbox',
@@ -9,7 +13,11 @@ export class AlertboxComponent implements OnInit {
   whichStatus: any = 'loading';
   alertMessage: any = '努力加载中...';
   alertShow = false;
-  constructor() { }
+  luckDrawShow = false;
+  luckConShow = false;
+  luckConShowMoney = 0;
+  constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
+              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
   }
@@ -30,6 +38,18 @@ export class AlertboxComponent implements OnInit {
   }
   close() {
     this.alertShow = false;
+    this.luckDrawShow = false;
+    this.luckConShow = false;
   }
-
+  draw() {
+    this.luckDrawShow = true;
+  }
+  drawResult(num) {
+    this.luckConShow = true;
+    this.luckConShowMoney = num;
+  }
+  sureFn() {
+    this.close();
+    this.TongXin.luckDawClick(1);
+  }
 }

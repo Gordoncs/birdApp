@@ -6,3 +6,17 @@
   <div class='title'>{{alertMessage}}</div>
   <div *ngIf="whichStatus=='error'" class="closeBtn" (click)="alertShow=false">确 定</div>
 </div>
+
+<div *ngIf="luckDrawShow" class='blackBg'></div>
+<div *ngIf="luckDrawShow" class='loadBox'>
+  <img src="./assets/image/loading.gif" alt="">
+</div>
+
+<div *ngIf="luckConShow" class='blackBg'></div>
+<div *ngIf="luckConShow" class='luckConBox'>
+  <h1>
+    恭喜您获得{{luckConShowMoney}}元美丽金
+    <span>奖金将在三个工作日内退回您订单支付账户</span>
+  </h1>
+  <div class="sureBtn"  (click)="sureFn()">确 定</div>
+</div>

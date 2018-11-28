@@ -29,6 +29,7 @@ import { SharedpageComponent } from './sharedpage/sharedpage.component';
 import { NewergifComponent } from './newergif/newergif.component';
 import { NewerdecComponent } from './newerdec/newerdec.component';
 import { NewercomeComponent } from './newercome/newercome.component';
+import { LuckdrawComponent } from './luckdraw/luckdraw.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { NewercomeComponent } from './newercome/newercome.component';
     SharedpageComponent,
     NewergifComponent,
     NewerdecComponent,
-    NewercomeComponent
+    NewercomeComponent,
+    LuckdrawComponent
   ],
   imports: [
     BrowserModule,

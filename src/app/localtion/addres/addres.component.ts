@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 declare var  qq: any;
 import {
   trigger,
@@ -56,7 +56,8 @@ export class AddresComponent implements OnInit {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
+              private userConfigService: UserConfigService, private TongXin: TongxinService,
+              private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     const t = this;
@@ -181,6 +182,8 @@ export class AddresComponent implements OnInit {
         if (data['result']) {
           this.shopArr = data['data'];
           this.allInit(latitude, longitude);
+          this.changeDetectorRef.markForCheck();
+          this.changeDetectorRef.detectChanges();
         } else {
           console.log(data['message']);
         }

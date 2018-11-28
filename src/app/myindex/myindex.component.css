@@ -44,10 +44,17 @@
   height: 100%;
   width: 3.5rem;
   position: absolute;
-  right: 0;
+  right: 1rem;
   display: flex;
   flex-direction:column;
   justify-content: center;
+}
+.chouIcon{
+  width: 1.67rem;
+  height: 2rem;
+  position: absolute;
+  right: 0rem;
+  top: 1.2rem;
 }
 .heads .infoBox span{
   color: #FFF;

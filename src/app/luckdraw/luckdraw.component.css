@@ -1,0 +1,82 @@
+.bottom{
+  width: 100%;
+  height: 1.2rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 9;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+}
+
+.bottom .leftInfo{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #646464;
+  font-size: 0.22rem;
+}
+.bottom .btns{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  font-size: 0.28rem;
+}
+.bgyellow{
+  background: #d8b669;
+}
+.bggreen{
+  background: #316854;
+}
+.con{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+.content{
+  width: 100%;
+}
+.content img{
+  width: 100%;
+}
+.boxCon{
+  width: 6.6rem;
+  height: 4rem;
+  position: absolute;
+  top: 5.2rem;
+  left: 50%;
+  margin-left: -3.3rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.boxList{
+  width: 1.82rem;
+  height: 1.57rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.boxList .baseImg{
+  width: 1.82rem;
+  height: 1.57rem;
+}
+.boxList .openImg{
+  position: absolute;
+  width:2.3rem;
+  height:2.45rem;
+  bottom: 0;
+}

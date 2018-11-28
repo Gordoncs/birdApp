@@ -257,13 +257,16 @@
   z-index: 3;
 }
 .restBtn{
-  width: 0.5rem;
-  height: 0.5rem;
-  background: #000;
-  z-index: 999;
+  width: 0.47rem;
+  height: 0.48rem;
+  z-index: 99;
   position: absolute;
   left: 0.3rem;
-  top: 8.4rem;
+  top: 1.5rem;
+}
+.restBtn img{
+  display: block;
+  width: 100%;
 }
 .bgnone{
   background: none !important;

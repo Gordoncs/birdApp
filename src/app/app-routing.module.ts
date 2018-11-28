@@ -20,6 +20,7 @@ import {SharedpageComponent} from './sharedpage/sharedpage.component';
 import {NewergifComponent} from './newergif/newergif.component';
 import {NewerdecComponent} from './newerdec/newerdec.component';
 import {NewercomeComponent} from './newercome/newercome.component';
+import {LuckdrawComponent} from './luckdraw/luckdraw.component';
 import {PaystatusGuard} from './shared/paystatus.guard';
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'teacher', component: TeacherComponent},
   { path: 'upload', component: UploadComponent},
   { path: 'hexiao', component: HexiaoComponent},
+  { path: 'luckdraw', component: LuckdrawComponent},
   { path: '**', component: Code404Component},
 ];
 

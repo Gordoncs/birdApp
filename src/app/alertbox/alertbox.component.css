@@ -53,3 +53,52 @@
   background: #efcd83;
   color: #FFF;
 }
+
+.luckConBox{
+  width: 6rem;
+  height: 5rem;
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  margin-left: -3rem;
+  top: 50%;
+  margin-top: -2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  border-radius: 0.2rem;
+  text-align: center;
+  background: #d94839;
+  padding: 3em;
+  color: #FFF;
+}
+
+.luckConBox h1{
+  font-size: 0.45rem;
+  line-height: 1.3rem;
+  margin: 0;
+  font-weight: 300;
+}
+.luckConBox h1 span{
+  display: block;
+  font-size: 50%;
+  opacity: 0.7;
+  padding: 0 0 0.6em 0.1em;
+}
+.luckConBox .sureBtn{
+  width: 2rem;
+  height: 0.8rem;
+  border-radius: 0.05rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.25rem;
+  position: absolute;
+  bottom: 0.15rem;
+  left: 50%;
+  margin-left: -1rem;
+  background: #FFF;
+  color: #333;
+}

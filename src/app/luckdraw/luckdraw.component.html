@@ -1,0 +1,18 @@
+<div class="con">
+  <div class="content">
+    <img src="./assets/image/luckdrawBg.png" alt="">
+  </div>
+  <div class="boxCon">
+    <div class="boxList" *ngFor="let item of boxArr" (click)="choseBox(item)">
+      <img class="baseImg" *ngIf="!item.isclick" src="./assets/image/drawBox.png" alt="">
+      <img class="openImg" *ngIf="item.isclick" src="./assets/image/drawBoxOpen.png" alt="">
+    </div>
+  </div>
+</div>
+
+
+<div class="bottom">
+  <div class="btns" style="color: #646464">查看幸运值</div>
+  <div class="btns bggreen" >增加次数</div>
+</div>
+<app-alertbox></app-alertbox>
