@@ -68,9 +68,11 @@ export class UploadComponent implements OnInit {
     this.cropperArr[this.indexNow].returnData.big = databig;
     this.cropperArr[this.indexNow].returnData.small = datasamll;
     this.cropperArr[this.indexNow].returnData.real = base64big;
-    this.indexNow = -1;
+    const objs = this.cropperArr[this.indexNow].obj;
+    objs.destroy();
+    $('#image' + this.indexNow).attr('src', '');
+    $('#image' + this.indexNow).parent().find('.cropper-container').remove();
     this.isshow = false;
-
   }
   crearImg(imageDom, previewDom) {
     return new Cropper(imageDom, {

@@ -45,7 +45,15 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
     this.getMemberIndexInfo();
   }
   ngAfterContentInit() {
-    // this.userConfigService.wxConfigFn();
+    const t = this;
+    $(window).on('touchmove', function(e) {
+      const touch = e.originalEvent['targetTouches'][0];
+      const y = touch.pageY;
+      if ( y < 120) {
+        t.orderGetOrderInfo(t.orderId);
+        t.getMemberIndexInfo();
+      }
+    });
   }
   count_down(countDown_time) {
     const that = this;
