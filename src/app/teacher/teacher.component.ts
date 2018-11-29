@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
@@ -25,7 +25,7 @@ export class TeacherComponent implements OnInit {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService) { }
+              private userConfigService: UserConfigService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     /***
@@ -98,6 +98,8 @@ export class TeacherComponent implements OnInit {
       scanType: ['qrCode', 'barCode'], // 可以指定扫二维码还是一维码，默认二者都有
       success: function (res) {
         t.router.navigate(['hexiao', {'code': res.resultStr, 'advisorId': t.teacherInfo.id}]);
+        t.changeDetectorRef.markForCheck();
+        t.changeDetectorRef.detectChanges();
       }
     });
   }

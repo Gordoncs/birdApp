@@ -15,6 +15,7 @@ export class AlertboxComponent implements OnInit {
   alertShow = false;
   luckDrawShow = false;
   luckConShow = false;
+  drawerrorShow = false;
   luckConShowMoney = 0;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
@@ -40,9 +41,13 @@ export class AlertboxComponent implements OnInit {
     this.alertShow = false;
     this.luckDrawShow = false;
     this.luckConShow = false;
+    this.drawerrorShow = false;
   }
   draw() {
     this.luckDrawShow = true;
+  }
+  drawerror() {
+    this.drawerrorShow = true;
   }
   drawResult(num) {
     this.luckConShow = true;

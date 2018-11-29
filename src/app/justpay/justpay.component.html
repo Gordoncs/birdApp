@@ -29,7 +29,7 @@
     </div>
     <div class="price" >
       <span class="s1">应付金额:</span>
-      <span class="s2">￥{{(allMoney*1-discountPriceAmout*1) | number:'1.2-2'}}</span>
+      <span class="s2">￥{{((allMoney*1-discountPriceAmout*1) < 0 ? 0 : (allMoney*1-discountPriceAmout*1) ) | number:'1.2-2'}}</span>
     </div>
   </div>
   <div class="saveBtn" *ngIf="orderInfo.from == 'index'" (click)="cashpay()">完成本次服务</div>

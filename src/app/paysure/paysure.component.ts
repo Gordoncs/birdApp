@@ -162,9 +162,13 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
             } else {
               t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
             }
+            t.changeDetectorRef.markForCheck();
+            t.changeDetectorRef.detectChanges();
           },
           cancel: function(res) {
             t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            t.changeDetectorRef.markForCheck();
+            t.changeDetectorRef.detectChanges();
           }
         });
       } else {
@@ -233,6 +237,7 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
+        this.alertBox.success(data['message']);
         // this.router.navigate(['paystatus', {'res': true, 'orderNo': data.data, 'from': 'paysure'}]);
       } else {
         this.alertBox.error(data['message']);

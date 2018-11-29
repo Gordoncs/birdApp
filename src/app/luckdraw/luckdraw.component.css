@@ -80,3 +80,20 @@
   height:2.45rem;
   bottom: 0;
 }
+.tipsBox{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 9.2rem;
+  color: #FFF;
+  font-size: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.tipsBox span{
+  color: #c51e63;
+  font-size: 0.72rem;
+  margin: 0 0.1rem;
+}

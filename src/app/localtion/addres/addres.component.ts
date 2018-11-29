@@ -96,15 +96,15 @@ export class AddresComponent implements OnInit {
       });
     });
     //
-    // t.locallat = '39.908';
-    // t.locallong = '116.3974';
-    // if (t.statusInfo.status === 'nohave') {
-    //   // 外省访问
-    //   t.getNextStoreInfo(39.908 , 116.3974);
-    // } else {
-    //   // 北京本地访问
-    //   t.getNextStoreInfo(t.locallat, t.locallong);
-    // }
+    t.locallat = '39.908';
+    t.locallong = '116.3974';
+    if (t.statusInfo.status === 'nohave') {
+      // 外省访问
+      t.getNextStoreInfo(39.908 , 116.3974);
+    } else {
+      // 北京本地访问
+      t.getNextStoreInfo(t.locallat, t.locallong);
+    }
   }
   toggle() {
     this.isOpen = !this.isOpen;

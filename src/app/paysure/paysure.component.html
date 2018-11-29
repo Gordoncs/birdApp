@@ -71,7 +71,7 @@
 <div class="priceBar">
   <div class="price">
     <span class="s1">应付金额:</span>
-    <span class="s2">￥{{(allMoney*1 - order.discountPriceAmout*1) | number:'2.2-2'}}</span>
+    <span class="s2">￥{{((allMoney*1 - order.discountPriceAmout*1)<0?0:(allMoney*1 - order.discountPriceAmout*1)) | number:'2.2-2'}}</span>
   </div>
   <div class="payBtn" (click)="payFn()" *ngIf="fromData.from!='zero'">立即支付</div>
   <div class="payBtn" (click)="payzeroFn()" *ngIf="fromData.from=='zero'">立即领取</div>

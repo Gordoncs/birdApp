@@ -12,7 +12,7 @@ import {TongxinService} from '../shared/tongxin.service';
 })
 export class LuckdrawComponent implements OnInit {
   public boxArr = [];
-  public gifShow = true;
+  userInfo: any = {};
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -28,17 +28,19 @@ export class LuckdrawComponent implements OnInit {
       this.boxArr.push(obj);
     }
     this.getClickIt();
-    // this.getGoodsInfo(this.goodsId, JSON.parse(localStorage.getItem('storeInfo'))['id']);
+    this.getMemberIndexInfo();
   }
   /**
-   * 获取详情页数据
+   * 抽奖
    */
-  getGoodsInfo(goodsId: any, shopId: any) {
-    this.alertBox.load();
-    this.userConfigService.getGoodsInfo(goodsId, shopId)
+  takeOutRedPacket() {
+    const memberId = localStorage.getItem('memberId');
+    this.alertBox.draw();
+    this.userConfigService.takeOutRedPacket(memberId)
       .subscribe((data) => {
         this.alertBox.close();
         if (data['result']) {
+          this.alertBox.drawResult(data.data);
         } else {
           this.alertBox.error(data['message']);
         }
@@ -49,24 +51,39 @@ export class LuckdrawComponent implements OnInit {
    * 选择抽奖
    */
   choseBox(item) {
+    if (this.userInfo.activityRemnant <= 0) {
+      this.alertBox.drawerror();
+      return;
+    }
     for ( let i = 0 ; i < 6 ; i++) {
       this.boxArr[i].isclick = false;
     }
     item.isclick = true;
-    // this.alertBox.draw();
-    // const  t = this;
-    // setTimeout(function () {
-    //   t.alertBox.close();
-    // }, 2000);
-    this.alertBox.drawResult(5);
+    this.takeOutRedPacket();
   }
   public getClickIt() {
     this.TongXin.Status2$.subscribe(res => {
-      alert('关闭了页面');
       for ( let i = 0 ; i < 6 ; i++) {
         this.boxArr[i].isclick = false;
       }
+      this.getMemberIndexInfo();
     });
   }
-
+  getMemberIndexInfo() {
+    const memberId = localStorage.getItem('memberId');
+    this.alertBox.load();
+    this.userConfigService.getMemberIndexInfo(memberId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.userInfo = data['data'];
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  goEffectluck(type) {
+    this.userInfo.showtype = type;
+    this.router.navigate(['/effectluck', this.userInfo]);
+  }
 }

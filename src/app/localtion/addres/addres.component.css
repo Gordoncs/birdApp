@@ -259,7 +259,7 @@
 .restBtn{
   width: 0.47rem;
   height: 0.48rem;
-  z-index: 99;
+  z-index: 9;
   position: absolute;
   left: 0.3rem;
   top: 1.5rem;

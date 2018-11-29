@@ -8,7 +8,7 @@
       <span>微信：{{userInfo.nickname}}</span>
       <span>电话：{{userInfo.phone}}</span>
     </div>
-    <img class="chouIcon" [routerLink]="['/luckdraw']" src="./assets/image/chouIcon.png" alt="">
+    <img class="chouIcon" *ngIf="userInfo.activityRemnant>0" [routerLink]="['/luckdraw']" src="./assets/image/chouIcon.png" alt="">
   </div>
   <div class="orderStatusBox">
     <div class="statusHead">
@@ -35,12 +35,12 @@
       </div>
     </div>
   </div>
-  <div class="effectLuckBox" (click)="goEffectluck()" [routerLink]="['/effectluck']">
-    <div class="effectLuckList">
+  <div class="effectLuckBox">
+    <div class="effectLuckList"  (click)="goEffectluck(1)">
       <img src="./assets/image/effect.png" alt="">
       <span>{{userInfo.influence}}</span>
     </div>
-    <div class="effectLuckList">
+    <div class="effectLuckList"  (click)="goEffectluck(2)">
       <img src="./assets/image/luck.png" alt="">
       <span>{{userInfo.luckyIndex}}</span>
     </div>

@@ -8,8 +8,8 @@
 </div>
 
 <div *ngIf="luckDrawShow" class='blackBg'></div>
-<div *ngIf="luckDrawShow" class='loadBox'>
-  <img src="./assets/image/loading.gif" alt="">
+<div *ngIf="luckDrawShow" class='loadBox' style="background: none;">
+  <img src="./assets/image/openbox.gif" style="width: 4rem;height: 4rem" alt="">
 </div>
 
 <div *ngIf="luckConShow" class='blackBg'></div>
@@ -17,6 +17,16 @@
   <h1>
     恭喜您获得{{luckConShowMoney}}元美丽金
     <span>奖金将在三个工作日内退回您订单支付账户</span>
+  </h1>
+  <div class="sureBtn"  (click)="sureFn()">确 定</div>
+</div>
+
+
+<div *ngIf="drawerrorShow" class='blackBg'></div>
+<div *ngIf="drawerrorShow" class='luckConBox'>
+  <h1>
+    很遗憾您没有抽奖机会~
+    <span>请分享好友体验变美获得抽奖机会！</span>
   </h1>
   <div class="sureBtn"  (click)="sureFn()">确 定</div>
 </div>

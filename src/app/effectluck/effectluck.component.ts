@@ -28,6 +28,7 @@ export class EffectluckComponent implements OnInit, AfterContentInit {
      */
     this.titleService.setTitle('我的实力');
     this.routerInfo.params.subscribe((params) => this.userInfo = params);
+    this.choseit(this.userInfo.showtype);
     this.getMemberInfluenceList(0, 8);
     this.getMemberActivityRecordList(0, 12);
   }

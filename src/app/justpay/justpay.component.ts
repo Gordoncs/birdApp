@@ -141,10 +141,14 @@ export class JustpayComponent implements OnInit, AfterContentInit, OnDestroy {
               t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
                 'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
             }
+            t.changeDetectorRef.markForCheck();
+            t.changeDetectorRef.detectChanges();
           },
           cancel: function(res) {
             t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
               'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+            t.changeDetectorRef.markForCheck();
+            t.changeDetectorRef.detectChanges();
           }
         });
       } else {

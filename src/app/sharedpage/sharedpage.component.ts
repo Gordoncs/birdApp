@@ -28,7 +28,7 @@ export class SharedpageComponent implements OnInit {
       this.shareNewmember();
       const title = '抽空体验一下，颜值需要呵护，一小时容颜焕发';
       const desc = '春鸟科美超值体验活动，等你来体验，打造无纹面庞，精致神曲，水水嫩嫩，尽享魅力人生。';
-      const link = 'https://mp.needai.com/g/index.html?authCode=' + this.memberInfo.authCode +
+      const link = this.userConfigService.configUrl + '/g/index.html?authCode=' + this.memberInfo.authCode +
         '&guideId=' + localStorage.getItem('memberId') +
         '&frompage=newergif';
       const imgUrl = this.memberInfo.headimgurl;
@@ -38,7 +38,7 @@ export class SharedpageComponent implements OnInit {
       this.shareZore();
       const title = this.memberInfo.nickname + '已经为您买单，科技美容免费选，速戳！！';
       const desc = '逆龄抗衰、塑形体雕、净体脱毛等15项任选其一，单已买，就差您来了。';
-      const link = 'https://mp.needai.com/g/index.html?authCode=' + this.memberInfo.authCode +
+      const link = this.userConfigService.configUrl + '/g/index.html?authCode=' + this.memberInfo.authCode +
         '&guideId=' + localStorage.getItem('memberId') +
         '&frompage=newerdec';
       const imgUrl = this.memberInfo.headimgurl;
