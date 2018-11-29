@@ -36,8 +36,8 @@ export class UserConfigService {
    * 公共地址
    */
   // configUrl = 'https://mp.spbird.com';
-  // configUrl = 'https://mp.needai.com';
-  configUrl = 'http://59.110.175.91:9000';
+  configUrl = 'https://mp.needai.com';
+  // configUrl = 'http://59.110.175.91:9000';
   /**
    * 判断no auth进行地址跳转
    */

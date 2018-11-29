@@ -5,7 +5,7 @@
       <img src="{{userInfo.headIconAddr}}" alt="">
     </div>
     <div class="infoBox">
-      <span>微信：{{userInfo.nickname}}</span>
+      <span>昵称：{{userInfo.nickname}}</span>
       <span>电话：{{userInfo.phone}}</span>
     </div>
     <img class="chouIcon" *ngIf="userInfo.activityRemnant>0" [routerLink]="['/luckdraw']" src="./assets/image/chouIcon.png" alt="">
