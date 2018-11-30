@@ -1,4 +1,4 @@
-import {AfterContentInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
@@ -36,7 +36,8 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService, private changeDetectorRef: ChangeDetectorRef) { }
+              private userConfigService: UserConfigService, private changeDetectorRef: ChangeDetectorRef,
+              private zone: NgZone) { }
 
   ngOnInit() {
     /***
@@ -158,15 +159,21 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              });
             } else {
-              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
+              });
             }
             t.changeDetectorRef.markForCheck();
             t.changeDetectorRef.detectChanges();
           },
           cancel: function(res) {
-            t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            t.zone.run(() => {
+              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            });
             t.changeDetectorRef.markForCheck();
             t.changeDetectorRef.detectChanges();
           }

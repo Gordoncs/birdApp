@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
@@ -18,7 +18,8 @@ export class PaystausComponent implements OnInit, AfterContentInit {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
+              private userConfigService: UserConfigService, private TongXin: TongxinService,
+              private changeDetectorRef: ChangeDetectorRef) { }
   ngOnInit() {
     /***
      * 设置title
@@ -35,6 +36,8 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     //     console.log(event);
     //   }
     // });
+    this.changeDetectorRef.markForCheck();
+    this.changeDetectorRef.detectChanges();
   }
   ngAfterContentInit() {
     // this.userConfigService.wxConfigFn();

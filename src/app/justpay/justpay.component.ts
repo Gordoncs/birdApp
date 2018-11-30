@@ -1,4 +1,4 @@
-import {AfterContentInit, ChangeDetectorRef, Component, Directive, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, Directive, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
@@ -24,7 +24,8 @@ export class JustpayComponent implements OnInit, AfterContentInit, OnDestroy {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService, private changeDetectorRef: ChangeDetectorRef) { }
+              private userConfigService: UserConfigService, private changeDetectorRef: ChangeDetectorRef,
+              private zone: NgZone) { }
 
   ngOnInit() {
     this.titleService.setTitle('支付确认');
@@ -135,18 +136,24 @@ export class JustpayComponent implements OnInit, AfterContentInit, OnDestroy {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['paystatus', {'res': true, 'order': JSON.stringify(order),
-                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': true, 'order': JSON.stringify(order),
+                  'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+              });
             } else {
-              t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
-                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
+                  'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+              });
             }
             t.changeDetectorRef.markForCheck();
             t.changeDetectorRef.detectChanges();
           },
           cancel: function(res) {
-            t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
-              'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+            t.zone.run(() => {
+              t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
+                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+            });
             t.changeDetectorRef.markForCheck();
             t.changeDetectorRef.detectChanges();
           }
