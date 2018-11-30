@@ -125,7 +125,7 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     }
     if (this.fromData['from'] === 'special') {
       sku = [];
-      sku.push(this.skuArr['id']);
+      sku.push(JSON.parse(this.skuArr)['id']);
     }
     // const type = this.paySureInfo.type;
     const type = this.fromData['liuchengType'];

@@ -7,7 +7,8 @@
   <div class="navbarList" [routerLink]="['/cart']" routerLinkActive="activeIndex" #rlacar="routerLinkActive">
     <img class="car"  *ngIf="rlacar.isActive" src='./assets/image/carSel.png' alt="">
     <img class="car"  *ngIf="!rlacar.isActive" src='./assets/image/car.png' alt="">
-    <div class="text">购物车{{cartNum}}</div>
+    <div class="text">购物车</div>
+    <div class="numbers">{{cartNum}}</div>
   </div>
   <div class="navbarList"  [routerLink]="['/myindex']" routerLinkActive="activeIndex" #rlaperson="routerLinkActive">
     <img class="person" *ngIf="rlaperson.isActive" src='./assets/image/personSel.png'   alt="">

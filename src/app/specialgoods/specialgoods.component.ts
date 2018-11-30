@@ -36,11 +36,13 @@ export class SpecialgoodsComponent implements OnInit {
       });
   }
   goPaysure() {
-    const skuId = this.detailInfo[this.selStatus];
-    if (!skuId) {
-      this.alertBox.error('请选择产品');
-      return;
-    }
+    const skuId = {
+      'id': this.detailInfo[this.selStatus]['id'],
+      'goodsId': this.detailInfo[this.selStatus]['goodsId'],
+      'skuSpecId': this.detailInfo[this.selStatus]['skuSpecId'] || 0,
+      'skuStyleId': this.detailInfo[this.selStatus]['skuStyleId'] || 0,
+      'goodsType': this.detailInfo[this.selStatus].goodsType,
+    };
     this.router.navigate(['/paysure', {'from': 'special', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 9}]);
   }
 }

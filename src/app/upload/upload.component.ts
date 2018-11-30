@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import Cropper from 'cropperjs';
 import * as $ from 'jquery';
-import * as lrz from 'node_modules/lrz/dist/lrz.bundle.js';
+import * as lrz from 'lrz/dist/lrz.all.bundle.js';
 import {Title} from '@angular/platform-browser';
 import {UserConfigService} from '../shared/user-config.service';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
@@ -44,6 +44,7 @@ export class UploadComponent implements OnInit {
     // alert(window.URL.createObjectURL($event.srcElement['files'][0]));
     let yaImg = '';
     const t = this;
+    this.alertBox.load();
     // 压缩图片
     lrz($event.srcElement['files'][0])
       .then(function (rst) {
@@ -53,6 +54,7 @@ export class UploadComponent implements OnInit {
         t.indexNow = index;
         t.isshow = true;
         t.cropperArr[index].obj.replace(yaImg) ;
+        t.alertBox.close();
       })
       .catch(function (err) {
         // 处理失败会执行
@@ -79,8 +81,8 @@ export class UploadComponent implements OnInit {
     const cassmall = this.cropperArr[this.indexNow].obj.getCroppedCanvas({width: 88, height: 150});
     const base64small = cassmall.toDataURL('image/jpeg'); // 转换为base64
     const datasamll = encodeURIComponent(base64small);
-    console.log(111, base64big);
-    console.log(222, base64small);
+    // console.log(111, base64big);
+    // console.log(222, base64small);
     this.cropperArr[this.indexNow].returnData.big = databig;
     this.cropperArr[this.indexNow].returnData.small = datasamll;
     this.cropperArr[this.indexNow].returnData.real = base64big;

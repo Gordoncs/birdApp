@@ -61,7 +61,6 @@
 
 .mainBox{
   width: 7rem;
-  height: 9.5rem;
   background: #FFF;
   border-radius: 0.1rem;
   margin-top: 0.4rem;
@@ -75,8 +74,8 @@
 }
 
 .mainBox .goodsImg{
+  display: block;
   width: 7rem;
-  height: 7.6rem;
 }
 .mainBox .btnBox{
   width: 100%;
