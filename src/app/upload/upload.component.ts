@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import Cropper from 'cropperjs';
 import * as $ from 'jquery';
+import * as lrz from 'node_modules/lrz/dist/lrz.bundle.js';
 import {Title} from '@angular/platform-browser';
 import {UserConfigService} from '../shared/user-config.service';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
@@ -41,9 +42,24 @@ export class UploadComponent implements OnInit {
     // alert(window.URL);
     // alert(window['webkitURL']);
     // alert(window.URL.createObjectURL($event.srcElement['files'][0]));
-    this.indexNow = index;
-    this.isshow = true;
-    this.cropperArr[index].obj.replace(window.URL.createObjectURL($event.srcElement['files'][0])) ;
+    let yaImg = '';
+    const t = this;
+    // 压缩图片
+    lrz($event.srcElement['files'][0])
+      .then(function (rst) {
+        // 处理成功会执行
+        // console.log(rst);
+        yaImg = rst.base64;
+        t.indexNow = index;
+        t.isshow = true;
+        t.cropperArr[index].obj.replace(yaImg) ;
+      })
+      .catch(function (err) {
+        // 处理失败会执行
+      })
+      .always(function () {
+        // 不管是成功失败，都会执行
+      });
   }
   delImg(item, index) {
     item.returnData.real = '';

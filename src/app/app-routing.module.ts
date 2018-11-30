@@ -22,6 +22,7 @@ import {NewerdecComponent} from './newerdec/newerdec.component';
 import {NewercomeComponent} from './newercome/newercome.component';
 import {LuckdrawComponent} from './luckdraw/luckdraw.component';
 import {PaystatusGuard} from './shared/paystatus.guard';
+import {AboutpromiseComponent} from './aboutpromise/aboutpromise.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full'},
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'effectluck', component: EffectluckComponent},
   { path: 'goodsdetail', component: DetailComponent},
   { path: 'specialgoods', component: SpecialgoodsComponent},
+  { path: 'aboutpromise', component: AboutpromiseComponent},
   { path: 'newergif', component: NewergifComponent},
   { path: 'newerdec', component: NewerdecComponent},
   { path: 'newercome', component: NewercomeComponent},

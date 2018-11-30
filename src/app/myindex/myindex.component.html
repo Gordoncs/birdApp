@@ -51,11 +51,11 @@
     <img [routerLink]="['/newerdec', {'nums': userInfo.presentRemnant}]" *ngIf="userInfo.presentRemnant>0" src="./assets/image/zeroShare.png" alt="">
     <img style="width: 7.25rem;height: 2.2rem" [routerLink]="['/newergif', {'goodsId': 5}]" *ngIf="userInfo.presentRemnant==0" src="./assets/image/newperson.png" alt="">
   </div>
-  <div class="birdList">
+  <div class="birdList" [routerLink]="['/aboutpromise', {'type': 'promise'}]">
     <span class="ml55">春鸟服务承诺</span>
     <img class="mr40" src="./assets/image/rigthArrow.png" alt="">
   </div>
-  <div class="birdList">
+  <div class="birdList" [routerLink]="['/aboutpromise', {'type': 'about'}]">
     <span class="ml55">关于春鸟科美</span>
     <img class="mr40" src="./assets/image/rigthArrow.png" alt="">
   </div>
