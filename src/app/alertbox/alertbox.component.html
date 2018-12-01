@@ -23,10 +23,8 @@
 
 
 <div *ngIf="drawerrorShow" class='blackBg'></div>
-<div *ngIf="drawerrorShow" class='luckConBox'>
-  <h1>
-    很遗憾您没有抽奖机会~
-    <span>请分享好友体验变美获得抽奖机会！</span>
-  </h1>
-  <div class="sureBtn"  (click)="sureFn()">确 定</div>
+<div *ngIf="drawerrorShow" class='luckErroBox'>
+  <img class="luckdawCloseBtn" (click)="sureFn()" src="./assets/image/luckdawCloseBtn.png" alt="">
+  <img class="bg" src="./assets/image/luckdawAlertBg.png" alt="">
+  <div class="sureBtn"  (click)="goshareFn()">分享美丽，邀请好友</div>
 </div>

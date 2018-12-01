@@ -28,6 +28,7 @@ export class LuckdrawComponent implements OnInit {
       this.boxArr.push(obj);
     }
     this.getClickIt();
+    this.getshareClickIt();
     this.getMemberIndexInfo();
   }
   /**
@@ -67,6 +68,11 @@ export class LuckdrawComponent implements OnInit {
         this.boxArr[i].isclick = false;
       }
       this.getMemberIndexInfo();
+    });
+  }
+  public getshareClickIt() {
+    this.TongXin.Status3$.subscribe(res => {
+      this.router.navigate(['/newergif', {'goodsId': 5}]);
     });
   }
   getMemberIndexInfo() {

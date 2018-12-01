@@ -57,4 +57,8 @@ export class AlertboxComponent implements OnInit {
     this.close();
     this.TongXin.luckDawClick(1);
   }
+  goshareFn() {
+    this.close();
+    this.TongXin.goshareClick(1);
+  }
 }

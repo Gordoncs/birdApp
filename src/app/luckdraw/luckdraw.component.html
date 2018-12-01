@@ -7,15 +7,18 @@
       <img class="baseImg" *ngIf="!item.isclick" src="./assets/image/drawBox.png" alt="">
       <img class="openImg" *ngIf="item.isclick" src="./assets/image/drawBoxOpen.png" alt="">
     </div>
-  </div>
-  <div class="tipsBox">
-    剩余 <span>{{userInfo.activityRemnant}}</span>次开箱机会
+    <div class="tipsBox">
+      剩余 <span>{{userInfo.activityRemnant}}</span>次开箱机会
+    </div>
+    <div class="textBox">
+      <img src="./assets/image/luckdawTips.png" alt="">
+    </div>
   </div>
 </div>
 
 
 <div class="bottom">
-  <div class="btns" style="color: #646464" (click)="goEffectluck(2)">查看幸运值</div>
+  <div class="btns" style="color: #FFF; background: #ff586b" (click)="goEffectluck(2)">查看幸运值</div>
   <div class="btns bggreen" [routerLink]="['/newergif',  {'goodsId': 5}]">增加次数</div>
 </div>
 <app-alertbox></app-alertbox>
