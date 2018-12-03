@@ -436,7 +436,7 @@ export class UserConfigService {
     if (order.discountPriceAmout === null) {
       order.discountPriceAmout = 0;
     }
-    const params = 'sku=' + sku + '&storeId=' + storeId + '&order.memberId=' + order.memberId +
+    const params = 'skuId=' + sku + '&storeId=' + storeId + '&order.memberId=' + order.memberId +
       '&order.storeId=' + order.storeId + '&order.orderRemark=' + order.orderRemark +
       '&order.subscribePhone=' + order.subscribePhone + '&order.linkman=' + order.linkman +
       '&order.discountPriceAmout=' + order.discountPriceAmout;
