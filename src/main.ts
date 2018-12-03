@@ -6,8 +6,12 @@ import {environment} from './environments/environment';
 import wx from 'weixin-js-sdk';
 import * as MobileDetect from 'mobile-detect';
 import * as $ from 'jquery';
-if (environment.production) {
+if (!environment.production) {
   enableProdMode();
+  window.console.log = function() {};
+  window.console.info = function() {};
+  window.console.warn = function() {};
+  window.console.error = function() {};
 }
 const platformBrowserDynamics = function() {
   platformBrowserDynamic().bootstrapModule(AppModule)
@@ -36,7 +40,7 @@ if (locationUrl.indexOf('?') > -1) {
     success: function(data) {
       if (data.result.success) {
         wx.config({
-          debug: false,
+          debug: true,
           appId: data.result.data.appId,
           timestamp: data.result.data.timestamp,
           nonceStr: data.result.data.noncestr,
@@ -76,7 +80,7 @@ if (locationUrl.indexOf('?') > -1) {
     success: function(data) {
       if (data.result.success) {
         wx.config({
-          debug: false,
+          debug: true,
           appId: data.result.data.appId,
           timestamp: data.result.data.timestamp,
           nonceStr: data.result.data.noncestr,
