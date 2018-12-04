@@ -159,11 +159,12 @@
 }
 .boxShowlist{
   width: 100%;
-  min-height: 12rem;
+  min-height: 6rem;
   text-align: center;
   position: relative;
 }
 .boxShowlist .justimg{
+  display: block;
   width: 100%;
 }
 .selit{

@@ -2,8 +2,8 @@
   width: 100%;
   height: 1.2rem;
   position: fixed;
-  left:0;
-  bottom: 1.4rem;
+  left: 0;
+  bottom: 0;
   z-index: 9;
   background: #FFF;
   display: flex;
@@ -41,8 +41,8 @@
   height: 1rem;
   position: fixed;
   left: 0;
-  bottom: 0.3rem;
-  z-index: 19;
+  bottom: 1.7rem;
+  z-index: 9;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
