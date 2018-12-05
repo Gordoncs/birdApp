@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {UserConfigService} from '../shared/user-config.service';
 import {TongxinService} from '../shared/tongxin.service';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-alertbox',
   templateUrl: './alertbox.component.html',
@@ -42,8 +42,10 @@ export class AlertboxComponent implements OnInit {
     this.luckDrawShow = false;
     this.luckConShow = false;
     this.drawerrorShow = false;
+    $('#gifimg').attr('src', '');
   }
   draw() {
+    $('#gifimg').attr('src', './assets/image/openbox.gif');
     this.luckDrawShow = true;
   }
   drawerror() {

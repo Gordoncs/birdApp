@@ -245,7 +245,7 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
       this.alertBox.close();
       if (data['result']) {
         this.alertBox.success(data['message']);
-        // this.router.navigate(['paystatus', {'res': true, 'orderNo': data.data, 'from': 'paysure'}]);
+        this.router.navigate(['paystatus', {'res': true, 'orderNo': data.data, 'from': 'paysure'}]);
       } else {
         this.alertBox.error(data['message']);
       }

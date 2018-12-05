@@ -8,10 +8,10 @@ import * as MobileDetect from 'mobile-detect';
 import * as $ from 'jquery';
 if (environment.production) {
   enableProdMode();
-  // window.console.log = function() {};
-  // window.console.info = function() {};
-  // window.console.warn = function() {};
-  // window.console.error = function() {};
+  window.console.log = function() {};
+  window.console.info = function() {};
+  window.console.warn = function() {};
+  window.console.error = function() {};
 }
 const platformBrowserDynamics = function() {
   platformBrowserDynamic().bootstrapModule(AppModule)

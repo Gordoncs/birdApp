@@ -35,13 +35,18 @@ export class LuckdrawComponent implements OnInit {
    * 抽奖
    */
   takeOutRedPacket() {
+    const t = this;
     const memberId = localStorage.getItem('memberId');
-    this.alertBox.draw();
+    this.alertBox.load();
     this.userConfigService.takeOutRedPacket(memberId)
       .subscribe((data) => {
         this.alertBox.close();
         if (data['result']) {
-          this.alertBox.drawResult(data.data);
+          this.alertBox.draw();
+          setTimeout(function () {
+            t.alertBox.close();
+            t.alertBox.drawResult(data.data);
+          }, 900);
         } else {
           this.alertBox.error(data['message']);
         }
@@ -77,7 +82,7 @@ export class LuckdrawComponent implements OnInit {
   }
   getMemberIndexInfo() {
     const memberId = localStorage.getItem('memberId');
-    this.alertBox.load();
+    // this.alertBox.load();
     this.userConfigService.getMemberIndexInfo(memberId).
     subscribe(data => {
       this.alertBox.close();
