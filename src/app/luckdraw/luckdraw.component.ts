@@ -82,7 +82,7 @@ export class LuckdrawComponent implements OnInit {
   }
   getMemberIndexInfo() {
     const memberId = localStorage.getItem('memberId');
-    // this.alertBox.load();
+    this.alertBox.load();
     this.userConfigService.getMemberIndexInfo(memberId).
     subscribe(data => {
       this.alertBox.close();
