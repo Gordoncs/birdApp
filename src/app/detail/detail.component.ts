@@ -1,5 +1,5 @@
 import {Component, OnInit, AfterViewInit, ViewChild, AfterContentInit} from '@angular/core';
-import Swiper from 'swiper';
+import Swiper from 'node_modules/swiper/dist/js/swiper.min.js';
 import { Title } from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
