@@ -138,12 +138,12 @@ export class JustpayComponent implements OnInit, AfterContentInit, OnDestroy {
             if (res.errMsg === 'chooseWXPay:ok' ) {
               t.zone.run(() => {
                 t.router.navigate(['paystatus', {'res': true, 'order': JSON.stringify(order),
-                  'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+                  'discounts': JSON.stringify(discounts), 'orderNo': orderId, 'from': 'justpay'}]);
               });
             } else {
               t.zone.run(() => {
                 t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
-                  'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+                  'discounts': JSON.stringify(discounts), 'orderNo': orderId, 'from': 'justpay'}]);
               });
             }
             t.changeDetectorRef.markForCheck();
@@ -152,7 +152,7 @@ export class JustpayComponent implements OnInit, AfterContentInit, OnDestroy {
           cancel: function(res) {
             t.zone.run(() => {
               t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
-                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+                'discounts': JSON.stringify(discounts), 'orderNo': orderId, 'from': 'justpay'}]);
             });
             t.changeDetectorRef.markForCheck();
             t.changeDetectorRef.detectChanges();

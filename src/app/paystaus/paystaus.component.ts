@@ -49,12 +49,13 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     // });
   }
   pay() {
-    if (this.fromData.from === 'justpay') {
-      this.justpaypay(JSON.parse(this.fromData.order), JSON.parse(this.fromData.discounts));
-    }
-    if (this.fromData.from === 'paysure') {
-      this.paysurepay(this.fromData.orderNo);
-    }
+    this.paysurepay(this.fromData.orderNo);
+    // if (this.fromData.from === 'justpay') {
+    //   this.justpaypay(JSON.parse(this.fromData.order), JSON.parse(this.fromData.discounts));
+    // }
+    // if (this.fromData.from === 'paysure') {
+    //   this.paysurepay(this.fromData.orderNo);
+    // }
   }
   paysurepay(orderId) {
     const t = this;

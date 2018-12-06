@@ -201,10 +201,11 @@ export class AddresComponent implements OnInit {
     $('.shopBox').scrollTop(0);
   }
   sureFn() {
-    console.log( this.choseInfo);
-    localStorage.setItem('latitude', this.choseInfo.latitude);
-    localStorage.setItem('longitude', this.choseInfo.longitude);
-    localStorage.setItem('storeInfo', this.choseInfo.storeInfo);
+    if (this.choseInfo.latitude && this.choseInfo.longitude && this.choseInfo.storeInfo) {
+      localStorage.setItem('latitude', this.choseInfo.latitude);
+      localStorage.setItem('longitude', this.choseInfo.longitude);
+      localStorage.setItem('storeInfo', this.choseInfo.storeInfo);
+    }
     history.go(-1);
   }
   allInit(latitude , longitude) {
