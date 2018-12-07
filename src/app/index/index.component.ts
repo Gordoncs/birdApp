@@ -30,7 +30,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
     /***
      * 设置title
      */
-    this.titleService.setTitle('春鸟科美');
+    this.titleService.setTitle('春鸟皮肤管理中心');
     /***
      * 懒加载图片
      */
