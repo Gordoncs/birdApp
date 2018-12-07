@@ -42,6 +42,7 @@ export class UploadComponent implements OnInit {
     // alert(window.URL);
     // alert(window['webkitURL']);
     // alert(window.URL.createObjectURL($event.srcElement['files'][0]));
+    // alert($event.srcElement['files'][0]);
     let yaImg = '';
     const t = this;
     this.alertBox.load();
@@ -50,6 +51,7 @@ export class UploadComponent implements OnInit {
       .then(function (rst) {
         // 处理成功会执行
         // console.log(rst);
+        // alert('压缩成功')
         yaImg = rst.base64;
         t.indexNow = index;
         t.isshow = true;
