@@ -15,7 +15,9 @@
   </div>
 
   <div class="mainBox">
-    <img class="goodsImg" [src]="detailInfo[selStatus]['photoAddr']"  alt="">
+    <img class="goodsImg" *ngIf="selStatus=='beforeOnSaleGoods'" [src]="detailInfo['beforeOnSaleGoods']['photoAddr']"  alt="">
+    <img class="goodsImg" *ngIf="selStatus=='nowOnSaleGoods'" [src]="detailInfo['nowOnSaleGoods']['photoAddr']"  alt="">
+    <img class="goodsImg" *ngIf="selStatus=='nextOnSaleGoods'" [src]="detailInfo['nextOnSaleGoods']['photoAddr']"  alt="">
     <div class="btnBox">
       <div class="littleBox" routerLink="/index">返回首页</div>
       <div class="bigBox" *ngIf="selStatus=='nowOnSaleGoods'" (click)="goPaysure()">立即抢购</div>

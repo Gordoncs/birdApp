@@ -43,27 +43,38 @@ export class UploadComponent implements OnInit {
     // alert(window['webkitURL']);
     // alert(window.URL.createObjectURL($event.srcElement['files'][0]));
     // alert($event.srcElement['files'][0]);
-    let yaImg = '';
+    let yaImg ;
     const t = this;
     this.alertBox.load();
+    t.photoCompress($event.srcElement['files'][0], {
+      quality: 0.2
+    }, function(base64Codes) {
+      alert('压缩成功');
+      yaImg = base64Codes;
+      t.indexNow = index;
+      t.isshow = true;
+      t.cropperArr[index].obj.replace(yaImg) ;
+      t.alertBox.close();
+    });
     // 压缩图片
-    lrz($event.srcElement['files'][0])
-      .then(function (rst) {
-        // 处理成功会执行
-        // console.log(rst);
-        // alert('压缩成功')
-        yaImg = rst.base64;
-        t.indexNow = index;
-        t.isshow = true;
-        t.cropperArr[index].obj.replace(yaImg) ;
-        t.alertBox.close();
-      })
-      .catch(function (err) {
-        // 处理失败会执行
-      })
-      .always(function () {
-        // 不管是成功失败，都会执行
-      });
+    // lrz($event.srcElement['files'][0])
+    //   .then(function (rst) {
+    //     // 处理成功会执行
+    //     // console.log(rst);
+    //     alert('压缩成功');
+    //     yaImg = rst.base64;
+    //     t.indexNow = index;
+    //     t.isshow = true;
+    //     t.cropperArr[index].obj.replace(yaImg) ;
+    //     t.alertBox.close();
+    //   })
+    //   .catch(function (err) {
+    //     // 处理失败会执行
+    //     alert(err);
+    //   })
+    //   .always(function () {
+    //     // 不管是成功失败，都会执行
+    //   });
   }
   delImg(item, index) {
     item.returnData.real = '';
@@ -188,5 +199,57 @@ export class UploadComponent implements OnInit {
 
   choseType(type) {
     this.memberCase.serviceType = type;
+  }
+
+  /**
+       三个参数
+       file：一个是文件(类型是图片格式)，
+       w：一个是文件压缩的后宽度，宽度越小，字节越小
+       objDiv：一个是容器或者回调函数
+       photoCompress()
+   */
+  photoCompress(file, w, objDiv) {
+    const  t = this;
+    const ready = new FileReader();
+    /*开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容.*/
+    ready.readAsDataURL(file);
+    ready.onload = function() {
+      const re = this.result;
+      t.canvasDataURL(re, w, objDiv);
+    };
+  }
+  canvasDataURL(path, obj, callback) {
+    const img = new Image();
+    img.src = path;
+    img.onload = function() {
+      const that = this;
+      // 默认按比例压缩
+      let w = that['width'],
+          h = that['height'];
+      const scale = w / h;
+      w = obj.width || w;
+      h = obj.height || (w / scale);
+      let quality = 0.7;  // 默认图片质量为0.7
+      // 生成canvas
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      // 创建属性节点
+      const anw = document.createAttribute('width');
+      anw.nodeValue = w;
+      const anh = document.createAttribute('height');
+      anh.nodeValue = h;
+      canvas.setAttributeNode(anw);
+      canvas.setAttributeNode(anh);
+      // @ts-ignore
+      ctx.drawImage(that, 0, 0, w, h);
+      // 图像质量
+      if (obj.quality && obj.quality <= 1 && obj.quality > 0) {
+        quality = obj.quality;
+      }
+      // quality值越小，所绘制出的图像越模糊
+      const base64 = canvas.toDataURL('image/jpeg', quality);
+      // 回调函数返回base64的值
+      callback(base64);
+    };
   }
 }
