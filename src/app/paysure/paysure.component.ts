@@ -256,4 +256,7 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
       }
     });
   }
+  goback() {
+    history.go(-1);
+  }
 }
