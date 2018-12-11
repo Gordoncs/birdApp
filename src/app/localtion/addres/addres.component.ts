@@ -206,6 +206,7 @@ export class AddresComponent implements OnInit {
       localStorage.setItem('latitude', this.choseInfo.latitude);
       localStorage.setItem('longitude', this.choseInfo.longitude);
       localStorage.setItem('storeInfo', this.choseInfo.storeInfo);
+      localStorage.setItem('fromaddress', 'yes');
     }
     history.go(-1);
   }

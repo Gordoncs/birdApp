@@ -92,7 +92,18 @@ export class UserConfigService {
         tap(data => this.canGoHref(data))
       );
   }
-
+  /**
+   * 获取店铺信息
+   */
+  getStoreInfo(): Observable<any> {
+    const storeId = JSON.parse(localStorage.getItem('storeInfo'))['id'] || '';
+    return this.http.get(this.configUrl + '/getStoreInfo?storeId=' + storeId , this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
   /**
    * 详情页数据
    */

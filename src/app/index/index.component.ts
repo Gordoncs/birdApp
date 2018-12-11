@@ -122,17 +122,23 @@ export class IndexComponent implements OnInit, AfterContentInit {
           }
           that.carouselarr = carouselarr;
           // 处理店铺信息
-          that.storeInfo = that.indexInfo['storeInfo'];
-          if ( that.storeInfo === null) {
-            this.router.navigate(['/address',  {'status': 'nohave'}]);
+          if (localStorage.getItem('fromaddress') === 'yes') {
+            // 从选择地址过来，用店铺id获取店铺信息
+            that.getStoreInfo();
           } else {
-            localStorage.setItem('storeInfo', JSON.stringify(that.indexInfo['storeInfo']));
-            if (localStorage.getItem('fromPage')) {
-              if (localStorage.getItem('fromPage')  === 'newergif') {
-                this.router.navigate(['newergif', {'goodsId': 5}]);
-              }
-              if (localStorage.getItem('fromPage')  === 'newerdec') {
-                this.router.navigate(['newercome']);
+            // 第一次进入首页 用默认店铺信息
+            that.storeInfo = that.indexInfo['storeInfo'];
+            if ( that.storeInfo === null) {
+              this.router.navigate(['/address',  {'status': 'nohave'}]);
+            } else {
+              localStorage.setItem('storeInfo', JSON.stringify(that.indexInfo['storeInfo']));
+              if (localStorage.getItem('fromPage')) {
+                if (localStorage.getItem('fromPage')  === 'newergif') {
+                  this.router.navigate(['newergif', {'goodsId': 5}]);
+                }
+                if (localStorage.getItem('fromPage')  === 'newerdec') {
+                  this.router.navigate(['newercome']);
+                }
               }
             }
           }
@@ -147,7 +153,31 @@ export class IndexComponent implements OnInit, AfterContentInit {
         }
       });
   }
-
+  // 获取店铺信息
+  getStoreInfo() {
+    this.userConfigService.getStoreInfo()
+      .subscribe((data) => {
+        if (data['result']) {
+          localStorage.setItem('fromaddress', '');
+          this.storeInfo = data['data'];
+          if ( this.storeInfo === null) {
+            this.router.navigate(['/address',  {'status': 'nohave'}]);
+          } else {
+            localStorage.setItem('storeInfo', JSON.stringify(this.storeInfo));
+            if (localStorage.getItem('fromPage')) {
+              if (localStorage.getItem('fromPage')  === 'newergif') {
+                this.router.navigate(['newergif', {'goodsId': 5}]);
+              }
+              if (localStorage.getItem('fromPage')  === 'newerdec') {
+                this.router.navigate(['newercome']);
+              }
+            }
+          }
+        } else {
+          this.alertBox.error(data['message']);
+        }
+      });
+  }
   goDetail(id: any) {
     this.router.navigate(['/goodsdetail', {'goodsId': id}]);
   }
