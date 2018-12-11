@@ -1,14 +1,14 @@
 <div class="con">
   <div class="titles">
-    <div class="titleList" [class.thisdatebord]="selStatus=='beforeOnSaleGoods'" (click)="selStatus='beforeOnSaleGoods'">
+    <div class="titleList" [class.thisdatebord]="selStatus=='beforeOnSaleGoods'" (click)="selStatusFn('beforeOnSaleGoods')">
       <div class="name">上期</div>
       <div class="date" [class.thisdate]="selStatus=='beforeOnSaleGoods'" *ngIf="detailInfo.beforeOnSaleGoods">{{detailInfo.beforeOnSaleGoods.startTime | date:'MM月dd日' }}~{{detailInfo.beforeOnSaleGoods.endTime | date:'MM月dd日'}}</div>
     </div>
-    <div class="titleList" [class.thisdatebord]="selStatus=='nowOnSaleGoods'" (click)="selStatus='nowOnSaleGoods'">
+    <div class="titleList" [class.thisdatebord]="selStatus=='nowOnSaleGoods'"  (click)="selStatusFn('nowOnSaleGoods')">
       <div class="name">本期</div>
       <div class="date" [class.thisdate]="selStatus=='nowOnSaleGoods'" *ngIf="detailInfo.nowOnSaleGoods">{{detailInfo.nowOnSaleGoods.startTime | date:'MM月dd日'}}~{{detailInfo.nowOnSaleGoods.endTime | date:'MM月dd日'}}</div>
     </div>
-    <div class="titleList" [class.thisdatebord]="selStatus=='nextOnSaleGoods'" (click)="selStatus='nextOnSaleGoods'">
+    <div class="titleList" [class.thisdatebord]="selStatus=='nextOnSaleGoods'" (click)="selStatusFn('nextOnSaleGoods')">
       <div class="name">下期</div>
       <div class="date" [class.thisdate]="selStatus=='nextOnSaleGoods'" *ngIf="detailInfo.nextOnSaleGoods">{{detailInfo.nextOnSaleGoods.startTime | date:'MM月dd日'}}~{{detailInfo.nextOnSaleGoods.endTime | date:'MM月dd日'}}</div>
     </div>

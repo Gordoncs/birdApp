@@ -64,12 +64,12 @@
       <div class="exImg">
         <div class="exlist" *ngFor="let imgs of person.casePictureArr">
           <div class="listsc">
-            <img *ngIf="imgs.before!=''" src="{{imgs.before}}" (click)="showLook(person.casePictureArr,imgs.before)" alt="">
+            <img class="sds" *ngIf="imgs.before!=''" src="" data-src="{{imgs.before}}" (click)="showLook(person.casePictureArr,imgs.before)" alt="">
             <p *ngIf="imgs.before==''">服务前</p>
           </div>
           <div class="listsc">
-            <img *ngIf="imgs.before!=''" src="{{imgs.after}}" (click)="showLook(person.casePictureArr,imgs.after)" alt="">
-            <p *ngIf="imgs.before==''">服务后</p>
+            <img class="sds" *ngIf="imgs.before!=''" src="" data-src="{{imgs.after}}" (click)="showLook(person.casePictureArr,imgs.after)" alt="">
+            <p *ngIf="imgs.after==''">服务后</p>
           </div>
         </div>
       </div>

@@ -170,6 +170,7 @@ export class AddresComponent implements OnInit {
     }
   }
   choseAddress(item) {
+    this.searchText = item.name;
     this.getNextStoreInfo(item.latLng.lat, item.latLng.lng);
     this.isfocus = false;
   }

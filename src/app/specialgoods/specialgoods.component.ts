@@ -45,4 +45,9 @@ export class SpecialgoodsComponent implements OnInit {
     };
     this.router.navigate(['/paysure', {'from': 'special', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 9}]);
   }
+  selStatusFn(type) {
+    if (this.detailInfo[type]) {
+      this.selStatus = type;
+    }
+  }
 }

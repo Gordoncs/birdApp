@@ -31,34 +31,6 @@ export class IndexComponent implements OnInit, AfterContentInit {
      * 设置title
      */
     this.titleService.setTitle('春鸟皮肤管理中心');
-    /***
-     * 懒加载图片
-     */
-    window.onload = function () {
-      let scrollTop = window.scrollY;
-      const imgs = Array.from(document.querySelectorAll('img.sds'));
-      lazyLoad();
-
-      // 函数防抖模式
-      let timer = null;
-      window.onscroll = () => {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-          scrollTop = window.scrollY;
-          lazyLoad();
-        }, 300);
-      };
-
-      function lazyLoad() {
-        imgs.forEach((item, index) => {
-          // @ts-ignore
-          if (item.offsetTop < window.innerHeight + scrollTop) {
-            // @ts-ignore
-            item.setAttribute('src', item.dataset.src);
-          }
-        });
-      }
-    };
     // 获取首页数据
     this.getInfo(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
     // this.getInfo(39.91474, 116.37333);
@@ -194,6 +166,34 @@ export class IndexComponent implements OnInit, AfterContentInit {
       slidesPerView: 'auto',
       spaceBetween: 30,
     });
+    /***
+     * 懒加载图片
+     */
+    window.onload = function () {
+      let scrollTop = window.scrollY;
+      const imgs = Array.from(document.querySelectorAll('img.sds'));
+      lazyLoad();
+
+      // 函数防抖模式
+      let timer = null;
+      window.onscroll = () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          scrollTop = window.scrollY;
+          lazyLoad();
+        }, 300);
+      };
+
+      function lazyLoad() {
+        imgs.forEach((item, index) => {
+          // @ts-ignore
+          if (item.offsetTop < window.innerHeight + scrollTop) {
+            // @ts-ignore
+            item.setAttribute('src', item.dataset.src);
+          }
+        });
+      }
+    };
   }
   carouselGoto(item) {
     if (item.type === '1') {

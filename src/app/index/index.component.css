@@ -185,7 +185,6 @@
 }
 .serveBox .serveList{
   width: 6.8rem;
-  height: 4.50rem;
   border-radius: 0.2rem;
   margin-top: 0.3rem;
   -moz-box-shadow:0px 0.02rem 0.2rem #c6c6c6;
@@ -194,6 +193,7 @@
   overflow: hidden;
 
   position: relative;
+  padding-bottom: 0.1rem;
 }
 .servehead{
   width: 100%;
@@ -296,10 +296,10 @@
 }
 .serveBox .declist{
   width: 100%;
-  text-indent: 0.5rem;
   color: #7e7e7e;
   font-size: 0.2rem;
   line-height: 0.3rem;
+  padding: 0 0.35rem;
 }
 
 .lookBox{
