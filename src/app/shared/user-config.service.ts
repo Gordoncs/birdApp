@@ -82,6 +82,9 @@ export class UserConfigService {
    * 首页数据
    */
   indexView(latitude: any, longitude: any): Observable<any> {
+    // const storeId =  JSON.parse(localStorage.getItem('storeInfo'))['id'] || '';
+    // return this.http.get(this.configUrl + '/indexView?longitude=' + longitude + '&latitude=' + latitude +
+    //   '&storeId=' + latitude, this.headoptions)
     return this.http.get(this.configUrl + '/indexView?longitude=' + longitude + '&latitude=' + latitude, this.headoptions)
       .pipe(
         retry(1),
