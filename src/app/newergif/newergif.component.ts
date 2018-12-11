@@ -42,7 +42,7 @@ export class NewergifComponent implements OnInit {
       'skuStyleId': this.tiyanInfo['sku'][0]['skuStyleId'] || 0,
       'goodsType': this.tiyanInfo['goodsInfo'].type,
     };
-    this.router.navigate(['/paysure', {'from': 'detail', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 1}]);
+    this.router.navigate(['/paysure', {'from': 'newgift', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 1}]);
   }
   /**
    * 获取详情页数据

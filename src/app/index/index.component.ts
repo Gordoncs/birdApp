@@ -221,7 +221,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
         }
       });
   }
-  showLook(img) {
+  showLook(img, selimg) {
     const imgsarr = [];
     for (let i = 0 ; i < img.length ; i++) {
       if (img[i].before !== '') {
@@ -231,10 +231,12 @@ export class IndexComponent implements OnInit, AfterContentInit {
         imgsarr.push(img[i].afterbig);
       }
     }
+    const index  = imgsarr.indexOf(selimg);
     this.lookImgUrl = imgsarr;
     setTimeout(function () {
       const swiperss = new Swiper('.middleBox .swiper-container', {
         slidesPerView: 1,
+        initialSlide : index,
         spaceBetween: 30,
         loop: true,
         pagination: {

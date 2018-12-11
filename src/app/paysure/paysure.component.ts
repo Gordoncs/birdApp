@@ -52,6 +52,8 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
       this.checkoutInfo();
     } else if (this.fromData['from'] === 'detail') {
       this.checkoutOutrightPurchase();
+    } else if ( this.fromData['from'] === 'newgift') {
+      this.checkoutOutrightPurchase();
     } else if ( this.fromData['from'] === 'special') {
       this.checkoutOutrightPurchase();
     } else if ( this.fromData['from'] === 'zero') {
@@ -101,6 +103,9 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
         this.getAllMoney();
       } else {
         this.alertBox.error(data['message']);
+        setTimeout(function () {
+          history.go(-1);
+        }, 2000);
       }
     });
   }

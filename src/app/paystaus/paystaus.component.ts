@@ -158,4 +158,7 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     localStorage.setItem('isBecomeOrder', 'ss');
     this.router.navigate(['orderdetail', {id: this.fromData.orderNo}]);
   }
+  goback() {
+    this.router.navigate(['index']);
+  }
 }

@@ -12,8 +12,8 @@
     <div class="headSwiper">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div *ngFor="let item of carouselarr" class="swiper-slide" (click)="carouselGoto(item)" >
-            <img  src="{{item.imgs}}" alt="">
+          <div *ngFor="let item of carouselarr" class="swiper-slide"  >
+            <img  (click)="carouselGoto(item)" src="{{item.imgs}}" alt="">
           </div>
         </div>
         <!-- 如果需要分页器 -->
@@ -64,12 +64,12 @@
       <div class="exImg">
         <div class="exlist" *ngFor="let imgs of person.casePictureArr">
           <div class="listsc">
-            <img *ngIf="imgs.before!=''" src="{{imgs.before}}" (click)="showLook(person.casePictureArr)" alt="">
+            <img *ngIf="imgs.before!=''" src="{{imgs.before}}" (click)="showLook(person.casePictureArr,imgs.before)" alt="">
             <p *ngIf="imgs.before==''">服务前</p>
           </div>
           <div class="listsc">
-            <img *ngIf="imgs.before!=''" src="{{imgs.after}}" (click)="showLook(person.casePictureArr)" alt="">
-            <p *ngIf="imgs.before==''">服务前</p>
+            <img *ngIf="imgs.before!=''" src="{{imgs.after}}" (click)="showLook(person.casePictureArr,imgs.after)" alt="">
+            <p *ngIf="imgs.before==''">服务后</p>
           </div>
         </div>
       </div>
@@ -108,7 +108,9 @@
       <div class="swiper-button-prev"></div>
     </div>
   </div>
-  <div class="sureBtn" (click)="lookImgUrl=[]">X</div>
+  <div class="sureBtn" (click)="lookImgUrl=[]">
+    <img src="./assets/image/close.png" alt="">
+  </div>
 </div>
 
 <app-alertbox></app-alertbox>

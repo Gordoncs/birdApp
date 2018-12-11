@@ -1,5 +1,5 @@
 <div class="qRcodeTitle">
-  <img src="./assets/image/qRcodeIcon.png" (click)="sao()" alt="">
+  <img src="./assets/image/qRcodeIcon.png" *ngIf="fromData['from']=='shopcart'||fromData['from']=='detail'" (click)="sao()" alt="">
 </div>
 <div class="con">
   <div class="shopInfoBox">
@@ -29,7 +29,7 @@
         <img src="{{item.miniPhotoAddr}}" alt="">
       </div>
       <div class="productIndec">
-        <div class="name">{{item.name}}</div>
+        <div class="name">{{item.goodsName}}</div>
         <div class="classly">
           <div class="list">{{item.skuSpecName}}</div>
         </div>

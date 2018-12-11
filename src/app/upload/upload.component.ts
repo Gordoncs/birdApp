@@ -37,6 +37,15 @@ export class UploadComponent implements OnInit {
       this.memberCase.advisorId = params['advisorId']
     );
     this.creatArr();
+
+    if (window['FileReader']) {
+      alert('支持FileReader');
+      // var fr = new FileReader();
+      // add your code here
+    } else {
+      alert('Not supported by your browser!');
+    }
+
   }
   getImgUrl($event, index) {
     // alert(window.URL);
@@ -45,7 +54,7 @@ export class UploadComponent implements OnInit {
     // alert($event.srcElement['files'][0]);
     let yaImg ;
     const t = this;
-    this.alertBox.load();
+    // this.alertBox.load();
     t.photoCompress($event.srcElement['files'][0], {
       quality: 0.2
     }, function(base64Codes) {
@@ -213,9 +222,13 @@ export class UploadComponent implements OnInit {
     const ready = new FileReader();
     /*开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容.*/
     ready.readAsDataURL(file);
+    alert('文件进入onload之前');
     ready.onload = function() {
+      alert('文件读取成功完成时触发');
       const re = this.result;
+      alert('进入canvasDataURL');
       t.canvasDataURL(re, w, objDiv);
+      alert('结束canvasDataURL');
     };
   }
   canvasDataURL(path, obj, callback) {
