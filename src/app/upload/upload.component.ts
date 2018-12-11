@@ -221,15 +221,18 @@ export class UploadComponent implements OnInit {
     const  t = this;
     const ready = new FileReader();
     /*开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容.*/
-    ready.readAsDataURL(file);
-    alert('文件进入onload之前');
-    ready.onload = function() {
+    ready.onload = function(e) {
       alert('文件读取成功完成时触发');
-      const re = this.result;
+      const re = e.target.result;
       alert('进入canvasDataURL');
       t.canvasDataURL(re, w, objDiv);
       alert('结束canvasDataURL');
     };
+    ready.onerror = function (e) {
+      alert('error');
+      alert(e.target.error.code);
+    };
+    ready.readAsDataURL(file);
   }
   canvasDataURL(path, obj, callback) {
     const img = new Image();
