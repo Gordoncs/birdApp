@@ -183,7 +183,6 @@ export class IndexComponent implements OnInit, AfterContentInit {
   }
   scrollFn() {
     const mySwiper = new Swiper('.headSwiper .swiper-container', {
-      loop: true, // 循环模式选项
       autoplay: true,
       // 如果需要分页器
       pagination: {

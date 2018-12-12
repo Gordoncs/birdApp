@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import Cropper from 'cropperjs';
 import * as $ from 'jquery';
+import wx from 'weixin-js-sdk';
 import * as lrz from 'lrz/dist/lrz.all.bundle.js';
 import {Title} from '@angular/platform-browser';
 import {UserConfigService} from '../shared/user-config.service';
@@ -18,6 +19,7 @@ export class UploadComponent implements OnInit {
   indexNow = 0;
   previewDomNow: any;
   lookImgUrl = '';
+  yaImg: any;
   memberCase = {
     'advisorId': '',
     'memberAge': '',
@@ -38,33 +40,84 @@ export class UploadComponent implements OnInit {
     );
     this.creatArr();
 
-    if (window['FileReader']) {
-      alert('支持FileReader');
-      // var fr = new FileReader();
-      // add your code here
-    } else {
-      alert('Not supported by your browser!');
-    }
+    // if (window['FileReader']) {
+    //   alert('支持FileReader');
+    //   // var fr = new FileReader();
+    //   // add your code here
+    // } else {
+    //   alert('Not supported by your browser!');
+    // }
 
   }
   getImgUrl($event, index) {
+    const t = this;
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        wx.getLocalImgData({
+          localId: res.localIds[0], // 图片的localID
+          success: function (resdata) {
+            let base64 = resdata.localData;
+            if (base64.indexOf('data:image') !== 0) {
+              // 判断是否有这样的头部
+              base64 = 'data:image/jpeg;base64,' +  base64;
+            }
+            base64 = base64.replace(/\r|\n/g, '').replace('data:image/jgp', 'data:image/jpeg');
+            alert('图片base64是' + base64.substring(0, 30));
+            $('#ssdass').attr('src', base64);
+            t.indexNow = index;
+            t.isshow = true;
+            setTimeout(function () {
+              t.cropperArr[index].obj.replace(base64);
+            }, 1000);
+          }
+        });
+      }
+    });
+    return;
     // alert(window.URL);
     // alert(window['webkitURL']);
     // alert(window.URL.createObjectURL($event.srcElement['files'][0]));
     // alert($event.srcElement['files'][0]);
-    let yaImg ;
-    const t = this;
-    // this.alertBox.load();
-    t.photoCompress($event.srcElement['files'][0], {
-      quality: 0.2
-    }, function(base64Codes) {
-      alert('压缩成功');
-      yaImg = base64Codes;
+
+    t.yaImg = window.URL.createObjectURL($event.srcElement['files'][0]);
+    const ready = new FileReader();
+    ready.onload = function(e) {
+      console.log('进入onload');
+      console.log(e.target.result);
+      console.log('结束onload');
+      const re = t.transformArrayBufferToBase64(e.target.result);
+      console.log(re);
       t.indexNow = index;
       t.isshow = true;
-      t.cropperArr[index].obj.replace(yaImg) ;
-      t.alertBox.close();
-    });
+      t.cropperArr[index].obj.replace(re) ;
+    };
+    ready.onerror = function (e) {
+      console.warn('进入onerror');
+      console.warn(e.target.error);
+      console.warn('结束onerror');
+    };
+    // ready.readAsDataURL(file);
+    ready.readAsArrayBuffer($event.srcElement['files'][0]);
+    // alert($event.srcElement['files'][0].type);
+    return;
+    t.indexNow = index;
+    t.isshow = true;
+    t.cropperArr[index].obj.replace(t.yaImg) ;
+    t.cropperArr[index].type = $event.srcElement['files'][0].type;
+    // this.alertBox.load();
+    // t.photoCompress($event.srcElement['files'][0], {
+    //   quality: 0.2
+    // }, function(base64Codes) {
+    //   alert('压缩成功');
+    //   yaImg = base64Codes;
+    //   t.indexNow = index;
+    //   t.isshow = true;
+    //   t.cropperArr[index].obj.replace(yaImg) ;
+    //   t.alertBox.close();
+    // });
     // 压缩图片
     // lrz($event.srcElement['files'][0])
     //   .then(function (rst) {
@@ -97,22 +150,34 @@ export class UploadComponent implements OnInit {
   sureImg() {
     // 大图
     const casbig = this.cropperArr[this.indexNow].obj.getCroppedCanvas();
+    console.warn('casbig');
     const base64big = casbig.toDataURL('image/jpeg'); // 转换为base64
+    console.warn('base64big');
     const databig = encodeURIComponent(base64big);
+    console.warn('databig');
     // 缩略图
     const cassmall = this.cropperArr[this.indexNow].obj.getCroppedCanvas({width: 88, height: 150});
+    console.warn('cassmall');
     const base64small = cassmall.toDataURL('image/jpeg'); // 转换为base64
+    console.warn('base64small');
     const datasamll = encodeURIComponent(base64small);
+    console.warn('datasamll');
     // console.log(111, base64big);
     // console.log(222, base64small);
     this.cropperArr[this.indexNow].returnData.big = databig;
+    console.warn('big = databig');
     this.cropperArr[this.indexNow].returnData.small = datasamll;
+    console.warn('small = datasamll');
     this.cropperArr[this.indexNow].returnData.real = base64big;
+    console.warn('real = base64big');
     const objs = this.cropperArr[this.indexNow].obj;
+    console.warn('objs');
     objs.destroy();
+    console.warn('objs.destroy');
     $('#image' + this.indexNow).attr('src', '');
     $('#image' + this.indexNow).parent().find('.cropper-container').remove();
     this.isshow = false;
+    window.URL.revokeObjectURL(this.yaImg);
   }
   crearImg(imageDom, previewDom) {
     return new Cropper(imageDom, {
@@ -130,7 +195,7 @@ export class UploadComponent implements OnInit {
     for (let i = 0; i < 6; i++) {
       this.cropperArr.push(
         {obj: this.crearImg(document.getElementById('image' + i),
-          '.psbox' + i), returnData: {'big': '', 'small': '' , 'real': ''}}
+          '.psbox' + i), returnData: {'big': '', 'small': '' , 'real': ''}, type: ''}
       );
     }
   }
@@ -222,17 +287,24 @@ export class UploadComponent implements OnInit {
     const ready = new FileReader();
     /*开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容.*/
     ready.onload = function(e) {
-      alert('文件读取成功完成时触发');
+      console.log('进入onload');
+      console.log(e.target.result);
+      console.log('结束onload');
       const re = e.target.result;
-      alert('进入canvasDataURL');
       t.canvasDataURL(re, w, objDiv);
-      alert('结束canvasDataURL');
+    };
+    ready.onloadend = function(e) {
+      console.log('进入onloadend');
+      console.log(e.target.result);
+      console.log('结束onloadend');
     };
     ready.onerror = function (e) {
-      alert('error');
-      alert(e.target.error.code);
+      console.warn('进入onerror');
+      console.warn(e.target.error);
+      console.warn('结束onerror');
     };
-    ready.readAsDataURL(file);
+    // ready.readAsDataURL(file);
+    ready.readAsText(file);
   }
   canvasDataURL(path, obj, callback) {
     const img = new Image();
@@ -268,4 +340,14 @@ export class UploadComponent implements OnInit {
       callback(base64);
     };
   }
+
+  transformArrayBufferToBase64 (buffer) {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    for (let len = bytes.byteLength, i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return 'data:image/png;base64,' + window.btoa(binary);
+  }
+
 }
