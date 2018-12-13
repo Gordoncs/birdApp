@@ -39,15 +39,6 @@ export class UploadComponent implements OnInit {
       this.memberCase.advisorId = params['advisorId']
     );
     this.creatArr();
-
-    // if (window['FileReader']) {
-    //   alert('支持FileReader');
-    //   // var fr = new FileReader();
-    //   // add your code here
-    // } else {
-    //   alert('Not supported by your browser!');
-    // }
-
   }
   getImgUrl($event, index) {
     const t = this;
@@ -65,8 +56,6 @@ export class UploadComponent implements OnInit {
               base64 = 'data:image/jpeg;base64,' +  base64;
             }
             base64 = base64.replace(/\r|\n/g, '').replace('data:image/jgp', 'data:image/jpeg');
-            alert('图片base64是' + base64.substring(0, 30));
-            $('#ssdass').attr('src', base64);
             t.indexNow = index;
             t.isshow = true;
             setTimeout(function () {
@@ -77,8 +66,6 @@ export class UploadComponent implements OnInit {
       }
     });
     return;
-    // alert(window.URL);
-    // alert(window['webkitURL']);
     // alert(window.URL.createObjectURL($event.srcElement['files'][0]));
     // alert($event.srcElement['files'][0]);
 
@@ -88,7 +75,7 @@ export class UploadComponent implements OnInit {
       console.log('进入onload');
       console.log(e.target.result);
       console.log('结束onload');
-      const re = t.transformArrayBufferToBase64(e.target.result);
+      const re = e.target.result;
       console.log(re);
       t.indexNow = index;
       t.isshow = true;
@@ -100,7 +87,7 @@ export class UploadComponent implements OnInit {
       console.warn('结束onerror');
     };
     // ready.readAsDataURL(file);
-    ready.readAsArrayBuffer($event.srcElement['files'][0]);
+    ready.readAsDataURL($event.srcElement['files'][0]);
     // alert($event.srcElement['files'][0].type);
     return;
     t.indexNow = index;
@@ -150,34 +137,23 @@ export class UploadComponent implements OnInit {
   sureImg() {
     // 大图
     const casbig = this.cropperArr[this.indexNow].obj.getCroppedCanvas();
-    console.warn('casbig');
     const base64big = casbig.toDataURL('image/jpeg'); // 转换为base64
-    console.warn('base64big');
     const databig = encodeURIComponent(base64big);
-    console.warn('databig');
     // 缩略图
     const cassmall = this.cropperArr[this.indexNow].obj.getCroppedCanvas({width: 88, height: 150});
-    console.warn('cassmall');
     const base64small = cassmall.toDataURL('image/jpeg'); // 转换为base64
-    console.warn('base64small');
     const datasamll = encodeURIComponent(base64small);
-    console.warn('datasamll');
     // console.log(111, base64big);
     // console.log(222, base64small);
     this.cropperArr[this.indexNow].returnData.big = databig;
-    console.warn('big = databig');
     this.cropperArr[this.indexNow].returnData.small = datasamll;
-    console.warn('small = datasamll');
     this.cropperArr[this.indexNow].returnData.real = base64big;
-    console.warn('real = base64big');
     const objs = this.cropperArr[this.indexNow].obj;
-    console.warn('objs');
     objs.destroy();
-    console.warn('objs.destroy');
     $('#image' + this.indexNow).attr('src', '');
     $('#image' + this.indexNow).parent().find('.cropper-container').remove();
     this.isshow = false;
-    window.URL.revokeObjectURL(this.yaImg);
+    // window.URL.revokeObjectURL(this.yaImg);
   }
   crearImg(imageDom, previewDom) {
     return new Cropper(imageDom, {
@@ -195,7 +171,7 @@ export class UploadComponent implements OnInit {
     for (let i = 0; i < 6; i++) {
       this.cropperArr.push(
         {obj: this.crearImg(document.getElementById('image' + i),
-          '.psbox' + i), returnData: {'big': '', 'small': '' , 'real': ''}, type: ''}
+          '.psbox' + i), returnData: {'big': '', 'small': '' , 'real': ''}}
       );
     }
   }
@@ -259,22 +235,9 @@ export class UploadComponent implements OnInit {
         }
       });
   }
-
-  dataURLtoFile(dataurl, filename) {// 将base64转换为文件
-    const arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]);
-    let n = bstr.length;
-    const  u8arr = new Uint8Array(n);
-    while ( n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, {type: mime});
-  }
-
   choseType(type) {
     this.memberCase.serviceType = type;
   }
-
   /**
        三个参数
        file：一个是文件(类型是图片格式)，
@@ -340,14 +303,4 @@ export class UploadComponent implements OnInit {
       callback(base64);
     };
   }
-
-  transformArrayBufferToBase64 (buffer) {
-    let binary = '';
-    const bytes = new Uint8Array(buffer);
-    for (let len = bytes.byteLength, i = 0; i < len; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    return 'data:image/png;base64,' + window.btoa(binary);
-  }
-
 }

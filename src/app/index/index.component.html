@@ -11,9 +11,9 @@
     <img class="headBg" src="./assets/image/headBg.png" alt="">
     <div class="headSwiper">
       <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div *ngFor="let item of carouselarr" class="swiper-slide"  >
-            <img  (click)="carouselGoto(item)" src="{{item.imgs}}" alt="">
+        <div class="swiper-wrapper" >
+          <div  *ngFor="let item of carouselarr" class="swiper-slide"  >
+            <img   class="headswImglist" data-id="{{item['type']}}" src="{{item.imgs}}" alt="">
           </div>
         </div>
         <!-- 如果需要分页器 -->

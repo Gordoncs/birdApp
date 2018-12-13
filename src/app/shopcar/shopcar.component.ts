@@ -43,6 +43,7 @@ export class ShopcarComponent implements OnInit {
           for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
             this.cartListInfo.cartDetail[i].ischeck = true;
           }
+          this.cartListInfo.cartDetail = this.cartListInfo.cartDetail.reverse();
           this.getAllMoney();
           this.choseNum();
         } else {
@@ -60,6 +61,7 @@ export class ShopcarComponent implements OnInit {
   }
   choseList(item) {
     item.ischeck = !item.ischeck;
+    this.choseAllStatus = false;
     this.getAllMoney();
     this.choseNum();
   }
@@ -141,6 +143,9 @@ export class ShopcarComponent implements OnInit {
     });
   }
   goPaysure() {
+    if (this.allNum === 0) {
+      return;
+    }
     const skuIdArr = [];
     for (let i = 0; i < this.cartListInfo.cartDetail.length; i++) {
       if (this.cartListInfo.cartDetail[i].ischeck === true) {

@@ -1,4 +1,4 @@
-import {AfterContentInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
@@ -19,7 +19,7 @@ export class PaystausComponent implements OnInit, AfterContentInit {
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService, private TongXin: TongxinService,
-              private changeDetectorRef: ChangeDetectorRef) { }
+              private changeDetectorRef: ChangeDetectorRef, private zone: NgZone) { }
   ngOnInit() {
     /***
      * 设置title
@@ -74,13 +74,22 @@ export class PaystausComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              localStorage.setItem('isBecomeOrder', 'ss');
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              });
             } else {
-              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
+              localStorage.setItem('isBecomeOrder', 'ss');
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+              });
             }
           },
           cancel: function(res) {
-            t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            localStorage.setItem('isBecomeOrder', 'ss');
+            t.zone.run(() => {
+              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            });
           }
         });
       } else {
@@ -105,16 +114,25 @@ export class PaystausComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['paystatus', {'res': true, 'order': JSON.stringify(order),
-                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+              localStorage.setItem('isBecomeOrder', 'ss');
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': true, 'order': JSON.stringify(order),
+                  'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+              });
             } else {
-              t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
-                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+              localStorage.setItem('isBecomeOrder', 'ss');
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
+                  'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+              });
             }
           },
           cancel: function(res) {
-            t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
-              'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+            localStorage.setItem('isBecomeOrder', 'ss');
+            t.zone.run(() => {
+              t.router.navigate(['paystatus', {'res': false, 'order': JSON.stringify(order),
+                'discounts': JSON.stringify(discounts), 'from': 'justpay'}]);
+            });
           }
         });
       } else {
@@ -159,6 +177,7 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     this.router.navigate(['orderdetail', {id: this.fromData.orderNo}]);
   }
   goback() {
+    localStorage.setItem('isBecomeOrder', 'ss');
     this.router.navigate(['index']);
   }
 }

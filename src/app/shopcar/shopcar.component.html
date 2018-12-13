@@ -39,7 +39,7 @@
 
     </div>
   </div>
-  <p class="nogoodsTips" *ngIf="cartListInfo.cartDetail.length==0">购物车是空的~</p>
+  <p class="nogoodsTips" *ngIf="cartListInfo.cartDetail.length==0">亲，购物车还是空的哦~</p>
 </div>
 
 <div class="priceBar">
@@ -51,7 +51,7 @@
   </div>
   <div class="price" *ngIf="!canEdit">￥ {{allMoney | number:'2.2-2'}}</div>
   <div class="payBtn" (click)="delGoods()" *ngIf="canEdit">删除 （{{allNum}}）</div>
-  <div class="payBtn" *ngIf="!canEdit" (click)="goPaysure()" >去结算（{{allNum}}）</div>
+  <div class="payBtn" *ngIf="!canEdit" [class.hui]="allNum==0" (click)="goPaysure()" >去结算（{{allNum}}）</div>
 </div>
 
 <app-alertbox></app-alertbox>

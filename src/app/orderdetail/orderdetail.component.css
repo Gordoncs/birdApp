@@ -15,9 +15,9 @@
 .headsBox{
   position: absolute;
   left: 50%;
-  margin-left: -3.45rem;
+  margin-left: -47.5%;
   top: 0;
-  width: 6.9rem;
+  width: 95%;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -52,11 +52,12 @@
   margin-bottom: 2.4rem;
 }
 .orderBaseInfo{
-  width: 6.9rem;
+  width: 95%;
   border-bottom: 2px solid #e5e5e5;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  padding-bottom: 0.1rem;
 }
 .orderBaseInfo .list{
   width: 100%;
@@ -68,7 +69,6 @@
   width: 1.2rem;
   color: #737373;
   font-size: 0.22rem;
-  text-align: right;
 }
 .orderBaseInfo .list .s2{
   width: 5.7rem;
@@ -76,7 +76,7 @@
   font-size: 0.22rem;
 }
 .titles{
-  width: 6.9rem;
+  width: 95%;
   display: flex;
   flex-direction: row;
   color: #f27442;
@@ -86,9 +86,8 @@
 
 
 .shopCartBox{
-  width: 6.9rem;
+  width: 95%;
   background: #FFF;
-  border-radius: 0.1rem;
   display: flex;
   flex-direction: column;
   padding-bottom: 0.2rem;
@@ -138,7 +137,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin-left: -1rem;
+  margin-left: 35%;
 }
 .shopCartBox  .productIndec .name{
   width: 100%;
@@ -229,14 +228,13 @@
 
 
 .shopInfoBox{
-  width: 100%;
+  width: 95%;
   height: 1.62rem;
   display: flex;
   flex-direction: row;
   position: relative;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 0.1rem solid #eeeeee;
 }
 .shopInfoCon{
   height: 1.62rem;
@@ -248,7 +246,6 @@
 .shopInfoCon .text{
   color: #737373;
   font-size: 0.22rem;
-  margin-left: 0.28rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -266,7 +263,6 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  margin-right: 0.25rem;
 }
 .fz25{
   font-size: 0.25rem !important;
@@ -280,9 +276,8 @@
   height: 0.27rem;
 }
 .textBox{
-  width: 6.9rem;
+  width: 95%;
   height: 0.6rem;
-  border-top: 1px solid #e5e5e5;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -316,12 +311,12 @@
   background: #FFF;
   position: fixed;
   left: 0;
-  bottom: 1.2rem;
+  bottom: 1.3rem;
   z-index: 9;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
+  border-top: 0.1rem solid #eee;
 }
 .priceBar .price{
   width: 73%;
@@ -357,12 +352,13 @@
 
 .qrBigBox{
   width: 100%;
-  height: 2.8rem;
+  height: 3rem;
   display: flex;
   flex-direction: column;
   position: relative;
   align-items: center;
   justify-content: center;
+  border-top: 0.1rem solid #eeeeee;
   border-bottom: 0.1rem solid #eeeeee;
 }
 .qrBg{
@@ -408,11 +404,11 @@
   position: absolute;
   width: 100%;
   text-align: center;
-  bottom: 0rem;
+  bottom: 0.1rem;
   left: 0;
 }
 .tabBox{
-  width: 6.9rem;
+  width: 95%;
   height: 0.8rem;
   display: flex;
   flex-direction: row;
@@ -463,7 +459,7 @@
   font-size: 0.2rem;
 }
 .memoBox{
-  width: 6.9rem;
+  width: 95%;
   height: 1.48rem;
   border-radius: 0.1rem;
   border: 1px solid #e5e5e5;

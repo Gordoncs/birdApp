@@ -97,7 +97,7 @@
               <img src="./assets/image/littleUploadIcon.png" alt="">
             </div>
             <span>点击上传</span>
-            <input type="file"  class="uploadInput"  (change)="getImgUrl($event, i)">
+            <div  class="uploadInput upppinput{{i}}" (click)="getImgUrl($event, i)"></div>
             <img class="photoList" (click)="showLook(item)" *ngIf="item.returnData.real!=''" [src]="item.returnData.real" alt="">
           </div>
           <span>服务后照片</span>
@@ -113,7 +113,7 @@
               <img src="./assets/image/littleUploadIcon.png" alt="">
             </div>
             <span>点击上传</span>
-            <input type="file"  class="uploadInput"  (change)="getImgUrl($event, i)">
+            <div  class="uploadInput upppinput{{i}}" (click)="getImgUrl($event, i)"></div>
             <img class="photoList" (click)="showLook(item)" *ngIf="item.returnData.real!=''" [src]="item.returnData.real" alt="">
           </div>
           <span>服务前照片</span>
@@ -127,7 +127,7 @@
               <img src="./assets/image/littleUploadIcon.png" alt="">
             </div>
             <span>点击上传</span>
-            <input type="file"  class="uploadInput"  (change)="getImgUrl($event, i)">
+            <div  class="uploadInput upppinput{{i}}" (click)="getImgUrl($event, i)"></div>
             <img class="photoList" (click)="showLook(item)" *ngIf="item.returnData.real!=''" [src]="item.returnData.real" alt="">
           </div>
           <span>服务后照片</span>
@@ -143,7 +143,7 @@
               <img src="./assets/image/littleUploadIcon.png" alt="">
             </div>
             <span>点击上传</span>
-            <input type="file"  class="uploadInput"  (change)="getImgUrl($event, i)">
+            <div  class="uploadInput upppinput{{i}}" (click)="getImgUrl($event, i)"></div>
             <img class="photoList" (click)="showLook(item)" *ngIf="item.returnData.real!=''" [src]="item.returnData.real" alt="">
           </div>
           <span>服务前照片</span>
@@ -157,7 +157,7 @@
               <img src="./assets/image/littleUploadIcon.png" alt="">
             </div>
             <span>点击上传</span>
-            <input type="file"  class="uploadInput"  (change)="getImgUrl($event, i)">
+            <div  class="uploadInput upppinput{{i}}" (click)="getImgUrl($event, i)"></div>
             <img class="photoList" (click)="showLook(item)" *ngIf="item.returnData.real!=''" [src]="item.returnData.real" alt="">
           </div>
           <span>服务后照片</span>
@@ -181,7 +181,6 @@
     <!--<span class="t1">案例视频上传</span>-->
     <!--<span class="t2">支持25MB以内，MP4格式</span>-->
   <!--</div>-->
-  <img style="width: 7.5rem;display: block;" src="" id="ssdass" alt="">
   <div class="titles">
     效果描述：
   </div>

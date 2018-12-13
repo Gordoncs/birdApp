@@ -36,6 +36,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
     // this.getInfo(39.91474, 116.37333);
     // this.getInfo(31.5785354265, 117.3339843750);
     this.getbaseMember();
+    this.carouselGoto();
   }
   ngAfterContentInit() {
     const t = this;
@@ -144,6 +145,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
           }
           setTimeout(function () {
             that.scrollFn();
+            that.carouselGoto();
           }, 100);
         } else {
           that.alertBox.error(data['message']);
@@ -183,6 +185,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
   }
   scrollFn() {
     const mySwiper = new Swiper('.headSwiper .swiper-container', {
+      loop: true,
       autoplay: true,
       // 如果需要分页器
       pagination: {
@@ -224,16 +227,21 @@ export class IndexComponent implements OnInit, AfterContentInit {
       }
     };
   }
-  carouselGoto(item) {
-    if (item.type === '1') {
-      this.router.navigate(['/goodsdetail', {'goodsId': item.id}]);
-    }
-    if (item.type === '2') {
-      this.router.navigate(['/specialgoods']);
-    }
-    if (item.type === '3') {
-      this.router.navigate(['/newergif', {'goodsId': 5}]);
-    }
+  carouselGoto() {
+    const t = this;
+    $(window).on('.headswImglist', 'click', function(){
+      const id = $(this).attr('data-id');
+      alert(id);
+      if (id === '1') {
+        t.router.navigate(['/goodsdetail', {'goodsId': id}]);
+      }
+      if (id === '2') {
+        t.router.navigate(['/specialgoods']);
+      }
+      if (id === '3') {
+        t.router.navigate(['/newergif', {'goodsId': 5}]);
+      }
+    });
   }
   /***
    * 获取用户信息
