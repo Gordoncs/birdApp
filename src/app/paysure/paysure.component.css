@@ -116,6 +116,7 @@
   border: 1px solid #e7cd94;
   font-size: 0.28rem;
   text-indent: 0.1rem;
+  outline: none;
 }
 
 .mainBox{
@@ -189,13 +190,14 @@
   width: 95%;
   height: 1.48rem;
   border-radius: 0.1rem;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #e7cd94;
   color: #737373;
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
   resize: none;
   font-size: 0.20rem;
   padding: 0.1rem;
+  outline: none;
 }
 .priceBar{
   width: 100%;
