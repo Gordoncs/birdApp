@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import Cropper from 'cropperjs';
 import * as $ from 'jquery';
 import wx from 'weixin-js-sdk';
@@ -31,7 +31,8 @@ export class UploadComponent implements OnInit {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
+              private userConfigService: UserConfigService, private TongXin: TongxinService,
+              private changeDetectorRef: ChangeDetectorRef) { }
   ngOnInit() {
     window.URL = window.URL || window['webkitURL'];
     this.titleService.setTitle('案例上传');
@@ -60,7 +61,11 @@ export class UploadComponent implements OnInit {
             t.isshow = true;
             setTimeout(function () {
               t.cropperArr[index].obj.replace(base64);
+              t.changeDetectorRef.markForCheck();
+              t.changeDetectorRef.detectChanges();
             }, 1000);
+            t.changeDetectorRef.markForCheck();
+            t.changeDetectorRef.detectChanges();
           }
         });
       }

@@ -76,19 +76,19 @@ export class PaystausComponent implements OnInit, AfterContentInit {
             if (res.errMsg === 'chooseWXPay:ok' ) {
               localStorage.setItem('isBecomeOrder', 'ss');
               t.zone.run(() => {
-                t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+                t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
               });
             } else {
               localStorage.setItem('isBecomeOrder', 'ss');
               t.zone.run(() => {
-                t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+                t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
               });
             }
           },
           cancel: function(res) {
             localStorage.setItem('isBecomeOrder', 'ss');
             t.zone.run(() => {
-              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
             });
           }
         });

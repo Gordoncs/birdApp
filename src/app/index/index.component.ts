@@ -36,7 +36,6 @@ export class IndexComponent implements OnInit, AfterContentInit {
     // this.getInfo(39.91474, 116.37333);
     // this.getInfo(31.5785354265, 117.3339843750);
     this.getbaseMember();
-    this.carouselGoto();
   }
   ngAfterContentInit() {
     const t = this;
@@ -145,7 +144,6 @@ export class IndexComponent implements OnInit, AfterContentInit {
           }
           setTimeout(function () {
             that.scrollFn();
-            that.carouselGoto();
           }, 100);
         } else {
           that.alertBox.error(data['message']);
@@ -184,6 +182,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
     this.router.navigate(['/goodsdetail', {'goodsId': id}]);
   }
   scrollFn() {
+    const  t = this;
     const mySwiper = new Swiper('.headSwiper .swiper-container', {
       loop: true,
       autoplay: true,
@@ -193,6 +192,19 @@ export class IndexComponent implements OnInit, AfterContentInit {
         bulletClass: 'bullets',
         bulletActiveClass: 'my-bullet-active',
       },
+      on: {
+        click: function () {
+          // 这里有坑
+          // 需要注意的是：this 指向的是 swpier 实例，而不是当前的 vue， 因此借助 vm，来调用 methods 里的方法
+          // console.log(this); // -> Swiper
+          // 当前活动块的索引，与activeIndex不同的是，在loop模式下不会将 复制的块 的数量计算在内。
+          const realIndex = this.realIndex;
+          if (realIndex === 0) {
+            t.carouselGoto('2');
+          }
+        }
+      },
+      preventLinksPropagation: false   // 阻止点击事件冒泡
     });
     const sideScrollBox = new Swiper('.sideScrollBox .swiper-container', {
       slidesPerView: 'auto',
@@ -227,21 +239,17 @@ export class IndexComponent implements OnInit, AfterContentInit {
       }
     };
   }
-  carouselGoto() {
+  carouselGoto(id) {
     const t = this;
-    $(window).on('.headswImglist', 'click', function(){
-      const id = $(this).attr('data-id');
-      alert(id);
-      if (id === '1') {
-        t.router.navigate(['/goodsdetail', {'goodsId': id}]);
-      }
-      if (id === '2') {
-        t.router.navigate(['/specialgoods']);
-      }
-      if (id === '3') {
-        t.router.navigate(['/newergif', {'goodsId': 5}]);
-      }
-    });
+    if (id === '1') {
+      t.router.navigate(['/goodsdetail', {'goodsId': id}]);
+    }
+    if (id === '2') {
+      t.router.navigate(['/specialgoods']);
+    }
+    if (id === '3') {
+      t.router.navigate(['/newergif', {'goodsId': 5}]);
+    }
   }
   /***
    * 获取用户信息
