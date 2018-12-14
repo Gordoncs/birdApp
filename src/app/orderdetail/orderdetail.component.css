@@ -64,6 +64,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  margin-top: 0.05rem;
 }
 .orderBaseInfo .list .s1{
   width: 1.2rem;
@@ -137,7 +138,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin-left: 35%;
+  margin-left: -32%;
 }
 .shopCartBox  .productIndec .name{
   width: 100%;
@@ -286,7 +287,7 @@
   font-size: 0.22rem;
 }
 .textBox .cheapBox{
-  width: 5.7rem;
+  width: 83%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -469,4 +470,15 @@
   resize: none;
   font-size: 0.20rem;
   padding: 0.1rem;
+}
+
+
+.bgwhite{
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background: #FFF;
 }

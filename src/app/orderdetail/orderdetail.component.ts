@@ -94,6 +94,33 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
         this.alertBox.close();
         if (data['result']) {
           this.detailInfo = data['data'];
+          // 现金支付 给detail填充
+          if (this.detailInfo.orderType === 9) {
+            const obj = {
+              amountPrice: null,
+              checkoffNumber: null,
+              count: 1,
+              delBoolean: false,
+              goodsId: null,
+              goodsName: '金额支付',
+              goodsNumber: 1,
+              id: null,
+              insertTime: null,
+              miniPhotoAddr: './assets/image/delIcon.png',
+              orderId: null,
+              price: this.detailInfo.orderAmountPayable,
+              skuId: null,
+              skuName: null,
+              skuSpecId: null,
+              skuSpecName: null,
+              skuStyleId: null,
+              skuStyleName: null,
+              transactionPrice: null,
+              type: null,
+              updateTime: null
+            };
+            this.detailInfo.detail.push(obj);
+          }
           this.daohangUrl = 'https://apis.map.qq.com/uri/v1/marker?marker=coord:'
              + this.detailInfo.store.latitude + ',' + this.detailInfo.store.longitude + ';title:'
              + this.detailInfo.store.name + ';addr:' + this.detailInfo.store.addr + '&referer=春鸟科技';

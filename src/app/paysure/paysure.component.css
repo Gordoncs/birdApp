@@ -168,7 +168,7 @@
   font-size: 0.22rem;
 }
 .textBox .cheapBox{
-  width: 5.7rem;
+  width: 83%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
