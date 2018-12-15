@@ -211,6 +211,9 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     subscribe(data => {
       t.alertBox.close();
       if (data['result']) {
+        if (data['data'] === null) {
+          t.alertBox.error('该优惠劵已失效');
+        }
         t.discounts.id = data['data']['id'];
         t.discounts.authCode = data['data']['authCode'];
         t.discounts.advisorName = data['data']['advisorName'];
@@ -226,6 +229,8 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     this.discounts.id = '';
     this.discounts.authCode = '';
     this.order.discountPriceAmout = null;
+    this.changeDetectorRef.markForCheck();
+    this.changeDetectorRef.detectChanges();
   }
   changeURL() {
     window.history.pushState(null, null, '/g/');

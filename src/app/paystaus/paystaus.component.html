@@ -20,7 +20,7 @@
   <div *ngIf="status=='true'" class="baseBox">
     <div class="left">
       <div class="iconBox">
-        <img src="./assets/image/qrEx.png" alt="">
+        <img [src]="detailInfo.consumeVerificationQRcode" alt="">
       </div>
     </div>
     <div class="right">

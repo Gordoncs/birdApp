@@ -14,6 +14,7 @@ export class PaystausComponent implements OnInit, AfterContentInit {
   public status = 'false';
   public fromData: any = {};
   public userInfo: any = {};
+  public detailInfo: any ;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -27,15 +28,13 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     this.titleService.setTitle('支付结果');
     this.routerInfo.params.subscribe((params) => this.fromData = params);
     this.status = this.fromData.res;
-    console.log(this.fromData);
+    if ( this.status === 'true' ) {
+      this.orderGetOrderInfo(this.fromData.orderNo);
+    }
     this.getMemberIndexInfo();
     localStorage.setItem('isBecomeOrder', '');
     this.TongXin.cartNum(1);
-    // this.router.events.subscribe(event => {
-    //   if (event instanceof NavigationStart) {
-    //     console.log(event);
-    //   }
-    // });
+
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
   }
@@ -179,5 +178,17 @@ export class PaystausComponent implements OnInit, AfterContentInit {
   goback() {
     localStorage.setItem('isBecomeOrder', 'ss');
     this.router.navigate(['index']);
+  }
+
+  orderGetOrderInfo(orderId) {
+    this.userConfigService.orderGetOrderInfo(orderId)
+      .subscribe((data) => {
+        if (data['result']) {
+          this.detailInfo = data['data'];
+          this.detailInfo.consumeVerificationQRcode = 'data:image/jpeg;base64,' + this.detailInfo.consumeVerificationQRcode;
+        } else {
+          this.alertBox.error(data['message']);
+        }
+      });
   }
 }

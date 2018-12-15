@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, ViewChild, AfterContentInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild, AfterContentInit, ChangeDetectorRef} from '@angular/core';
 import Swiper from 'node_modules/swiper/dist/js/swiper.min.js';
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
@@ -24,7 +24,8 @@ export class IndexComponent implements OnInit, AfterContentInit {
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
-  constructor(private router: Router, private titleService: Title, private userConfigService: UserConfigService) {
+  constructor(private router: Router, private titleService: Title, private userConfigService: UserConfigService,
+              private changeDetectorRef: ChangeDetectorRef) {
   }
   ngOnInit() {
     /***
@@ -267,6 +268,9 @@ export class IndexComponent implements OnInit, AfterContentInit {
       });
   }
   showLook(img, selimg) {
+    this.lookImgUrl =  [];
+    this.changeDetectorRef.markForCheck();
+    this.changeDetectorRef.detectChanges();
     const imgsarr = [];
     for (let i = 0 ; i < img.length ; i++) {
       if (img[i].before !== '') {
@@ -295,6 +299,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
           prevEl: '.swiper-button-prev',
         },
       });
+      swiperss.slideTo(index, 50, false);
     }, 1000);
   }
 }
