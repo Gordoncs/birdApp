@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -31,7 +31,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
   alertBox: AlertboxComponent;
 
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService) {
+              private userConfigService: UserConfigService, private zone: NgZone) {
   }
 
   ngOnInit() {
@@ -41,13 +41,14 @@ export class MyorderComponent implements OnInit, AfterContentInit {
     this.titleService.setTitle('我的订单');
     this.routerInfo.params.subscribe((params) => this.showWhitchStatus = params['type']);
     this.showWitch(this.showWhitchStatus * 1);
-    $(window).scroll(function () {console.log(1); });
+    $(window).unbind ('touchend');
   }
 
   ngAfterContentInit() {
     const t = this;
-    $(window).scroll(function () {
-      if ($(window).scrollTop() + $(window).height() - $(document).height() > -20) {
+    $(window).on('touchend', function(e) {
+      if ($(window).scrollTop() + $(window).height() - $(document).height() >= -50 ) {
+        $('.loadBox').show();
         if (t.showWhitchStatus === 1) {
           t.startLimt1 = t.startLimt1 + 8;
           t.orderGetMemberOrderList('', t.startLimt1, 8, 'scroll');
@@ -68,6 +69,8 @@ export class MyorderComponent implements OnInit, AfterContentInit {
           t.startLimt5 = t.startLimt5 + 8;
           t.orderGetMemberOrderList(9, t.startLimt5, 8, 'scroll');
         }
+      } else {
+        $('.loadBox').hide();
       }
     });
     $('.bigBox').css('min-height', $(window).height() + 'px');
@@ -95,9 +98,10 @@ export class MyorderComponent implements OnInit, AfterContentInit {
 
   orderGetMemberOrderList(orderStatus, startLimit, pageNumber, form) {
     const memberId = localStorage.getItem('memberId');
-    this.alertBox.load();
+    // this.alertBox.load();
     this.userConfigService.orderGetMemberOrderList(memberId, orderStatus, startLimit, pageNumber).subscribe(data => {
       this.alertBox.close();
+      $('.loadBox').hide();
       if (data['result']) {
         // 现金支付 给detail填充
         for (let i = 0; i < data['data']['list'].length; i++) {
@@ -212,13 +216,19 @@ export class MyorderComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok') {
-              t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              });
             } else {
-              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+              });
             }
           },
           cancel: function (res) {
-            t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            t.zone.run(() => {
+              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            });
           }
         });
       } else {

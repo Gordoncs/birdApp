@@ -165,19 +165,27 @@ export class PaystausComponent implements OnInit, AfterContentInit {
   }
   go398() {
     localStorage.setItem('isBecomeOrder', 'ss');
-    this.router.navigate(['newerdec', {'nums': this.userInfo.presentRemnant}]);
+    this.zone.run(() => {
+      this.router.navigate(['newerdec', {'nums': this.userInfo.presentRemnant}]);
+    });
   }
   gogift() {
     localStorage.setItem('isBecomeOrder', 'ss');
-    this.router.navigate(['newergif', {'goodsId': 5}]);
+    this.zone.run(() => {
+      this.router.navigate(['newergif', {'goodsId': 5}]);
+    });
   }
   godetail() {
     localStorage.setItem('isBecomeOrder', 'ss');
-    this.router.navigate(['orderdetail', {id: this.fromData.orderNo}]);
+    this.zone.run(() => {
+      this.router.navigate(['orderdetail', {id: this.fromData.orderNo}]);
+    });
   }
   goback() {
     localStorage.setItem('isBecomeOrder', 'ss');
-    this.router.navigate(['index']);
+    this.zone.run(() => {
+      this.router.navigate(['index']);
+    });
   }
 
   orderGetOrderInfo(orderId) {

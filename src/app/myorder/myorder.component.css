@@ -31,7 +31,6 @@
   display: flex;
   flex-direction: column;
   margin-top: 0.9rem;
-  padding-bottom: 0.5rem;
 }
 .boxShowlist{
   width: 100%;
@@ -252,4 +251,19 @@
   align-items: center;
   margin-right: 0.2rem;
   border-radius: 0.1rem;
+}
+.loadBox{
+  width: 100%;
+  height: 1.5rem;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.loadBox img{
+  width: 0.32rem;
+  height: 0.32rem;
+  margin-right: 0.1rem;
+  display: block;
 }

@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -30,7 +30,8 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService, private TongXin: TongxinService) { }
+              private userConfigService: UserConfigService, private TongXin: TongxinService,
+              private zone: NgZone) { }
 
   ngOnInit() {
     /***
@@ -175,13 +176,19 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              });
             } else {
-              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+              });
             }
           },
           cancel: function(res) {
-            t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            t.zone.run(() => {
+              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            });
           }
         });
       } else {
