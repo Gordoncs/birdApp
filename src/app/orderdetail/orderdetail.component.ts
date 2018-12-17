@@ -43,6 +43,7 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
     this.routerInfo.params.subscribe((params) => this.orderId = params['id']);
     this.orderGetOrderInfo(this.orderId);
     this.getMemberIndexInfo();
+    $(window).on('touchmove', function(e) {console.log(2); });
   }
   ngAfterContentInit() {
     const t = this;

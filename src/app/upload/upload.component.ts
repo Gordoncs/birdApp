@@ -43,6 +43,10 @@ export class UploadComponent implements OnInit {
   }
   getImgUrl($event, index) {
     const t = this;
+    // t.indexNow = index;
+    // t.isshow = true;
+    // t.cropperArr[index].obj.replace('http://scm.3songshu.com/admin/webpage/img/state/warning.gif?v=201803300');
+    // return;
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
@@ -163,6 +167,7 @@ export class UploadComponent implements OnInit {
   crearImg(imageDom, previewDom) {
     return new Cropper(imageDom, {
       aspectRatio: 88 / 150,
+      autoCropArea: 1,
       movable: true,
       zoomable: true,
       viewMode: 2,
