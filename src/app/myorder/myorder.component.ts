@@ -47,7 +47,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
   ngAfterContentInit() {
     const t = this;
     $(window).scroll(function () {
-      if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+      if ($(window).scrollTop() + $(window).height() - $(document).height() > -20) {
         if (t.showWhitchStatus === 1) {
           t.startLimt1 = t.startLimt1 + 8;
           t.orderGetMemberOrderList('', t.startLimt1, 8, 'scroll');
