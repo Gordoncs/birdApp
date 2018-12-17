@@ -93,7 +93,7 @@
   <img src="./assets/image/kefu.png" alt="">
 </div>
 
-<div class="lookBox" [class.hide]="lookImgUrl.length == 0" >
+<div class="lookBox" *ngIf="lookImgUrl.length > 0" >
   <div class="middleBox" >
     <div class="swiper-container">
       <div class="swiper-wrapper" >

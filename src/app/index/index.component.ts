@@ -299,7 +299,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
           prevEl: '.swiper-button-prev',
         },
       });
-      swiperss.slideTo(index, 50, false);
+      // swiperss.slideTo(index, 50, false);
     }, 1000);
   }
 }
