@@ -31,6 +31,7 @@ import { NewerdecComponent } from './newerdec/newerdec.component';
 import { NewercomeComponent } from './newercome/newercome.component';
 import { LuckdrawComponent } from './luckdraw/luckdraw.component';
 import { AboutpromiseComponent } from './aboutpromise/aboutpromise.component';
+import { QiangpageComponent } from './qiangpage/qiangpage.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AboutpromiseComponent } from './aboutpromise/aboutpromise.component';
     NewerdecComponent,
     NewercomeComponent,
     LuckdrawComponent,
-    AboutpromiseComponent
+    AboutpromiseComponent,
+    QiangpageComponent
   ],
   imports: [
     BrowserModule,
