@@ -11,7 +11,6 @@ import {TongxinService} from '../shared/tongxin.service';
   styleUrls: ['./qiangpage.component.css']
 })
 export class QiangpageComponent implements OnInit {
-  public showTips = false;
   public goodsId: any = '';
   public tiyanInfo: any = {
     id: 1
@@ -41,7 +40,7 @@ export class QiangpageComponent implements OnInit {
       'skuStyleId': this.tiyanInfo['sku'][0]['skuStyleId'] || 0,
       'goodsType': this.tiyanInfo['goodsInfo'].type,
     };
-    this.router.navigate(['/paysure', {'from': 'zero', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 1}]);
+    this.router.navigate(['/paysure', {'from': 'qianggou', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 1}]);
   }
   /**
    * 获取详情页数据

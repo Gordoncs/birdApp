@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
       if (this.url.indexOf('goodsdetail') > -1 || this.url.indexOf('paysure') > -1 || this.url.indexOf('upload') > -1 ||
         this.url.indexOf('hexiao') > -1 || this.url.indexOf('myorder') > -1 || this.url.indexOf('justpay') > -1
         || this.url.indexOf('specialgoods') > -1 || this.url.indexOf('newergif') > -1 || this.url.indexOf('newerdec') > -1
-        || this.url.indexOf('newercome') > -1 || this.url.indexOf('sharedpage') > -1 || this.url.indexOf('luckdraw') > -1) {
+        || this.url.indexOf('newercome') > -1 || this.url.indexOf('sharedpage') > -1 || this.url.indexOf('luckdraw') > -1
+        || this.url.indexOf('qiangpage') > -1) {
         this.canShowNav = false;
       } else {
         this.canShowNav = true;

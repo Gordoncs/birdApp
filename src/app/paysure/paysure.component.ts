@@ -59,6 +59,8 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     } else if ( this.fromData['from'] === 'zero') {
       this.order.discountPriceAmout = 398;
       this.checkoutOutrightPurchase();
+    } else if ( this.fromData['from'] === 'qianggou') {
+      this.checkoutOutrightPurchase();
     }
   }
   ngAfterContentInit() {

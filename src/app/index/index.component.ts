@@ -141,6 +141,9 @@ export class IndexComponent implements OnInit, AfterContentInit {
                 if (localStorage.getItem('fromPage')  === 'newerdec') {
                   this.router.navigate(['newercome']);
                 }
+                if (localStorage.getItem('fromPage')  === 'qianggou') {
+                  this.router.navigate(['qianggou']);
+                }
               }
             }
           }
