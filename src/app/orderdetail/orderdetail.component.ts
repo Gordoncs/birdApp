@@ -108,7 +108,7 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
               goodsNumber: 1,
               id: null,
               insertTime: null,
-              miniPhotoAddr: './assets/image/delIcon.png',
+              miniPhotoAddr: './assets/image/cashImg.jpg',
               orderId: null,
               price: this.detailInfo.orderAmountPayable,
               skuId: null,

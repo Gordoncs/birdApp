@@ -30,6 +30,9 @@
         <div class="tips">您获得{{item.influenceNumber}}次活动机会</div>
       </div>
     </div>
+    <div class="loadBox loadBox1" style="display: none">
+      <img  src='./assets/image/loading.gif' /> 努力加载中...
+    </div>
   </div>
   <div *ngIf="showWitch==2" class="luckBox">
     <div class="luckHead">
@@ -39,6 +42,9 @@
     <div class="luckList" *ngFor="let item of luckList">
       <div class="wordShow">{{item.insertTime | date:'yyyy-MM-dd'}}</div>
       <div class="wordShow yellowColor">{{item.money}}</div>
+    </div>
+    <div class="loadBox loadBox2" style="display: none">
+      <img  src='./assets/image/loading.gif' /> 努力加载中...
     </div>
   </div>
 </div>

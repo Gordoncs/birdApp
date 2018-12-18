@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserConfigService} from '../shared/user-config.service';
 import * as $ from 'jquery';
 import wx from 'weixin-js-sdk';
+import set = Reflect.set;
 
 @Component({
   selector: 'app-myorder',
@@ -41,13 +42,13 @@ export class MyorderComponent implements OnInit, AfterContentInit {
     this.titleService.setTitle('我的订单');
     this.routerInfo.params.subscribe((params) => this.showWhitchStatus = params['type']);
     this.showWitch(this.showWhitchStatus * 1);
-    $(window).unbind ('touchend');
+    $(window).unbind('touchend');
   }
 
   ngAfterContentInit() {
     const t = this;
-    $(window).on('touchend', function(e) {
-      if ($(window).scrollTop() + $(window).height() - $(document).height() >= -50 ) {
+    $(window).on('touchend', function (e) {
+      if ($(window).scrollTop() + $(window).height() - $(document).height() >= -100) {
         $('.loadBox').show();
         if (t.showWhitchStatus === 1) {
           t.startLimt1 = t.startLimt1 + 8;
@@ -70,7 +71,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
           t.orderGetMemberOrderList(9, t.startLimt5, 8, 'scroll');
         }
       } else {
-        $('.loadBox').hide();
+        $('.loadBox').fadeOut(300);
       }
     });
     $('.bigBox').css('min-height', $(window).height() + 'px');
@@ -99,89 +100,93 @@ export class MyorderComponent implements OnInit, AfterContentInit {
   orderGetMemberOrderList(orderStatus, startLimit, pageNumber, form) {
     const memberId = localStorage.getItem('memberId');
     // this.alertBox.load();
-    this.userConfigService.orderGetMemberOrderList(memberId, orderStatus, startLimit, pageNumber).subscribe(data => {
-      this.alertBox.close();
-      $('.loadBox').hide();
-      if (data['result']) {
-        // 现金支付 给detail填充
-        for (let i = 0; i < data['data']['list'].length; i++) {
-          const item = data['data']['list'][i];
-          if (item.orderType === 9) {
-            const obj = {
-              amountPrice: null,
-              checkoffNumber: null,
-              count: 1,
-              delBoolean: false,
-              goodsId: null,
-              goodsName: '金额支付',
-              goodsNumber: 1,
-              id: null,
-              insertTime: null,
-              miniPhotoAddr: './assets/image/delIcon.png',
-              orderId: null,
-              price: item.orderAmountPayable,
-              skuId: null,
-              skuName: null,
-              skuSpecId: null,
-              skuSpecName: null,
-              skuStyleId: null,
-              skuStyleName: null,
-              transactionPrice: null,
-              type: null,
-              updateTime: null
-            };
-            item.detail.push(obj);
-          }
-        }
-        if (this.showWhitchStatus === 1) {
-          if (form === 'click') {
-            this.showWhitchStatusArr1 = data['data']['list'];
-          } else {
+    const t = this;
+    this.userConfigService.orderGetMemberOrderList(memberId, orderStatus, startLimit, pageNumber)
+      .subscribe(data => {
+        this.alertBox.close();
+        $('.loadBox').fadeOut(500);
+        setTimeout(function () {
+          if (data['result']) {
+            // 现金支付 给detail填充
             for (let i = 0; i < data['data']['list'].length; i++) {
-              this.showWhitchStatusArr1.push(data['data']['list'][i]);
+              const item = data['data']['list'][i];
+              if (item.orderType === 9) {
+                const obj = {
+                  amountPrice: null,
+                  checkoffNumber: null,
+                  count: 1,
+                  delBoolean: false,
+                  goodsId: null,
+                  goodsName: '金额支付',
+                  goodsNumber: 1,
+                  id: null,
+                  insertTime: null,
+                  miniPhotoAddr: './assets/image/cashImg.jpg',
+                  orderId: null,
+                  price: item.orderAmountPayable,
+                  skuId: null,
+                  skuName: null,
+                  skuSpecId: null,
+                  skuSpecName: null,
+                  skuStyleId: null,
+                  skuStyleName: null,
+                  transactionPrice: null,
+                  type: null,
+                  updateTime: null
+                };
+                item.detail.push(obj);
+              }
             }
-          }
-        }
-        if (this.showWhitchStatus === 2) {
-          if (form === 'click') {
-            this.showWhitchStatusArr2 = data['data']['list'];
+            if (t.showWhitchStatus === 1) {
+              if (form === 'click') {
+                t.showWhitchStatusArr1 = data['data']['list'];
+              } else {
+                for (let i = 0; i < data['data']['list'].length; i++) {
+                  t.showWhitchStatusArr1.push(data['data']['list'][i]);
+                }
+              }
+            }
+            if (t.showWhitchStatus === 2) {
+              if (form === 'click') {
+                t.showWhitchStatusArr2 = data['data']['list'];
+              } else {
+                for (let i = 0; i < data['data']['list'].length; i++) {
+                  t.showWhitchStatusArr2.push(data['data']['list'][i]);
+                }
+              }
+            }
+            if (t.showWhitchStatus === 3) {
+              if (form === 'click') {
+                t.showWhitchStatusArr3 = data['data']['list'];
+              } else {
+                for (let i = 0; i < data['data']['list'].length; i++) {
+                  t.showWhitchStatusArr3.push(data['data']['list'][i]);
+                }
+              }
+            }
+            if (t.showWhitchStatus === 4) {
+              if (form === 'click') {
+                t.showWhitchStatusArr4 = data['data']['list'];
+              } else {
+                for (let i = 0; i < data['data']['list'].length; i++) {
+                  t.showWhitchStatusArr4.push(data['data']['list'][i]);
+                }
+              }
+            }
+            if (t.showWhitchStatus === 5) {
+              if (form === 'click') {
+                t.showWhitchStatusArr5 = data['data']['list'];
+              } else {
+                for (let i = 0; i < data['data']['list'].length; i++) {
+                  t.showWhitchStatusArr5.push(data['data']['list'][i]);
+                }
+              }
+            }
           } else {
-            for (let i = 0; i < data['data']['list'].length; i++) {
-              this.showWhitchStatusArr2.push(data['data']['list'][i]);
-            }
+            t.alertBox.error(data['message']);
           }
-        }
-        if (this.showWhitchStatus === 3) {
-          if (form === 'click') {
-            this.showWhitchStatusArr3 = data['data']['list'];
-          } else {
-            for (let i = 0; i < data['data']['list'].length; i++) {
-              this.showWhitchStatusArr3.push(data['data']['list'][i]);
-            }
-          }
-        }
-        if (this.showWhitchStatus === 4) {
-          if (form === 'click') {
-            this.showWhitchStatusArr4 = data['data']['list'];
-          } else {
-            for (let i = 0; i < data['data']['list'].length; i++) {
-              this.showWhitchStatusArr4.push(data['data']['list'][i]);
-            }
-          }
-        }
-        if (this.showWhitchStatus === 5) {
-          if (form === 'click') {
-            this.showWhitchStatusArr5 = data['data']['list'];
-          } else {
-            for (let i = 0; i < data['data']['list'].length; i++) {
-              this.showWhitchStatusArr5.push(data['data']['list'][i]);
-            }
-          }
-        }
-      } else {
-        this.alertBox.error(data['message']);
-      }
-    });
+        }, 550);
+      });
   }
 
   cancelOrder(item, index, arr) {

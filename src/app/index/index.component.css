@@ -320,6 +320,13 @@
   height: 10rem;
   position: relative;
 }
+.lookBox .middleBoxBlack{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 999;
+  background: #000;
+}
 .sureBtn{
   width: 0.7rem;
   height: 0.7rem;

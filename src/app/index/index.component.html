@@ -94,7 +94,8 @@
 </div>
 
 <div class="lookBox" *ngIf="lookImgUrl.length > 0" >
-  <div class="middleBox" >
+  <div class="middleBoxBlack" *ngIf="lookImgUrlStatus"></div>
+  <div class="middleBox">
     <div class="swiper-container">
       <div class="swiper-wrapper" >
         <div class="swiper-slide" *ngFor="let imgs of lookImgUrl">

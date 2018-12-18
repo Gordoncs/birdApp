@@ -81,7 +81,16 @@
     <img src="./assets/image/tipdeng.png" alt="">
     <span>提醒：请再次确认本次服务项目</span>
   </div>
-  <div class="saveBtn" (click)="save()">完成本次服务</div>
+  <div class="saveBtn" (click)="sureBoxStatus=true">完成本次服务</div>
+</div>
+<div *ngIf="sureBoxStatus" class='blackBg'></div>
+<div *ngIf="sureBoxStatus" class='luckErroBox'>
+  <img class="luckdawCloseBtn" (click)="sureBoxStatus=false" src="./assets/image/luckdawCloseBtn.png" alt="">
+  <div class="suerBoxCon">
+    <img src="./assets/image/tipdeng.png" alt="">
+    <span>提醒：请再次确认本次服务项目</span>
+  </div>
+  <div class="sureBtn"  (click)="save()">确认完成</div>
 </div>
 
 <app-alertbox></app-alertbox>

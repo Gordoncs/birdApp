@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {AlertboxComponent} from '../alertbox/alertbox.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
@@ -20,7 +20,7 @@ export class EffectluckComponent implements OnInit, AfterContentInit {
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService) { }
+              private userConfigService: UserConfigService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     /***
@@ -31,16 +31,19 @@ export class EffectluckComponent implements OnInit, AfterContentInit {
     this.choseit(this.userInfo.showtype);
     this.getMemberInfluenceList(0, 8);
     this.getMemberActivityRecordList(0, 12);
+    $(window).unbind('touchend');
   }
   ngAfterContentInit() {
     const t = this;
-    $(window).scroll(function() {
-      if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+    $(window).on('touchend', function (e) {
+      if ($(window).scrollTop() + $(window).height() - $(document).height() >= -100) {
         if (t.showWitch === 1) {
+          $('.loadBox1').show();
           t.influenceStart = t.influenceStart + 8;
           t.getMemberInfluenceList(t.influenceStart, 8);
         }
         if (t.showWitch === 2) {
+          $('.loadBox2').show();
           t.activityStart = t.activityStart + 12;
           t.getMemberActivityRecordList(t.activityStart, 12);
         }
@@ -48,7 +51,9 @@ export class EffectluckComponent implements OnInit, AfterContentInit {
     });
   }
   choseit(index) {
-    this.showWitch = index;
+    this.showWitch = index * 1;
+    this.changeDetectorRef.markForCheck();
+    this.changeDetectorRef.detectChanges();
   }
 
   /***
@@ -56,10 +61,11 @@ export class EffectluckComponent implements OnInit, AfterContentInit {
    */
   getMemberInfluenceList(startLimit, pageNumber) {
     const memberId = localStorage.getItem('memberId');
-    this.alertBox.load();
+    // this.alertBox.load();
     this.userConfigService.getMemberInfluenceList(memberId, startLimit, pageNumber).
     subscribe(data => {
       this.alertBox.close();
+      $('.loadBox1').fadeOut(500);
       if (data['result']) {
         for (let i = 0; i < data['data']['list'].length ; i++) {
           this.effectList.push(data['data']['list'][i]);
@@ -74,10 +80,11 @@ export class EffectluckComponent implements OnInit, AfterContentInit {
    */
   getMemberActivityRecordList(startLimit, pageNumber) {
     const memberId = localStorage.getItem('memberId');
-    this.alertBox.load();
+    // this.alertBox.load();
     this.userConfigService.getMemberActivityRecordList(memberId, startLimit, pageNumber).
     subscribe(data => {
       this.alertBox.close();
+      $('.loadBox2').fadeOut(500);
       if (data['result']) {
         for (let i = 0; i < data['data']['list'].length ; i++) {
           this.luckList.push(data['data']['list'][i]);

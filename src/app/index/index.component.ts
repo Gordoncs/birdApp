@@ -21,6 +21,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
   public personIntroduce: any = [];
   public lookImgUrl: any = [];
   public showGotopBtn = false;
+  public lookImgUrlStatus = false;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -268,7 +269,9 @@ export class IndexComponent implements OnInit, AfterContentInit {
       });
   }
   showLook(img, selimg) {
+    const t = this;
     this.lookImgUrl =  [];
+    this.lookImgUrlStatus = true;
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
     const imgsarr = [];
@@ -300,6 +303,9 @@ export class IndexComponent implements OnInit, AfterContentInit {
         },
       });
       // swiperss.slideTo(index, 50, false);
-    }, 1000);
+    }, 500);
+    setTimeout(function () {
+      t.lookImgUrlStatus = false;
+    }, 700);
   }
 }

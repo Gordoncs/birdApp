@@ -13,6 +13,7 @@ export class HexiaoComponent implements OnInit {
   code: any = '';
   advisorId: any = '';
   hexiaoInfo: any = {};
+  sureBoxStatus = false;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -32,6 +33,7 @@ export class HexiaoComponent implements OnInit {
   }
 
   advisorGetOrderCheckoffDetail(id , code) {
+    const t = this;
     this.alertBox.load();
     this.userConfigService.advisorGetOrderCheckoffDetail(id, code).
     subscribe(data => {
@@ -43,6 +45,9 @@ export class HexiaoComponent implements OnInit {
         }
       } else {
         this.alertBox.error(data['message']);
+        setTimeout(function () {
+          t.router.navigate(['teacher']);
+        }, 3000);
       }
     });
   }
@@ -60,6 +65,7 @@ export class HexiaoComponent implements OnInit {
     }
     const orderId = this.hexiaoInfo.id;
     const advisorId = this.advisorId;
+    this.sureBoxStatus = false;
     this.alertBox.load();
     this.userConfigService.advisorCheckoffOrderDetail(detailId, orderId, advisorId).
     subscribe(data => {
@@ -68,7 +74,7 @@ export class HexiaoComponent implements OnInit {
         this.alertBox.success('核销成功');
         setTimeout(function () {
           t.router.navigate(['teacher']);
-        }, 2000);
+        }, 5000);
       } else {
         this.alertBox.error(data['message']);
       }

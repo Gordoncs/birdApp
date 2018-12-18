@@ -12,9 +12,9 @@
 .headsBox{
   position: absolute;
   left: 50%;
-  margin-left: -3.45rem;
+  margin-left: -47.5%;
   top: 0;
-  width: 6.9rem;
+  width: 95%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -32,18 +32,19 @@
   align-items: center;
 }
 .orderBaseInfo{
-  width: 6.9rem;
-  height: 1.64rem;
+  width: 95%;
   border-bottom: 2px solid #e5e5e5;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  padding-bottom: 0.1rem;
 }
 .orderBaseInfo .list{
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 0.05rem;
 }
 .orderBaseInfo .list .s1{
   color: #737373;
@@ -54,7 +55,7 @@
   font-size: 0.22rem;
 }
 .titles{
-  width: 6.9rem;
+  width: 95%;
   display: flex;
   flex-direction: row;
   color: #f27442;
@@ -64,9 +65,8 @@
 
 
 .shopCartBox{
-  width: 6.9rem;
+  width: 95%;
   background: #FFF;
-  border-radius: 0.1rem;
   display: flex;
   flex-direction: column;
   padding-bottom: 0.2rem;
@@ -116,7 +116,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin-left: -0.6rem;
+  margin-left: -27%;
 }
 .shopCartBox  .productIndec .name{
   width: 100%;
@@ -175,6 +175,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  text-align: right;
 }
 .hide{
   display: none !important;
@@ -235,4 +236,76 @@
   color: #FFF;
   font-size: 0.3rem;
   border-radius: 0.1rem;
+}
+.blackBg{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0;
+  bottom: 0;
+  z-index: 990;
+  background: #000;
+  opacity: 0.3;
+}
+
+.luckErroBox{
+  width: 5.76rem;
+  height: 4.13rem;
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  margin-left: -2.88rem;
+  top: 50%;
+  margin-top: -2.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  background: #FFF;
+  border-radius: 0.1rem;
+}
+.luckErroBox .bg{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.luckErroBox .sureBtn{
+  font-size: 0.28rem;
+  color: #FFF;
+  width: 3.8rem;
+  height: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  margin-left: -1.9rem;
+  bottom: 0.2rem;
+  background: #f9c47c;
+  border-radius: 0.3rem;
+}
+.luckdawCloseBtn{
+  width: 0.89rem;
+  height: 0.88rem;
+  position: absolute;
+  top: -0.35rem;
+  right: -0.3rem;
+}
+.suerBoxCon{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.suerBoxCon img{
+  width: 0.37rem;
+  height: 0.37rem;
+}
+.suerBoxCon span{
+  color: #b9b9b9;
+  font-size: 0.24rem;
+  margin-left: 0.1rem;
 }
