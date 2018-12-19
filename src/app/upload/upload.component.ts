@@ -49,7 +49,7 @@ export class UploadComponent implements OnInit {
     // return;
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         wx.getLocalImgData({
@@ -146,11 +146,11 @@ export class UploadComponent implements OnInit {
   sureImg() {
     // 大图
     const casbig = this.cropperArr[this.indexNow].obj.getCroppedCanvas();
-    const base64big = casbig.toDataURL('image/jpeg'); // 转换为base64
+    const base64big = casbig.toDataURL('image/jpeg', 0.7); // 转换为base64
     const databig = encodeURIComponent(base64big);
     // 缩略图
     const cassmall = this.cropperArr[this.indexNow].obj.getCroppedCanvas({width: 88, height: 150});
-    const base64small = cassmall.toDataURL('image/jpeg'); // 转换为base64
+    const base64small = cassmall.toDataURL('image/jpeg', 0.7); // 转换为base64
     const datasamll = encodeURIComponent(base64small);
     // console.log(111, base64big);
     // console.log(222, base64small);

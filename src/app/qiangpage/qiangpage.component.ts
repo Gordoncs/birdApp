@@ -23,8 +23,8 @@ export class QiangpageComponent implements OnInit {
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
-    this.titleService.setTitle('免费领取');
-    this.getGoodsInfo(5, JSON.parse(localStorage.getItem('storeInfo'))['id']);
+    this.titleService.setTitle('立即抢购');
+    this.getGoodsInfo(6, JSON.parse(localStorage.getItem('storeInfo'))['id']);
     localStorage.setItem('canshu', '');
     localStorage.setItem('fromPage', '');
     // const  t = this;
@@ -40,7 +40,7 @@ export class QiangpageComponent implements OnInit {
       'skuStyleId': this.tiyanInfo['sku'][0]['skuStyleId'] || 0,
       'goodsType': this.tiyanInfo['goodsInfo'].type,
     };
-    this.router.navigate(['/paysure', {'from': 'qianggou', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 1}]);
+    this.router.navigate(['/paysure', {'from': 'qianggou', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 2}]);
   }
   /**
    * 获取详情页数据
