@@ -64,7 +64,7 @@ export class AddresComponent implements OnInit {
   ngOnInit() {
     const t = this;
     this.searchService = new qq.maps.SearchService({
-      pageCapacity: 10,
+      pageCapacity: 30,
       pageIndex: 1,
       complete: function(results) {
         console.log(results);
