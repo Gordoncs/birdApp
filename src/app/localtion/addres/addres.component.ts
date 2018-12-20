@@ -96,13 +96,11 @@ export class AddresComponent implements OnInit {
             // 请求成功回调函数
             citylocation.setComplete(function(result) {
               t.city = result.detail.name;
-              let allno = false;
+              let text = '';
               for (let i = 0 ; i < t.AreaArr.length ; i++) {
-                if (t.city !== t.AreaArr[i].fullname) {
-                  allno = true;
-                }
+                text = text + t.AreaArr[i].fullname;
               }
-              if (allno) {
+              if (text.indexOf(t.city) < 0) {
                 t.AreaArr.push({
                   'fullname': t.city,
                   'latitude': result.detail.latLng.lat,
@@ -213,6 +211,7 @@ export class AddresComponent implements OnInit {
           this.changeDetectorRef.markForCheck();
           this.changeDetectorRef.detectChanges();
         } else {
+          this.allInit(latitude, longitude);
           console.log(data['message']);
         }
       });
