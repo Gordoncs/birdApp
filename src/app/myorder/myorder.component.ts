@@ -80,6 +80,11 @@ export class MyorderComponent implements OnInit, AfterContentInit {
 
   showWitch(index) {
     this.showWhitchStatus = index;
+    this.startLimt1 = 0;
+    this.startLimt2 = 0;
+    this.startLimt3 = 0;
+    this.startLimt4 = 0;
+    this.startLimt5 = 0;
     if (index === 1) {
       this.orderGetMemberOrderList('', 0, 8, 'click');
     }

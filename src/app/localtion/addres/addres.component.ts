@@ -96,15 +96,21 @@ export class AddresComponent implements OnInit {
             // 请求成功回调函数
             citylocation.setComplete(function(result) {
               t.city = result.detail.name;
+              let allno = false;
               for (let i = 0 ; i < t.AreaArr.length ; i++) {
                 if (t.city !== t.AreaArr[i].fullname) {
-                  t.AreaArr.push({
-                    'fullname': t.city,
-                    'latitude': result.detail.latLng.lat,
-                    'longitude': result.detail.latLng.lng
-                  });
+                  allno = true;
                 }
               }
+              if (allno) {
+                t.AreaArr.push({
+                  'fullname': t.city,
+                  'latitude': result.detail.latLng.lat,
+                  'longitude': result.detail.latLng.lng
+                });
+              }
+              t.changeDetectorRef.markForCheck();
+              t.changeDetectorRef.detectChanges();
             });
             citylocation.searchLocalCity();
             t.getNextStoreInfo(t.locallat, t.locallong);
