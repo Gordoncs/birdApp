@@ -64,8 +64,8 @@ export class AddresComponent implements OnInit {
   ngOnInit() {
     const t = this;
     this.searchService = new qq.maps.SearchService({
-      pageCapacity: 30,
-      pageIndex: 1,
+      pageCapacity: 10,
+      pageIndex: 0,
       complete: function(results) {
         console.log(results);
         t.searchResults = results.detail.pois;
