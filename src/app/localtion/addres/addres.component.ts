@@ -37,9 +37,11 @@ export class AddresComponent implements OnInit {
   public isOpen = true;
   public isfocus = false;
   public searchText = '';
+  public city: any = '北京市';
   public searchService: any;
   public searchResults = [];
   public shopArr: any = [];
+  public AreaArr: any = [];
   public statusInfo: any = {
     'status': 'have'
   } ;
@@ -62,7 +64,7 @@ export class AddresComponent implements OnInit {
   ngOnInit() {
     const t = this;
     this.searchService = new qq.maps.SearchService({
-      pageCapacity: 5,
+      pageCapacity: 10,
       pageIndex: 1,
       complete: function(results) {
         console.log(results);
@@ -79,7 +81,8 @@ export class AddresComponent implements OnInit {
       }
     });
     this.routerInfo.params.subscribe((params) => this.statusInfo = params);
-    // this.userConfigService.wxConfigFn();
+    t.getUseAddrArea();
+    this.userConfigService.wxConfigFn();
     wx.ready(function() {
       wx.getLocation({
         success: function (res) {
@@ -87,24 +90,39 @@ export class AddresComponent implements OnInit {
           t.locallong = res.longitude;
           if (t.statusInfo.status === 'nohave') {
             // 外省访问
-            t.getNextStoreInfo(39.908, 116.3974);
+            t.cityChangeFn('北京市');
           } else {
-            // 北京本地访问
+            const citylocation = new qq.maps.CityService();
+            // 请求成功回调函数
+            citylocation.setComplete(function(result) {
+              t.city = result.detail.name;
+              for (let i = 0 ; i < t.AreaArr.length ; i++) {
+                if (t.city !== t.AreaArr[i].fullname) {
+                  t.AreaArr.push({
+                    'fullname': t.city,
+                    'latitude': result.detail.latLng.lat,
+                    'longitude': result.detail.latLng.lng
+                  });
+                }
+              }
+            });
+            citylocation.searchLocalCity();
             t.getNextStoreInfo(t.locallat, t.locallong);
           }
         }
       });
     });
-    //
-    t.locallat = '39.908';
-    t.locallong = '116.3974';
-    if (t.statusInfo.status === 'nohave') {
-      // 外省访问
-      t.getNextStoreInfo(39.908 , 116.3974);
-    } else {
-      // 北京本地访问
-      t.getNextStoreInfo(t.locallat, t.locallong);
-    }
+    // t.locallat = '39.908';
+    // t.locallong = '116.3974';
+    // if (t.statusInfo.status === 'nohave') {
+    //   // 外省访问
+    //   t.getNextStoreInfo(39.908 , 116.3974);
+    // } else {
+    //   // 北京本地访问
+    //   t.getNextStoreInfo(t.locallat, t.locallong);
+    // }
+    // t.getNextStoreInfo(39.908 , 116.3974);
+
   }
   toggle() {
     this.isOpen = !this.isOpen;
@@ -164,9 +182,12 @@ export class AddresComponent implements OnInit {
     const t = this;
     if (this.searchText !== '') {
       setTimeout(function() {
-        const region = new qq.maps.LatLng(39.916527, 116.397128);
+        // const region = new qq.maps.LatLng(39.916527, 116.397128);
+        const region = new qq.maps.LatLng(t.locallat, t.locallong);
         t.searchService.searchNearBy(t.searchText, region , 100000);
-      }, 500);
+      }, 300);
+    } else {
+      t.searchResults = [];
     }
   }
   choseAddress(item) {
@@ -225,5 +246,30 @@ export class AddresComponent implements OnInit {
   }
   changeURL() {
     window.history.pushState(null, null, '/g/');
+  }
+  getUseAddrArea() {
+    this.userConfigService.getUseAddrArea()
+      .subscribe((data) => {
+        if (data['result']) {
+          this.AreaArr = data['data'];
+          this.changeDetectorRef.markForCheck();
+          this.changeDetectorRef.detectChanges();
+        } else {
+          console.log(data['message']);
+        }
+      });
+  }
+  cityChangeFn(cityname) {
+    const t = this;
+    t.city = cityname;
+    for (let i = 0 ; i < this.AreaArr.length ; i++) {
+      if (cityname === this.AreaArr[i].fullname) {
+        t.locallat = this.AreaArr[i].latitude;
+        t.locallong = this.AreaArr[i].longitude;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
+        t.getNextStoreInfo(t.locallat, t.locallong);
+      }
+    }
   }
 }

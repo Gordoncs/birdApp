@@ -474,6 +474,17 @@ export class UserConfigService {
       );
   }
   /**
+   * 获取城市信息
+   */
+  getUseAddrArea(): Observable<any> {
+    return this.http.get(this.configUrl + '/getUseAddrArea', this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
    * 微信签名
    */
   wxConfigFn() {

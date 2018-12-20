@@ -4,8 +4,14 @@
 </div>
 <div class="serachBox" [class.bgWhite]="isfocus">
   <div class="editInput" [class.noShadow]="isfocus">
+    <div class="selectBox">
+      <select class="selects" [(ngModel)]="city" (ngModelChange)="cityChangeFn(city)">
+        <option *ngFor="let item of AreaArr" value="{{item.fullname}}">{{item.fullname}}</option>
+      </select>
+      <img src="./assets/image/down.png" alt="">
+    </div>
     <img src="./assets/image/searchIcon.png" alt="">
-    <input [class.bgHui]="isfocus" type="text" [(ngModel)]="searchText" (focus)="focusFn()" (keyup)="searchAddress()" placeholder="请输入文字">
+    <input [class.bgHui]="isfocus" type="text" [(ngModel)]="searchText" (focus)="focusFn()" (ngModelChange)="searchAddress()" placeholder="请输入文字">
     <div class="sureBtn" *ngIf="!isfocus" (click)="sureFn()">确认</div>
     <div class="sureBtn" *ngIf="isfocus" [class.bgnone]="isfocus" (click)="isfocus=false">返回</div>
   </div>
