@@ -103,9 +103,9 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
       });
   }
   selIt(item, arr, type) {
-    if (this.fromGoods.skuSpecId) {
-      return false;
-    }
+    // if (this.fromGoods.skuSpecId) {
+    //   return false;
+    // }
     for (let i = 0; i < arr.length; i++) {
       arr[i].ischecked = false;
     }

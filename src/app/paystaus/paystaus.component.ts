@@ -73,22 +73,25 @@ export class PaystausComponent implements OnInit, AfterContentInit {
           paySign: data.paySignMap.paySign, // 支付签名
           success: function (res) {
             if (res.errMsg === 'chooseWXPay:ok' ) {
-              localStorage.setItem('isBecomeOrder', 'ss');
-              t.zone.run(() => {
-                t.router.navigate(['/paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
-              });
+              t.fromData  = {'res': 'true', 'orderNo': orderId, 'from': 'paysure'};
+              t.status = t.fromData.res;
+              window.history.pushState('', '', 'paystatus;res=true;orderNo=' + orderId + ';from=paysure');
+              t.changeDetectorRef.markForCheck();
+              t.changeDetectorRef.detectChanges();
             } else {
-              localStorage.setItem('isBecomeOrder', 'ss');
-              t.zone.run(() => {
-                t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
-              });
+              t.fromData  = {'res': 'false', 'orderNo': orderId, 'from': 'paysure'};
+              t.status = t.fromData.res;
+              window.history.pushState('', '', 'paystatus;res=false;orderNo=' + orderId + ';from=paysure');
+              t.changeDetectorRef.markForCheck();
+              t.changeDetectorRef.detectChanges();
             }
           },
           cancel: function(res) {
-            localStorage.setItem('isBecomeOrder', 'ss');
-            t.zone.run(() => {
-              t.router.navigate(['/paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
-            });
+            t.fromData  = {'res': 'false', 'orderNo': orderId, 'from': 'paysure'};
+            t.status = t.fromData.res;
+            window.history.pushState('', '', 'paystatus;res=false;orderNo=' + orderId + ';from=paysure');
+            t.changeDetectorRef.markForCheck();
+            t.changeDetectorRef.detectChanges();
           }
         });
       } else {

@@ -61,7 +61,17 @@ export class ShopcarComponent implements OnInit {
   }
   choseList(item) {
     item.ischeck = !item.ischeck;
-    this.choseAllStatus = false;
+    let allselstatus = 0;
+    for ( let i = 0 ; i < this.cartListInfo.cartDetail.length; i++) {
+      if (this.cartListInfo.cartDetail[i].ischeck === false) {
+        allselstatus = 1;
+      }
+    }
+    if (allselstatus === 1) {
+      this.choseAllStatus = false;
+    } else {
+      this.choseAllStatus = true;
+    }
     this.getAllMoney();
     this.choseNum();
   }

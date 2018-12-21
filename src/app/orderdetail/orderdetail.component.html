@@ -54,7 +54,7 @@
       </a>
     </div>
   </div>
-
+  <div style="width: 100%;height: 0.1rem;background: #eeee;"></div>
   <!--待使用显示-->
   <div class="qrBigBox" *ngIf="detailInfo.orderStatus==1">
     <img  class="qrBg" src="./assets/image/qrBg.png" alt="">
@@ -70,7 +70,7 @@
     <div class="tablist" [class.tablistSel]="iscomplete==false" (click)="iscomplete=false">待服务 ({{allServers-useServers}})</div>
     <div class="tablist" [class.tablistSel]="iscomplete==true" (click)="iscomplete=true">已完成 ({{useServers}})</div>
   </div>
-  <div class="titles" >
+  <div class="titles">
     服务项目：
   </div>
   <div class="shopCartBox" *ngIf="detailInfo.orderStatus!=1">

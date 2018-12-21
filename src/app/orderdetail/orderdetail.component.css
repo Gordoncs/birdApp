@@ -237,7 +237,6 @@
   position: relative;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 0.1rem solid #eeeeee;
 }
 .shopInfoCon{
   height: 1.62rem;
@@ -361,7 +360,6 @@
   position: relative;
   align-items: center;
   justify-content: center;
-  border-top: 0.1rem solid #eeeeee;
   border-bottom: 0.1rem solid #eeeeee;
 }
 .qrBg{
