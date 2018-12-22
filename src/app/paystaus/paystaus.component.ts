@@ -75,6 +75,7 @@ export class PaystausComponent implements OnInit, AfterContentInit {
             if (res.errMsg === 'chooseWXPay:ok' ) {
               t.fromData  = {'res': 'true', 'orderNo': orderId, 'from': 'paysure'};
               t.status = t.fromData.res;
+              t.orderGetOrderInfo(t.fromData.orderNo);
               window.history.pushState('', '', 'paystatus;res=true;orderNo=' + orderId + ';from=paysure');
               t.changeDetectorRef.markForCheck();
               t.changeDetectorRef.detectChanges();
@@ -197,6 +198,8 @@ export class PaystausComponent implements OnInit, AfterContentInit {
         if (data['result']) {
           this.detailInfo = data['data'];
           this.detailInfo.consumeVerificationQRcode = 'data:image/jpeg;base64,' + this.detailInfo.consumeVerificationQRcode;
+          this.changeDetectorRef.markForCheck();
+          this.changeDetectorRef.detectChanges();
         } else {
           this.alertBox.error(data['message']);
         }
