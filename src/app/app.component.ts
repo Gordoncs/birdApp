@@ -36,15 +36,11 @@ export class AppComponent implements OnInit {
         this.canShowNav = true;
       }
       if ((this.url.indexOf('sharedpage') < 0)) {
-        this.userConfigService.wxBaseShare();
+        console.log(this.url);
+        const canshu = this.url.replace('/', '');
+        console.log(canshu);
+        this.userConfigService.wxBaseShare(canshu);
       }
-      // // 不是列表页取消上拉获取数据接口
-      // if (this.url.indexOf('myorder') < 0) {
-      //   $(window).scroll(function () {});
-      // }
-      // if (this.url.indexOf('orderdetail') < 0) {
-      //   $(window).on('touchmove', function(e) {});
-      // }
     });
     /***
      * 获取购物车数字

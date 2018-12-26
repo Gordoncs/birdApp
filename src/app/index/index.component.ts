@@ -144,6 +144,8 @@ export class IndexComponent implements OnInit, AfterContentInit {
                 if (localStorage.getItem('fromPage')  === 'qiangpage') {
                   this.router.navigate(['qiangpage']);
                 }
+                const canshu = localStorage.getItem('fromPage');
+                this.goWhere(canshu);
               }
             }
           }
@@ -157,6 +159,23 @@ export class IndexComponent implements OnInit, AfterContentInit {
           }, 1000);
         }
       });
+  }
+  // 根据参数进行跳转
+  goWhere(canshu) {
+    localStorage.setItem('canshu', '');
+    localStorage.setItem('fromPage', '');
+    const savedata = {};
+    const canshuarr = canshu.split(';');
+    const page = canshuarr[0];
+    for ( let i = 1 ; i < canshuarr.length ; i++) {
+      const temp = canshuarr[i].split('=');
+      if (temp.length < 2) {
+        savedata[temp[0]] = '';
+      } else {
+        savedata[temp[0]] = temp[1];
+      }
+    }
+    this.router.navigate([page, savedata]);
   }
   // 获取店铺信息
   getStoreInfo() {
