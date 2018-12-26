@@ -36,9 +36,9 @@ export class AppComponent implements OnInit {
         this.canShowNav = true;
       }
       if ((this.url.indexOf('sharedpage') < 0)) {
-        console.log(this.url);
+        // console.log(this.url);
         const canshu = this.url.replace('/', '');
-        console.log(canshu);
+        // console.log(canshu);
         this.userConfigService.wxBaseShare(canshu);
       }
     });

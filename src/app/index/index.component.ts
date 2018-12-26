@@ -162,11 +162,11 @@ export class IndexComponent implements OnInit, AfterContentInit {
   }
   // 根据参数进行跳转
   goWhere(canshu) {
-    localStorage.setItem('canshu', '');
-    localStorage.setItem('fromPage', '');
     const savedata = {};
     const canshuarr = canshu.split(';');
     const page = canshuarr[0];
+    console.log(canshu);
+    console.log(canshuarr);
     for ( let i = 1 ; i < canshuarr.length ; i++) {
       const temp = canshuarr[i].split('=');
       if (temp.length < 2) {
@@ -175,6 +175,8 @@ export class IndexComponent implements OnInit, AfterContentInit {
         savedata[temp[0]] = temp[1];
       }
     }
+    localStorage.setItem('canshu', '');
+    localStorage.setItem('fromPage', '');
     this.router.navigate([page, savedata]);
   }
   // 获取店铺信息
@@ -182,7 +184,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
     this.userConfigService.getStoreInfo()
       .subscribe((data) => {
         if (data['result']) {
-          localStorage.setItem('fromaddress', '');
+          // localStorage.setItem('fromaddress', '');
           this.storeInfo = data['data'];
           if ( this.storeInfo === null) {
             this.router.navigate(['/address',  {'status': 'nohave'}]);
@@ -195,6 +197,11 @@ export class IndexComponent implements OnInit, AfterContentInit {
               if (localStorage.getItem('fromPage')  === 'newerdec') {
                 this.router.navigate(['newercome']);
               }
+              if (localStorage.getItem('fromPage')  === 'qiangpage') {
+                this.router.navigate(['qiangpage']);
+              }
+              const canshu = localStorage.getItem('fromPage');
+              this.goWhere(canshu);
             }
           }
         } else {
