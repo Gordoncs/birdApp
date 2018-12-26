@@ -144,7 +144,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
                 if (localStorage.getItem('fromPage')  === 'qiangpage') {
                   this.router.navigate(['qiangpage']);
                 }
-                const canshu = localStorage.getItem('fromPage');
+                const canshu = localStorage.getItem('canshu');
                 this.goWhere(canshu);
               }
             }
@@ -162,11 +162,10 @@ export class IndexComponent implements OnInit, AfterContentInit {
   }
   // 根据参数进行跳转
   goWhere(canshu) {
+    canshu = canshu.split('&');
     const savedata = {};
-    const canshuarr = canshu.split(';');
-    const page = canshuarr[0];
-    console.log(canshu);
-    console.log(canshuarr);
+    const canshuarr = canshu[0].split(';');
+    const page = canshuarr[0].split('=')[1];
     for ( let i = 1 ; i < canshuarr.length ; i++) {
       const temp = canshuarr[i].split('=');
       if (temp.length < 2) {
