@@ -19,7 +19,6 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     }
   };
   public allMoney: any = 0;
-  public chosePayType = false;
   public chosetype = '微信';
   public order: any = {
     'memberId':  localStorage.getItem('memberId'),
@@ -87,6 +86,11 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
         this.order.subscribePhone = this.paySureInfo.hisMobile;
         this.order.linkman = this.paySureInfo.hisName;
         this.getAllMoney();
+        if ((this.allMoney * 1 - this.order.discountPriceAmout * 1) <= 3000) {
+          this.chosetype = '微信';
+        } else {
+          this.chosetype = '银联';
+        }
       } else {
         this.alertBox.error(data['message']);
       }
@@ -107,6 +111,11 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
         this.order.subscribePhone = this.paySureInfo.hisMobile;
         this.order.linkman = this.paySureInfo.hisName;
         this.getAllMoney();
+        if ((this.allMoney * 1 - this.order.discountPriceAmout * 1) <= 3000) {
+          this.chosetype = '微信';
+        } else {
+          this.chosetype = '银联';
+        }
       } else {
         this.alertBox.error(data['message']);
         setTimeout(function () {
@@ -242,6 +251,11 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
         t.order.discountPriceAmout = data['data']['discountsMoney'];
         t.changeDetectorRef.markForCheck();
         t.changeDetectorRef.detectChanges();
+        if ((this.allMoney * 1 - this.order.discountPriceAmout * 1) <= 3000) {
+          this.chosetype = '微信';
+        } else {
+          this.chosetype = '银联';
+        }
       } else {
         t.alertBox.error(data['message']);
       }
