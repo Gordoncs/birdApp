@@ -531,42 +531,55 @@ export class UserConfigService {
    * 微信通用分享
    */
   wxBaseShare(canshu) {
-    // wx.updateAppMessageShareData({
-    //   title: '变美不剁手，全城有店，等你来撩', // 分享标题
-    //   desc: '点击查看春鸟皮肤管理中心具体服务项目和附近店铺吧，体验更美人生，打造精致生活，创造自信人生', // 分享描述
-    //   link: this.configUrl + '/g/index.html?frompage=' + canshu, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-    //   imgUrl: 'http://img.needai.com/index/jx1.png', // 分享图标
-    //   success: function () {
-    //     // 设置成功
-    //   }
-    // });
-    // wx.updateTimelineShareData({
-    //   title: '变美不剁手，全城有店，等你来撩', // 分享标题
-    //   link: this.configUrl + '/g/index.html?frompage=' + canshu, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-    //   imgUrl: 'http://img.needai.com/index/jx1.png', // 分享图标
-    //   success: function () {
-    //     // 设置成功
-    //   }
-    // });
-    wx.onMenuShareAppMessage({
+    wx.updateAppMessageShareData({
       title: '变美不剁手，全城有店，等你来撩', // 分享标题
       desc: '点击查看春鸟皮肤管理中心具体服务项目和附近店铺吧，体验更美人生，打造精致生活，创造自信人生', // 分享描述
       link: this.configUrl + '/g/index.html?frompage=' + canshu, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
       imgUrl: 'http://img.needai.com/index/jx1.png', // 分享图标
-      type: '', // 分享类型,music、video或link，不填默认为link
-      dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
       success: function () {
-        // 用户点击了分享后执行的回调函数
+        // 设置成功
       }
     });
-    wx.onMenuShareTimeline({
+    wx.updateTimelineShareData({
       title: '变美不剁手，全城有店，等你来撩', // 分享标题
       link: this.configUrl + '/g/index.html?frompage=' + canshu, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
       imgUrl: 'http://img.needai.com/index/jx1.png', // 分享图标
       success: function () {
-        // 用户点击了分享后执行的回调函数
+        // 设置成功
       }
     });
+    // wx.onMenuShareAppMessage({
+    //   title: '变美不剁手，全城有店，等你来撩', // 分享标题
+    //   desc: '点击查看春鸟皮肤管理中心具体服务项目和附近店铺吧，体验更美人生，打造精致生活，创造自信人生', // 分享描述
+    //   link: this.configUrl + '/g/index.html?frompage=' + canshu, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    //   imgUrl: 'http://img.needai.com/index/jx1.png', // 分享图标
+    //   type: '', // 分享类型,music、video或link，不填默认为link
+    //   dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+    //   success: function () {
+    //     // 用户点击了分享后执行的回调函数
+    //   }
+    // });
+    // wx.onMenuShareTimeline({
+    //   title: '变美不剁手，全城有店，等你来撩', // 分享标题
+    //   link: this.configUrl + '/g/index.html?frompage=' + canshu, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    //   imgUrl: 'http://img.needai.com/index/jx1.png', // 分享图标
+    //   success: function () {
+    //     // 用户点击了分享后执行的回调函数
+    //   }
+    // });
+  }
+
+  /**
+   * 发起银联支付请求
+   */
+  unionPay(orderId: any): Observable<any> {
+    const params = '?orderId=' + orderId ;
+    return this.http.get(this.configUrl + '/payment/unionpay/prepay' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
   }
 }
 

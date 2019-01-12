@@ -19,9 +19,12 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     }
   };
   public allMoney: any = 0;
+  public chosePayType = false;
+  public chosetype = '微信';
   public order: any = {
     'memberId':  localStorage.getItem('memberId'),
     'storeId': JSON.parse(localStorage.getItem('storeInfo'))['id'],
+    // 'storeId': '',
     'orderRemark': '',
     'subscribePhone': '',
     'linkman': '',
@@ -145,7 +148,11 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        this.wxpay(data.data);
+        if ( this.chosetype === '微信') {
+          this.wxpay(data.data);
+        } else {
+          this.unionPay(data.data);
+        }
       } else {
         this.alertBox.error(data['message']);
       }
@@ -191,7 +198,20 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
       }
     });
   }
-
+  unionPay(orderId) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.unionPay(orderId).
+    subscribe(data => {
+      console.log(data);
+      this.alertBox.close();
+      if (data['result']) {
+        window.location.href = data.data;
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
   sao() {
     const t = this;
     // this.checkoutGetSettleAccountsDiscounts(this.allMoney, {'id': '47', 'authCode': '899149'});

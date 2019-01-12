@@ -58,11 +58,15 @@
     </div>
     <div class="textBox">
       <span>支付方式：</span>
-      <div class="cheapBox">
+      <div class="cheapBox" (click)="chosePayType = true">
         <span class="name"></span>
-        <div class="name">
+        <div class="name" *ngIf="chosetype=='微信'">
           <img style="width: 0.37rem;height: 0.32rem;margin-left: 0;margin-right: 0.1rem" src="./assets/image/wechartIcon.png" alt="">
           微信支付
+        </div>
+        <div class="name" *ngIf="chosetype=='银联'">
+          <img style="width: 0.37rem;height: 0.24rem;margin-left: 0.2rem;margin-right: 0.1rem" src="./assets/image/uniony.png" alt="">
+          银联支付
         </div>
       </div>
     </div>
@@ -77,6 +81,20 @@
   <div class="payBtn" (click)="payFn()" *ngIf="fromData.from!='zero'">立即支付</div>
   <div class="payBtn" (click)="payzeroFn()" *ngIf="fromData.from=='zero'">立即领取</div>
 </div>
-
-
+<div *ngIf="chosePayType" class='blackBg'></div>
+<div *ngIf="chosePayType" class='loadBox'>
+  <div class="selbox" (click)="chosetype='微信'">
+    <div class="noselRaido raidoSelit left30">
+      <div [class.shi]="chosetype=='微信'" class="kong"></div>
+    </div>
+    <img style="width: 0.37rem;height: 0.32rem;margin-left: 0.2rem;margin-right: 0.1rem" src="./assets/image/wechartIcon.png" alt="">
+  </div>
+  <div class="selbox" (click)="chosetype='银联'">
+    <div class="noselRaido raidoSelit left30">
+      <div [class.shi]="chosetype=='银联'" class="kong"></div>
+    </div>
+    <img style="width: 0.37rem;height: 0.24rem;margin-left: 0.2rem;margin-right: 0.1rem" src="./assets/image/uniony.png" alt="">
+  </div>
+  <div  class="closeBtn" (click)="chosePayType=false">确 定</div>
+</div>
 <app-alertbox></app-alertbox>
