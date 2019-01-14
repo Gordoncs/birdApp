@@ -163,6 +163,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
   // 根据参数进行跳转
   goWhere(canshu) {
     canshu = canshu.split('&');
+    console.log(11111, canshu);
     const savedata = {};
     const canshuarr = canshu[0].split(';');
     const page = canshuarr[0].split('=')[1];
