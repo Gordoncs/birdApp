@@ -88,7 +88,7 @@ export class AddresComponent implements OnInit {
         success: function (res) {
           t.locallat = res.latitude;
           t.locallong = res.longitude;
-          if (t.statusInfo.status === 'nohave') {
+          if (t.statusInfo.status === 'nohave' || t.statusInfo.status === '' || t.statusInfo.status === undefined) {
             // 外省访问
             t.cityChangeFn('北京市');
           } else {
