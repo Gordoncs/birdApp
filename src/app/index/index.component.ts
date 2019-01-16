@@ -230,7 +230,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
           // console.log(this); // -> Swiper
           // 当前活动块的索引，与activeIndex不同的是，在loop模式下不会将 复制的块 的数量计算在内。
           const realIndex = this.realIndex;
-          t.carouselGoto(t.carouselarr[realIndex]['type']);
+          t.carouselGoto(t.carouselarr[realIndex]['type'], t.carouselarr[realIndex]['id']);
         }
       },
       preventLinksPropagation: false   // 阻止点击事件冒泡
@@ -268,15 +268,15 @@ export class IndexComponent implements OnInit, AfterContentInit {
       }
     };
   }
-  carouselGoto(id) {
+  carouselGoto(type, id) {
     const t = this;
-    if (id === '1') {
+    if (type === '1') {
       t.router.navigate(['/goodsdetail', {'goodsId': id}]);
     }
-    if (id === '2') {
+    if (type === '2') {
       t.router.navigate(['/specialgoods']);
     }
-    if (id === '3') {
+    if (type === '3') {
       t.router.navigate(['/newergif', {'goodsId': 5}]);
     }
   }
