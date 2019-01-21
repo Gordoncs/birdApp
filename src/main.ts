@@ -55,6 +55,15 @@ if (locationUrl.indexOf('?') > -1) {
               localStorage.setItem('longitude', res.longitude);
               platformBrowserDynamics();
               getNextStoreInfo(res.latitude, res.longitude);
+            },
+            cancel: function (res) {
+              alert('需要获取您的地理位置，否则无法进入该页面');
+            },
+            error: function(errInfo) {
+              alert('需要获取您的地理位置，请开启手机定位服务，否则无法进入该页面');
+            },
+            fail: function (e) {
+              alert('需要获取您的地理位置，请开启手机定位服务，否则无法进入该页面');
             }
           });
           getbaseMember();
