@@ -182,6 +182,33 @@
       <div class="name">-{{detailInfo.discountPriceAmout}}元</div>
     </div>
   </div>
+
+  <div class="textBox" *ngIf="detailInfo.orderStatus==0" style="min-height: 0.6rem;height: auto;border-bottom: 1px solid #e5e5e5 ">
+    <span>支付方式：</span>
+    <div class="cheapBoxbig">
+      <div class="cheapBox" *ngIf="detailInfo.orderAmountPayable<=3000" (click)="chosetype='微信'">
+        <span class="name"></span>
+        <div class="name" >
+          <img style="width: 0.37rem;height: 0.32rem;margin-left: 0;margin-right: 0.1rem" src="./assets/image/wechartIcon.png" alt="">
+          微信支付&nbsp;&nbsp;（限0～3000元以下）
+          <div class="noselRaido raidoSelit left30">
+            <div [class.shi]="chosetype=='微信'" class="kong"></div>
+          </div>
+        </div>
+      </div>
+      <div class="cheapBox" *ngIf="detailInfo.orderAmountPayable<=50000" (click)="chosetype='银联'">
+        <span class="name"></span>
+        <div class="name" >
+          <img style="width: 0.37rem;height: 0.24rem;margin-left: 0.2rem;margin-right: 0.1rem" src="./assets/image/uniony.png" alt="">
+          银联支付（限0～50000元以下）
+          <div class="noselRaido raidoSelit left30">
+            <div [class.shi]="chosetype=='银联'" class="kong"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="textBox" *ngIf="detailInfo.orderStatus==1 || detailInfo.orderStatus==2 || detailInfo.orderStatus==9">
     <span></span><span>实付金额：￥{{detailInfo.orderAmountPayable}}</span>
   </div>

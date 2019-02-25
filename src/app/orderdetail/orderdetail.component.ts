@@ -23,6 +23,7 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
   public allServers = 0;
   public useServers = 0;
   public daohangUrl: any = '';
+  public chosetype = '微信';
   /**
    * 订单状态：0=未付款，1=已付款，2=已完成，9=已取消；null=全部订单列表
    */
@@ -137,6 +138,11 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
             this.allServers = allServers;
             this.useServers = useServers;
           }
+          if ((this.detailInfo.orderAmountPayable * 1) <= 3000) {
+            this.chosetype = '微信';
+          } else {
+            this.chosetype = '银联';
+          }
         } else {
           this.alertBox.error(data['message']);
         }
@@ -157,7 +163,11 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
     });
   }
   payFn() {
-    this.wxpay(this.detailInfo.id);
+    if ( this.chosetype === '微信') {
+      this.wxpay(this.detailInfo.id);
+    } else {
+      this.unionPay(this.detailInfo.id);
+    }
   }
   wxpay(orderId) {
     const t = this;
@@ -195,6 +205,54 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
         this.alertBox.error(data['message']);
       }
     });
+  }
+  unionPay(orderId) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.unionPay(orderId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        // window.location.href = data.data;
+        const url = data.data.frontConsumeUrl;
+        const oldjson = data.data.paySgin;
+        const postparms = [];
+        for (const key of Object.keys(oldjson)) {
+          const json = {'name': key, 'value': oldjson[key]};
+          postparms.push(json);
+        }
+        setTimeout(function () {
+          t.fromPost(url, postparms);
+        }, 500);
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  /**
+   * post模拟提交表单
+   */
+  fromPost(URL, PARAMTERS) {
+    // 创建form表单
+    const temp_form = document.createElement('form');
+    temp_form.action = URL;
+    // 如需打开新窗口，form的target属性要设置为'_blank'
+    // temp_form.target = '_blank';
+    temp_form.method = 'post';
+    temp_form.style.display = 'none';
+    // 添加参数
+    for (const item of  Object.keys(PARAMTERS)) {
+      const opt = document.createElement('input');
+      opt.name = PARAMTERS[item].name;
+      opt.value = PARAMTERS[item].value;
+      temp_form.appendChild(opt);
+    }
+    document.body.appendChild(temp_form);
+    // return;
+    // 提交数据
+    setTimeout(function () {
+      temp_form.submit();
+    }, 500);
   }
   changeURL() {
     window.history.pushState(null, null, '/g/');
