@@ -6,6 +6,7 @@ import {UserConfigService} from '../shared/user-config.service';
 import * as $ from 'jquery';
 import wx from 'weixin-js-sdk';
 import set = Reflect.set;
+import {TongxinService} from '../shared/tongxin.service';
 
 @Component({
   selector: 'app-myorder',
@@ -24,6 +25,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
   public startLimt4 = 0;
   public showWhitchStatusArr5 = [];
   public startLimt5 = 0;
+  public daipayItem: any;
   /**
    * 订单状态：0=未付款，1=已付款，2=已完成，9=已取消；null=全部订单列表
    */
@@ -32,10 +34,11 @@ export class MyorderComponent implements OnInit, AfterContentInit {
   alertBox: AlertboxComponent;
 
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService, private zone: NgZone) {
+              private userConfigService: UserConfigService, private zone: NgZone,  private TongXin: TongxinService) {
   }
 
   ngOnInit() {
+    // this.alertBox.chosepayFn(3000);
     /***
      * 设置title
      */
@@ -43,6 +46,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
     this.routerInfo.params.subscribe((params) => this.showWhitchStatus = params['type']);
     this.showWitch(this.showWhitchStatus * 1);
     $(window).unbind('touchend');
+    this.getchosepaytypeClickIt();
   }
 
   ngAfterContentInit() {
@@ -207,7 +211,9 @@ export class MyorderComponent implements OnInit, AfterContentInit {
   }
 
   payFn(item) {
-    this.wxpay(item.id);
+    this.daipayItem = item;
+    this.alertBox.chosepayFn(item.orderAmountPayable);
+    // this.wxpay(item.id);
   }
 
   wxpay(orderId) {
@@ -249,5 +255,62 @@ export class MyorderComponent implements OnInit, AfterContentInit {
 
   changeURL() {
     window.history.pushState(null, null, '/g/');
+  }
+  public getchosepaytypeClickIt() {
+    this.TongXin.Status4$.subscribe(res => {
+      if (res === '微信') {
+        this.wxpay(this.daipayItem.id);
+      } else {
+        this.unionPay(this.daipayItem.id);
+      }
+    });
+  }
+  unionPay(orderId) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.unionPay(orderId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        // window.location.href = data.data;
+        const url = data.data.frontConsumeUrl;
+        const oldjson = data.data.paySgin;
+        const postparms = [];
+        for (const key of Object.keys(oldjson)) {
+          const json = {'name': key, 'value': oldjson[key]};
+          postparms.push(json);
+        }
+        setTimeout(function () {
+          t.fromPost(url, postparms);
+        }, 500);
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  /**
+   * post模拟提交表单
+   */
+  fromPost(URL, PARAMTERS) {
+    // 创建form表单
+    const temp_form = document.createElement('form');
+    temp_form.action = URL;
+    // 如需打开新窗口，form的target属性要设置为'_blank'
+    // temp_form.target = '_blank';
+    temp_form.method = 'post';
+    temp_form.style.display = 'none';
+    // 添加参数
+    for (const item of  Object.keys(PARAMTERS)) {
+      const opt = document.createElement('input');
+      opt.name = PARAMTERS[item].name;
+      opt.value = PARAMTERS[item].value;
+      temp_form.appendChild(opt);
+    }
+    document.body.appendChild(temp_form);
+    // return;
+    // 提交数据
+    setTimeout(function () {
+      temp_form.submit();
+    }, 500);
   }
 }

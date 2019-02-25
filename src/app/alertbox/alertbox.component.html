@@ -29,3 +29,37 @@
   <img class="bg" src="./assets/image/luckdawAlertBg.png" alt="">
   <div class="sureBtn"  (click)="goshareFn()">分享美丽，邀请好友</div>
 </div>
+
+<div *ngIf="chosepay" class='blackBg'></div>
+<div *ngIf="chosepay" class='luckConBox' style="background: #FFF;height: 5rem;justify-content: flex-start;margin-top: -2.5rem">
+  <div class="textBox" style="margin-top: 0.65rem">
+    <span style="font-size: 0.3rem">请选择支付方式：</span>
+    <div class="cheapBoxbig">
+      <div class="cheapBox" *ngIf="(orderAmountPayable*1)<=3000" (click)="chosetype='微信'">
+        <span class="name"></span>
+        <div class="name" >
+          <img style="width: 0.37rem;height: 0.32rem;margin-left: 0;margin-right: 0.1rem" src="./assets/image/wechartIcon.png" alt="">
+          微信支付&nbsp;&nbsp;（限0～3000元以下）
+          <div class="noselRaido raidoSelit left30">
+            <div [class.shi]="chosetype=='微信'" class="kong"></div>
+          </div>
+        </div>
+      </div>
+      <div class="cheapBox" *ngIf="(orderAmountPayable*1)<=50000" (click)="chosetype='银联'">
+        <span class="name"></span>
+        <div class="name" >
+          <img style="width: 0.37rem;height: 0.24rem;margin-left: 0.2rem;margin-right: 0.1rem" src="./assets/image/uniony.png" alt="">
+          银联支付（限0～50000元以下）
+          <div class="noselRaido raidoSelit left30">
+            <div [class.shi]="chosetype=='银联'" class="kong"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sureBtn" style="border: 1px solid #d8d8d8;border-radius: 5px;bottom: 1.6rem;color: #deb95f;"  (click)="chosepaysureFn()">确认支付</div>
+  <div class="sureBtn" style="border: 1px solid #d8d8d8;border-radius: 5px;"  (click)="close()">取消</div>
+</div>
+
+
+

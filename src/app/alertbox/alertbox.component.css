@@ -154,3 +154,63 @@
 .drwaBox  img{
   width: 100%;
 }
+
+.noselRaido{
+  width: 0.34rem;
+  height: 0.34rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 0.34rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.15rem;
+  margin-right: 0.1rem;
+}
+.kong{
+  width: 0.17rem;
+  height: 0.17rem;
+  background: none;
+  border-radius: 0.17rem;
+}
+.raidoSelit{
+  border: 1px solid #e7cd94 !important;
+}
+.shi{
+  background: #e7cd94 !important;
+}
+.textBox{
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: #737373;
+  font-size: 0.22rem;
+}
+.cheapBoxbig{
+  width: 83%;
+  display: flex;
+  flex-direction: column;
+}
+.textBox .cheapBox{
+  width: 100%;
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.textBox .cheapBox .name{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #f27442;
+  font-size: 0.24rem;
+  line-height: 0.24rem;
+}
+.textBox .cheapBox .name img{
+  width: 0.24rem;
+  height: 0.24rem;
+  margin-left: 0.2rem;
+}

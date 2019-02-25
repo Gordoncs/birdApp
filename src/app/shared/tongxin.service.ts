@@ -11,6 +11,7 @@ export class TongxinService {
   public carNum = 0;
   public luckDawClickNum = 0;
   public goshareClickNum = 0;
+  public chosepayval;
   // 实例化主题Subject类对象
   private Source = new Subject<any>();
   public Status$ = this.Source.asObservable();
@@ -20,6 +21,10 @@ export class TongxinService {
   // 实例化主题Subject类对象
   private Source3 = new Subject<any>();
   public Status3$ = this.Source3.asObservable();
+  // 定义数据传递函数
+  // 实例化主题Subject类对象
+  private Source4 = new Subject<any>();
+  public Status4$ = this.Source4.asObservable();
   // 定义数据传递函数
   // 购物车图标数字变化通信
   public cartNum(data) {
@@ -35,5 +40,10 @@ export class TongxinService {
   public goshareClick(data) {
     this.goshareClickNum = data;
     this.Source3.next(this.goshareClickNum);
+  }
+  // 未付款列表 去支付弹框状态传输返回
+  public chosepayClick(data) {
+    this.chosepayval = data;
+    this.Source4.next(this.chosepayval);
   }
 }

@@ -37,7 +37,7 @@ export class UserConfigService {
    */
   // configUrl = 'https://mp.spbird.com';
   configUrl = 'https://test.spbird.com';
-  // configUrl = 'http://59.110.175.91:9000';
+  // configUrl = 'http://test2.spbird.com';
   /**
    * 判断no auth进行地址跳转
    */
