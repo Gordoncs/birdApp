@@ -32,7 +32,7 @@ export class PaystausComponent implements OnInit, AfterContentInit {
       this.orderGetOrderInfo(this.fromData.orderNo);
     }
     this.getMemberIndexInfo();
-    localStorage.setItem('isBecomeOrder', '');
+    localStorage.setItem('isBecomeOrder', 'ss');
     this.TongXin.cartNum(1);
 
     this.changeDetectorRef.markForCheck();
