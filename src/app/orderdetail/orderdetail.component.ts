@@ -233,6 +233,8 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
    * post模拟提交表单
    */
   fromPost(URL, PARAMTERS) {
+    const t = this;
+    t.alertBox.load();
     // 创建form表单
     const temp_form = document.createElement('form');
     temp_form.action = URL;
@@ -251,6 +253,7 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
     // return;
     // 提交数据
     setTimeout(function () {
+      // t.alertBox.close();
       temp_form.submit();
     }, 500);
   }
