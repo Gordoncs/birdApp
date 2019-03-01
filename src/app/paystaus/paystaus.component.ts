@@ -48,7 +48,12 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     // });
   }
   pay() {
-    this.paysurepay(this.fromData.orderNo);
+    if (this.fromData.from === 'uniony') {
+      this.unionPay(this.fromData.orderNo);
+    } else {
+      this.paysurepay(this.fromData.orderNo);
+    }
+
     // if (this.fromData.from === 'justpay') {
     //   this.justpaypay(JSON.parse(this.fromData.order), JSON.parse(this.fromData.discounts));
     // }
@@ -204,5 +209,57 @@ export class PaystausComponent implements OnInit, AfterContentInit {
           this.alertBox.error(data['message']);
         }
       });
+  }
+
+  unionPay(orderId) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.unionPay(orderId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        // window.location.href = data.data;
+        const url = data.data.frontConsumeUrl;
+        const oldjson = data.data.paySgin;
+        const postparms = [];
+        for (const key of Object.keys(oldjson)) {
+          const json = {'name': key, 'value': oldjson[key]};
+          postparms.push(json);
+        }
+        setTimeout(function () {
+          t.fromPost(url, postparms);
+        }, 500);
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  /**
+   * post模拟提交表单
+   */
+  fromPost(URL, PARAMTERS) {
+    const t = this;
+    t.alertBox.load();
+    // 创建form表单
+    const temp_form = document.createElement('form');
+    temp_form.action = URL;
+    // 如需打开新窗口，form的target属性要设置为'_blank'
+    // temp_form.target = '_blank';
+    temp_form.method = 'post';
+    temp_form.style.display = 'none';
+    // 添加参数
+    for (const item of  Object.keys(PARAMTERS)) {
+      const opt = document.createElement('input');
+      opt.name = PARAMTERS[item].name;
+      opt.value = PARAMTERS[item].value;
+      temp_form.appendChild(opt);
+    }
+    document.body.appendChild(temp_form);
+    // return;
+    // 提交数据
+    setTimeout(function () {
+      // t.alertBox.close();
+      temp_form.submit();
+    }, 500);
   }
 }
