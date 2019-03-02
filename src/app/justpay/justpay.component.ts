@@ -5,6 +5,7 @@ import {Title} from '@angular/platform-browser';
 import {UserConfigService} from '../shared/user-config.service';
 import * as $ from 'jquery';
 import wx from 'weixin-js-sdk';
+import {TongxinService} from '../shared/tongxin.service';
 @Component({
   selector: 'app-justpay',
   templateUrl: './justpay.component.html',
@@ -19,18 +20,20 @@ export class JustpayComponent implements OnInit, AfterContentInit, OnDestroy {
     'authCode' : '',
     'advisorName' : ''
   };
+  orderid: number;
   storeInfo = JSON.parse(localStorage.getItem('storeInfo'));
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService, private changeDetectorRef: ChangeDetectorRef,
-              private zone: NgZone) { }
+              private zone: NgZone, private TongXin: TongxinService) { }
 
   ngOnInit() {
     this.titleService.setTitle('支付确认');
     this.routerInfo.params.subscribe((params) => this.orderInfo = params);
     this.allMoney = this.orderInfo.allMoney;
+    this.getchosepaytypeClickIt();
   }
   ngAfterContentInit() {
     $('#moneyInput').focus();
@@ -54,13 +57,22 @@ export class JustpayComponent implements OnInit, AfterContentInit, OnDestroy {
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        this.wxpay(data.data);
+        this.alertBox.chosepayFn(this.allMoney);
+        this.orderid = data.data;
       } else {
         this.alertBox.error(data['message']);
       }
     });
   }
-
+  public getchosepaytypeClickIt() {
+    this.TongXin.Status4$.subscribe(res => {
+      if (res === '微信') {
+        this.wxpay(this.orderid);
+      } else {
+        this.unionPay(this.orderid);
+      }
+    });
+  }
   sao() {
     if (this.allMoney <= 0) {
       this.alertBox.error('请输入金额再扫码');
@@ -162,5 +174,56 @@ export class JustpayComponent implements OnInit, AfterContentInit, OnDestroy {
         this.alertBox.error(data['message']);
       }
     });
+  }
+  unionPay(orderId) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.unionPay(orderId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        // window.location.href = data.data;
+        const url = data.data.frontConsumeUrl;
+        const oldjson = data.data.paySgin;
+        const postparms = [];
+        for (const key of Object.keys(oldjson)) {
+          const json = {'name': key, 'value': oldjson[key]};
+          postparms.push(json);
+        }
+        setTimeout(function () {
+          t.fromPost(url, postparms);
+        }, 500);
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  /**
+   * post模拟提交表单
+   */
+  fromPost(URL, PARAMTERS) {
+    const t = this;
+    t.alertBox.load();
+    // 创建form表单
+    const temp_form = document.createElement('form');
+    temp_form.action = URL;
+    // 如需打开新窗口，form的target属性要设置为'_blank'
+    // temp_form.target = '_blank';
+    temp_form.method = 'post';
+    temp_form.style.display = 'none';
+    // 添加参数
+    for (const item of  Object.keys(PARAMTERS)) {
+      const opt = document.createElement('input');
+      opt.name = PARAMTERS[item].name;
+      opt.value = PARAMTERS[item].value;
+      temp_form.appendChild(opt);
+    }
+    document.body.appendChild(temp_form);
+    // return;
+    // 提交数据
+    setTimeout(function () {
+      // t.alertBox.close();
+      temp_form.submit();
+    }, 500);
   }
 }
