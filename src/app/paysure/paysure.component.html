@@ -69,11 +69,11 @@
             </div>
           </div>
         </div>
-        <div class="cheapBox" *ngIf="(allMoney*1 - order.discountPriceAmout*1)<=50000" (click)="chosetype='银联'">
+        <div class="cheapBox" *ngIf="(allMoney*1 - order.discountPriceAmout*1)<=20000" (click)="chosetype='银联'">
           <span class="name"></span>
           <div class="name" >
             <img style="width: 0.37rem;height: 0.24rem;margin-left: 0.2rem;margin-right: 0.1rem" src="./assets/image/uniony.png" alt="">
-            银联支付（限0～50000元以下）
+            银联支付（限0～20000元以下）
             <div class="noselRaido raidoSelit left30">
               <div [class.shi]="chosetype=='银联'" class="kong"></div>
             </div>
