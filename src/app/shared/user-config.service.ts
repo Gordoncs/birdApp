@@ -271,7 +271,9 @@ export class UserConfigService {
    * 发起微信支付请求
    */
   paymentWechatPrepay(orderId: string): Observable<any> {
-    return this.http.get(this.configUrl + '/payment/wechat/prepay?orderId=' + orderId, this.headoptions)
+    const params = '?orderId=' + orderId + '&channel=' + this.whichpay('微信支付') ;
+    // return this.http.get(this.configUrl + '/payment/wechat/prepay' + params, this.headoptions)
+    return this.http.get(this.configUrl + '/payment/router' + params, this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError),
@@ -573,13 +575,26 @@ export class UserConfigService {
    * 发起银联支付请求
    */
   unionPay(orderId: any): Observable<any> {
-    const params = '?orderId=' + orderId ;
-    return this.http.get(this.configUrl + '/payment/unionpay/prepay' + params, this.headoptions)
+    const params = '?orderId=' + orderId + '&channel=' + this.whichpay('银联支付') ;
+    // return this.http.get(this.configUrl + '/payment/unionpay/prepay' + params, this.headoptions)
+    return this.http.get(this.configUrl + '/payment/router' + params, this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError),
         tap(data => this.canGoHref(data))
       );
+  }
+
+  /**
+   * 动态返回支付接口类型参数
+   */
+  private whichpay(text: any) {
+    const paytypeArr = (JSON.parse(localStorage.getItem('memberInfo')))['paymentChannels'];
+    for (let i = 0; i < paytypeArr.length; i++) {
+      if (text === paytypeArr['channelDesc']) {
+          return paytypeArr['channelName'];
+      }
+    }
   }
 }
 
