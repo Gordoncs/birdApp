@@ -25,7 +25,7 @@ export class AlertboxComponent implements OnInit {
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
-    this.paystyleArr = this.userConfigService.paystyleArr;
+    this.paystyleArr = this.userConfigService.paystyleArr();
   }
   load() {
     this.whichStatus = 'loading';

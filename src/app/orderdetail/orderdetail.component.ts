@@ -47,7 +47,7 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
     this.orderGetOrderInfo(this.orderId);
     this.getMemberIndexInfo();
     $(window).on('touchmove', function(e) {console.log(2); });
-    this.paystyleArr = this.userConfigService.paystyleArr;
+    this.paystyleArr = this.userConfigService.paystyleArr();
   }
   ngAfterContentInit() {
     const t = this;

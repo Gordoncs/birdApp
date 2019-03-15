@@ -41,7 +41,9 @@ export class UserConfigService {
   /**
    * 支付方式
    */
-  paystyleArr = (JSON.parse(localStorage.getItem('memberInfo')))['paymentChannels'];
+  paystyleArr() {
+    return (JSON.parse(localStorage.getItem('memberInfo')))['paymentChannels'];
+  }
   /**
    * 判断no auth进行地址跳转
    */
