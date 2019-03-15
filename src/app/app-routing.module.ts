@@ -24,6 +24,7 @@ import {LuckdrawComponent} from './luckdraw/luckdraw.component';
 import {PaystatusGuard} from './shared/paystatus.guard';
 import {AboutpromiseComponent} from './aboutpromise/aboutpromise.component';
 import {QiangpageComponent} from './qiangpage/qiangpage.component';
+import {FaqiComponent} from './kanjia/faqi/faqi.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full'},
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'hexiao', component: HexiaoComponent},
   { path: 'luckdraw', component: LuckdrawComponent},
   { path: 'qiangpage', component: QiangpageComponent},
+  { path: 'kanjiafaqi', component: FaqiComponent},
   { path: '**', component: Code404Component},
 ];
 
