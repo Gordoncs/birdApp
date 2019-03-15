@@ -258,7 +258,7 @@ export class MyorderComponent implements OnInit, AfterContentInit {
   }
   public getchosepaytypeClickIt() {
     this.TongXin.Status4$.subscribe(res => {
-      if (res === '微信') {
+      if (res === '微信支付') {
         this.wxpay(this.daipayItem.id);
       } else {
         this.unionPay(this.daipayItem.id);

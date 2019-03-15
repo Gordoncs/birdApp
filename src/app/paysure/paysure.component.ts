@@ -19,7 +19,8 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     }
   };
   public allMoney: any = 0;
-  public chosetype = '微信';
+  public chosetype = '微信支付';
+  public paystyleArr: any;
   public order: any = {
     'memberId':  localStorage.getItem('memberId'),
     'storeId': JSON.parse(localStorage.getItem('storeInfo'))['id'],
@@ -64,6 +65,7 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     } else if ( this.fromData['from'] === 'qianggou') {
       this.checkoutOutrightPurchase();
     }
+    this.paystyleArr = this.userConfigService.paystyleArr;
   }
   ngAfterContentInit() {
     // this.userConfigService.wxConfigFn();
@@ -86,11 +88,6 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
         this.order.subscribePhone = this.paySureInfo.hisMobile;
         this.order.linkman = this.paySureInfo.hisName;
         this.getAllMoney();
-        if ((this.allMoney * 1 - this.order.discountPriceAmout * 1) <= 3000) {
-          this.chosetype = '微信';
-        } else {
-          this.chosetype = '银联';
-        }
       } else {
         this.alertBox.error(data['message']);
       }
@@ -111,11 +108,6 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
         this.order.subscribePhone = this.paySureInfo.hisMobile;
         this.order.linkman = this.paySureInfo.hisName;
         this.getAllMoney();
-        if ((this.allMoney * 1 - this.order.discountPriceAmout * 1) <= 3000) {
-          this.chosetype = '微信';
-        } else {
-          this.chosetype = '银联';
-        }
       } else {
         this.alertBox.error(data['message']);
         setTimeout(function () {
@@ -157,7 +149,7 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        if ( this.chosetype === '微信') {
+        if ( this.chosetype === '微信支付') {
           this.wxpay(data.data);
         } else {
           this.unionPay(data.data);
@@ -288,11 +280,6 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
         t.order.discountPriceAmout = data['data']['discountsMoney'];
         t.changeDetectorRef.markForCheck();
         t.changeDetectorRef.detectChanges();
-        if ((this.allMoney * 1 - this.order.discountPriceAmout * 1) <= 3000) {
-          this.chosetype = '微信';
-        } else {
-          this.chosetype = '银联';
-        }
       } else {
         t.alertBox.error(data['message']);
       }

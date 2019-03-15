@@ -23,7 +23,8 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
   public allServers = 0;
   public useServers = 0;
   public daohangUrl: any = '';
-  public chosetype = '微信';
+  public chosetype = '微信支付';
+  public paystyleArr: any;
   /**
    * 订单状态：0=未付款，1=已付款，2=已完成，9=已取消；null=全部订单列表
    */
@@ -46,6 +47,7 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
     this.orderGetOrderInfo(this.orderId);
     this.getMemberIndexInfo();
     $(window).on('touchmove', function(e) {console.log(2); });
+    this.paystyleArr = this.userConfigService.paystyleArr;
   }
   ngAfterContentInit() {
     const t = this;
@@ -138,11 +140,6 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
             this.allServers = allServers;
             this.useServers = useServers;
           }
-          if ((this.detailInfo.orderAmountPayable * 1) <= 3000) {
-            this.chosetype = '微信';
-          } else {
-            this.chosetype = '银联';
-          }
         } else {
           this.alertBox.error(data['message']);
         }
@@ -163,7 +160,7 @@ export class OrderdetailComponent implements OnInit, AfterContentInit {
     });
   }
   payFn() {
-    if ( this.chosetype === '微信') {
+    if ( this.chosetype === '微信支付') {
       this.wxpay(this.detailInfo.id);
     } else {
       this.unionPay(this.detailInfo.id);

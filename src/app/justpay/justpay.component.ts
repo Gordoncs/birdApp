@@ -66,7 +66,7 @@ export class JustpayComponent implements OnInit, AfterContentInit, OnDestroy {
   }
   public getchosepaytypeClickIt() {
     this.TongXin.Status4$.subscribe(res => {
-      if (res === '微信') {
+      if (res === '微信支付') {
         this.wxpay(this.orderid);
       } else {
         this.unionPay(this.orderid);

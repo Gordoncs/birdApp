@@ -39,6 +39,10 @@ export class UserConfigService {
   configUrl = 'https://test.spbird.com';
   // configUrl = 'http://test2.spbird.com';
   /**
+   * 支付方式
+   */
+  paystyleArr = (JSON.parse(localStorage.getItem('memberInfo')))['paymentChannels'];
+  /**
    * 判断no auth进行地址跳转
    */
   private canGoHref(data: any) {
@@ -591,8 +595,8 @@ export class UserConfigService {
   private whichpay(text: any) {
     const paytypeArr = (JSON.parse(localStorage.getItem('memberInfo')))['paymentChannels'];
     for (let i = 0; i < paytypeArr.length; i++) {
-      if (text === paytypeArr['channelDesc']) {
-          return paytypeArr['channelName'];
+      if (text === paytypeArr[i]['channelDesc']) {
+          return paytypeArr[i]['channelName'];
       }
     }
   }

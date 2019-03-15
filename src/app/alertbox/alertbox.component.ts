@@ -19,11 +19,13 @@ export class AlertboxComponent implements OnInit {
   chosepay = false;
   luckConShowMoney = 0;
   orderAmountPayable = 0;
-  public chosetype = '微信';
+  public chosetype = '微信支付';
+  public paystyleArr: any;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService, private TongXin: TongxinService) { }
 
   ngOnInit() {
+    this.paystyleArr = this.userConfigService.paystyleArr;
   }
   load() {
     this.whichStatus = 'loading';
@@ -68,12 +70,12 @@ export class AlertboxComponent implements OnInit {
     this.TongXin.goshareClick(1);
   }
   chosepayFn(orderAmountPayable) {
-    this.orderAmountPayable = orderAmountPayable * 1;
-    if ((this.orderAmountPayable) <= 3000) {
-      this.chosetype = '微信';
-    } else {
-      this.chosetype = '银联';
-    }
+    // this.orderAmountPayable = orderAmountPayable * 1;
+    // if ((this.orderAmountPayable) <= 3000) {
+    //   this.chosetype = '微信';
+    // } else {
+    //   this.chosetype = '银联';
+    // }
     this.chosepay = true;
   }
   chosepaysureFn() {
