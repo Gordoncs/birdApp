@@ -34,7 +34,7 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     this.getMemberIndexInfo();
     localStorage.setItem('isBecomeOrder', 'ss');
     this.TongXin.cartNum(1);
-
+    this.getchosepaytypeClickIt();
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
   }
@@ -47,12 +47,22 @@ export class PaystausComponent implements OnInit, AfterContentInit {
     //   // t.router.navigate(['orderdetail', {id: t.fromData.orderNo}]);
     // });
   }
+  public getchosepaytypeClickIt() {
+    this.TongXin.Status4$.subscribe(res => {
+      if (res === '微信支付') {
+        this.paysurepay(this.fromData.orderNo);
+      } else {
+        this.unionPay(this.fromData.orderNo);
+      }
+    });
+  }
   pay() {
-    if (this.fromData.from === 'uniony') {
-      this.unionPay(this.fromData.orderNo);
-    } else {
-      this.paysurepay(this.fromData.orderNo);
-    }
+    this.alertBox.chosepayFn(1);
+    // if (this.fromData.from === 'uniony') {
+    //   this.unionPay(this.fromData.orderNo);
+    // } else {
+    //   this.paysurepay(this.fromData.orderNo);
+    // }
 
     // if (this.fromData.from === 'justpay') {
     //   this.justpaypay(JSON.parse(this.fromData.order), JSON.parse(this.fromData.discounts));
