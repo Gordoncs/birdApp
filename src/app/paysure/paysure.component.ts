@@ -122,6 +122,10 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
         money = money + this.paySureInfo.cartDetail[i].price * this.paySureInfo.cartDetail[i].number;
     }
     this.allMoney =  money;
+    const t = this;
+    if (localStorage.getItem('discounts')) {
+      t.checkoutGetSettleAccountsDiscounts(t.allMoney, JSON.parse(localStorage.getItem('discounts')), t);
+    }
   }
   payFn() {
     if (this.order.linkman === '') {
@@ -261,6 +265,7 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
           'id' : res.resultStr.split('#')[0],
           'authCode' : res.resultStr.split('#')[2],
         };
+        localStorage.setItem('discounts', JSON.stringify(discounts));
         t.checkoutGetSettleAccountsDiscounts(t.allMoney, discounts, t);
       }
     });

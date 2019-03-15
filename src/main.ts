@@ -188,4 +188,5 @@ if (md.os() === 'iOS') {
 localStorage.setItem('channel', 'wxH5');
 localStorage.setItem('language', 'zh_cn');
 localStorage.setItem('fromaddress', '');
+localStorage.setItem('discounts', '');
 
