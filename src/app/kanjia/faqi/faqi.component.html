@@ -1,0 +1,135 @@
+<div class="kanjiabox flexcol">
+  <div class="backicon">
+    <img src="./assets/image/kanjia/back.png" alt="">
+  </div>
+  <img src="./assets/image/kanjia/head.png" alt="">
+  <div class="kanbox">
+    <div class="prodinfo">
+      <div class="leftimg">
+        <img src="" alt="">
+      </div>
+      <div class="rightbox">
+        <div class="text">【逆龄抗衰】天庭饱满：淡化抬头纹、川字 纹，紧致额头--单品</div>
+        <div class="decs">
+          <div class="s1">￥380.00</div>
+          <div class="s2">23:59:59后砍价过期</div>
+        </div>
+      </div>
+    </div>
+    <div class="jindubox">
+      <p>共1人已砍29.8元，还差359.8元</p>
+      <div class="line">
+        <div class="wcline"></div>
+      </div>
+    </div>
+    <div class="kanbtn">
+      <div class="text">分享给好友，帮我砍一刀</div>
+      <img src="./assets/image/kanjia/btnbg.png" alt="">
+    </div>
+    <div class="kanbtn">
+      <div class="text">哇，好便宜了，我要下单！</div>
+      <img src="./assets/image/kanjia/btnbg.png" alt="">
+    </div>
+    <div class="litterIcon">
+      <img src="./assets/image/kanjia/littericon.png" alt="">
+    </div>
+  </div>
+
+  <div class="kanfriendbox">
+    <div class="greenyeIcon">
+      <img src="./assets/image/kanjia/greenye.png" alt="">
+    </div>
+    <div class="changetitle">
+      <div class="changetitlelist " [class.changetitlelistSel]="changetitle=='帮砍团'" (click)="changetitle = '帮砍团'">帮砍团</div>
+      <div class="changetitlelist" [class.changetitlelistSel]="changetitle=='帮砍排行榜'" (click)="changetitle = '帮砍排行榜'">
+        <span class="s1">砍价TOP20排行榜</span>
+        <span class="s2">（共XXXX人已完成砍价）</span>
+      </div>
+    </div>
+    <div class="kanfriendmain">
+      <div class="friendlist">
+        <div class="paixu" style="background: none !important;" *ngIf="changetitle=='帮砍团'"></div>
+        <div class="paixu" *ngIf="changetitle=='帮砍排行榜'">TOP 1</div>
+        <div class="headimg">
+          <img src="" alt="">
+        </div>
+        <div class="name">小可爱</div>
+        <img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">
+        <div class="kanmoney">共砍掉 <span>XX</span> 元</div>
+      </div>
+      <div class="friendlist">
+        <div class="paixu" style="background: none !important;" *ngIf="changetitle=='帮砍团'"></div>
+        <div class="paixu" *ngIf="changetitle=='帮砍排行榜'">TOP 1</div>
+        <div class="headimg">
+          <img src="" alt="">
+        </div>
+        <div class="name">小可爱</div>
+        <img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">
+        <div class="kanmoney">共砍掉 <span>XX</span> 元</div>
+      </div>
+      <div class="friendlist">
+        <div class="paixu" style="background: none !important;" *ngIf="changetitle=='帮砍团'"></div>
+        <div class="paixu" *ngIf="changetitle=='帮砍排行榜'">TOP 1</div>
+        <div class="headimg">
+          <img src="" alt="">
+        </div>
+        <div class="name">小可爱</div>
+        <img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">
+        <div class="kanmoney">共砍掉 <span>XX</span> 元</div>
+      </div>
+      <div class="friendlist">
+        <div class="paixu" style="background: none !important;" *ngIf="changetitle=='帮砍团'"></div>
+        <div class="paixu" *ngIf="changetitle=='帮砍排行榜'">TOP 1</div>
+        <div class="headimg">
+          <img src="" alt="">
+        </div>
+        <div class="name">小可爱</div>
+        <img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">
+        <div class="kanmoney">共砍掉 <span>XX</span> 元</div>
+      </div>
+      <div class="friendlist">
+        <div class="paixu" style="background: none !important;" *ngIf="changetitle=='帮砍团'"></div>
+        <div class="paixu" *ngIf="changetitle=='帮砍排行榜'">TOP 1</div>
+        <div class="headimg">
+          <img src="" alt="">
+        </div>
+        <div class="name">小可爱</div>
+        <img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">
+        <div class="kanmoney">共砍掉 <span>XX</span> 元</div>
+      </div>
+      <div class="friendlist">
+        <div class="paixu" style="background: none !important;" *ngIf="changetitle=='帮砍团'"></div>
+        <div class="paixu" *ngIf="changetitle=='帮砍排行榜'">TOP 1</div>
+        <div class="headimg">
+          <img src="" alt="">
+        </div>
+        <div class="name">小可爱</div>
+        <img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">
+        <div class="kanmoney">共砍掉 <span>XX</span> 元</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="indecbox">
+    <img class="indecimg" style="margin-top: .2rem" src="./assets/image/kanjia/indec1.png" alt="">
+    <img class="indecimg" src="./assets/image/kanjia/indec2.png" alt="">
+    <div class="tree1">
+      <img src="./assets/image/kanjia/tree1.png" alt="">
+    </div>
+    <div class="tree2">
+      <img src="./assets/image/kanjia/tree2.png" alt="">
+    </div>
+  </div>
+  <div class="erweibox">
+    <img class="erweibg" src="./assets/image/kanjia/erweibg.png" alt="">
+    <img class="erweima" src="./assets/image/gongzhongerwei.jpeg" alt="">
+  </div>
+</div>
+<div class="bottom">
+  <div class="btns bgyellow" [routerLink]="['/index', {}]">平台首页</div>
+  <div class="btns bggreen" [routerLink]="['/sharedpage', {'from': 'newergif'}]">砍价玩法</div>
+  <div class="btns" style="background: #204e3a" [routerLink]="['/sharedpage', {'from': 'newergif'}]">活动规则</div>
+</div>
+<div class="loadBox" style="display: none">
+  <img  src='./assets/image/loading.gif' /> 努力加载中...
+</div>

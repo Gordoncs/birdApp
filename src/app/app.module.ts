@@ -32,6 +32,7 @@ import { NewercomeComponent } from './newercome/newercome.component';
 import { LuckdrawComponent } from './luckdraw/luckdraw.component';
 import { AboutpromiseComponent } from './aboutpromise/aboutpromise.component';
 import { QiangpageComponent } from './qiangpage/qiangpage.component';
+import { FaqiComponent } from './kanjia/faqi/faqi.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { QiangpageComponent } from './qiangpage/qiangpage.component';
     NewercomeComponent,
     LuckdrawComponent,
     AboutpromiseComponent,
-    QiangpageComponent
+    QiangpageComponent,
+    FaqiComponent
   ],
   imports: [
     BrowserModule,
