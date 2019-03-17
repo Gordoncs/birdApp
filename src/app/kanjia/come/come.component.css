@@ -1,0 +1,431 @@
+.kanjiabox{
+  width: 100%;
+  min-height: 7rem;
+  background: #cf1e18;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.kanjiabox img{
+  width: 100%;
+}
+.backicon{
+  position: absolute;
+  width: 0.84rem;
+  height: 0.86rem;
+  left: .55rem;
+  top: .5rem;
+}
+.backicon img{
+  width: 100%;
+  height: 100%;
+}
+.kanbox{
+  position: relative;
+  width: 92%;
+  height: 5.4rem;
+  background: #e1362e;
+  border-radius: .15rem;
+  margin-top: -0.8rem;
+  box-shadow:0px .1rem .2rem #be1c16;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.prodinfo{
+  width: 93%;
+  height: 1.6rem;
+  background: #d31d17;
+  border-radius: .15rem;
+  margin-top: .2rem;
+  box-shadow:0px .1rem .2rem #be1c16 inset;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.prodinfo .leftimg{
+  width: 1.23rem;
+  height: 1.23rem;
+  border-radius: .1rem;
+  background: #FFF;
+  margin: .19rem;
+}
+.prodinfo .leftimg img{
+  width: 100%;
+  height: 100%;
+}
+.prodinfo .rightbox{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  height: 1.23rem;
+  padding-right: 0.2rem;
+}
+.prodinfo .rightbox .text{
+  color: #FFF;
+  font-size: .24rem;
+}
+.prodinfo .rightbox .decs{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.prodinfo .rightbox .decs .s1{
+  color: #ffd798;
+  font-size: .28rem;
+}
+.prodinfo .rightbox .decs .s2{
+  color: #f6b27e;
+  font-size: .24rem;
+  background: #dc2c25;
+  padding: .02rem;
+}
+.jindubox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: .25rem;
+}
+.jindubox p{
+  color: #FFF;
+  font-size: .28rem;
+  margin-top: .35rem;
+}
+.jindubox .line{
+  width: 81%;
+  height: .1rem;
+  border-radius: .1rem;
+  background: #ba1913;
+  overflow: hidden;
+  margin-top: .2rem;
+}
+.wcline{
+  width: 60%;
+  height: 100%;
+  border-radius: .1rem;
+  background: #fbd7b4;
+}
+.kanbtn{
+  width: 4.46rem;
+  height: .7rem;
+  position: relative;
+  margin-top: .2rem;
+}
+.kanbtn .text{
+  width: 100%;
+  height: 100%;
+  font-size: .28rem;
+  color: #ae1812;
+  position: absolute;
+  text-align: center;
+  line-height: .7rem;
+}
+.kanbtn img{
+  width: 100%;
+  height: 100%;
+}
+.litterIcon{
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  width: 1.55rem;
+  height: 1.21rem;
+}
+.litterIcon img{
+  width: 100%;
+  height: 100%;
+}
+
+.kanfriendbox{
+  position: relative;
+  width: 92%;
+  height: 6.2rem;
+  background: #e1362e;
+  border-radius: .15rem;
+  margin-top: .2rem;
+  box-shadow:0px .1rem .2rem #be1c16;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  border: .015rem solid #fc6957;
+}
+.changetitle{
+  width: 100%;
+  height: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.changetitlelist{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: .28rem;
+  color: #ffd798;
+}
+.changetitlelist .s1{
+  font-size: .28rem;
+}
+.changetitlelist .s2{
+  font-size: .18rem;
+}
+.changetitlelistSel{
+  background: #ec4139;
+  color: #FFF;
+  border-radius: .15rem .15rem 0 0 ;
+  border: .015rem solid #fc6957;
+  border-bottom: 0px;
+  position: relative;
+}
+.kanfriendmain{
+  width: 100%;
+  height: 5.2rem;
+  border-top: .015rem solid #fc6957;
+  margin-top: -0.02rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ec4139;
+  overflow: auto;
+  overflow-x: hidden;
+}
+.greenyeIcon{
+  position: absolute;
+  width: .7rem;
+  height: 2.17rem;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+.greenyeIcon img{
+  width: 100%;
+  height: 100%;
+}
+.friendlist{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  padding-left: .2rem;
+  margin-top: .25rem;
+}
+.friendlist .paixu{
+  width: 1rem;
+  height: .28rem;
+  border-radius: .2rem;
+  background: #f1d3af;
+  color: #d31d17;
+  font-size: .18rem;
+  line-height: .28rem;
+  text-indent: .1rem;
+}
+.friendlist .headimg{
+  width: .9rem;
+  height: .9rem;
+  border-radius: .9rem;
+  background: #FFF;
+  margin-left: -0.2rem;
+}
+.friendlist .headimg img{
+  width: 100%;
+  height: 100%;
+}
+.friendlist .name{
+  color: #ffffff;
+  font-size: .28rem;
+  margin-left: .2rem;
+  width: 1.6rem;
+}
+.friendlist .kanicon{
+  display: block;
+  width: .63rem;
+  height: .63rem;
+  margin-top: 0.05rem;
+}
+.friendlist .kanmoney{
+  color: #FFF;
+  font-size: .28rem;
+  margin-left: .2rem;
+}
+.friendlist .kanmoney span{
+  color: #ffd798;
+}
+
+.indecbox{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #a01914;
+  margin-top: .25rem;
+  width: 100%;
+}
+.indecimg{
+  width: 100%;
+}
+.tree1{
+  width: 1.73rem;
+  height: 1.41rem;
+  position: absolute;
+  left: 0;
+  top: 2.25rem;
+}
+.tree2{
+  width: .88rem;
+  height: 1.78rem;
+  position: absolute;
+  right: 0;
+  bottom: .3rem;
+}
+.erweibox{
+  width: 100%;
+  position: relative;
+}
+.erweibg{
+  display: block;
+  width: 100%;
+  margin-bottom: .5rem;
+}
+.erweima{
+  position: absolute;
+  width: 1.44rem !important;
+  height: 1.44rem !important;
+  right: 0.55rem;
+  top: 0.35rem;
+  z-index: 1;
+}
+
+.loadBox{
+  width: 100%;
+  height: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.24rem;
+  position: fixed;
+  top: 50%;
+  margin-top: -0.75rem;
+}
+.loadBox img{
+  width: 0.32rem;
+  height: 0.32rem;
+  margin-right: 0.1rem;
+  display: block;
+}
+.bigkanbox{
+  width: 96%;
+  margin-top: .3rem;
+}
+.bigkanlist{
+  width: 100%;
+}
+.bigkanlist img{
+  width: 100%;
+}
+.headbox{
+  position: absolute;
+  width: 2rem;
+  height: 1.6rem;
+  left: 50%;
+  margin-left: -1rem;
+  top: .6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.headboximg{
+  width: 0.98rem;
+  height: 0.98rem;
+  border-radius: 0.98rem;
+  border: 0.02rem solid #e8cfa1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.headboximg img{
+  width: 0.96rem;
+  height: 0.96rem;
+}
+.headname{
+  color: #e8cfa1;
+  font-size: 0.28rem;
+}
+.fixedbox{
+  position: absolute;
+  width: 1.8rem;
+  height: .45rem;
+  background: #000000;
+  color: #FFF;
+  font-size: .28rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.35rem;
+  right: .5rem;
+  top: .7rem;
+  z-index: 1;
+}
+.kanresult{
+  width: 6.7rem;
+  height: 4.11rem;
+  position: fixed;
+  left: 50%;
+  margin-left: -3.35rem;
+  top: 50%;
+  margin-top: -2.05rem;
+  z-index: 3;
+}
+.kanresult img{
+  width: 100%;
+}
+.kanresulthead{
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 1.6rem;
+  border: 0.1rem solid #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  overflow: hidden;
+  left: 50%;
+  margin-left: -0.8rem;
+  top: -0.5rem;
+  box-shadow:0px .1rem .2rem #f8f1e1;
+}
+.kanresulthead img{
+  width: 100%;
+  height: 100%;
+}
+.kanresultclosebtn{
+  position: absolute;
+  width: .8rem;
+  height: .8rem;
+  z-index: 3;
+  right: .4rem;
+  top: .3rem;
+}
+.kanmoneyshow{
+  width: 1.5rem;
+  font-size: .6rem;
+  color: #ec4139;
+  position: absolute;
+  z-index: 3;
+  bottom: .95rem;
+  right: 2rem;
+  text-align: center;
+}
