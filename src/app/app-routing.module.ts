@@ -25,6 +25,8 @@ import {PaystatusGuard} from './shared/paystatus.guard';
 import {AboutpromiseComponent} from './aboutpromise/aboutpromise.component';
 import {QiangpageComponent} from './qiangpage/qiangpage.component';
 import {FaqiComponent} from './kanjia/faqi/faqi.component';
+import {IndecComponent} from './kanjia/indec/indec.component';
+import {ComeComponent} from './kanjia/come/come.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full'},
@@ -51,6 +53,8 @@ const routes: Routes = [
   { path: 'luckdraw', component: LuckdrawComponent},
   { path: 'qiangpage', component: QiangpageComponent},
   { path: 'kjfaqi', component: FaqiComponent},
+  { path: 'kjdec', component: IndecComponent},
+  { path: 'kjcome', component: ComeComponent},
   { path: '**', component: Code404Component},
 ];
 
