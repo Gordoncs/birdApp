@@ -35,6 +35,7 @@ import { QiangpageComponent } from './qiangpage/qiangpage.component';
 import { FaqiComponent } from './kanjia/faqi/faqi.component';
 import { IndecComponent } from './kanjia/indec/indec.component';
 import { ComeComponent } from './kanjia/come/come.component';
+import { KanlistComponent } from './kanjia/kanlist/kanlist.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ComeComponent } from './kanjia/come/come.component';
     QiangpageComponent,
     FaqiComponent,
     IndecComponent,
-    ComeComponent
+    ComeComponent,
+    KanlistComponent
   ],
   imports: [
     BrowserModule,

@@ -27,6 +27,7 @@ import {QiangpageComponent} from './qiangpage/qiangpage.component';
 import {FaqiComponent} from './kanjia/faqi/faqi.component';
 import {IndecComponent} from './kanjia/indec/indec.component';
 import {ComeComponent} from './kanjia/come/come.component';
+import {KanlistComponent} from './kanjia/kanlist/kanlist.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full'},
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'kjfaqi', component: FaqiComponent},
   { path: 'kjdec', component: IndecComponent},
   { path: 'kjcome', component: ComeComponent},
+  { path: 'kjlist', component: KanlistComponent},
   { path: '**', component: Code404Component},
 ];
 
