@@ -19,4 +19,8 @@ export class FaqiComponent implements OnInit, AfterContentInit {
       console.log($('.kanfriendmain').scrollTop(), $('.kanfriendmain').height());
     });
   }
+  showqs() {
+    const hrefTop = $('#indecbox').offset().top;
+    $(window).scrollTop(hrefTop);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-indec',
   templateUrl: './indec.component.html',
@@ -11,5 +11,8 @@ export class IndecComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  showqs() {
+    const hrefTop = $('#indecbox').offset().top;
+    $(window).scrollTop(hrefTop);
+  }
 }

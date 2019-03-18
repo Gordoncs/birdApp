@@ -2,6 +2,7 @@
   <div class="backicon">
     <img src="./assets/image/kanjia/back.png" alt="">
   </div>
+  <div class="huodongguize" (click)="showqs()"></div>
   <img src="./assets/image/kanjia/head.png" alt="">
   <div class="kanbox">
     <div class="prodinfo">
@@ -110,7 +111,7 @@
     </div>
   </div>
 
-  <div class="indecbox">
+  <div class="indecbox" id="indecbox">
     <img class="indecimg" style="margin-top: .2rem" src="./assets/image/kanjia/indec1.png" alt="">
     <img class="indecimg" src="./assets/image/kanjia/indec2.png" alt="">
     <div class="tree1">
@@ -128,7 +129,7 @@
 <div class="bottom">
   <div class="btns bgyellow" [routerLink]="['/index', {}]">平台首页</div>
   <div class="btns bggreen" [routerLink]="['/sharedpage', {'from': 'newergif'}]">砍价玩法</div>
-  <div class="btns" style="background: #204e3a" [routerLink]="['/sharedpage', {'from': 'newergif'}]">活动规则</div>
+  <div class="btns" style="background: #204e3a" (click)="showqs()">活动规则</div>
 </div>
 <div class="loadBox" style="display: none">
   <img  src='./assets/image/loading.gif' /> 努力加载中...

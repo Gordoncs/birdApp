@@ -360,3 +360,11 @@
   margin-right: 0.1rem;
   display: block;
 }
+.huodongguize{
+  width: 1.5rem;
+  height: .5rem;
+  position: absolute;
+  right: 0;
+  top: .2rem;
+  z-index: 1;
+}
