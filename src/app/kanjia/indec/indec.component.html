@@ -1,21 +1,15 @@
 <div class="kanjiabox flexcol">
-  <div class="backicon">
+  <div class="backicon" (click)="back()">
     <img src="./assets/image/kanjia/back.png" alt="">
   </div>
   <div class="huodongguize" (click)="showqs()"></div>
   <img src="./assets/image/kanjia/head.png" alt="">
   <div class="bigkanbox">
-    <div class="bigkanlist">
-      <img src="./assets/image/kanjia/kanlist1.png" alt="">
-    </div>
-    <div class="bigkanlist">
-      <img src="./assets/image/kanjia/kanlist2.png" alt="">
-    </div>
-    <div class="bigkanlist">
-      <img src="./assets/image/kanjia/kanlist3.png" alt="">
-    </div>
-    <div class="bigkanlist">
-      <img src="./assets/image/kanjia/kanlist4.png" alt="">
+    <div class="bigkanlist" *ngFor="let item of imgs">
+      <div class="leftimgbox" [routerLink]="['/goodsdetail', {'goodsId': item.goodsId}]">
+        <img src="{{item.activityPic}}" alt="">
+      </div>
+      <img class="futouimg" [routerLink]="['/kjfaqi', {'setid': item.activitySetupId}]" src="./assets/image/kanjia/futou.png" alt="">
     </div>
   </div>
   <div class="indecbox" id="indecbox">
@@ -34,3 +28,4 @@
   </div>
 </div>
 
+<app-alertbox></app-alertbox>

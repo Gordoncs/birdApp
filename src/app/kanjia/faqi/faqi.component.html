@@ -1,5 +1,5 @@
 <div class="kanjiabox flexcol">
-  <div class="backicon">
+  <div class="backicon" (click)="back()">
     <img src="./assets/image/kanjia/back.png" alt="">
   </div>
   <div class="huodongguize" (click)="showqs()"></div>
@@ -7,18 +7,18 @@
   <div class="kanbox">
     <div class="prodinfo">
       <div class="leftimg">
-        <img src="" alt="">
+        <img src="{{detailInfo.skuPic}}" alt="">
       </div>
       <div class="rightbox">
-        <div class="text">【逆龄抗衰】天庭饱满：淡化抬头纹、川字 纹，紧致额头--单品</div>
+        <div class="text">{{detailInfo.skuName}}</div>
         <div class="decs">
-          <div class="s1">￥380.00</div>
-          <div class="s2">23:59:59后砍价过期</div>
+          <div class="s1">￥{{detailInfo.skuPrice}}</div>
+          <div class="s2">{{timer}}后砍价过期</div>
         </div>
       </div>
     </div>
     <div class="jindubox">
-      <p>共1人已砍29.8元，还差359.8元</p>
+      <p>共{{detailInfo.count}}人已砍{{detailInfo.hasBargainMoney}}元，还差{{detailInfo.skuPrice*1 - detailInfo.hasBargainMoney*1}}元</p>
       <div class="line">
         <div class="wcline"></div>
       </div>
@@ -128,9 +128,10 @@
 </div>
 <div class="bottom">
   <div class="btns bgyellow" [routerLink]="['/index', {}]">平台首页</div>
-  <div class="btns bggreen" [routerLink]="['/sharedpage', {'from': 'newergif'}]">砍价玩法</div>
+  <div class="btns bggreen" (click)="showqs()">砍价玩法</div>
   <div class="btns" style="background: #204e3a" (click)="showqs()">活动规则</div>
 </div>
 <div class="loadBox" style="display: none">
   <img  src='./assets/image/loading.gif' /> 努力加载中...
 </div>
+<app-alertbox></app-alertbox>

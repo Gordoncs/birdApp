@@ -71,9 +71,22 @@
 }
 .bigkanlist{
   width: 100%;
+  border-radius: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background: #FFF;
+  margin-top: .2rem;
+  padding: .1rem 0 0 0 ;
 }
-.bigkanlist img{
-  width: 100%;
+.bigkanlist .leftimgbox{
+  width: 72%;
+  border-radius: 0.05rem;
+  border: 1px solid #f1d3af;
+}
+.futouimg{
+  width: 20% !important;
 }
 .huodongguize{
   width: 1.5rem;

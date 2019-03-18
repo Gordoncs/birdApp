@@ -36,8 +36,9 @@ export class UserConfigService {
    * 公共地址
    */
   // configUrl = 'https://mp.spbird.com';
-  configUrl = 'https://test.spbird.com';
+  // configUrl = 'https://test.spbird.com';
   // configUrl = 'http://test2.spbird.com';
+  configUrl = 'http://2404h43s81.wicp.vip';
   /**
    * 支付方式
    */
@@ -601,6 +602,41 @@ export class UserConfigService {
           return paytypeArr[i]['channelName'];
       }
     }
+  }
+
+  /**
+   * 查询砍价商品列表
+   */
+  bargainGoodsList(): Observable<any> {
+    return this.http.get(this.configUrl + '/bargain/goods/list', this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 砍价接口
+   */
+  bargain(bargainSetupId: any, bargainMemberId: any): Observable<any> {
+    const params = 'bargainSetupId=' + bargainSetupId + '&bargainMemberId=' + bargainMemberId ;
+    return this.http.post(this.configUrl + '/bargain', params, this.headoptionsPost)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 砍价详情
+   */
+  bargainDetail(bargainId: any): Observable<any> {
+    return this.http.get(this.configUrl + '/bargain/detail?bargainId=' + bargainId, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
   }
 }
 
