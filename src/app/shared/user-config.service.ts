@@ -527,7 +527,8 @@ export class UserConfigService {
               nonceStr: data.result.data.noncestr,
               signature: data.result.data.signature,
               jsApiList: ['scanQRCode', 'getLocation', 'uploadImage', 'chooseImage',
-                'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData']
+                'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData',
+                'onMenuShareAppMessage', 'onMenuShareTimeline']
             });
           } else {
             window.location.href = data.result.data;
@@ -632,6 +633,42 @@ export class UserConfigService {
    */
   bargainDetail(bargainId: any): Observable<any> {
     return this.http.get(this.configUrl + '/bargain/detail?bargainId=' + bargainId, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 查询帮砍团
+   */
+  bargainAssistor(bargainId: any, pageIndex: any, pageSize: any): Observable<any> {
+    const params = '?bargainId=' + bargainId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize ;
+    return this.http.get(this.configUrl + '/bargain/assistor' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 查询砍价top20排行榜
+   */
+  bargainTop(bargainId: any): Observable<any> {
+    const params = '?bargainId=' + bargainId ;
+    return this.http.get(this.configUrl + '/bargain/top' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+  /**
+   * 查询个人砍价列表
+   */
+  bargainPersonal(memberId: any): Observable<any> {
+    const params = '?memberId=' + memberId ;
+    return this.http.get(this.configUrl + '/bargain/personal' + params, this.headoptions)
       .pipe(
         retry(1),
         catchError(this.handleError),

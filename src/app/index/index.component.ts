@@ -141,6 +141,8 @@ export class IndexComponent implements OnInit, AfterContentInit {
                   this.router.navigate(['newercome']);
                 } else if (localStorage.getItem('fromPage')  === 'qiangpage') {
                   this.router.navigate(['qiangpage']);
+                } else if (localStorage.getItem('fromPage')  === 'kanjia') {
+                  this.router.navigate(['kjcome']);
                 } else {
                   const canshu = localStorage.getItem('canshu');
                   this.goWhere(canshu);
@@ -196,6 +198,8 @@ export class IndexComponent implements OnInit, AfterContentInit {
                 this.router.navigate(['newercome']);
               } else if (localStorage.getItem('fromPage')  === 'qiangpage') {
                 this.router.navigate(['qiangpage']);
+              } else if (localStorage.getItem('fromPage')  === 'kanjia') {
+                this.router.navigate(['kjcome']);
               } else {
                 const canshu = localStorage.getItem('fromPage');
                 this.goWhere(canshu);

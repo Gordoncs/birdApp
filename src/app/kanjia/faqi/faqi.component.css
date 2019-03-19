@@ -191,12 +191,12 @@
   height: 5.2rem;
   border-top: .015rem solid #fc6957;
   margin-top: -0.02rem;
-  display: flex;
   flex-direction: column;
   align-items: center;
   background: #ec4139;
   overflow: auto;
   overflow-x: hidden;
+  display: none;
 }
 .greenyeIcon{
   position: absolute;
@@ -367,4 +367,7 @@
   right: 0;
   top: .2rem;
   z-index: 1;
+}
+.show{
+  display: flex !important;
 }

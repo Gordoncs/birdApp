@@ -46,7 +46,8 @@ if (locationUrl.indexOf('?') > -1) {
           nonceStr: data.result.data.noncestr,
           signature: data.result.data.signature,
           jsApiList: ['scanQRCode', 'getLocation', 'uploadImage', 'chooseImage',
-            'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData']
+            'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData',
+            'onMenuShareAppMessage', 'onMenuShareTimeline']
         });
         wx.ready(function() {
           wx.getLocation({
@@ -95,7 +96,8 @@ if (locationUrl.indexOf('?') > -1) {
           nonceStr: data.result.data.noncestr,
           signature: data.result.data.signature,
           jsApiList: ['scanQRCode', 'getLocation', 'uploadImage', 'chooseImage',
-            'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData']
+            'chooseWXPay', 'updateAppMessageShareData', 'updateTimelineShareData',
+            'onMenuShareAppMessage', 'onMenuShareTimeline']
         });
         wx.ready(function() {
           wx.getLocation({

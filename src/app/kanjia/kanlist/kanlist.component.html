@@ -1,105 +1,25 @@
 <div class="kanjiabox">
-  <div class="backicon">
+  <div class="backicon"  (click)="back()">
     <img src="./assets/image/kanjia/back.png" alt="">
   </div>
   <img src="./assets/image/kanjia/head.png" alt="">
   <div class="kanboxbig" style="margin-top: -1.9rem">
-    <div class="kanbox">
+    <div class="kanbox" *ngFor="let item of kanlist">
       <div class="prodinfo">
         <div class="leftimg">
-          <img src="" alt="">
+          <img [src]="item.skuPic" alt="">
         </div>
         <div class="rightbox">
-          <div class="text">【逆龄抗衰】天庭饱满：淡化抬头纹、川字 纹，紧致额头--单品</div>
+          <div class="text">{{item.skuName}}</div>
           <div class="decs">
-            <div class="s1">￥380.00</div>
-            <div class="s2">23:59:59后砍价过期</div>
+            <div class="s1">￥{{item.skuPrice}}</div>
+            <div class="s2">{{item.timer}}后砍价过期</div>
           </div>
         </div>
       </div>
       <div class="detailbox">
         <div class="lefttext">
-          共 <span>1</span> 人已砍<span>29.8</span>元 &nbsp;&nbsp;&nbsp;&nbsp;现价 <span>599</span> 元
-        </div>
-        <div class="rightbtn">去下单</div>
-      </div>
-    </div>
-    <div class="kanbox">
-      <div class="prodinfo">
-        <div class="leftimg">
-          <img src="" alt="">
-        </div>
-        <div class="rightbox">
-          <div class="text">【逆龄抗衰】天庭饱满：淡化抬头纹、川字 纹，紧致额头--单品</div>
-          <div class="decs">
-            <div class="s1">￥380.00</div>
-            <div class="s2">23:59:59后砍价过期</div>
-          </div>
-        </div>
-      </div>
-      <div class="detailbox">
-        <div class="lefttext">
-          共 <span>1</span> 人已砍<span>29.8</span>元 &nbsp;&nbsp;&nbsp;&nbsp;现价 <span>599</span> 元
-        </div>
-        <div class="rightbtn">去下单</div>
-      </div>
-    </div>
-    <div class="kanbox">
-      <div class="prodinfo">
-        <div class="leftimg">
-          <img src="" alt="">
-        </div>
-        <div class="rightbox">
-          <div class="text">【逆龄抗衰】天庭饱满：淡化抬头纹、川字 纹，紧致额头--单品</div>
-          <div class="decs">
-            <div class="s1">￥380.00</div>
-            <div class="s2">23:59:59后砍价过期</div>
-          </div>
-        </div>
-      </div>
-      <div class="detailbox">
-        <div class="lefttext">
-          共 <span>1</span> 人已砍<span>29.8</span>元 &nbsp;&nbsp;&nbsp;&nbsp;现价 <span>599</span> 元
-        </div>
-        <div class="rightbtn">去下单</div>
-      </div>
-    </div>
-    <div class="kanbox">
-      <div class="prodinfo">
-        <div class="leftimg">
-          <img src="" alt="">
-        </div>
-        <div class="rightbox">
-          <div class="text">【逆龄抗衰】天庭饱满：淡化抬头纹、川字 纹，紧致额头--单品</div>
-          <div class="decs">
-            <div class="s1">￥380.00</div>
-            <div class="s2">23:59:59后砍价过期</div>
-          </div>
-        </div>
-      </div>
-      <div class="detailbox">
-        <div class="lefttext">
-          共 <span>1</span> 人已砍<span>29.8</span>元 &nbsp;&nbsp;&nbsp;&nbsp;现价 <span>599</span> 元
-        </div>
-        <div class="rightbtn">去下单</div>
-      </div>
-    </div>
-    <div class="kanbox">
-      <div class="prodinfo">
-        <div class="leftimg">
-          <img src="" alt="">
-        </div>
-        <div class="rightbox">
-          <div class="text">【逆龄抗衰】天庭饱满：淡化抬头纹、川字 纹，紧致额头--单品</div>
-          <div class="decs">
-            <div class="s1">￥380.00</div>
-            <div class="s2">23:59:59后砍价过期</div>
-          </div>
-        </div>
-      </div>
-      <div class="detailbox">
-        <div class="lefttext">
-          共 <span>1</span> 人已砍<span>29.8</span>元 &nbsp;&nbsp;&nbsp;&nbsp;现价 <span>599</span> 元
+          共 <span>{{item.count}}</span> 人已砍<span>{{item.hasBargainMoney}}</span>元 &nbsp;&nbsp;&nbsp;&nbsp;现价 <span>{{item.skuPrice*1 - item.hasBargainMoney*1}}</span> 元
         </div>
         <div class="rightbtn">去下单</div>
       </div>
