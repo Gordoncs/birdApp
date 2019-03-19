@@ -134,6 +134,12 @@ const getbaseMember = function() {
       }
     }
     localStorage.setItem('fromPage', savedata['frompage']);
+    // 砍价专用
+    const kanjson = {
+      'faqimemberid' : savedata['guideId'],
+      'kanjiaid' : savedata['kanjiaid']
+    };
+    localStorage.setItem('kanjiainfo', JSON.stringify(kanjson));
   }
   $.ajax({
     url: '/base/member',

@@ -6,7 +6,7 @@
   <img src="./assets/image/kanjia/head.png" alt="">
   <div class="kanbox">
     <div class="prodinfo">
-      <div class="leftimg">
+      <div class="leftimg" (click)="goGoodsDetail(detailInfo)">
         <img [src]="detailInfo.skuPic" alt="">
       </div>
       <div class="rightbox">
@@ -20,14 +20,14 @@
     <div class="jindubox">
       <p>共{{detailInfo.count}}人已砍{{detailInfo.hasBargainMoney}}元，还差{{detailInfo.skuPrice*1 - detailInfo.hasBargainMoney*1}}元</p>
       <div class="line">
-        <div class="wcline"></div>
+        <div class="wcline" ></div>
       </div>
     </div>
     <div class="kanbtn">
-      <div class="text">分享给好友，帮我砍一刀</div>
+      <div class="text" (click)="sharefn()">分享给好友，帮我砍一刀</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
-    <div class="kanbtn">
+    <div class="kanbtn" (click)="paychoseFn()">
       <div class="text">哇，好便宜了，我要下单！</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>

@@ -153,10 +153,14 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        if ( this.chosetype === '微信支付') {
-          this.wxpay(data.data);
+        if (data.data.payment) {
+          if ( this.chosetype === '微信支付') {
+            this.wxpay(data.data.orderId);
+          } else {
+            this.unionPay(data.data.orderId);
+          }
         } else {
-          this.unionPay(data.data);
+          this.router.navigate(['paystatus', {'res': true, 'orderNo': data.data.orderId, 'from': 'paysure'}]);
         }
       } else {
         this.alertBox.error(data['message']);

@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import * as $ from 'jquery';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -21,6 +21,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     skuPrice : 0,
     count : '',
     hasBargainMoney : 0,
+    percent: 0
   };
   public skuPic = '';
   public kantop: any;
@@ -29,11 +30,13 @@ export class FaqiComponent implements OnInit, AfterContentInit {
   public bargainId: any;
   public pages = 1;
   public memberInfo: any =  JSON.parse(localStorage.getItem('memberInfo'));
+  public chosetype = '微信支付';
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
 
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
-              private userConfigService: UserConfigService, private TongXin: TongxinService) {
+              private userConfigService: UserConfigService, private TongXin: TongxinService, private changeDetectorRef: ChangeDetectorRef,
+              private zone: NgZone) {
   }
 
   ngOnInit() {
@@ -42,12 +45,12 @@ export class FaqiComponent implements OnInit, AfterContentInit {
       this.activitySetupId = params['setid']
     );
     this.bargain();
-
+    this.getchosepaytypeClickIt();
     // const title = this.memberInfo.nickname + '已经为您买单，科技美容免费选，速戳！！';
     // const desc = '逆龄抗衰、塑形体雕、净体脱毛等15项任选其一，单已买，就差您来了。';
-    // const link = this.userConfigService.configUrl + '/g/index.html?authCode=' + this.memberInfo.authCode +
-    //   '&guideId=' + localStorage.getItem('memberId') +
-    //   '&frompage=newerdec';
+    const link = this.userConfigService.configUrl + '/g/index.html?authCode=' + this.memberInfo.authCode +
+      '&guideId=' + localStorage.getItem('memberId') + '&kanjiaid=' + this.bargainId +
+      '&frompage=kanjia';
     // const imgUrl = this.memberInfo.headimgurl;
     // this.wxupdateAppMessageShareData(title, desc, link, imgUrl);
     // this.wxupdateTimelineShareData(title, desc, link, imgUrl);
@@ -56,7 +59,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
   ngAfterContentInit() {
     const t = this;
     $('.bangkanboxs').on('touchend', function (e) {
-      if ($('.bangkanboxs').scrollTop() + $('.kanfriendmain').height() >= $('.kanfriendmain').height()) {
+      if ($('.bangkanboxs').scrollTop() + $('.kanfriendmain').height() > $('.kanfriendmain').height()) {
         t.pages = t.pages + 1;
         t.bargainAssistor(t.bargainId, t.pages, 5);
       }
@@ -82,10 +85,11 @@ export class FaqiComponent implements OnInit, AfterContentInit {
         t.bargainTop(data.data['bargainId']);
         t.bargainAssistor(data.data['bargainId'], 1 , 5);
       } else {
-        this.alertBox.error(data['message']);
-        setTimeout(function () {
-          // t.router.navigate(['/index']);
-        }, 3000);
+        // this.alertBox.error(data['message']);
+        t.bargainId = data.data['bargainId'];
+        t.bargainDetail(data.data['bargainId']);
+        t.bargainTop(data.data['bargainId']);
+        t.bargainAssistor(data.data['bargainId'], 1 , 5);
       }
     });
   }
@@ -99,6 +103,8 @@ export class FaqiComponent implements OnInit, AfterContentInit {
       if (data['result']) {
         this.detailInfo = data.data;
         this.skuPic = data.data.skuPic;
+        this.detailInfo.percent = data.data.hasBargainMoney / data.data.skuPrice * 100;
+        $('.wcline').css('width', this.detailInfo.percent + '%');
         this.countTime(data.data.currentTime, data.data.expireTime);
       } else {
         this.alertBox.error(data['message']);
@@ -123,7 +129,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
       mm = t.checkTime(mm);
       ss = t.checkTime(ss);
       if (ts > 0) {
-        t.timer = dd + '天' + hh + '时' + mm + '分' + ss + '秒';
+        t.timer = 0 + '天' + hh + '时' + mm + '分' + ss + '秒';
         startTime++;
       } else if (ts < 0) {
         t.timer = '00:00:00';
@@ -216,5 +222,153 @@ export class FaqiComponent implements OnInit, AfterContentInit {
         // 用户点击了分享后执行的回调函数
       }
     });
+  }
+  paychoseFn() {
+    this.alertBox.chosepayFn(1);
+    // this.wxpay(item.id);
+  }
+  payFn() {
+    const sku = [this.detailInfo['skuId']];
+    const type = 3;
+    const order = {
+      'memberId':  localStorage.getItem('memberId'),
+      'storeId': JSON.parse(localStorage.getItem('storeInfo'))['id'],
+      'orderRemark': '',
+      'subscribePhone': '',
+      'linkman': '',
+      'discountPriceAmout': null,
+    };
+    const discounts = {
+      'id': this.bargainId,
+      'authCode': ''
+    };
+    this.alertBox.load();
+    this.userConfigService.checkoutAdd(sku, type, order, discounts).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        if (data.data.payment) {
+          if ( this.chosetype === '微信支付') {
+            this.wxpay(data.data.orderId);
+          } else {
+            this.unionPay(data.data.orderId);
+          }
+        } else {
+          this.zone.run(() => {
+            this.router.navigate(['paystatus', {'res': true, 'orderNo': data.data.orderId, 'from': 'paysure'}]);
+          });
+        }
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  wxpay(orderId) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.paymentWechatPrepay(orderId).
+    subscribe(data => {
+      console.log(data);
+      this.alertBox.close();
+      if (data['result']) {
+        wx.chooseWXPay({
+          timestamp: data.paySignMap.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          nonceStr: data.paySignMap.nonceStr, // 支付签名随机串，不长于 32 位
+          package: data.paySignMap.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+          signType: data.paySignMap.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          paySign: data.paySignMap.paySign, // 支付签名
+          success: function (res) {
+            if (res.errMsg === 'chooseWXPay:ok' ) {
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': true, 'orderNo': orderId, 'from': 'paysure'}]);
+              });
+            } else {
+              t.zone.run(() => {
+                t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure' }]);
+              });
+            }
+            t.changeDetectorRef.markForCheck();
+            t.changeDetectorRef.detectChanges();
+          },
+          cancel: function(res) {
+            t.zone.run(() => {
+              t.router.navigate(['paystatus', {'res': false, 'orderNo': orderId, 'from': 'paysure'}]);
+            });
+            t.changeDetectorRef.markForCheck();
+            t.changeDetectorRef.detectChanges();
+          }
+        });
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  unionPay(orderId) {
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.unionPay(orderId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        // window.location.href = data.data;
+        const url = data.data.frontConsumeUrl;
+        const oldjson = data.data.paySgin;
+        const postparms = [];
+        for (const key of Object.keys(oldjson)) {
+          const json = {'name': key, 'value': oldjson[key]};
+          postparms.push(json);
+        }
+        setTimeout(function () {
+          t.fromPost(url, postparms);
+        }, 500);
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
+  }
+  /**
+   * post模拟提交表单
+   */
+  fromPost(URL, PARAMTERS) {
+    const t = this;
+    t.alertBox.load();
+    // 创建form表单
+    const temp_form = document.createElement('form');
+    temp_form.action = URL;
+    // 如需打开新窗口，form的target属性要设置为'_blank'
+    // temp_form.target = '_blank';
+    temp_form.method = 'post';
+    temp_form.style.display = 'none';
+    // 添加参数
+    for (const item of  Object.keys(PARAMTERS)) {
+      const opt = document.createElement('input');
+      opt.name = PARAMTERS[item].name;
+      opt.value = PARAMTERS[item].value;
+      temp_form.appendChild(opt);
+    }
+    document.body.appendChild(temp_form);
+    // return;
+    // 提交数据
+    setTimeout(function () {
+      // t.alertBox.close();
+      temp_form.submit();
+    }, 500);
+  }
+  public getchosepaytypeClickIt() {
+    this.TongXin.Status4$.subscribe(res => {
+      this.chosetype = res;
+      this.payFn();
+      // if (res === '微信支付') {
+      //   this.wxpay(this.daipayItem.id);
+      // } else {
+      //   this.unionPay(this.daipayItem.id);
+      // }
+    });
+  }
+  sharefn() {
+    alert('请点击右上角进行分享哦～');
+  }
+  goGoodsDetail(item) {
+    this.router.navigate(['/goodsdetail', item]);
   }
 }

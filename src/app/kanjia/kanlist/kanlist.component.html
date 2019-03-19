@@ -6,7 +6,7 @@
   <div class="kanboxbig" style="margin-top: -1.9rem">
     <div class="kanbox" *ngFor="let item of kanlist">
       <div class="prodinfo">
-        <div class="leftimg">
+        <div class="leftimg" (click)="goGoodsDetail(item)">
           <img [src]="item.skuPic" alt="">
         </div>
         <div class="rightbox">

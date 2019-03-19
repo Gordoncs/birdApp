@@ -75,4 +75,7 @@ export class KanlistComponent implements OnInit {
   back() {
     history.go(-1);
   }
+  goGoodsDetail(item) {
+    this.router.navigate(['/goodsdetail', item]);
+  }
 }

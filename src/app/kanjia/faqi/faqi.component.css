@@ -105,7 +105,6 @@
   margin-top: .2rem;
 }
 .wcline{
-  width: 60%;
   height: 100%;
   border-radius: .1rem;
   background: #fbd7b4;
@@ -235,6 +234,7 @@
   border-radius: .9rem;
   background: #FFF;
   margin-left: -0.2rem;
+  overflow: hidden;
 }
 .friendlist .headimg img{
   width: 100%;
@@ -300,7 +300,7 @@
   position: absolute;
   width: 1.44rem !important;
   height: 1.44rem !important;
-  right: 0.55rem;
+  right: 8%;
   top: 0.35rem;
   z-index: 1;
 }

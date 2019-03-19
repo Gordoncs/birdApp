@@ -142,7 +142,7 @@ export class IndexComponent implements OnInit, AfterContentInit {
                 } else if (localStorage.getItem('fromPage')  === 'qiangpage') {
                   this.router.navigate(['qiangpage']);
                 } else if (localStorage.getItem('fromPage')  === 'kanjia') {
-                  this.router.navigate(['kjcome']);
+                  this.router.navigate(['kjcome', JSON.parse(localStorage.getItem('kanjiainfo'))]);
                 } else {
                   const canshu = localStorage.getItem('canshu');
                   this.goWhere(canshu);

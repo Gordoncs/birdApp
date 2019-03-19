@@ -675,5 +675,17 @@ export class UserConfigService {
         tap(data => this.canGoHref(data))
       );
   }
+  /**
+   * 帮砍接口
+   */
+  bargainHelp(bargainId: any, bargainMemberId: any, assistorMemberId: any): Observable<any> {
+    const params = 'bargainId=' + bargainId + '&bargainMemberId=' + bargainMemberId + '&assistorMemberId=' + assistorMemberId;
+    return this.http.post(this.configUrl + '/bargain/help', params, this.headoptionsPost)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
 }
 
