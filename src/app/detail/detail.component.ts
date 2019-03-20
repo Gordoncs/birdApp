@@ -20,7 +20,7 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
   public  priceArr: any = [];
   public  choseSkuSpecId: any = [];
   public  choseSkuStyleId: any = [];
-  public  choseSku: any = '';
+  public  choseSku: any;
   public cartNum = 0 ;
   public fixed = false;
   public allDomHeight: any = 0;

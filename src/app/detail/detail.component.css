@@ -270,3 +270,17 @@
   bottom: 0px !important;
 }
 
+.kantip{
+  width: 1rem;
+  height: 1rem;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  margin-top: -0.5rem;
+  z-index: 3;
+  background: #050d01;
+  color: #FFF;
+  font-size: 14px;
+  text-align: center;
+  line-height: 1rem;
+}

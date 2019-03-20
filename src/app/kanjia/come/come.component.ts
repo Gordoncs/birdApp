@@ -24,7 +24,8 @@ export class ComeComponent implements OnInit, AfterContentInit {
     skuPrice : 0,
     count : '',
     hasBargainMoney : 0,
-    percent: 0
+    percent: 0,
+    activitySetupId: ''
   };
   public skuPic = '';
   public kantop: any;
