@@ -36,9 +36,9 @@ export class UserConfigService {
    * 公共地址
    */
   // configUrl = 'https://mp.spbird.com';
-  // configUrl = 'https://test.spbird.com';
+  configUrl = 'https://test.spbird.com';
   // configUrl = 'http://test2.spbird.com';
-  configUrl = 'http://2404h43s81.wicp.vip';
+  // configUrl = 'http://2404h43s81.wicp.vip';
   /**
    * 支付方式
    */
