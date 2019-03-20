@@ -57,7 +57,7 @@ export class KanlistComponent implements OnInit {
       mm = t.checkTime(mm);
       ss = t.checkTime(ss);
       if (ts > 0) {
-        obj.timer = dd + '天' + hh + '时' + mm + '分' + ss + '秒';
+        obj.timer = 0 + '天' + hh + '时' + mm + '分' + ss + '秒';
         startTime++;
       } else if (ts < 0) {
         obj.timer = '00:00:00';

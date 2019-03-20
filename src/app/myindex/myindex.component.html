@@ -40,10 +40,14 @@
       <img src="./assets/image/effect.png" alt="">
       <span>{{userInfo.influence}}</span>
     </div>
-    <div class="effectLuckList"  (click)="goEffectluck(2)">
+    <div class="effectLuckList"  [routerLink]="['/kjlist', {}]">
       <img src="./assets/image/luck.png" alt="">
       <span>{{userInfo.luckyIndex}}</span>
     </div>
+    <!--<div class="effectLuckList"  (click)="goEffectluck(2)">-->
+      <!--<img src="./assets/image/luck.png" alt="">-->
+      <!--<span>{{userInfo.luckyIndex}}</span>-->
+    <!--</div>-->
   </div>
 
   <div class="zeroShareBox" >
