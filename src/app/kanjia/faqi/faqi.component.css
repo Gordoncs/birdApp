@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1.12rem;
+  padding-bottom: 4.12rem;
 }
 .kanjiabox img{
   width: 100%;
@@ -289,12 +289,14 @@
 }
 .erweibox{
   width: 100%;
-  position: relative;
+  position: fixed;
+  left: 0;
+  bottom: 1.2rem;
+  z-index: 5;
 }
 .erweibg{
   display: block;
   width: 100%;
-  margin-bottom: .5rem;
 }
 .erweima{
   position: absolute;
@@ -370,4 +372,17 @@
 }
 .show{
   display: flex !important;
+}
+.yindaoimg ,.yindaoimgBg{
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.yindaoimgBg{
+  height: 100%;
+  z-index: 9 !important;
+  background: #000;
+  opacity: 0.6;
 }

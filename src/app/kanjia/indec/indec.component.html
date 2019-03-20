@@ -5,14 +5,14 @@
   <div class="huodongguize" (click)="showqs()"></div>
   <img src="./assets/image/kanjia/head.png" alt="">
   <div class="bigkanbox">
-    <div class="bigkanlist" *ngFor="let item of imgs">
-      <div class="leftimgbox" [routerLink]="['/goodsdetail', {'goodsId': item.goodsId}]">
+    <div class="bigkanlist" *ngFor="let item of imgs" [routerLink]="['/goodsdetail', {'goodsId': item.goodsId}]">
+      <div class="leftimgbox">
         <img src="{{item.activityPic}}" alt="">
       </div>
-      <img class="futouimg" [routerLink]="['/kjfaqi', {'setid': item.activitySetupId}]" src="./assets/image/kanjia/futou.png" alt="">
+      <img class="futouimg" src="./assets/image/kanjia/futou.png" alt="">
     </div>
   </div>
-  <div class="indecbox" id="indecbox">
+  <div class="indecbox" id="indecbox" style="margin-bottom: 4rem">
     <img class="indecimg" style="margin-top: .2rem" src="./assets/image/kanjia/indec1.png" alt="">
     <img class="indecimg" src="./assets/image/kanjia/indec2.png" alt="">
     <div class="tree1">

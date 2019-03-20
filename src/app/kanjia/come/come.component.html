@@ -50,7 +50,7 @@
       <div class="changetitlelist " [class.changetitlelistSel]="changetitle=='帮砍团'" (click)="changetitle = '帮砍团'">帮砍团</div>
       <div class="changetitlelist" [class.changetitlelistSel]="changetitle=='帮砍排行榜'" (click)="changetitle = '帮砍排行榜'">
         <span class="s1">砍价TOP20排行榜</span>
-        <span class="s2">（共XXXX人已完成砍价）</span>
+        <span class="s2">（共{{kantop.length}}人已完成砍价）</span>
       </div>
     </div>
     <div class="kanfriendmain bangkanboxs2" [class.show]="changetitle=='帮砍团'">
@@ -77,7 +77,7 @@
     </div>
   </div>
 
-  <div class="indecbox" id="indecbox">
+  <div class="indecbox" id="indecbox" style="margin-bottom: 3rem">
     <img class="indecimg" style="margin-top: .2rem" src="./assets/image/kanjia/indec1.png" alt="">
     <div class="tree1">
       <img src="./assets/image/kanjia/tree1.png" alt="">
@@ -107,7 +107,7 @@
   </div>
   <div class="kanresultclosebtn" (click)="iskan = false"></div>
   <div class="kanmoneyshow">
-    {{helpmoney}}
+    {{helpmoney | number:'2.2-2'}}
   </div>
 </div>
 <app-alertbox></app-alertbox>

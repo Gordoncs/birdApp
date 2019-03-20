@@ -86,21 +86,35 @@
   margin-left: 0.35rem;
   text-align: inherit;
 }
+/*.payBox{*/
+  /*width: 7rem;*/
+  /*height: 1.4rem;*/
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*justify-content: center;*/
+  /*position: relative;*/
+  /*z-index: 9;*/
+  /*margin-top: 0.38rem;*/
+  /*-moz-box-shadow:0rem 0.08rem 0.1rem #AEAEB0, 0.02rem 0rem 0.05rem #AEAEB0, -0.02rem 0rem 0.05rem #AEAEB0;*/
+  /*-webkit-box-shadow:0rem 0.08rem 0.1rem #AEAEB0, 0.02rem 0rem 0.05rem #AEAEB0, -0.02rem 0rem 0.05rem #AEAEB0;*/
+  /*box-shadow:0rem 0.08rem 0.1rem #AEAEB0, 0.02rem 0rem 0.05rem #AEAEB0, -0.02rem 0rem 0.05rem #AEAEB0;*/
+/*}*/
+/*.payBox img{*/
+  /*width: 7rem;*/
+  /*height: 100%;*/
+/*}*/
 .payBox{
-  width: 7rem;
-  height: 1.4rem;
+  width: 7.2rem;
+  height: 1.57rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
   position: relative;
   z-index: 9;
   margin-top: 0.38rem;
-  -moz-box-shadow:0rem 0.08rem 0.1rem #AEAEB0, 0.02rem 0rem 0.05rem #AEAEB0, -0.02rem 0rem 0.05rem #AEAEB0;
-  -webkit-box-shadow:0rem 0.08rem 0.1rem #AEAEB0, 0.02rem 0rem 0.05rem #AEAEB0, -0.02rem 0rem 0.05rem #AEAEB0;
-  box-shadow:0rem 0.08rem 0.1rem #AEAEB0, 0.02rem 0rem 0.05rem #AEAEB0, -0.02rem 0rem 0.05rem #AEAEB0;
 }
 .payBox img{
-  width: 7rem;
+  width: 100%;
   height: 100%;
 }
 

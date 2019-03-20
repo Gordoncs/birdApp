@@ -23,6 +23,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     hasBargainMoney : 0,
     percent: 0
   };
+  public sharetips = false;
   public skuPic = '';
   public kantop: any;
   public bangkan = [];
@@ -46,14 +47,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     );
     this.bargain();
     this.getchosepaytypeClickIt();
-    // const title = this.memberInfo.nickname + '已经为您买单，科技美容免费选，速戳！！';
-    // const desc = '逆龄抗衰、塑形体雕、净体脱毛等15项任选其一，单已买，就差您来了。';
-    const link = this.userConfigService.configUrl + '/g/index.html?authCode=' + this.memberInfo.authCode +
-      '&guideId=' + localStorage.getItem('memberId') + '&kanjiaid=' + this.bargainId +
-      '&frompage=kanjia';
-    // const imgUrl = this.memberInfo.headimgurl;
-    // this.wxupdateAppMessageShareData(title, desc, link, imgUrl);
-    // this.wxupdateTimelineShareData(title, desc, link, imgUrl);
+
   }
 
   ngAfterContentInit() {
@@ -84,12 +78,14 @@ export class FaqiComponent implements OnInit, AfterContentInit {
         t.bargainDetail(data.data['bargainId']);
         t.bargainTop(data.data['bargainId']);
         t.bargainAssistor(data.data['bargainId'], 1 , 5);
+        t.setsharefn();
       } else {
         // this.alertBox.error(data['message']);
         t.bargainId = data.data['bargainId'];
         t.bargainDetail(data.data['bargainId']);
         t.bargainTop(data.data['bargainId']);
         t.bargainAssistor(data.data['bargainId'], 1 , 5);
+        t.setsharefn();
       }
     });
   }
@@ -370,5 +366,15 @@ export class FaqiComponent implements OnInit, AfterContentInit {
   }
   goGoodsDetail(item) {
     this.router.navigate(['/goodsdetail', item]);
+  }
+  setsharefn() {
+    const title = '我在砍价做美容，就差你1刀了！帮个忙哦！！';
+    const desc = '由春鸟国际为粉丝提供的超值福利，全城覆盖，绝无隐消，无需剁手，遇见更美的你。';
+    const link = this.userConfigService.configUrl + '/g/index.html?authCode=' + this.memberInfo.authCode +
+      '&guideId=' + localStorage.getItem('memberId') + '&kanjiaid=' + this.bargainId +
+      '&frompage=kanjia';
+    const imgUrl = this.memberInfo.headimgurl;
+    this.wxupdateAppMessageShareData(title, desc, link, imgUrl);
+    this.wxupdateTimelineShareData(title, desc, link, imgUrl);
   }
 }

@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="kanbtn">
-      <div class="text" (click)="sharefn()">分享给好友，帮我砍一刀</div>
+      <div class="text" (click)="sharetips = true">分享给好友，帮我砍一刀</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
     <div class="kanbtn" (click)="paychoseFn()">
@@ -44,7 +44,7 @@
       <div class="changetitlelist " [class.changetitlelistSel]="changetitle=='帮砍团'" (click)="changetitle = '帮砍团'">帮砍团</div>
       <div class="changetitlelist" [class.changetitlelistSel]="changetitle=='帮砍排行榜'" (click)="changetitle = '帮砍排行榜'">
         <span class="s1">砍价TOP20排行榜</span>
-        <span class="s2">（共XXXX人已完成砍价）</span>
+        <span class="s2">（共{{kantop.length}}人已完成砍价）</span>
       </div>
     </div>
     <div class="kanfriendmain bangkanboxs" [class.show]="changetitle=='帮砍团'">
@@ -81,10 +81,10 @@
       <img src="./assets/image/kanjia/tree2.png" alt="">
     </div>
   </div>
-  <div class="erweibox">
-    <img class="erweibg" src="./assets/image/kanjia/erweibg.png" alt="">
-    <img class="erweima" src="./assets/image/gongzhongerwei.jpeg" alt="">
-  </div>
+</div>
+<div class="erweibox">
+  <img class="erweibg" src="./assets/image/kanjia/erweibg.png" alt="">
+  <img class="erweima" src="./assets/image/gongzhongerwei.jpeg" alt="">
 </div>
 <div class="bottom">
   <div class="btns bgyellow" [routerLink]="['/index', {}]">平台首页</div>
@@ -94,4 +94,6 @@
 <div class="loadBox" style="display: none">
   <img  src='./assets/image/loading.gif' /> 努力加载中...
 </div>
+<div class="yindaoimgBg" *ngIf="sharetips" (click)="sharetips=false"></div>
+<img class="yindaoimg" *ngIf="sharetips" (click)="sharetips=false" src="./assets/image/kanjia/yindao.png" alt="">
 <app-alertbox></app-alertbox>

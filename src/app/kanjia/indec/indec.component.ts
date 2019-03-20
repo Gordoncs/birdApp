@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, OnInit, ViewChild, } from '@angular/core';
 import * as $ from 'jquery';
 import {AlertboxComponent} from '../../alertbox/alertbox.component';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -11,7 +11,7 @@ import wx from 'weixin-js-sdk';
   templateUrl: './indec.component.html',
   styleUrls: ['./indec.component.css']
 })
-export class IndecComponent implements OnInit {
+export class IndecComponent implements OnInit, AfterContentInit {
   public imgs: any;
 // 弹框显示
   @ViewChild(AlertboxComponent)
@@ -22,6 +22,8 @@ export class IndecComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('春鸟科美-砍价介绍页');
     this.bargainGoodsList();
+  }
+  ngAfterContentInit() {
   }
   showqs() {
     const hrefTop = $('#indecbox').offset().top;
