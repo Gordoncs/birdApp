@@ -32,6 +32,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
   public pages = 1;
   public memberInfo: any =  JSON.parse(localStorage.getItem('memberInfo'));
   public chosetype = '微信支付';
+  public subscribe = false;
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
 
@@ -376,5 +377,18 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     const imgUrl = this.memberInfo.headimgurl;
     this.wxupdateAppMessageShareData(title, desc, link, imgUrl);
     this.wxupdateTimelineShareData(title, desc, link, imgUrl);
+  }
+  baseMemberInfo() {
+    const memberId = localStorage.getItem('memberId');
+    this.alertBox.load();
+    this.userConfigService.baseMemberInfo(memberId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.subscribe = data['data'].subscribe;
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
   }
 }

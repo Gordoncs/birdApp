@@ -687,5 +687,19 @@ export class UserConfigService {
         tap(data => this.canGoHref(data))
       );
   }
+
+  /**
+   * 根据用户Id获取用户信息
+   */
+  baseMemberInfo(memberId: any): Observable<any> {
+    const params = '?memberId=' + memberId ;
+    return this.http.get(this.configUrl + '/base/member/info' + params, this.headoptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        tap(data => this.canGoHref(data))
+      );
+  }
+
 }
 

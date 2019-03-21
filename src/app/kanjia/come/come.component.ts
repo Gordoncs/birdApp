@@ -36,6 +36,7 @@ export class ComeComponent implements OnInit, AfterContentInit {
   public memberInfo: any =  JSON.parse(localStorage.getItem('memberInfo'));
   public helpmoney = 0;
   public imgs: any;
+  public subscribe = false;
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
@@ -48,10 +49,13 @@ export class ComeComponent implements OnInit, AfterContentInit {
       this.fromJson = params
     );
     localStorage.setItem('kanjiainfo', '');
+    localStorage.setItem('canshu', '');
+    localStorage.setItem('fromPage', '');
     this.bargainDetail(this.fromJson['kanjiaid']);
     this.bargainTop(this.fromJson['kanjiaid']);
     this.bargainAssistor(this.fromJson['kanjiaid'], 1 , 5);
     this.bargainGoodsList();
+    this.baseMemberInfo();
   }
   ngAfterContentInit() {
     const t = this;
@@ -177,5 +181,18 @@ export class ComeComponent implements OnInit, AfterContentInit {
   }
   goGoodsDetail(item) {
     this.router.navigate(['/goodsdetail', item]);
+  }
+  baseMemberInfo() {
+    const memberId = localStorage.getItem('memberId');
+    this.alertBox.load();
+    this.userConfigService.baseMemberInfo(memberId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.subscribe = data['data'].subscribe;
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
   }
 }

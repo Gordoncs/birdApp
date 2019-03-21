@@ -13,6 +13,7 @@ import wx from 'weixin-js-sdk';
 })
 export class IndecComponent implements OnInit, AfterContentInit {
   public imgs: any;
+  public subscribe = false;
 // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -22,6 +23,7 @@ export class IndecComponent implements OnInit, AfterContentInit {
   ngOnInit() {
     this.titleService.setTitle('春鸟科美-砍价介绍页');
     this.bargainGoodsList();
+    this.baseMemberInfo();
   }
   ngAfterContentInit() {
   }
@@ -43,5 +45,18 @@ export class IndecComponent implements OnInit, AfterContentInit {
   }
   back() {
     history.go(-1);
+  }
+  baseMemberInfo() {
+    const memberId = localStorage.getItem('memberId');
+    this.alertBox.load();
+    this.userConfigService.baseMemberInfo(memberId).
+    subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.subscribe = data['data'].subscribe;
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
   }
 }
