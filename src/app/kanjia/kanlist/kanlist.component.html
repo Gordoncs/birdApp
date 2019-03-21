@@ -4,8 +4,8 @@
   </div>
   <img src="./assets/image/kanjia/head.png" alt="">
   <div class="kanboxbig" style="margin-top: -1.9rem">
-    <div class="kanbox" *ngFor="let item of kanlist" [routerLink]="['/kjfaqi', {'setid': item.activitySetupId}]">
-      <div class="prodinfo">
+    <div class="kanbox" *ngFor="let item of kanlist" >
+      <div class="prodinfo" [routerLink]="['/kjfaqi', {'setid': item.activitySetupId}]">
         <div class="leftimg" >
           <img [src]="item.skuPic" alt="">
         </div>
@@ -21,11 +21,20 @@
         <div class="lefttext">
           共 <span>{{item.count}}</span> 人已砍<span>{{item.hasBargainMoney}}</span>元 &nbsp;&nbsp;&nbsp;&nbsp;现价 <span>{{item.skuPrice*1 - item.hasBargainMoney*1}}</span> 元
         </div>
-        <div class="rightbtn">去下单</div>
+        <div class="rightbtn" (click)="showxiadanbox=true;detailInfo=item" *ngIf="item.isAddOrder==false">去下单</div>
+        <div class="rightbtn" [routerLink]="['/orderdetail', {id: item.orderId}]" *ngIf="item.isAddOrder==true">查看订单</div>
       </div>
     </div>
   </div>
 
 </div>
-
+<div *ngIf="showxiadanbox" class='blackBg'></div>
+<div *ngIf="showxiadanbox" class='luckConBox' style="background: #FFF;height: 4rem;justify-content: flex-start;margin-top: -2.5rem;z-index: 9999">
+  <div class="textBox" style="margin-top: 0.65rem;    font-size: .3rem;
+    color: #000;">
+    是否确认结束本次砍价，马上下单购买？
+  </div>
+  <div class="sureBtn" style="border: 1px solid #d8d8d8;border-radius: 5px;"  (click)="showxiadanbox = false">再等等</div>
+  <div class="sureBtn" style="border: 1px solid #d8d8d8;border-radius: 5px;bottom: 1.6rem;color: #deb95f;"  (click)="payFn()">我要去下单</div>
+</div>
 <app-alertbox></app-alertbox>

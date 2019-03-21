@@ -368,7 +368,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     const link = this.userConfigService.configUrl + '/g/index.html?authCode=' + this.memberInfo.authCode +
       '&guideId=' + localStorage.getItem('memberId') + '&kanjiaid=' + this.bargainId +
       '&frompage=kanjia';
-    const imgUrl = this.memberInfo.headimgurl;
+    const imgUrl = 'http://img2.spbird.com/bargain/share.jpg';
     this.wxupdateAppMessageShareData(title, desc, link, imgUrl);
     this.wxupdateTimelineShareData(title, desc, link, imgUrl);
   }
