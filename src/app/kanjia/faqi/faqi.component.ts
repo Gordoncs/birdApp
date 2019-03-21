@@ -33,6 +33,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
   public memberInfo: any =  JSON.parse(localStorage.getItem('memberInfo'));
   public chosetype = '微信支付';
   public subscribe = false;
+  public payorderId: any;
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
 
@@ -48,7 +49,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     );
     this.bargain();
     this.getchosepaytypeClickIt();
-
+    this.baseMemberInfo();
   }
 
   ngAfterContentInit() {
@@ -245,11 +246,8 @@ export class FaqiComponent implements OnInit, AfterContentInit {
       this.alertBox.close();
       if (data['result']) {
         if (data.data.payment) {
-          if ( this.chosetype === '微信支付') {
-            this.wxpay(data.data.orderId);
-          } else {
-            this.unionPay(data.data.orderId);
-          }
+          this.payorderId = data.data.orderId;
+          this.paychoseFn();
         } else {
           this.zone.run(() => {
             this.router.navigate(['paystatus', {'res': true, 'orderNo': data.data.orderId, 'from': 'paysure'}]);
@@ -354,16 +352,12 @@ export class FaqiComponent implements OnInit, AfterContentInit {
   public getchosepaytypeClickIt() {
     this.TongXin.Status4$.subscribe(res => {
       this.chosetype = res;
-      this.payFn();
-      // if (res === '微信支付') {
-      //   this.wxpay(this.daipayItem.id);
-      // } else {
-      //   this.unionPay(this.daipayItem.id);
-      // }
+      if ( this.chosetype === '微信支付') {
+        this.wxpay(this.payorderId);
+      } else {
+        this.unionPay(this.payorderId);
+      }
     });
-  }
-  sharefn() {
-    alert('请点击右上角进行分享哦～');
   }
   goGoodsDetail(item) {
     this.router.navigate(['/goodsdetail', item]);
