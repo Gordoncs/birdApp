@@ -447,5 +447,5 @@
   text-align: center;
 }
 .show{
-  display: flex !important;
+  display: block !important;
 }
