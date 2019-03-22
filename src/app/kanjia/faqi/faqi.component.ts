@@ -34,6 +34,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
   public chosetype = '微信支付';
   public subscribe = false;
   public payorderId: any;
+  public showxiadanbox = false;
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
 
@@ -247,7 +248,8 @@ export class FaqiComponent implements OnInit, AfterContentInit {
       if (data['result']) {
         if (data.data.payment) {
           this.payorderId = data.data.orderId;
-          this.paychoseFn();
+          // this.paychoseFn();
+          this.router.navigate(['orderdetail', {id: data.data.orderId}]);
         } else {
           this.zone.run(() => {
             this.router.navigate(['paystatus', {'res': true, 'orderNo': data.data.orderId, 'from': 'paysure'}]);

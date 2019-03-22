@@ -27,7 +27,7 @@
       <div class="text" (click)="sharetips = true">分享给好友，帮我砍一刀</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
-    <div class="kanbtn" (click)="payFn()">
+    <div class="kanbtn" (click)="showxiadanbox=true;">
       <div class="text">哇，好便宜了，我要下单！</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
@@ -96,4 +96,14 @@
 </div>
 <div class="yindaoimgBg" *ngIf="sharetips" (click)="sharetips=false"></div>
 <img class="yindaoimg" *ngIf="sharetips" (click)="sharetips=false" src="./assets/image/kanjia/yindao.png" alt="">
+
+<div *ngIf="showxiadanbox" class='blackBg'></div>
+<div *ngIf="showxiadanbox" class='luckConBox' style="background: #FFF;height: 4rem;justify-content: flex-start;margin-top: -2.5rem;z-index: 9999">
+  <div class="textBox" style="margin-top: 0.65rem;    font-size: .3rem;
+    color: #000;">
+    是否确认结束本次砍价，马上下单购买？
+  </div>
+  <div class="sureBtn" style="border: 1px solid #d8d8d8;border-radius: 5px;"  (click)="showxiadanbox = false">再等等</div>
+  <div class="sureBtn" style="border: 1px solid #d8d8d8;border-radius: 5px;bottom: 1.6rem;color: #deb95f;"  (click)="payFn()">我要去下单</div>
+</div>
 <app-alertbox></app-alertbox>
