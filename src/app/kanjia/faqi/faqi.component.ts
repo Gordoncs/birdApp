@@ -227,6 +227,15 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     // this.wxpay(item.id);
   }
   payFn() {
+    const skuId = {
+      'id': this.detailInfo['skuId'],
+      'goodsId': this.detailInfo['goodsId'],
+      'skuSpecId': this.detailInfo['skuSpecId'] || 0,
+      'skuStyleId': this.detailInfo['skuStyleId'] || 0,
+      'goodsType': this.detailInfo['goodsType '],
+    };
+    this.router.navigate(['/paysure', {'from': 'kanjia', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 3}]);
+    return;
     const sku = [this.detailInfo['skuId']];
     const type = 3;
     const order = {

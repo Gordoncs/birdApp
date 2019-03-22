@@ -64,6 +64,8 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
       this.checkoutOutrightPurchase();
     } else if ( this.fromData['from'] === 'qianggou') {
       this.checkoutOutrightPurchase();
+    } else if ( this.fromData['from'] === 'kanjia') {
+      this.checkoutOutrightPurchase();
     }
     this.paystyleArr = this.userConfigService.paystyleArr();
   }
