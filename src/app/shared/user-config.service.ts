@@ -213,7 +213,7 @@ export class UserConfigService {
   checkoutOutrightPurchase(memberId: any, storeId: any, type: any, sku: any): Observable<any> {
     const params = 'memberId=' + memberId + '&storeId=' + storeId + '&type=' + type + '&sku.id=' + sku.id
       + '&sku.goodsId=' + sku.goodsId + '&sku.skuSpecId=' + sku.skuSpecId + '&sku.skuStyleId=' + sku.skuStyleId
-      + '&sku.goodsType=' + sku.goodsType;
+      + '&sku.goodsType=' + sku.goodsType + '&sku.bargainId=' + sku.bargainId || '';
     return this.http.post(this.configUrl + '/checkout/outrightPurchase', params, this.headoptionsPost)
       .pipe(
         retry(1),
