@@ -149,7 +149,13 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
     // const type = this.paySureInfo.type;
     const type = this.fromData['liuchengType'];
     const order = this.order;
-    const discounts = this.discounts;
+    let discounts = this.discounts;
+    if (this.fromData['from'] === 'kanjia') {
+      discounts = {
+        'id': JSON.parse(this.skuArr)['bargainId'],
+        'authCode': ''
+      };
+    }
     this.alertBox.load();
     this.userConfigService.checkoutAdd(sku, type, order, discounts).
     subscribe(data => {

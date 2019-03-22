@@ -21,7 +21,8 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     skuPrice : 0,
     count : '',
     hasBargainMoney : 0,
-    percent: 0
+    percent: 0,
+    addOrder: false
   };
   public sharetips = false;
   public skuPic = '';
