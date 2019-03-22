@@ -232,7 +232,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
       'goodsId': this.detailInfo['goodsId'],
       'skuSpecId': this.detailInfo['skuSpecId'] || 0,
       'skuStyleId': this.detailInfo['skuStyleId'] || 0,
-      'goodsType': this.detailInfo['goodsType '],
+      'goodsType': this.detailInfo['goodsType'],
     };
     this.router.navigate(['/paysure', {'from': 'kanjia', 'skuIdArr': JSON.stringify(skuId), 'liuchengType': 3}]);
     return;
