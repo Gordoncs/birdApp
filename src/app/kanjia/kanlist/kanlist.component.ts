@@ -28,7 +28,7 @@ export class KanlistComponent implements OnInit {
 
   ngOnInit() {
     this.bargainPersonal();
-    this.getchosepaytypeClickIt();
+    // this.getchosepaytypeClickIt();
   }
   // 砍价详情
   bargainPersonal() {
