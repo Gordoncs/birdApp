@@ -53,7 +53,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
       this.fromdata = params
     );
     this.activitySetupId = this.fromdata['setid'];
-    this.frombargainId = this.fromdata['bargainId'] || '';
+    this.frombargainId = this.fromdata['frombargainId'] || '';
     if (this.frombargainId) {
       this.bargainId = this.frombargainId;
       this.bargainDetail(this.frombargainId);
@@ -87,8 +87,9 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     const t = this;
     const bargainSetupId = this.activitySetupId;
     const bargainMemberId = localStorage.getItem('memberId') || 7;
+    const skuid = this.fromdata.skuid;
     this.alertBox.load();
-    this.userConfigService.bargain(bargainSetupId, bargainMemberId).subscribe(data => {
+    this.userConfigService.bargain(bargainSetupId, bargainMemberId, skuid).subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
         t.bargainId = data.data['bargainId'];

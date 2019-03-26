@@ -91,7 +91,7 @@
   <div class="addCarBtn"  (click)="cartAdd()" >加入购物车</div>
   <div class="payBtn"  (click)="goPaysure()">立即购买</div>
 </div>
-<div class="kantip" [routerLink]="['/kjfaqi', {'setid': choseSku.activitySetupId}]" *ngIf="choseSku.bargainBoolean">
+<div class="kantip" [routerLink]="['/kjfaqi', {'setid': choseSku.activitySetupId, 'skuid':choseSku.id}]" *ngIf="choseSku.bargainBoolean">
   <img src="./assets/image/kanjia/floatkan.png" alt="">
 </div>
 <app-alertbox></app-alertbox>

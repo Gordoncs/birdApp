@@ -619,8 +619,9 @@ export class UserConfigService {
   /**
    * 砍价接口
    */
-  bargain(bargainSetupId: any, bargainMemberId: any): Observable<any> {
-    const params = 'bargainSetupId=' + bargainSetupId + '&bargainMemberId=' + bargainMemberId ;
+  bargain(bargainSetupId: any, bargainMemberId: any, skuId: any): Observable<any> {
+    const params = 'bargainSetupId=' + bargainSetupId + '&bargainMemberId=' + bargainMemberId +
+      '&skuId=' + skuId ;
     return this.http.post(this.configUrl + '/bargain', params, this.headoptionsPost)
       .pipe(
         retry(1),
