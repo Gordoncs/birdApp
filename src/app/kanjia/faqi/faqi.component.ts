@@ -39,6 +39,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
   public tsstatus = true;
   public frombargainId = null;
   public fromdata = null;
+  public scrollTimer = null;
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
 
@@ -131,7 +132,7 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     // let startTime = 1508428800; // 开始时间
     // const endTime = 1508428860; // 结束时间
     const t = this;
-    setInterval(function () {
+    t.scrollTimer = setInterval(function () {
       const ts = (endTime - startTime); // 计算剩余的毫秒数
       let dd = parseInt((ts / 60 / 60 / 24).toString(), 10); // 计算剩余的天数
       let hh = parseInt((ts / 60 / 60 % 24).toString(), 10); // 计算剩余的小时数
@@ -147,6 +148,8 @@ export class FaqiComponent implements OnInit, AfterContentInit {
       } else if (ts < 0) {
         t.timer = '00:00:00';
         t.tsstatus = false;
+        window.clearInterval(t.scrollTimer);
+        t.scrollTimer = null;
         t.alertBox.error('活动已结束');
         // location.reload();
       }

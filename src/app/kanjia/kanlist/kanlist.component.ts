@@ -68,7 +68,7 @@ export class KanlistComponent implements OnInit {
         startTime++;
       } else if (ts < 0) {
         obj.timer = '00:00:00';
-        location.reload();
+        // location.reload();
       }
     }, 1000);
   }
