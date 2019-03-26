@@ -36,6 +36,9 @@ export class FaqiComponent implements OnInit, AfterContentInit {
   public subscribe = false;
   public payorderId: any;
   public showxiadanbox = false;
+  public tsstatus = true;
+  public frombargainId = null;
+  public fromdata = null;
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
 
@@ -47,11 +50,21 @@ export class FaqiComponent implements OnInit, AfterContentInit {
   ngOnInit() {
     this.titleService.setTitle('春鸟科美-砍价发起页');
     this.routerInfo.params.subscribe((params) =>
-      this.activitySetupId = params['setid']
+      this.fromdata = params
     );
-    this.bargain();
+    this.activitySetupId = this.fromdata['setid'];
+    this.frombargainId = this.fromdata['bargainId'] || '';
+    if (this.frombargainId) {
+      this.bargainId = this.frombargainId;
+      this.bargainDetail(this.frombargainId);
+      this.bargainTop(this.frombargainId);
+      this.bargainAssistor(this.frombargainId, 1 , 5);
+      this.setsharefn();
+    } else {
+      this.bargain();
+      this.baseMemberInfo();
+    }
     this.getchosepaytypeClickIt();
-    this.baseMemberInfo();
   }
 
   ngAfterContentInit() {
@@ -119,7 +132,6 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     const t = this;
     setInterval(function () {
       const ts = (endTime - startTime); // 计算剩余的毫秒数
-      // console.log(ts);
       let dd = parseInt((ts / 60 / 60 / 24).toString(), 10); // 计算剩余的天数
       let hh = parseInt((ts / 60 / 60 % 24).toString(), 10); // 计算剩余的小时数
       let mm = parseInt((ts / 60 % 60).toString(), 10); // 计算剩余的分钟数
@@ -133,7 +145,9 @@ export class FaqiComponent implements OnInit, AfterContentInit {
         startTime++;
       } else if (ts < 0) {
         t.timer = '00:00:00';
-        location.reload();
+        t.tsstatus = false;
+        t.alertBox.error('活动已结束');
+        // location.reload();
       }
     }, 1000);
   }

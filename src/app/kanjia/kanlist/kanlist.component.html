@@ -5,7 +5,7 @@
   <img src="./assets/image/kanjia/head.png" alt="">
   <div class="kanboxbig" style="margin-top: -1.9rem">
     <div class="kanbox" *ngFor="let item of kanlist" >
-      <div class="prodinfo" [routerLink]="['/kjfaqi', {'setid': item.activitySetupId}]">
+      <div class="prodinfo" [routerLink]="['/kjfaqi', {'setid': item.activitySetupId, 'frombargainId': item.id}]">
         <div class="leftimg" >
           <img [src]="item.skuPic" alt="">
         </div>

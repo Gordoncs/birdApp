@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="kanbtn">
-      <div class="text" (click)="sharetips = true">分享给好友，帮我砍一刀</div>
+      <div class="text" *ngIf="tsstatus" (click)="sharetips = true">分享给好友，帮我砍一刀</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
     <div class="kanbtn" *ngIf="detailInfo.addOrder==false" (click)="showxiadanbox=true;">
