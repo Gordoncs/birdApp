@@ -29,12 +29,12 @@
         <div class="wcline" ></div>
       </div>
     </div>
-    <div class="kanbtn"  (click)="bargainHelp()">
+    <div class="kanbtn"  (click)="bargainHelp()" *ngIf="tsstatus">
       <div class="text">帮好友砍一刀</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
     <div class="kanbtn">
-      <div class="text" [routerLink]="['/kjfaqi', {'setid': detailInfo.activitySetupId, 'skuid': detailInfo.skuId}]">与好友同享美，我也要发起砍价</div>
+      <div class="text" *ngIf="tsstatus" [routerLink]="['/kjfaqi', {'setid': detailInfo.activitySetupId, 'skuid': detailInfo.skuId}]">与好友同享美，我也要发起砍价</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
     <div class="litterIcon">

@@ -21,6 +21,7 @@ export class KanlistComponent implements OnInit {
   public chosetype = '微信支付';
   public detailInfo: any;
   public payorderId: any;
+  public scrollTimer = null;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService, private TongXin: TongxinService,
               private zone: NgZone, private changeDetectorRef: ChangeDetectorRef) {
@@ -52,7 +53,7 @@ export class KanlistComponent implements OnInit {
     // let startTime = 1508428800; // 开始时间
     // const endTime = 1508428860; // 结束时间
     const t = this;
-    setInterval(function () {
+    let scrollTimer = setInterval(function () {
       const ts = (endTime - startTime); // 计算剩余的毫秒数
       // console.log(ts);
       let dd = parseInt((ts / 60 / 60 / 24).toString(), 10); // 计算剩余的天数
@@ -67,7 +68,9 @@ export class KanlistComponent implements OnInit {
         obj.timer = 0 + '天' + hh + '时' + mm + '分' + ss + '秒';
         startTime++;
       } else if (ts < 0) {
-        obj.timer = '00:00:00';
+        obj.timer = '活动时间已结束';
+        window.clearInterval(scrollTimer);
+        scrollTimer = null;
         // location.reload();
       }
     }, 1000);

@@ -120,6 +120,8 @@ export class FaqiComponent implements OnInit, AfterContentInit {
         this.skuPic = data.data.skuPic;
         this.detailInfo.percent = data.data.hasBargainMoney / data.data.skuPrice * 100;
         $('.wcline').css('width', this.detailInfo.percent + '%');
+        window.clearInterval(t.scrollTimer);
+        t.scrollTimer = null;
         this.countTime(data.data.currentTime, data.data.expireTime);
       } else {
         this.alertBox.error(data['message']);

@@ -38,6 +38,8 @@ export class ComeComponent implements OnInit, AfterContentInit {
   public helpmoney = 0;
   public imgs: any;
   public subscribe = false;
+  public scrollTimer = null;
+  public tsstatus = true;
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
@@ -83,6 +85,8 @@ export class ComeComponent implements OnInit, AfterContentInit {
         this.skuPic = data.data.skuPic;
         this.detailInfo.percent = data.data.hasBargainMoney / data.data.skuPrice * 100;
         $('.wcline').css('width', this.detailInfo.percent + '%');
+        window.clearInterval(t.scrollTimer);
+        t.scrollTimer = null;
         this.countTime(data.data.currentTime, data.data.expireTime);
       } else {
         this.alertBox.error(data['message']);
@@ -94,9 +98,8 @@ export class ComeComponent implements OnInit, AfterContentInit {
     // let startTime = 1508428800; // 开始时间
     // const endTime = 1508428860; // 结束时间
     const t = this;
-    setInterval(function () {
+    t.scrollTimer = setInterval(function () {
       const ts = (endTime - startTime); // 计算剩余的毫秒数
-      // console.log(ts);
       let dd = parseInt((ts / 60 / 60 / 24).toString(), 10); // 计算剩余的天数
       let hh = parseInt((ts / 60 / 60 % 24).toString(), 10); // 计算剩余的小时数
       let mm = parseInt((ts / 60 % 60).toString(), 10); // 计算剩余的分钟数
@@ -110,7 +113,11 @@ export class ComeComponent implements OnInit, AfterContentInit {
         startTime++;
       } else if (ts < 0) {
         t.timer = '00:00:00';
-        location.reload();
+        t.tsstatus = false;
+        window.clearInterval(t.scrollTimer);
+        t.scrollTimer = null;
+        t.alertBox.error('活动已结束');
+        // location.reload();
       }
     }, 1000);
   }
