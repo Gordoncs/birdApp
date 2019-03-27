@@ -34,7 +34,7 @@
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
     <div class="kanbtn">
-      <div class="text" [routerLink]="['/kjfaqi', {'setid': detailInfo.activitySetupId}]">与好友同享美，我也要发起砍价</div>
+      <div class="text" [routerLink]="['/kjfaqi', {'setid': detailInfo.activitySetupId, 'skuid': detailInfo.skuId}]">与好友同享美，我也要发起砍价</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
     <div class="litterIcon">
@@ -84,11 +84,11 @@
     </div>
   </div>
   <div class="bigkanbox">
-    <div class="bigkanlist" *ngFor="let item of imgs">
-      <div class="leftimgbox" [routerLink]="['/goodsdetail', {'goodsId': item.goodsId}]">
+    <div class="bigkanlist" *ngFor="let item of imgs" [routerLink]="['/goodsdetail', {'goodsId': item.goodsId}]">
+      <div class="leftimgbox" >
         <img src="{{item.activityPic}}" alt="">
       </div>
-      <img class="futouimg" [routerLink]="['/kjfaqi', {'setid': item.activitySetupId}]" src="./assets/image/kanjia/futou.png" alt="">
+      <img class="futouimg"  src="./assets/image/kanjia/futou.png" alt="">
     </div>
   </div>
   <div class="erweibox" *ngIf="!subscribe">

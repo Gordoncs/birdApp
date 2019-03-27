@@ -25,7 +25,8 @@ export class ComeComponent implements OnInit, AfterContentInit {
     count : '',
     hasBargainMoney : 0,
     percent: 0,
-    activitySetupId: ''
+    activitySetupId: '',
+    skuId: ''
   };
   public skuPic = '';
   public kantop: any;
@@ -51,6 +52,7 @@ export class ComeComponent implements OnInit, AfterContentInit {
     localStorage.setItem('kanjiainfo', '');
     localStorage.setItem('canshu', '');
     localStorage.setItem('fromPage', '');
+    this.bargainId = this.fromJson['kanjiaid'];
     this.bargainDetail(this.fromJson['kanjiaid']);
     this.bargainTop(this.fromJson['kanjiaid']);
     this.bargainAssistor(this.fromJson['kanjiaid'], 1 , 5);

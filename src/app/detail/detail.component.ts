@@ -25,6 +25,8 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
   public fixed = false;
   public showgokanjia = true;
   public allDomHeight: any = 0;
+  public kanlist: any = [];
+  public showxiadanbox = false;
   // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
@@ -41,6 +43,7 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
     this.goodsId = this.fromGoods['goodsId'];
     this.getGoodsInfo(this.goodsId, JSON.parse(localStorage.getItem('storeInfo'))['id']);
     this.cartGetCartDetailNumber();
+    this.bargainPersonal();
   }
 
   ngAfterViewInit(): void {
@@ -228,9 +231,30 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
   }
   gokanjia() {
     if (this.choseSku.bargainBoolean) {
-      this.router.navigate(['/kjfaqi', {'setid': this.choseSku.activitySetupId, 'skuid': this.choseSku.id}]);
+      if (this.kanlist.length === 0) {
+        this.router.navigate(['/kjfaqi', {'setid': this.choseSku.activitySetupId, 'skuid': this.choseSku.id}]);
+      } else {
+        this.showxiadanbox = true;
+      }
     } else {
       this.alertBox.error('请选择产品进行砍价哦～');
     }
+  }
+  gokanjiahref() {
+    this.router.navigate(['/kjfaqi', {'setid': this.choseSku.activitySetupId, 'skuid': this.choseSku.id}]);
+  }
+  // 砍价详情
+  bargainPersonal() {
+    const bargainMemberId = localStorage.getItem('memberId') || 7;
+    const t = this;
+    this.alertBox.load();
+    this.userConfigService.bargainPersonal(bargainMemberId).subscribe(data => {
+      this.alertBox.close();
+      if (data['result']) {
+        this.kanlist = data.data;
+      } else {
+        this.alertBox.error(data['message']);
+      }
+    });
   }
 }

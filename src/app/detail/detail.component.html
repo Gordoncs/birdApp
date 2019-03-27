@@ -94,4 +94,13 @@
 <div class="kantip" (click)="gokanjia()"  *ngIf="showgokanjia">
   <img src="./assets/image/kanjia/floatkan.png" alt="">
 </div>
+<div *ngIf="showxiadanbox" class='blackBg'></div>
+<div *ngIf="showxiadanbox" class='luckConBox' style="background: #FFF;height: 4rem;justify-content: flex-start;margin-top: -2.5rem;z-index: 9999">
+  <div class="textBox" style="margin-top: 0.65rem;    font-size: .3rem;
+    color: #000;">
+    您已有砍价记录，是否继续砍价？
+  </div>
+  <div class="sureBtn" style="border: 1px solid #d8d8d8;border-radius: 5px;"  (click)="showxiadanbox = false">再等等</div>
+  <div class="sureBtn" style="border: 1px solid #d8d8d8;border-radius: 5px;bottom: 1.6rem;color: #deb95f;"  (click)="gokanjiahref()">我要砍价</div>
+</div>
 <app-alertbox></app-alertbox>
