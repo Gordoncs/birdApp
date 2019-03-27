@@ -23,6 +23,7 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
   public  choseSku: any = '';
   public cartNum = 0 ;
   public fixed = false;
+  public showgokanjia = true;
   public allDomHeight: any = 0;
   // 弹框显示
   @ViewChild(AlertboxComponent)
@@ -129,6 +130,7 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
         this.choseSku = this.detailInfo.sku[i];
       }
     }
+    this.showgokanjia =  this.choseSku.bargainBoolean;
   }
   cartAdd() {
     const memberId = localStorage.getItem('memberId');
@@ -222,6 +224,13 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
       if (this.detailInfo.sku[i].skuSpecId * 1 === item.skuSpecId * 1 && this.detailInfo.sku[i].skuStyleId * 1 === item.skuStyleId * 1) {
         this.choseSku = this.detailInfo.sku[i];
       }
+    }
+  }
+  gokanjia() {
+    if (this.choseSku.bargainBoolean) {
+      this.router.navigate(['/kjfaqi', {'setid': this.choseSku.activitySetupId, 'skuid': this.choseSku.id}]);
+    } else {
+      this.alertBox.error('请选择产品进行砍价哦～');
     }
   }
 }

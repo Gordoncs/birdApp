@@ -150,7 +150,7 @@ export class ComeComponent implements OnInit, AfterContentInit {
       }
     });
   }
-  // 帮砍团
+  // 帮砍一刀
   bargainHelp() {
     const bargainId = this.fromJson['kanjiaid'];
     const bargainMemberId = this.fromJson['faqimemberid'] || 7;
@@ -162,6 +162,10 @@ export class ComeComponent implements OnInit, AfterContentInit {
       if (data['result']) {
         this.iskan = true;
         this.helpmoney = data.data.bargainMoney;
+        this.bargainDetail(this.fromJson['kanjiaid']);
+        this.bargainTop(this.fromJson['kanjiaid']);
+        this.bangkan = [];
+        this.bargainAssistor(this.fromJson['kanjiaid'], 1 , 5);
       } else {
         this.alertBox.error(data['message']);
       }
