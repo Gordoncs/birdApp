@@ -46,13 +46,22 @@
     <div class="textBox">
       <span>金额合计：</span><span>￥ {{allMoney | number:'2.2-2'}}</span>
     </div>
-    <div class="textBox" style="border-bottom: 1px solid #e5e5e5 " *ngIf="order.discountPriceAmout">
-      <span>优惠方式：</span>
+    <div class="textBox" style="border-bottom: 1px solid #e5e5e5 " *ngIf="order.discountPriceAmout&&fromData['from']!=='kanjia'">
+      <span style="flex: 0 0 auto;">优惠方式：</span>
       <div class="cheapBox">
         <span class="name">内购券优惠-{{discounts.advisorName}}</span>
         <div class="name">
           -{{order.discountPriceAmout}}元
           <img src="./assets/image/closeIcon.png" (click)="clearDiscount()" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="textBox" style="border-bottom: 1px solid #e5e5e5 " *ngIf="order.discountPriceAmout&&fromData['from']==='kanjia'">
+      <span style="flex: 0 0 auto;">砍价优惠：</span>
+      <div class="cheapBox">
+        <span class="name"></span>
+        <div class="name">
+          -{{order.discountPriceAmout}}元
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import * as $ from 'jquery';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -12,75 +12,72 @@ import wx from 'weixin-js-sdk';
   templateUrl: './kanlist.component.html',
   styleUrls: ['./kanlist.component.css']
 })
-export class KanlistComponent implements OnInit {
+export class KanlistComponent implements OnInit, OnDestroy {
 
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;
   public kanlist: any;
+  public kanlists: any;
   public showxiadanbox = false;
   public chosetype = '微信支付';
   public detailInfo: any;
   public payorderId: any;
-  public scrollTimer = null;
+  pageTimer = {};
+  one$;
   constructor(private router: Router, private titleService: Title, private routerInfo: ActivatedRoute,
               private userConfigService: UserConfigService, private TongXin: TongxinService,
               private zone: NgZone, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    const t = this;
     this.bargainPersonal();
-    // this.getchosepaytypeClickIt();
+  }
+  ngOnDestroy() {
+    this.one$.unsubscribe();
+    const t = this;
+    for ( let i = 0 ; i < t.kanlist.length; i++) {
+      if (t.kanlist[i].interobj) {
+        clearInterval(t.kanlist[i].interobj);
+        t.kanlist[i].interobj = null;
+      }
+    }
   }
   // 砍价详情
   bargainPersonal() {
     const bargainMemberId = localStorage.getItem('memberId') || 7;
     const t = this;
     this.alertBox.load();
-    this.userConfigService.bargainPersonal(bargainMemberId).subscribe(data => {
+    this.one$ = this.userConfigService.bargainPersonal(bargainMemberId).subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        for ( let i = 0 ; i < data.data.length; i++) {
-          this.countTime(data.data[i].currentTime, data.data[i].expireTime, data.data[i]);
-        }
         this.kanlist = data.data;
+        for ( let i = 0 ; i < t.kanlist.length; i++) {
+          t.kanlist[i].interobj = null;
+          t.kanlist[i].interobj = setInterval(() => {
+            const ts = (t.kanlist[i].expireTime - t.kanlist[i].currentTime); // 计算剩余的毫秒数
+            const days = (ts) / 1000 / 60 / 60 / 24; // 获取天数
+            const daysRound = Math.floor(days);
+            const hours = (ts) / 1000 / 60 / 60 - (24 * daysRound); // 获取小时
+            const hoursRound = Math.floor(hours);
+            const minutes = (ts) / 1000 / 60 - (24 * 60 * daysRound) - (60 * hoursRound); // 获取分钟
+            const minutesRound = Math.floor(minutes);
+            const seconds = (ts) / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound); //获取秒钟
+            const secondsRound = Math.round(seconds);
+            if (ts > 0) {
+              t.kanlist[i].timer = daysRound + '天' + hoursRound + '时' + minutesRound + '分' + secondsRound + '秒';
+              t.kanlist[i].currentTime = t.kanlist[i].currentTime + 1000;
+            } else if (ts < 0) {
+              t.kanlist[i].timer = '活动时间已结束';
+              clearInterval(t.kanlist[i].interobj);
+              t.kanlist[i].interobj = null;
+            }
+          }, 1000);
+        }
       } else {
         this.alertBox.error(data['message']);
       }
     });
-  }
-  // 计算倒计时
-  countTime(startTime, endTime, obj) {
-    // let startTime = 1508428800; // 开始时间
-    // const endTime = 1508428860; // 结束时间
-    const t = this;
-    let scrollTimer = setInterval(function () {
-      const ts = (endTime - startTime); // 计算剩余的毫秒数
-      // console.log(ts);
-      let dd = parseInt((ts / 60 / 60 / 24).toString(), 10); // 计算剩余的天数
-      let hh = parseInt((ts / 60 / 60 % 24).toString(), 10); // 计算剩余的小时数
-      let mm = parseInt((ts / 60 % 60).toString(), 10); // 计算剩余的分钟数
-      let ss = parseInt((ts % 60).toString(), 10); // 计算剩余的秒数
-      dd = t.checkTime(dd);
-      hh = t.checkTime(hh);
-      mm = t.checkTime(mm);
-      ss = t.checkTime(ss);
-      if (ts > 0) {
-        obj.timer = 0 + '天' + hh + '时' + mm + '分' + ss + '秒';
-        startTime++;
-      } else if (ts < 0) {
-        obj.timer = '活动时间已结束';
-        window.clearInterval(scrollTimer);
-        scrollTimer = null;
-        // location.reload();
-      }
-    }, 1000);
-  }
-
-  checkTime(i) {
-    if (i <= 10) {
-      i = '0' + i;
-    }
-    return i;
   }
   back() {
     history.go(-1);

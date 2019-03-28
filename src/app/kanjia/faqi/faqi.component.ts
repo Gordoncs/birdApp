@@ -1,4 +1,4 @@
-import {AfterContentInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import * as $ from 'jquery';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -12,7 +12,7 @@ import wx from 'weixin-js-sdk';
   templateUrl: './faqi.component.html',
   styleUrls: ['./faqi.component.css']
 })
-export class FaqiComponent implements OnInit, AfterContentInit {
+export class FaqiComponent implements OnInit, AfterContentInit, OnDestroy {
   public changetitle: any = '帮砍团';
   public activitySetupId: any;
   public detailInfo = {
@@ -67,7 +67,11 @@ export class FaqiComponent implements OnInit, AfterContentInit {
     }
     this.getchosepaytypeClickIt();
   }
-
+  ngOnDestroy() {
+    const t = this;
+    clearInterval(t.scrollTimer);
+    t.scrollTimer = null;
+  }
   ngAfterContentInit() {
     const t = this;
     $('.bangkanboxs').on('touchend', function (e) {
@@ -120,50 +124,34 @@ export class FaqiComponent implements OnInit, AfterContentInit {
         this.skuPic = data.data.skuPic;
         this.detailInfo.percent = data.data.hasBargainMoney / data.data.skuPrice * 100;
         $('.wcline').css('width', this.detailInfo.percent + '%');
-        window.clearInterval(t.scrollTimer);
         t.scrollTimer = null;
-        this.countTime(data.data.currentTime, data.data.expireTime);
+        t.scrollTimer = setInterval(function () {
+          const ts = (data.data.expireTime - data.data.currentTime); // 计算剩余的毫秒数
+          const days = (ts) / 1000 / 60 / 60 / 24; // 获取天数
+          const daysRound = Math.floor(days);
+          const hours = (ts) / 1000 / 60 / 60 - (24 * daysRound); // 获取小时
+          const hoursRound = Math.floor(hours);
+          const minutes = (ts) / 1000 / 60 - (24 * 60 * daysRound) - (60 * hoursRound); // 获取分钟
+          const minutesRound = Math.floor(minutes);
+          const seconds = (ts) / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound); //获取秒钟
+          const secondsRound = Math.round(seconds);
+          if (ts > 0) {
+            t.timer = daysRound + '天' + hoursRound + '时' + minutesRound + '分' + secondsRound + '秒';
+            data.data.currentTime = data.data.currentTime + 1000;
+          } else if (ts < 0) {
+            t.timer = '00:00:00';
+            clearInterval(t.scrollTimer);
+            t.scrollTimer = null;
+            t.tsstatus = false;
+            t.alertBox.error('活动已结束');
+          }
+        }, 1000);
       } else {
         this.alertBox.error(data['message']);
       }
     });
   }
 
-  // 计算倒计时
-  countTime(startTime, endTime) {
-    // let startTime = 1508428800; // 开始时间
-    // const endTime = 1508428860; // 结束时间
-    const t = this;
-    t.scrollTimer = setInterval(function () {
-      const ts = (endTime - startTime); // 计算剩余的毫秒数
-      let dd = parseInt((ts / 60 / 60 / 24).toString(), 10); // 计算剩余的天数
-      let hh = parseInt((ts / 60 / 60 % 24).toString(), 10); // 计算剩余的小时数
-      let mm = parseInt((ts / 60 % 60).toString(), 10); // 计算剩余的分钟数
-      let ss = parseInt((ts % 60).toString(), 10); // 计算剩余的秒数
-      dd = t.checkTime(dd);
-      hh = t.checkTime(hh);
-      mm = t.checkTime(mm);
-      ss = t.checkTime(ss);
-      if (ts > 0) {
-        t.timer = 0 + '天' + hh + '时' + mm + '分' + ss + '秒';
-        startTime++;
-      } else if (ts < 0) {
-        t.timer = '00:00:00';
-        t.tsstatus = false;
-        window.clearInterval(t.scrollTimer);
-        t.scrollTimer = null;
-        t.alertBox.error('活动已结束');
-        // location.reload();
-      }
-    }, 1000);
-  }
-
-  checkTime(i) {
-    if (i <= 10) {
-      i = '0' + i;
-    }
-    return i;
-  }
   back() {
     history.go(-1);
   }

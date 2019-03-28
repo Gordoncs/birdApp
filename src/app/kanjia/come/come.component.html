@@ -77,13 +77,13 @@
     </div>
   </div>
 
-  <div class="indecbox" id="indecbox" style="margin-bottom: 3rem">
+  <div class="indecbox" id="indecbox" >
     <img class="indecimg" style="margin-top: .2rem" src="./assets/image/kanjia/indec1.png" alt="">
     <div class="tree1">
       <img src="./assets/image/kanjia/tree1.png" alt="">
     </div>
   </div>
-  <div class="bigkanbox">
+  <div class="bigkanbox" style="margin-bottom: 3rem">
     <div class="bigkanlist" *ngFor="let item of imgs" [routerLink]="['/goodsdetail', {'goodsId': item.goodsId}]">
       <div class="leftimgbox" >
         <img src="{{item.activityPic}}" alt="">

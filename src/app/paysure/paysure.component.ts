@@ -89,6 +89,7 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
         this.paySureInfo = data['data'];
         this.order.subscribePhone = this.paySureInfo.hisMobile;
         this.order.linkman = this.paySureInfo.hisName;
+        this.order.discountPriceAmout = this.paySureInfo.cartDetail[0].discountsPrice || null;
         this.getAllMoney();
       } else {
         this.alertBox.error(data['message']);
@@ -109,6 +110,7 @@ export class PaysureComponent implements OnInit, AfterContentInit, OnDestroy {
         this.paySureInfo = data['data'];
         this.order.subscribePhone = this.paySureInfo.hisMobile;
         this.order.linkman = this.paySureInfo.hisName;
+        this.order.discountPriceAmout = this.paySureInfo.cartDetail[0].discountsPrice || null;
         this.getAllMoney();
       } else {
         this.alertBox.error(data['message']);
