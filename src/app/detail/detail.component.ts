@@ -234,7 +234,17 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
       if (this.kanlist.length === 0) {
         this.router.navigate(['/kjfaqi', {'setid': this.choseSku.activitySetupId, 'skuid': this.choseSku.id}]);
       } else {
-        this.showxiadanbox = true;
+        let status = false;
+        for ( let i = 0; i < this.kanlist.length; i++) {
+          if (this.kanlist[i].addOrder === false) {
+            status = true;
+          }
+        }
+        if (status) {
+          this.showxiadanbox = true;
+        } else {
+          this.router.navigate(['/kjfaqi', {'setid': this.choseSku.activitySetupId, 'skuid': this.choseSku.id}]);
+        }
       }
     } else {
       this.alertBox.error('请选择产品进行砍价哦～');

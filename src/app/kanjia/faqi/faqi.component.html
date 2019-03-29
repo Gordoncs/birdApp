@@ -23,7 +23,7 @@
         <div class="wcline" ></div>
       </div>
     </div>
-    <div class="kanbtn" *ngIf="tsstatus" (click)="sharetips = true">
+    <div class="kanbtn" *ngIf="tsstatus&&detailInfo.addOrder==false" (click)="sharetips = true">
       <div class="text">分享给好友，帮我砍一刀</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
