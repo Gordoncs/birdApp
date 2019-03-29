@@ -83,7 +83,7 @@
       <img src="./assets/image/kanjia/tree1.png" alt="">
     </div>
   </div>
-  <div class="bigkanbox" style="margin-bottom: 3rem">
+  <div class="bigkanbox" style="margin-bottom: {{subscribe? '':'3rem'}}">
     <div class="bigkanlist" *ngFor="let item of imgs" [routerLink]="['/goodsdetail', {'goodsId': item.goodsId}]">
       <div class="leftimgbox" >
         <img src="{{item.activityPic}}" alt="">
