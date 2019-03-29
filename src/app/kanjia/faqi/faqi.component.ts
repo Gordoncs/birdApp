@@ -61,6 +61,7 @@ export class FaqiComponent implements OnInit, AfterContentInit, OnDestroy {
       this.bargainTop(this.frombargainId);
       this.bargainAssistor(this.frombargainId, 1 , 5);
       this.setsharefn();
+      this.baseMemberInfo();
     } else {
       this.bargain();
       this.baseMemberInfo();
