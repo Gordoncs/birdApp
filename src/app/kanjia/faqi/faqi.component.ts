@@ -22,7 +22,7 @@ export class FaqiComponent implements OnInit, AfterContentInit, OnDestroy {
     count : '',
     hasBargainMoney : 0,
     percent: 0,
-    addOrder: false
+    addOrder: 0
   };
   public sharetips = false;
   public skuPic = '';

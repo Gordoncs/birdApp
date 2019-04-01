@@ -236,7 +236,7 @@ export class DetailComponent implements OnInit, AfterViewInit, AfterContentInit 
       } else {
         let status = false;
         for ( let i = 0; i < this.kanlist.length; i++) {
-          if (this.kanlist[i].addOrder === false) {
+          if (this.kanlist[i].addOrder < 2) {
             status = true;
           }
         }
