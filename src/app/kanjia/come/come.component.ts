@@ -38,6 +38,7 @@ export class ComeComponent implements OnInit, AfterContentInit, OnDestroy {
   public helpmoney = 0;
   public imgs: any;
   public subscribe = false;
+  public showshuoming = false;
   public scrollTimer = null;
   public tsstatus = true;
   @ViewChild(AlertboxComponent)

@@ -176,3 +176,11 @@
   margin-left: -2.5rem;
   color: #333;
 }
+.huodongguize{
+  width: 1.5rem;
+  height: .5rem;
+  position: absolute;
+  right: 0;
+  top: .2rem;
+  z-index: 1;
+}

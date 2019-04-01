@@ -2,7 +2,7 @@
   <div class="backicon" (click)="back()">
     <img src="./assets/image/kanjia/back.png" alt="">
   </div>
-  <div class="huodongguize" (click)="showqs()"></div>
+  <div class="huodongguize" (click)="showshuoming=true"></div>
   <img src="./assets/image/kanjia/head.png" alt="">
   <div class="kanbox">
     <div class="prodinfo">
@@ -105,5 +105,26 @@
   </div>
   <div class="sureBtn" style="border: 1px solid #d8d8d8;border-radius: 5px;"  (click)="showxiadanbox = false">再等等</div>
   <div class="sureBtn" style="border: 1px solid #d8d8d8;border-radius: 5px;bottom: 1.6rem;color: #deb95f;"  (click)="payFn()">我要去下单</div>
+</div>
+
+<div class='blackBg' *ngIf="showshuoming"></div>
+<div class='luckConBox' *ngIf="showshuoming" style="background: #FFF;justify-content: flex-start;margin-top: -4.5rem;z-index: 9999">
+  <div class="textBox" style="    font-size: .22rem; color: #f1d3af;text-align: left;padding: .2rem">
+    <p>1.	活动时间2019年X月X日-2019年X年X日；</p>
+    <p>2.	砍价活动为春鸟粉丝专享，添加公众号进入春鸟线上平台即可参与；</p>
+    <p>3.	所有春鸟粉丝均可在平台中任意选择科技美容服务进入砍价活动页面发起砍价；</p>
+    <p>4.	粉丝可通过微信群、朋友圈分享砍价活动页面给好友助力砍价，将商品砍至一定金额（最低可砍至0元）；</p>
+    <p>5.	同一时间只能发起一个砍价活动，在该活动结束或成交后，可再次发起其他服务的砍价活动；</p>
+    <p>6.	发起砍价用户 将可以通过砍价活动，获得最终砍价后的优惠价格购买该服务的权限；</p>
+    <p>7.	用户通过砍价后购买的服务需在30天内在就近门店进行核销使用，逾期未核销视为自动放弃，购买服务的实付金额将在订单过期后原路退回；</p>
+    <p>8.	好友助力砍价只可为砍价发起者发起的单次砍价活动进行一次助力，重复砍价无效；</p>
+    <p>9.	同一好友可为同一砍价发起者累计砍价服务不超过3次，超出次数砍价无效；</p>
+    <p>10.	好友砍价为随机金额，助力者越多，累计砍掉金额越高；</p>
+    <p>11.	活动期间一切价格以平台实际价格为准，在服务环节中均不存在隐形消费，敬请监督！</p>
+    <p>12.	咨询和投诉电话：400-6886-525</p>
+    <p>13.	本活动秉承公平公正原则，严禁作弊，一经发现春鸟有权取消其已获得的优惠权限。</p>
+  </div>
+  <div style="width: .5rem;height: .5rem;border-radius: .5rem;background: #d8af60;color: #FFF;text-align: c
+;line-height: .5rem;position: absolute;right: -0.15rem;top: -0.15rem" (click)="showshuoming = false">X</div>
 </div>
 <app-alertbox></app-alertbox>

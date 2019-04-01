@@ -19,6 +19,7 @@ export class KanlistComponent implements OnInit, OnDestroy {
   public kanlist: any;
   public kanlists: any;
   public showxiadanbox = false;
+  public showshuoming = false;
   public chosetype = '微信支付';
   public detailInfo: any;
   public payorderId: any;

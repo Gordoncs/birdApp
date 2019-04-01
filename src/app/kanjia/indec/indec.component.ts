@@ -14,6 +14,7 @@ import wx from 'weixin-js-sdk';
 export class IndecComponent implements OnInit, AfterContentInit {
   public imgs: any;
   public subscribe = false;
+  public showshuoming = false;
 // 弹框显示
   @ViewChild(AlertboxComponent)
   alertBox: AlertboxComponent;

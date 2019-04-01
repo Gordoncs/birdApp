@@ -36,6 +36,7 @@ export class FaqiComponent implements OnInit, AfterContentInit, OnDestroy {
   public subscribe = false;
   public payorderId: any;
   public showxiadanbox = false;
+  public showshuoming = false;
   public tsstatus = true;
   public frombargainId = null;
   public fromdata = null;
