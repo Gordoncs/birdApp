@@ -151,7 +151,7 @@ export class ComeComponent implements OnInit, AfterContentInit, OnDestroy {
           }
         } else {
           this.alertBox.error('已是最后一条数据咯～');
-          $('.bangkanboxs2').unbind('touchend');
+          $('.bangkanboxs2').on('touchend', function (e) {});
         }
       } else {
         this.alertBox.error(data['message']);

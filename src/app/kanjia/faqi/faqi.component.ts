@@ -187,7 +187,7 @@ export class FaqiComponent implements OnInit, AfterContentInit, OnDestroy {
           }
         } else {
           this.alertBox.error('已是最后一条数据咯～');
-          $('.bangkanboxs').unbind('touchend');
+          $('.bangkanboxs').on('touchend', function (e) {});
         }
       } else {
         this.alertBox.error(data['message']);
