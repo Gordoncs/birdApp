@@ -68,10 +68,27 @@ export class ComeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
   ngAfterContentInit() {
     const t = this;
+    let startX, startY, moveEndX, moveEndY;
+    $('.bangkanboxs2').on('touchstart', function (e) {
+      e.preventDefault();
+      startX = e.touches[0].pageX;
+      startY = e.touches[0].pageY;
+    });
     $('.bangkanboxs2').on('touchend', function (e) {
-      if ($('.bangkanboxs2').scrollTop() + $('.kanfriendmain').height() > $('.kanfriendmain').height()) {
-        t.pages = t.pages + 1;
-        t.bargainAssistor(t.bargainId, t.pages, 5);
+      e.preventDefault();
+
+      moveEndX = e.changedTouches[0].pageX;
+
+      moveEndY = e.changedTouches[0].pageY;
+
+      const X = moveEndX - startX;
+
+      const Y = moveEndY - startY;
+      if ( Y > 0) {
+        if ($('.bangkanboxs2').scrollTop() + $('.kanfriendmain').height() > $('.kanfriendmain').height()) {
+          t.pages = t.pages + 1;
+          t.bargainAssistor(t.bargainId, t.pages, 5);
+        }
       }
     });
   }
@@ -127,8 +144,13 @@ export class ComeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.userConfigService.bargainAssistor(bargainId, pageIndex, pageSize).subscribe(data => {
       this.alertBox.close();
       if (data['result']) {
-        for (let i = 0 ; i < data.data.length ; i ++ ) {
-          this.bangkan.push(data.data[i]);
+        if (data.data.length > 0) {
+          for (let i = 0; i < data.data.length; i++) {
+            this.bangkan.push(data.data[i]);
+          }
+        } else {
+          this.alertBox.error('已是最后一条数据咯～');
+          $('.bangkanboxs2').unbind('touchend');
         }
       } else {
         this.alertBox.error(data['message']);
