@@ -19,7 +19,7 @@
         <div class="text">{{detailInfo.skuName}}</div>
         <div class="decs">
           <div class="s1">￥{{detailInfo.skuPrice}}</div>
-          <div class="s2">{{timer}}后砍价过期</div>
+          <div class="s2" *ngIf="detailInfo.addOrder==0">{{timer}}后砍价过期</div>
         </div>
       </div>
     </div>
@@ -29,12 +29,12 @@
         <div class="wcline" ></div>
       </div>
     </div>
-    <div class="kanbtn"  (click)="bargainHelp()" *ngIf="tsstatus">
+    <div class="kanbtn"  (click)="bargainHelp()" *ngIf="tsstatus&&detailInfo.addOrder!=2">
       <div class="text">帮好友砍一刀</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
     <div class="kanbtn">
-      <div class="text" *ngIf="tsstatus" [routerLink]="['/kjfaqi', {'setid': detailInfo.activitySetupId, 'skuid': detailInfo.skuId}]">与好友同享美，我也要发起砍价</div>
+      <div class="text" *ngIf="tsstatus&&detailInfo.addOrder!=2" [routerLink]="['/kjfaqi', {'setid': detailInfo.activitySetupId, 'skuid': detailInfo.skuId}]">与好友同享美，我也要发起砍价</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
     <div class="litterIcon">

@@ -26,7 +26,8 @@ export class ComeComponent implements OnInit, AfterContentInit, OnDestroy {
     hasBargainMoney : 0,
     percent: 0,
     activitySetupId: '',
-    skuId: ''
+    skuId: '',
+    addOrder: 0
   };
   public skuPic = '';
   public kantop: any;

@@ -13,7 +13,7 @@
         <div class="text">{{detailInfo.skuName}}</div>
         <div class="decs">
           <div class="s1">￥{{detailInfo.skuPrice}}</div>
-          <div class="s2">{{timer}}后砍价过期</div>
+          <div class="s2" *ngIf="detailInfo.addOrder==0">{{timer}}后砍价过期</div>
         </div>
       </div>
     </div>
@@ -23,11 +23,11 @@
         <div class="wcline" ></div>
       </div>
     </div>
-    <div class="kanbtn" *ngIf="tsstatus&&detailInfo.addOrder<2" (click)="sharetips = true">
+    <div class="kanbtn" *ngIf="tsstatus&&detailInfo.addOrder!=2" (click)="sharetips = true">
       <div class="text">分享给好友，帮我砍一刀</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
-    <div class="kanbtn" *ngIf="detailInfo.addOrder<2" (click)="showxiadanbox=true;">
+    <div class="kanbtn" *ngIf="tsstatus&&detailInfo.addOrder!=2" (click)="showxiadanbox=true;">
       <div class="text">哇，好便宜了，我要下单！</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
