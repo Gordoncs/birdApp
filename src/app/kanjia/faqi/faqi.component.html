@@ -69,7 +69,7 @@
         <img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">
         <div class="kanmoney">共砍掉 <span>{{item.bargainMoney}}</span> 元</div>
       </div>
-      <div *ngIf="nomore" style="width: 100%;display: flex;  font-size: .30rem;justify-content: center;">没有更多数据了...</div>
+      <div *ngIf="nomore" style="width: 100%;display: flex;  font-size: .30rem;justify-content: center;color: #FFF">没有更多了</div>
     </div>
     <div class="kanfriendmain" [class.show]="changetitle=='帮砍排行榜'">
       <div class="friendlist" *ngFor="let item of kantop let i = index">
