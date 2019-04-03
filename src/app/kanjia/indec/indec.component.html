@@ -28,8 +28,9 @@
   </div>
 </div>
 <div class='blackBg' *ngIf="showshuoming"></div>
-<div class='luckConBox' *ngIf="showshuoming" style="background: #FFF;justify-content: flex-start;margin-top: -4.5rem;z-index: 9999">
-  <div class="textBox" style="    font-size: .22rem; color: #f1d3af;text-align: left;padding: .2rem">
+<div class='luckConBox' *ngIf="showshuoming" style="width: 82%;height:auto;justify-content: flex-start;margin-top: 0;top: 1rem;margin-left:-41%;z-index: 9999">
+  <img src="./assets/image/kanjia/smbg.png" style="width: 100%;position: absolute;z-index: -1;left: 0;top:0" alt="">
+  <div class="textBox" style="font-size: 85%; color: #3f3331;text-align: left;padding: .5rem;">
     <p>1.	活动时间2019年X月X日-2019年X年X日；</p>
     <p>2.	砍价活动为春鸟粉丝专享，添加公众号进入春鸟线上平台即可参与；</p>
     <p>3.	所有春鸟粉丝均可在平台中任意选择科技美容服务进入砍价活动页面发起砍价；</p>
@@ -44,7 +45,6 @@
     <p>12.	咨询和投诉电话：400-6886-525</p>
     <p>13.	本活动秉承公平公正原则，严禁作弊，一经发现春鸟有权取消其已获得的优惠权限。</p>
   </div>
-  <div style="width: .5rem;height: .5rem;border-radius: .5rem;background: #d8af60;color: #FFF;text-align: c
-;line-height: .5rem;position: absolute;right: -0.15rem;top: -0.15rem" (click)="showshuoming = false">X</div>
+  <div style="width: .5rem;height: .5rem;border-radius: .5rem;line-height: .5rem;position: absolute;right: .4rem;top: .3rem;" (click)="showshuoming = false"></div>
 </div>
 <app-alertbox></app-alertbox>

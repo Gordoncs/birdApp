@@ -184,3 +184,6 @@
   top: .2rem;
   z-index: 1;
 }
+.textBox p{
+  line-height: 1.5;
+}
