@@ -15,6 +15,7 @@ import wx from 'weixin-js-sdk';
 export class FaqiComponent implements OnInit, AfterContentInit, OnDestroy {
   public changetitle: any = '帮砍团';
   public activitySetupId: any;
+  public nomore = false;
   public detailInfo = {
     skuPic : '',
     skuName : '',
@@ -188,7 +189,8 @@ export class FaqiComponent implements OnInit, AfterContentInit, OnDestroy {
             this.bangkan.push(data.data[i]);
           }
         } else {
-          this.alertBox.error('已是最后一条数据咯～');
+          this.nomore = true;
+          // this.alertBox.error('已是最后一条数据咯～');
           $('.bangkanboxs').unbind('touchend');
         }
       } else {

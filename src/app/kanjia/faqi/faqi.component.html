@@ -59,28 +59,29 @@
         <span class="s2">（共{{kantop.length}}人已完成砍价）</span>
       </div>
     </div>
-    <!--<div class="kanfriendmain bangkanboxs" [class.show]="changetitle=='帮砍团'">-->
-      <!--<div class="friendlist" *ngFor="let item of bangkan let i = index">-->
-        <!--<div class="paixu" style="background: none !important;"></div>-->
-        <!--<div class="headimg">-->
-          <!--<img [src]="item.headIconAddr" alt="">-->
-        <!--</div>-->
-        <!--<div class="name">{{item.memberNick}}</div>-->
-        <!--<img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">-->
-        <!--<div class="kanmoney">共砍掉 <span>{{item.bargainMoney}}</span> 元</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="kanfriendmain" [class.show]="changetitle=='帮砍排行榜'">-->
-      <!--<div class="friendlist" *ngFor="let item of kantop let i = index">-->
-        <!--<div class="paixu" *ngIf="changetitle=='帮砍排行榜'">TOP {{i+1}}</div>-->
-        <!--<div class="headimg">-->
-          <!--<img [src]="item.headIconAddr" alt="">-->
-        <!--</div>-->
-        <!--<div class="name">{{item.memberNick}}</div>-->
-        <!--<img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">-->
-        <!--<div class="kanmoney">共砍掉 <span>{{item.hasBargainMoney}}</span> 元</div>-->
-      <!--</div>-->
-    <!--</div>-->
+    <div class="kanfriendmain bangkanboxs" [class.show]="changetitle=='帮砍团'">
+      <div class="friendlist" *ngFor="let item of bangkan let i = index">
+        <div class="paixu" style="background: none !important;"></div>
+        <div class="headimg">
+          <img [src]="item.headIconAddr" alt="">
+        </div>
+        <div class="name">{{item.memberNick}}</div>
+        <img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">
+        <div class="kanmoney">共砍掉 <span>{{item.bargainMoney}}</span> 元</div>
+      </div>
+      <div *ngIf="nomore" style="width: 100%;display: flex;  font-size: .30rem;justify-content: center;">没有更多数据了...</div>
+    </div>
+    <div class="kanfriendmain" [class.show]="changetitle=='帮砍排行榜'">
+      <div class="friendlist" *ngFor="let item of kantop let i = index">
+        <div class="paixu" *ngIf="changetitle=='帮砍排行榜'">TOP {{i+1}}</div>
+        <div class="headimg">
+          <img [src]="item.headIconAddr" alt="">
+        </div>
+        <div class="name">{{item.memberNick}}</div>
+        <img class="kanicon" src="./assets/image/kanjia/kanicon.png" alt="">
+        <div class="kanmoney">共砍掉 <span>{{item.hasBargainMoney}}</span> 元</div>
+      </div>
+    </div>
   </div>
 
   <div class="indecbox" id="indecbox">
