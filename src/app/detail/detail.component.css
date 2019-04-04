@@ -275,8 +275,7 @@
   height: 1.57rem;
   position: fixed;
   right: 0;
-  top: 50%;
-  margin-top: -0.7rem;
+  bottom: 1.5rem;
   z-index: 3;
 }
 .kantip img{

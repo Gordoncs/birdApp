@@ -35,12 +35,16 @@
         <div class="wcline" ></div>
       </div>
     </div>
-    <div class="kanbtn" *ngIf="tsstatus&&detailInfo.addOrder!=2" (click)="sharetips = true">
+    <div class="kanbtn" *ngIf="tsstatus&&detailInfo.addOrder!=2||(detailInfo.addOrder!=2&&(detailInfo.skuPrice*1 - detailInfo.hasBargainMoney*1))>0" (click)="sharetips = true">
       <div class="text">分享给好友，帮我砍一刀</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
     <div class="kanbtn" *ngIf="tsstatus&&detailInfo.addOrder!=2" (click)="showxiadanbox=true;">
       <div class="text">哇，好便宜了，我要下单！</div>
+      <img src="./assets/image/kanjia/btnbg.png" alt="">
+    </div>
+    <div class="kanbtn" *ngIf="!tsstatus&&detailInfo.addOrder>=2" [routerLink]="['/orderdetail', {id: detailInfo.orderId}]">
+      <div class="text">查看详情</div>
       <img src="./assets/image/kanjia/btnbg.png" alt="">
     </div>
     <div class="litterIcon">
