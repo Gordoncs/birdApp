@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="jindubox">
-      <p>共{{detailInfo.count}}人已砍{{detailInfo.hasBargainMoney}}元，还差{{detailInfo.skuPrice*1 - detailInfo.hasBargainMoney*1}}元</p>
+      <p>共{{detailInfo.count}}人已砍{{detailInfo.hasBargainMoney}}元，还差{{(detailInfo.skuPrice*1 - detailInfo.hasBargainMoney*1)  | number:'2.2-2'}}元</p>
       <div class="line">
         <div class="wcline" ></div>
       </div>

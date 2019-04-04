@@ -23,7 +23,7 @@
       </div>
       <div class="detailbox">
         <div class="lefttext">
-          共 <span>{{item.count}}</span> 人已砍<span>{{item.hasBargainMoney}}</span>元 &nbsp;&nbsp;&nbsp;&nbsp;现价 <span>{{item.skuPrice*1 - item.hasBargainMoney*1}}</span> 元
+          共 <span>{{item.count}}</span> 人已砍<span>{{item.hasBargainMoney}}</span>元 &nbsp;&nbsp;&nbsp;&nbsp;现价 <span>{{(item.skuPrice*1 - item.hasBargainMoney*1) | number:'2.2-2'}}</span> 元
         </div>
         <div class="rightbtn" (click)="showxiadanbox=true;detailInfo=item" *ngIf="item.addOrder!=2">去下单</div>
         <div class="rightbtn" [routerLink]="['/orderdetail', {id: item.orderId}]" *ngIf="item.addOrder==2">查看订单</div>
